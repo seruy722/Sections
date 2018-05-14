@@ -27,6 +27,12 @@
                     <li><a href="#sections">Кружки</a></li>
                     <li><a href="#schedule">Расписание</a></li>
                     <li><a href="#news">Новости</a></li>
+                    @if (Route::has('login'))
+                            @if (Auth::check())
+                            <li><a href="{{route('admin')}}">Администратор</a></li> @else
+                            <li><a href="{{ url('/login') }}">Авторизация</a></li>
+                            <li><a href="{{ url('/register') }}">Регистрация</a></li> @endif
+                    @endif
                 </ul>
             </div>
             <!--/.nav-collapse -->
