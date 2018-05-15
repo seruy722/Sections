@@ -11,16 +11,18 @@ class SchedulesTableSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker\Factory::create();
         for ($i = 1; $i <= 100; $i++) {
             $t=rand(8, 18);
             DB::table('schedules')->insert([
-                'days_of_week' => str_random(20),
-                'event_name' => str_random(20),
-                'event_info' => str_random(300),
+                'days_of_week' => $faker->dayOfWeek(),
+                'event_name' => $faker->text($maxNbChars = 20),
+                'event_info' => $faker->text($maxNbChars = 100),
                 'data_start' => $t . ':00',
                 'data_end' => ($t+1) . ':00',
             ]);
         }
     }
 }
+
 

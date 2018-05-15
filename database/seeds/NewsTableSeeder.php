@@ -11,11 +11,12 @@ class NewsTableSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker\Factory::create();
         for ($i = 1; $i <= 100; $i++) {
             DB::table('news')->insert([
-                'title' => str_random(20),
-                'description' => str_random(300),
-                'content' => str_random(1000),
+                'title' => $faker->text($maxNbChars = 20),
+                'description' => $faker->text($maxNbChars = 300),
+                'content' => $faker->text($maxNbChars = 1000),
                 'img_filename' => str_random(10). '.jpg',
             ]);
         }
