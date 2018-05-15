@@ -1,150 +1,65 @@
-<template id="post-list">
-    <div class="row">
-        <div>
-            <div class="row">
-                <div class="col-md-4">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                    <input type="date" @change="fetchSearch" v-model="search.dateStart">
-                    <input type="date" @change="fetchSearch" v-model="search.dateLast">
-                </div>
-                <div class="col-md-3">
-                    <span class="glyphicon glyphicon-user"></span>
-                    <input list="client" v-model="search.client" @change="$event.target.select();fetchSearch()"
-                           @click="$event.target.select()">
-                    <datalist id="client">
-                        <option value="Все">0</option>
-                        <option v-for="(client,index) in allClients" :key="index" v-bind:value="client.name">
-                            {{client.id}}
-                        </option>
-                    </datalist>
-                </div>
-                <div class="col-md-2">
-                    <span class="glyphicon glyphicon-th-list"></span>
-                    <select class="list-group" @change="changeTable">
-                        <option value="cargos">КАРГО</option>
-                        <option value="debts" v-bind:selected="table==='debts'">ДОЛГИ</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <span class="glyphicon glyphicon-th-list"></span>
-                    <select class="list-group" v-model="search.typeTable" @change="fetchSearch">
-                        <option v-bind:value="null">Все</option>
-                        <option value="Оплата">ОПЛАТА</option>
-                        <option value="Долг">ДОЛГ</option>
-                    </select>
-                </div>
-                <div class="col-md-1">
-                    <download-excel
-                            class="btn btn-success"
-                            :data='excel.excelData'
-                            :fields="excel.jsonFields"
-                            :meta="excel.jsonMeta"
-                            :name="search.client">
-                        Excel
-                    </download-excel>
-                    <br><br>
-                </div>
-            </div>
-        </div>
-        <div>{{notification}}</div>
-        <button @click="change">Click</button>
-        <div>
-            <div class="row">
-                <div class="col-xs-2">
-                    <button type="button" @click="addNewPost" class="btn btn-block btn-success">
-                        <span class="glyphicon glyphicon-plus"></span>
-                        Добавить
-                    </button>
-                </div>
-            </div>
-            <div v-for="(post,index) in posty">
-                <div class="row">
-                    <div class="col-xs-2">
-                        <button type="button" @click="removePost(index)" class="btn btn-block btn-danger">
-                            <span class="glyphicon glyphicon-minus"></span>
-                            Удалить
-                        </button>
-                    </div>
-                    <div class="form-group col-xs-5">
-                        <label>Price (HUF)</label>
-                        <input v-model="post.price" type="number" class="form-control" placeholder="Price">
-                    </div>
-                    <div class="form-group col-xs-5">
-                        <label>Rooms (PCS)</label>
-                        <input v-model="post.kg" type="number" class="form-control" placeholder="Rooms">
-                    </div>
-                </div>
-            </div>
-            <div v-if="post" class="row">
-                <div class="col-xs-2">
-                    <button type="submit" class="btn btn-block btn-primary">
-                        Сохранить
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div>
-            <v-dialog v-model="dialog" max-width="500px">
-                <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
-                <v-card>
-                    <v-card-title>
-                        <span class="headline">{{ formTitle }}</span>
-                    </v-card-title>
-                    <v-card-text>
-                        <v-container grid-list-md>
-                            <v-layout wrap>
-                                <v-flex xs12 sm6 md4>
-                                    <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
-                                </v-flex>
-                                <v-flex xs12 sm6 md4>
-                                    <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
-                                </v-flex>
-                                <v-flex xs12 sm6 md4>
-                                    <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
-                                </v-flex>
-                                <v-flex xs12 sm6 md4>
-                                    <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
-                                </v-flex>
-                                <v-flex xs12 sm6 md4>
-                                    <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
-                                </v-flex>
-                            </v-layout>
-                        </v-container>
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                        <v-btn color="blue darken-1" flat @click.native="save">Save</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
-            <v-data-table
-                    :headers="headers"
-                    :items="desserts"
-                    hide-actions
-                    class="elevation-1"
-            >
-                <template slot="items" slot-scope="props">
-                    <td>{{ props.item.name }}</td>
-                    <td class="text-xs-right">{{ props.item.calories }}</td>
-                    <td class="text-xs-right">{{ props.item.fat }}</td>
-                    <td class="text-xs-right">{{ props.item.carbs }}</td>
-                    <td class="text-xs-right">{{ props.item.protein }}</td>
-                    <td class="justify-center layout px-0">
-                        <v-btn icon class="mx-0" @click="editItem(props.item)">
-                            <v-icon color="teal">edit</v-icon>
-                        </v-btn>
-                        <v-btn icon class="mx-0" @click="deleteItem(props.item)">
-                            <v-icon color="pink">delete</v-icon>
-                        </v-btn>
-                    </td>
-                </template>
-                <template slot="no-data">
-                    <v-btn color="primary" @click="initialize">Reset</v-btn>
-                </template>
-            </v-data-table>
-        </div>
-    </div>
+<template>
+    <v-app id="inspire" dark>
+        <v-navigation-drawer
+                v-model="drawer"
+                clipped
+                fixed
+                app
+        >
+            <v-list dense>
+                <v-list-tile @click="">
+                    <v-list-tile-action>
+                        <v-icon>dashboard</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title>Dashboard</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+                <v-list-tile @click="">
+                    <v-list-tile-action>
+                        <v-icon>settings</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title>Настройки</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+            </v-list>
+        </v-navigation-drawer>
+        <v-toolbar app fixed clipped-left>
+            <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+            <v-toolbar-title>Админ панель</v-toolbar-title>
+        </v-toolbar>
+        <v-content>
+            <v-container fluid fill-height>
+                <v-layout justify-center align-center>
+                    <v-flex shrink>
+                        <v-tooltip right>
+                            <v-btn
+                                    slot="activator"
+                                    :href="source"
+                                    icon
+                                    large
+                                    target="_blank"
+                            >
+                                <v-icon large>code</v-icon>
+                            </v-btn>
+                            <span>Source</span>
+                        </v-tooltip>
+                        <v-tooltip right>
+                            <v-btn slot="activator" icon large href="https://codepen.io/johnjleider/pen/qxQWda"
+                                   target="_blank">
+                                <v-icon large>mdi-codepen</v-icon>
+                            </v-btn>
+                            <span>Codepen</span>
+                        </v-tooltip>
+                    </v-flex>
+                </v-layout>
+            </v-container>
+        </v-content>
+        <v-footer app fixed>
+            <span>&copy; 2018</span>
+        </v-footer>
+    </v-app>
 </template>
 
 <script>

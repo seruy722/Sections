@@ -1,4 +1,3 @@
-// require('./bootstrap');
 
 window.Vue = require('vue');
 window.VueRouter = require('vue-router').default;
@@ -6,7 +5,7 @@ window.VueAxios = require('vue-axios').default;
 window.Axios = require('axios').default;
 window.Vuetify = require('vuetify').default;
 import {store} from './store/store';
-
+import 'vuetify/dist/vuetify.min.css';
 Vue.config.productionTip = false;
 
 let AppLayout = require('./components/App.vue');
@@ -23,7 +22,7 @@ Vue.use(VueRouter, VueAxios, Axios,Vuetify);
 const routes = [
     {
         name: 'Listposts',
-        path: '/',
+        path: '/home',
         component: Listposts
     },
     {
