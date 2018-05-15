@@ -14,6 +14,7 @@ class CreateSchedulesTable extends Migration
     public function up()
     {
         Schema::create('schedules', function (Blueprint $table) {
+           // Schema::drop('schedules');
             $table->increments('id');
             $table->string('days_of_week');
             $table->string('event_name');
@@ -22,5 +23,9 @@ class CreateSchedulesTable extends Migration
             $table->time('data_end');
             $table->timestamps();
         });
+    }
+    public function down()
+    {
+        Schema::dropIfExists('schedules');
     }
 }
