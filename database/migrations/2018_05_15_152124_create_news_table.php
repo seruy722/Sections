@@ -21,6 +21,11 @@ class CreateNewsTable extends Migration
             $table->string('img_filename')->nullable();
             $table->timestamps();
         });
+
+        Schema::table('news', function (Blueprint $table) {
+            $table->integer('users_id')->unsigned();
+            $table->foreign('users_id')->references('id')->on('users');
+        });
     }
 
     /**
