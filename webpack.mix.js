@@ -11,10 +11,5 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.styles([
-	'resources/assets/front/css/bootstrap.min.css',
-	'resources/assets/front/css/custom.css',
-	'resources/assets/front/css/style.css'
-],'public/css/front.css');
-
-mix.copy('resources/assets/front/img', 'public/images');
+mix.js('resources/assets/js/app.js', 'public/js')
+   .sass('resources/assets/sass/app.scss', 'public/css');
