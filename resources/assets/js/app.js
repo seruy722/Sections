@@ -37,7 +37,7 @@ const routes = [
     },
     {
         name: 'Editpost',
-        path: '/edit/:id',
+        path: '/edit',
         component: Editpost
     },
     {
