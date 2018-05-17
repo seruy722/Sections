@@ -17,8 +17,8 @@ class NewsTableSeeder extends Seeder
                 'title' => $faker->text($maxNbChars = 20),
                 'description' => $faker->text($maxNbChars = 300),
                 'content' => $faker->text($maxNbChars = 1000),
-                'img_filename' => str_random(10). '.jpg',
-                'users_id' => rand(1,25),
+                'img_filename' => str_random(10) . '.jpg',
+                'user_id' => rand(1, 90),
             ]);
         }
     }
