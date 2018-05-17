@@ -18,4 +18,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('api/news', 'Api\NewsController')->only(['index', 'show']);
+Route::resource('api/news', 'Api\NewsController');
+Route::resource('api/users', 'Api\UserController');

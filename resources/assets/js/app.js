@@ -6,6 +6,7 @@ window.Axios = require('axios').default;
 window.Vuetify = require('vuetify').default;
 import {store} from './store/store';
 import 'vuetify/dist/vuetify.min.css';
+import Vuelidate from 'vuelidate';
 Vue.config.productionTip = false;
 
 let AppLayout = require('./components/App.vue');
@@ -15,9 +16,11 @@ const Addpost = Vue.component('Addpost', require('./components/Addpost.vue'));
 const Deletepost = Vue.component('Deletepost', require('./components/Deletepost.vue'));
 const Editpost = Vue.component('Editpost', require('./components/Editpost.vue'));
 const Viewpost = Vue.component('Viewpost', require('./components/Viewpost.vue'));
+const Settings = Vue.component('Settings', require('./components/Settings.vue'));
+const Users = Vue.component('Users', require('./components/Users.vue'));
+const News = Vue.component('News', require('./components/News.vue'));
 
-
-Vue.use(VueRouter, VueAxios, Axios,Vuetify);
+Vue.use(VueRouter, VueAxios, Axios,Vuetify,Vuelidate);
 
 const routes = [
     {
@@ -44,7 +47,22 @@ const routes = [
         name: 'Viewpost',
         path: '/view/:id',
         component: Viewpost
-    }
+    },
+    {
+        name: 'Settings',
+        path: 'settings',
+        component: Settings
+    },
+    {
+        name: 'Users',
+        path: 'users',
+        component: Users
+    },
+    {
+        name: 'News',
+        path: 'news',
+        component: News
+    },
 ];
 
 const router = new VueRouter({
