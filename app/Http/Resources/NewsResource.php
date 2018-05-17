@@ -14,6 +14,7 @@ class NewsResource extends JsonResource
      */
     public function toArray($request)
     {
+        $need_date = date('d-m-Y', strtotime($this->created_at));
         return [
             'id' => $this->id,
             'user_name' => optional($this->user)->name,
@@ -21,7 +22,9 @@ class NewsResource extends JsonResource
             'description' => $this->description,
             'content' => $this->content,
             'image_filename' => $this->image_filename,
-            'user_id' => $this->users_id
+            'user_id' => $this->user_id,
+            'active' => $this->active,
+            'created_at' => $need_date
         ];
     }
 }

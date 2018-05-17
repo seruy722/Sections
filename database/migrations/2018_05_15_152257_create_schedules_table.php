@@ -21,12 +21,10 @@ class CreateSchedulesTable extends Migration
             $table->text('event_info');
             $table->time('data_start');
             $table->time('data_end');
-            $table->timestamps();
-        });
-
-        Schema::table('schedules', function (Blueprint $table) {
             $table->integer('users_id')->unsigned();
             $table->foreign('users_id')->references('id')->on('users');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
     public function down()
