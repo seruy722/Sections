@@ -130,48 +130,109 @@
                     <div class="cd-schedule loading">
                         <div class="timeline">
                             <ul>
+                                <li><span>08:00</span></li>
                                 <li><span>09:00</span></li>
-                                <li><span>09:30</span></li>
                                 <li><span>10:00</span></li>
-                                <li><span>10:30</span></li>
                                 <li><span>11:00</span></li>
-                                <li><span>11:30</span></li>
                                 <li><span>12:00</span></li>
-                                <li><span>12:30</span></li>
                                 <li><span>13:00</span></li>
-                                <li><span>13:30</span></li>
                                 <li><span>14:00</span></li>
-                                <li><span>14:30</span></li>
                                 <li><span>15:00</span></li>
-                                <li><span>15:30</span></li>
                                 <li><span>16:00</span></li>
-                                <li><span>16:30</span></li>
                                 <li><span>17:00</span></li>
-                                <li><span>17:30</span></li>
                                 <li><span>18:00</span></li>
+                                <li><span>19:00</span></li>
+                                <li><span>20:00</span></li>
                             </ul>
                         </div>
                         <!-- .timeline -->
 
                         <div class="events">
                             <ul>
+
                                 <li class="events-group">
                                     <div class="top-info"><span>Понедельник</span></div>
-
                                     <ul>
-                                        <li class="single-event" data-start="09:30" data-end="10:30"
-                                            data-content="event-abs-circuit" data-event="event-1">
-                                            <a href="#0"><em class="event-name">Abs Circuit</em></a>
+                                        <li class="single-event" data-start="08:00" data-end="10:00"
+                                            data-content="event-rowing-workout" data-event="event-1">
+                                            <a href="#0">
+                                                <em class="event-name">
+                                                    @foreach ($monday as $day)
+                                                        <?php $start=strtotime('08:00:00'); $end=strtotime('10:00:00'); $run=strtotime($day->data_start); ?>
+                                                        @if (($start <= $run) && ($run < $end))
+                                                            {{$day->id}}
+                                                        @endif
+                                                    @endforeach
+                                                </em>
+                                            </a>
                                         </li>
 
-                                        <li class="single-event" data-start="11:00" data-end="12:30"
-                                            data-content="event-rowing-workout" data-event="event-2">
-                                            <a href="#0"><em class="event-name">Rowing Workout</em></a>
+                                        <li class="single-event" data-start="10:00" data-end="12:00"
+                                            data-content="event-restorative-yoga" data-event="event-2">
+                                                    <a href="#0">
+                                                        <em class="event-name">
+                                                            @foreach ($monday as $day)
+                                                                <?php $start=strtotime('10:00:00'); $end=strtotime('12:00:00'); $run=strtotime($day->data_start); ?>
+                                                                    @if (($start <= $run) && ($run < $end))
+                                                                        {{$day->id}}
+                                                                    @endif
+                                                            @endforeach
+                                                        </em>
+                                                    </a>
                                         </li>
 
-                                        <li class="single-event" data-start="14:00" data-end="15:15"
-                                            data-content="event-yoga-1" data-event="event-3">
-                                            <a href="#0"><em class="event-name">Yoga Level 1</em></a>
+                                        <li class="single-event" data-start="12:00" data-end="14:00"
+                                            data-content="event-abs-circuit" data-event="event-3">
+                                            <a href="#0">
+                                                <em class="event-name">
+                                                    @foreach ($monday as $day)
+                                                        <?php $start=strtotime('12:00:00'); $end=strtotime('14:00:00'); $run=strtotime($day->data_start); ?>
+                                                        @if (($start <= $run) && ($run < $end))
+                                                            {{$day->id}}
+                                                        @endif
+                                                    @endforeach
+                                                </em>
+                                            </a>
+                                        </li>
+
+                                        <li class="single-event" data-start="14:00" data-end="16:00"
+                                            data-content="event-yoga-1" data-event="event-4">
+                                            <a href="#0">
+                                                <em class="event-name">
+                                                    @foreach ($monday as $day)
+                                                        <?php $start=strtotime('14:00:00'); $end=strtotime('16:00:00'); $run=strtotime($day->data_start); ?>
+                                                        @if (($start <= $run) && ($run < $end))
+                                                            {{$day->id}}
+                                                        @endif
+                                                    @endforeach
+                                                </em>
+                                            </a>
+                                        </li>
+                                        <li class="single-event" data-start="16:00" data-end="18:00"
+                                            data-content="event-rowing-workout" data-event="event-5">
+                                            <a href="#0">
+                                                <em class="event-name">
+                                                    @foreach ($monday as $day)
+                                                        <?php $start=strtotime('16:00:00'); $end=strtotime('18:00:00'); $run=strtotime($day->data_start); ?>
+                                                        @if (($start <= $run) && ($run < $end))
+                                                            {{$day->id}}
+                                                        @endif
+                                                    @endforeach
+                                                </em>
+                                            </a>
+                                        </li>
+
+                                        <li class="single-event" data-start="18:00" data-end="20:00"
+                                            data-content="event-restorative-yoga" data-event="event-6">                                                    <a href="#0">
+                                                <em class="event-name">
+                                                    @foreach ($monday as $day)
+                                                        <?php $start=strtotime('18:00:00'); $end=strtotime('20:00:00'); $run=strtotime($day->data_start); ?>
+                                                        @if (($start <= $run) && ($run < $end))
+                                                            {{$day->id}}
+                                                        @endif
+                                                    @endforeach
+                                                </em>
+                                            </a>
                                         </li>
                                     </ul>
                                 </li>
@@ -257,20 +318,13 @@
                                     <div class="top-info"><span>Пятница</span></div>
 
                                     <ul>
-                                        <li class="single-event" data-start="10:00" data-end="11:00"
-                                            data-content="event-rowing-workout" data-event="event-2">
-                                            <a href="#0"><em class="event-name">Rowing Workout</em></a>
-                                        </li>
-
-                                        <li class="single-event" data-start="12:30" data-end="14:00"
-                                            data-content="event-abs-circuit" data-event="event-1">
-                                            <a href="#0"><em class="event-name">Abs Circuit</em></a>
-                                        </li>
-
-                                        <li class="single-event" data-start="15:45" data-end="16:45"
-                                            data-content="event-yoga-1" data-event="event-3">
-                                            <a href="#0"><em class="event-name">Yoga Level 1</em></a>
-                                        </li>
+                                        @foreach ($friday as $day)
+                                            <li class="single-event" data-start="{{$day->data_start}}" data-end="{{$day->data_end}}"
+                                                data-content="event-abs-circuit" data-event="event-1">
+                                                <a href="#0"><em class="event-name">Abs Circuit</em></a>
+                                            </li>
+                                            <?php echo strtotime('8:00:00'); ?>
+                                        @endforeach
                                     </ul>
                                 </li>
                             </ul>
@@ -305,7 +359,9 @@
                             </header>
 
                             <div class="body">
-                                <div class="event-info">33333</div>
+
+                                <div class="event-info">2222</div>
+
                                 <div class="body-bg"></div>
                             </div>
 
