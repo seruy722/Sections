@@ -21,7 +21,7 @@ class SchedulesTableSeeder extends Seeder
                 'data_start' => $t . ':00',
                 'data_end' => ($t+1) . ':00',
                 'data_end' => ($t+1) . ':00',
-                'users_id' => rand(1, 100),
+                'user_id' => rand(1, 100),
             ]);
         }
     }
