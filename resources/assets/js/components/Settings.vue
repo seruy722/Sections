@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="wrapper">
         <v-toolbar color="cyan" dark tabs>
             <v-toolbar-title>Общие настройки</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -42,9 +42,28 @@
                     :id="'tab-' + item"
             >
                 <v-card flat>
-                    <v-card-text>
+                    <v-card-text v-if="item=='Изображения'">
                         <h2>{{ item }}</h2>
-                        {{ text }}
+                        <v-container fluid>
+                            <form v-on:submit.prevent="">
+                                <v-layout row>
+                                    <v-flex xs4>
+                                        <v-subheader>Главная картинка</v-subheader>
+                                    </v-flex>
+                                    <v-flex xs8>
+                                        <input type="file">
+                                    </v-flex>
+                                </v-layout>
+                                <v-layout row>
+                                    <v-flex xs4>
+                                        <v-subheader>Логотип</v-subheader>
+                                    </v-flex>
+                                    <v-flex xs8>
+                                        <input type="file">
+                                    </v-flex>
+                                </v-layout>
+                            </form>
+                        </v-container>
                     </v-card-text>
                 </v-card>
             </v-tab-item>
@@ -57,7 +76,7 @@
         data: () => ({
             currentItem: 'tab-Web',
             items: [
-                'Web', 'Shopping', 'Videos', 'Images'
+                'Web', 'Shopping', 'Изображения', 'Images'
             ],
             more: [
                 'News', 'Maps', 'Books', 'Flights', 'Apps'

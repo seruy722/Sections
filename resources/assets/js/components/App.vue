@@ -43,7 +43,7 @@
         <v-toolbar app fixed clipped-left>
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>Админ панель</v-toolbar-title>
-            <v-btn color="primary" dark class="mb-2">На главную</v-btn>
+            <v-btn color="primary" dark class="mb-2" @click="mainPage">На главную</v-btn>
         </v-toolbar>
         <v-content>
             <v-container fluid fill-height>
@@ -54,7 +54,7 @@
                 </v-layout>
             </v-container>
         </v-content>
-        <v-footer app fixed>
+        <v-footer app fixed >
             <span>&copy; 2018</span>
         </v-footer>
     </v-app>
@@ -67,6 +67,11 @@
         }),
         props: {
             source: String
+        },
+        methods:{
+            mainPage(){
+                window.location = this.$store.state.url;
+            }
         }
     };
 </script>

@@ -36335,6 +36335,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     props: {
         source: String
+    },
+    methods: {
+        mainPage: function mainPage() {
+            window.location = this.$store.state.url;
+        }
     }
 });
 
@@ -36466,7 +36471,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-btn",
-            { staticClass: "mb-2", attrs: { color: "primary", dark: "" } },
+            {
+              staticClass: "mb-2",
+              attrs: { color: "primary", dark: "" },
+              on: { click: _vm.mainPage }
+            },
             [_vm._v("На главную")]
           )
         ],
@@ -36625,12 +36634,31 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             currentItem: 'tab-Web',
-            items: ['Web', 'Shopping', 'Videos', 'Images'],
+            items: ['Web', 'Shopping', 'Изображения', 'Images'],
             more: ['News', 'Maps', 'Books', 'Flights', 'Apps'],
             text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
         };
@@ -36662,6 +36690,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "wrapper" },
     [
       _c(
         "v-toolbar",
@@ -36781,14 +36810,70 @@ var render = function() {
                 "v-card",
                 { attrs: { flat: "" } },
                 [
-                  _c("v-card-text", [
-                    _c("h2", [_vm._v(_vm._s(item))]),
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(_vm.text) +
-                        "\n                "
-                    )
-                  ])
+                  item == "Изображения"
+                    ? _c(
+                        "v-card-text",
+                        [
+                          _c("h2", [_vm._v(_vm._s(item))]),
+                          _vm._v(" "),
+                          _c("v-container", { attrs: { fluid: "" } }, [
+                            _c(
+                              "form",
+                              {
+                                on: {
+                                  submit: function($event) {
+                                    $event.preventDefault()
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "v-layout",
+                                  { attrs: { row: "" } },
+                                  [
+                                    _c(
+                                      "v-flex",
+                                      { attrs: { xs4: "" } },
+                                      [
+                                        _c("v-subheader", [
+                                          _vm._v("Главная картинка")
+                                        ])
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c("v-flex", { attrs: { xs8: "" } }, [
+                                      _c("input", { attrs: { type: "file" } })
+                                    ])
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-layout",
+                                  { attrs: { row: "" } },
+                                  [
+                                    _c(
+                                      "v-flex",
+                                      { attrs: { xs4: "" } },
+                                      [_c("v-subheader", [_vm._v("Логотип")])],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c("v-flex", { attrs: { xs8: "" } }, [
+                                      _c("input", { attrs: { type: "file" } })
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        ],
+                        1
+                      )
+                    : _vm._e()
                 ],
                 1
               )
