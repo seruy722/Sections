@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\User;
+use App\News;
+use App\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -102,6 +104,8 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if ($user) {
+            News::where('user_id',$id)->delete();
+            Schedule::where('user_id',$id)->delete();
             $user->delete();
             return response()->json(['status' => 'success', 'msg' => 'Запись успешно удалена']);
         } else {

@@ -86,10 +86,9 @@
                     },
                     {text: 'Email', value: 'email', sortable: false,},
                     {text: 'Роль', value: 'role', sortable: false,},
-                    {text: 'Управления', sortable: false,}
+                    {text: 'Управление', sortable: false,}
                 ],
                 users: [],
-                url: "http://sections.loc/",
                 editedIndex: -1,
                 editedItem: {
                     name: '',
@@ -121,7 +120,7 @@
         },
         methods: {
             initialize() {
-                Axios.get(`${this.url}api/users`).then(response => {
+                Axios.get(`${this.$store.state.url}api/users`).then(response => {
                     this.users = response.data.data;
                 });
             },
@@ -134,10 +133,14 @@
 
             deleteItem(item) {
                 const index = this.users.indexOf(item);
-                confirm('Вы действительно хотите удалить этого пользователя?') && this.users.splice(index, 1);
-                Axios.delete(`${this.url}api/users/` + item.id).then(response => {
-                    console.log(response.data);
-                });
+                let answer = confirm('Вы действительно хотите удалить этого пользователя?');
+                if (answer) {
+                    Axios.delete(`${this.$store.state.url}api/users/` + item.id).then(response => {
+                        if (response.data.status == 'success') {
+                            this.users.splice(index, 1);
+                        }
+                    });
+                }
             },
 
             close() {
@@ -150,15 +153,16 @@
 
             save() {
                 if (this.editedIndex > -1) {
-                    Axios.patch(`${this.url}api/users/` + this.users[this.editedIndex]['id'], Object.assign(this.users[this.editedIndex], this.editedItem)).then(response => {
+                    Axios.patch(`${this.$store.state.url}api/users/` + this.users[this.editedIndex]['id'], Object.assign(this.users[this.editedIndex], this.editedItem)).then(response => {
                         console.log(response.data);
                     });
                 } else {
                     let item = this.editedItem;
                     item.created_at = this.formatDate(new Date());
-                    this.users.push(item);
-                    Axios.post(`${this.url}api/users`, this.editedItem).then(response => {
-                        console.log(response.data);
+                    Axios.post(`${this.$store.state.url}api/users`, this.editedItem).then(response => {
+                        if(response.data.status === 'success'){
+                            this.users.push(item);
+                        }
                     });
                 }
                 this.close();
@@ -167,7 +171,7 @@
                 let dd = date.getDate();
                 if (dd < 10) dd = '0' + dd;
                 let mm = date.getMonth() + 1;
-                if (mm < 10) mm = '0' +  mm;
+                if (mm < 10) mm = '0' + mm;
                 let yy = date.getFullYear();
                 if (yy < 10) yy = '0' + yy;
                 return dd + '-' + mm + '-' + yy;
