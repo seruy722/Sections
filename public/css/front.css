@@ -7873,34 +7873,50 @@ h1 small {
     }
 }
 
-.dbox-list {
+dbox-list {
     width: 100%;
     height: auto;
     padding-bottom: 20px;
     margin-bottom: 20px;
-    border-bottom: 1px solid #767e9e
+    border-bottom: 1px solid #767E9E;
 }
 
 .dbox-list > .itemCont > a > .thumb {
     width: 100px;
     float: left;
-    margin-left: 30px
+    margin-left: 30px;
+}
+
+.dbox-list > .itemCont > .thumb_img {
+    width: 30%;
+    float: left;
+    margin: 4px 10px 2px 0px;
 }
 
 .dbox-list > .itemCont > a > .itemInfo {
     float: left;
     margin-left: 30px;
-    width: 75%
+    width: 75%;
 }
 
 .dbox-list > .itemCont > a > .itemInfo > p {
     display: block;
-    color: #777
+    color: #777;
+}
+
+.dbox-list > .itemCont > .itemInfo {
+    width: 100%;
+    text-align: justify;
+}
+
+.dbox-list > .itemCont > .itemInfo > p {
+    display: block;
+    color: #777;
 }
 
 .dbox-list .goto {
     display: block;
-    float: right
+    float: right;
 }
 
 footer {
