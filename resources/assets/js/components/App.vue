@@ -6,7 +6,7 @@
                 fixed
                 app>
             <v-list dense>
-                <v-list-tile v-bind:to="{name:'Editpost'}">
+                <v-list-tile v-bind:to="{name:'Dashboard'}">
                     <v-list-tile-action>
                         <v-icon>dashboard</v-icon>
                     </v-list-tile-action>
@@ -43,11 +43,11 @@
         <v-toolbar app fixed clipped-left>
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>Админ панель</v-toolbar-title>
-            <v-btn   color="primary" dark class="mb-2">На главную</v-btn>
+            <v-btn color="primary" dark class="mb-2">На главную</v-btn>
         </v-toolbar>
         <v-content>
             <v-container fluid fill-height>
-                <v-layout >
+                <v-layout>
                     <transition name="fade">
                         <router-view></router-view>
                     </transition>
@@ -61,8 +61,6 @@
 </template>
 
 <script>
-    import {mapActions, mapGetters, mapMutations, mapState} from 'vuex';
-
     export default {
         data: () => ({
             drawer: true

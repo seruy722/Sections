@@ -1,9 +1,8 @@
 <template>
     <div class="wrapper">
         <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-
             <v-card>
-                <v-toolbar dark color="primary">
+                <v-toolbar color="primary" dark>
                     <v-btn icon dark @click.native="dialog = false">
                         <v-icon>close</v-icon>
                     </v-btn>
@@ -41,11 +40,6 @@
                         </v-card-actions>
                     </v-card>
                 </v-flex>
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" flat @click.native="">Отмена</v-btn>
-                    <v-btn color="blue darken-1" flat @click.native="">Сохранить</v-btn>
-                </v-card-actions>
                 <v-divider></v-divider>
             </v-card>
         </v-dialog>
