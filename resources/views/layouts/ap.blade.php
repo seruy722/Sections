@@ -28,90 +28,98 @@
 </head>
 
 <body data-spy="scroll" data-target="#ha-header">
+<div id="app">
 
-<!-- Fixed navbar -->
-<div class="navbar navbar-default navbar-fixed-top ha-header-large" id="ha-header">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span
-                        class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
-            <a class="navbar-brand logo" href="/">Project name</a>
-        </div>
-        <div class="navbar-collapse collapse ">
-            <ul class="nav navbar-nav navbar-right">
-                <!-- Authentication Links -->
-                @guest
-                    <li><a class="nav-link" href="{{ route('login') }}">{{ __('Вход') }}</a></li>
-                    <li><a class="nav-link" href="{{ route('register') }}">{{ __('Регистрация') }}</a></li>
-                @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                {{ __('Выход') }}
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top ha-header-large" id="ha-header">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span
+                            class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo" href="/">Project name</a>
+            </div>
+            <div class="navbar-collapse collapse ">
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Authentication Links -->
+                    @guest
+                        <li><a class="nav-link" href="{{ route('login') }}">{{ __('Вход') }}</a></li>
+                        <li><a class="nav-link" href="{{ route('register') }}">{{ __('Регистрация') }}</a></li>
+                        
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
-                            <a href="{{ route('admin') }}">Профиль</a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                @endguest
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#home">Главная</a></li>
-                <li><a href="#sections">Кружки</a></li>
-                <li><a href="#schedule">Расписание</a></li>
-                <li><a href="#news">Новости</a></li>
-            </ul>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Выход') }}
+                                </a>
+                                <a href="{{ route('admin') }}">Профиль</a>
 
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                      style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#sections">Кружки</a></li>
+                    <li><a href="#schedule">Расписание</a></li>
+                    <li><a href="#news">Новости</a></li>
+                </ul>
+
+            </div>
+            <!--/.nav-collapse -->
         </div>
-        <!--/.nav-collapse -->
     </div>
-</div>
-<!-- End Fixed navbar -->
-
-<!-- Full Page Image Header Area -->
-<div id="home" class="home">
-    <div class="header_img">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <div class="spacer"></div>
-                <h1>Секции, студии, кружки</h1>
+    <!-- End Fixed navbar -->
+    <div>
+        <router-view></router-view>
+    </div>
+    <!-- Full Page Image Header Area -->
+    <div id="home" class="home">
+        <div class="header_img">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="spacer"></div>
+                    <h1>Секции, студии, кружки</h1>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- /Full Page Image Header Area -->
+    <!-- /Full Page Image Header Area -->
 
-<!-- Content. Contains page content -->
+    <!-- Content. Contains page content -->
 @yield('content')
 <!-- /.content -->
 
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-md-9 col-sm-12">
-                <p>Copyright &copy; 2018 Coyier. All rights reserved.</p>
-            </div>
-            <div class="col-xs-12 col-md-3 col-sm-12">
-                <ul class=" footer_social clearfix">
-                    <li><a href="#"><img src="./images/favicon.png" alt=""></a></li>
-                    <li><a href="#"><img src="./images/favicon.png" alt=""></a></li>
-                    <li><a href="#"><img src="./images/favicon.png" alt=""></a></li>
-                </ul>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-9 col-sm-12">
+                    <p>Copyright &copy; 2018 Coyier. All rights reserved.</p>
+                </div>
+                <div class="col-xs-12 col-md-3 col-sm-12">
+                    <ul class=" footer_social clearfix">
+                        <li><a href="#"><img src="./images/favicon.png" alt=""></a></li>
+                        <li><a href="#"><img src="./images/favicon.png" alt=""></a></li>
+                        <li><a href="#"><img src="./images/favicon.png" alt=""></a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
+</div>
+<script src="{{ asset('js/app.js') }}"></script>
 <!-- /Footer -->
 <!-- JavaScript -->
 <script src="/js/jquery.min.js"></script>
@@ -128,6 +136,11 @@
 
 <script src="/js/main.js"></script>
 <!-- Resource jQuery -->
+<script>
+    window.Laravel = <?php echo json_encode([
+        'csrfToken' => csrf_token(),
+    ]); ?>
+</script>
 
 </body>
 

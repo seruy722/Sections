@@ -16,6 +16,10 @@ const Users = Vue.component('Users', require('./components/admin/Users.vue'));
 const News = Vue.component('News', require('./components/admin/News.vue'));
 const Dashboard = Vue.component('Dashboard', require('./components/admin/Dashboard.vue'));
 
+
+const Login = Vue.component('Login', require('./components/Login.vue'));
+const Register = Vue.component('Register', require('./components/Register.vue'));
+
 Vue.use(VueRouter, VueAxios, Axios, Vuetify, Vuelidate);
 
 const routes = [
@@ -51,6 +55,22 @@ const routes = [
             adminAuth:true,moderAuth:false
         }
     },
+    {
+        name: 'Login',
+        path: '/login',
+        component: Login,
+        meta:{
+            adminAuth:true,moderAuth:false
+        }
+    },
+    {
+        name: 'Register',
+        path: '/register',
+        component: Register,
+        meta:{
+            adminAuth:true,moderAuth:false
+        }
+    },
 ];
 
 const router = new VueRouter({
@@ -63,6 +83,6 @@ new Vue(
             router,
             store
         },
-        AppLayout
+
     )
 ).$mount('#app');
