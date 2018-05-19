@@ -56,6 +56,7 @@
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Выход') }}
                             </a>
+                            <a href="{{ route('admin') }}">Профиль</a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf

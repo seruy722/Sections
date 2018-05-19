@@ -14,7 +14,6 @@ class CreateSchedulesTable extends Migration
     public function up()
     {
         Schema::create('schedules', function (Blueprint $table) {
-           // Schema::drop('schedules');
             $table->increments('id');
             $table->string('days_of_week');
             $table->string('event_name');
