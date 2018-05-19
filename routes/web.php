@@ -28,3 +28,4 @@ Route::resource('/', 'SiteSettingsCotroller');
 //    ->only(['index', 'show']);
 Route::get('/', 'FrontController@index');
 Route::get('/articles/{id}', 'FrontController@show')->name('articles');
+Route::get('/articles', 'FrontController@all')->name('news');

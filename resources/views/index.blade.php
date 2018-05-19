@@ -354,7 +354,7 @@
                                     </div>
                                 </div>
                                     @endforeach
-                                    <button type="button" class="btn btn-primary goto">Посмотреть все новости</button>
+                                <a href="{{route('news')}}"><button type="button" class="btn btn-primary goto">Посмотреть все новости</button></a>
                             </div>
                         </div>
                     </div>

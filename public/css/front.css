@@ -1657,7 +1657,7 @@ th {
 }
 
 .table {
-    width: 100%;
+    width: 94%;
     margin-bottom: 20px
 }
 
@@ -4260,7 +4260,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .nav-justified {
-    width: 100%
+    width: 94%
 }
 
 .nav-justified > li {
@@ -4940,9 +4940,11 @@ textarea.input-group-sm > .input-group-btn > .btn {
     display: inline-block;
     padding-left: 0;
     margin: 20px 0;
-    border-radius: 4px
+    border-radius: 4px;
 }
-
+.paginate {
+    text-align: center;
+}
 .pagination > li {
     display: inline
 }
@@ -4956,27 +4958,30 @@ textarea.input-group-sm > .input-group-btn > .btn {
     line-height: 1.428571429;
     text-decoration: none;
     background-color: #fff;
-    border: 1px solid #ddd
+    border: 1px solid #ddd;
+    background: #f2f2f2;
 }
 
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {
     margin-left: 0;
     border-bottom-left-radius: 4px;
-    border-top-left-radius: 4px
+    border-top-left-radius: 4px;
+    background: #f2f2f2;
 }
 
 .pagination > li:last-child > a,
 .pagination > li:last-child > span {
     border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px
+    border-bottom-right-radius: 4px;
+    background: #f2f2f2;
 }
 
 .pagination > li > a:focus,
 .pagination > li > a:hover,
 .pagination > li > span:focus,
 .pagination > li > span:hover {
-    background-color: #eee
+    background-color: #e1e2e7;
 }
 
 .pagination > .active > a,
@@ -7912,7 +7917,7 @@ dbox-list {
 .dbox-list > .itemCont > a > .itemInfo {
     float: left;
     margin-left: 30px;
-    width: 75%;
+    width: 83%;
 }
 
 .dbox-list > .itemCont > a > .itemInfo > p {

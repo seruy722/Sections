@@ -83,9 +83,10 @@ class FrontController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function all()
     {
-        //
+        $all = News::orderBy('id', 'desc')->paginate(10);
+        return view('articles', ['all' => $all]);
     }
 
     /**
