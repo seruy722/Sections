@@ -127,70 +127,198 @@
                             <h2>Расписание</h2>
                         </header>
                     </div>
-                    <div class="cd-schedule loading">
-                        <div class="timeline">
-                            <ul>
-                                <li><span>08:00</span></li>
-                                <li><span>09:00</span></li>
-                                <li><span>10:00</span></li>
-                                <li><span>11:00</span></li>
-                                <li><span>12:00</span></li>
-                                <li><span>13:00</span></li>
-                                <li><span>14:00</span></li>
-                                <li><span>15:00</span></li>
-                                <li><span>16:00</span></li>
-                                <li><span>17:00</span></li>
-                                <li><span>18:00</span></li>
-                                <li><span>19:00</span></li>
-                                <li><span>20:00</span></li>
-                            </ul>
-                        </div>
-                        <!-- .timeline -->
+                    <div class="container">
+                        <ul class="nav nav-justified nav-pills">
+                            <li class="active noround"><a data-toggle="pill" href="#menu">Понедельник</a></li>
+                            <li class="noround"><a data-toggle="pill" href="#menu1">Вторник</a></li>
+                            <li class="noround"><a data-toggle="pill" href="#menu2">Среда</a></li>
+                            <li class="noround"><a data-toggle="pill" href="#menu3">Четверг</a></li>
+                            <li class="noround"><a data-toggle="pill" href="#menu4">Пятница</a></li>
+                            <li class="noround"><a data-toggle="pill" href="#menu5">Суббота</a></li>
+                        </ul>
 
-
-
-                        <div class="event-modal" data-event="event-1">
-                            <header class="header">
-                                <div class="content">
-                                    <span class="event-date"></span>
-                                    <h3 class="event-name"></h3>
-                                </div>
-
-                                <div class="header-bg"></div>
-                            </header>
-
-                            <div class="body">
-                                <div class="event-info">11111111111111</div>
-                                <div class="body-bg"></div>
+                        <div class="tab-content">
+                            <div id="menu" class="tab-pane fade in active">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <div class="container">
+                                    <thead>
+                                    <tr class="table-head">
+                                        <th class="col-md-1">Название</th>
+                                        <th class="col-md-1">Время начала</th>
+                                        <th class="col-md-3">Время окончания</th>
+                                        <th class="col-md-2">Информация</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($monday as $day=>$a)
+                                        <tr>
+                                            <th colspan="7">{{$day}}</th>
+                                        </tr>
+                                        @foreach($a as $b)
+                                            <tr>
+                                                <td>{{$b->event_name}}</td>
+                                                <td>{{$b->data_start}}</td>
+                                                <td>{{$b->data_end}}</td>
+                                                <td>{{$b->event_info}}</td>
+                                            </tr>
+                                        @endforeach
+                                    @endforeach
+                                    </tbody>
+                                    </div>
+                                </table>
                             </div>
 
-                            <a href="#0" class="close">Close</a>
-                        </div>
-
-                        <div class="event-modal" data-event="event-2">
-                            <header class="header">
-                                <div class="content">
-                                    <span class="event-date"></span>
-                                    <h3 class="event-name"></h3>
-                                </div>
-
-                                <div class="header-bg"></div>
-                            </header>
-
-                            <div class="body">
-
-                                <div class="event-info">2222</div>
-
-                                <div class="body-bg"></div>
+                            <div id="menu1" class="tab-pane fade">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <div class="container">
+                                        <thead>
+                                        <tr class="table-head">
+                                            <th class="col-md-1">Название</th>
+                                            <th class="col-md-1">Время начала</th>
+                                            <th class="col-md-3">Время окончания</th>
+                                            <th class="col-md-2">Информация</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($tuesday as $day=>$a)
+                                            <tr>
+                                                <th colspan="7">{{$day}}</th>
+                                            </tr>
+                                            @foreach($a as $b)
+                                                <tr>
+                                                    <td>{{$b->event_name}}</td>
+                                                    <td>{{$b->data_start}}</td>
+                                                    <td>{{$b->data_end}}</td>
+                                                    <td>{{$b->event_info}}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
+                                        </tbody>
+                                    </div>
+                                </table>
                             </div>
 
-                            <a href="#0" class="close">Close</a>
-                        </div>
+                            <div id="menu2" class="tab-pane fade">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <div class="container">
+                                        <thead>
+                                        <tr class="table-head">
+                                            <th class="col-md-1">Название</th>
+                                            <th class="col-md-1">Время начала</th>
+                                            <th class="col-md-3">Время окончания</th>
+                                            <th class="col-md-2">Информация</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($wednesday as $day=>$a)
+                                            <tr>
+                                                <th colspan="7">{{$day}}</th>
+                                            </tr>
+                                            @foreach($a as $b)
+                                                <tr>
+                                                    <td>{{$b->event_name}}</td>
+                                                    <td>{{$b->data_start}}</td>
+                                                    <td>{{$b->data_end}}</td>
+                                                    <td>{{$b->event_info}}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
+                                        </tbody>
+                                    </div>
+                                </table>
+                            </div>
 
-                        <div class="cover-layer"></div>
+                            <div id="menu3" class="tab-pane fade">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <div class="container">
+                                        <thead>
+                                        <tr class="table-head">
+                                            <th class="col-md-1">Название</th>
+                                            <th class="col-md-1">Время начала</th>
+                                            <th class="col-md-3">Время окончания</th>
+                                            <th class="col-md-2">Информация</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($thursday as $day=>$a)
+                                            <tr>
+                                                <th colspan="7">{{$day}}</th>
+                                            </tr>
+                                            @foreach($a as $b)
+                                                <tr>
+                                                    <td>{{$b->event_name}}</td>
+                                                    <td>{{$b->data_start}}</td>
+                                                    <td>{{$b->data_end}}</td>
+                                                    <td>{{$b->event_info}}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
+                                        </tbody>
+                                    </div>
+                                </table>
+                            </div>
+
+                            <div id="menu4" class="tab-pane fade">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <div class="container">
+                                        <thead>
+                                        <tr class="table-head">
+                                            <th class="col-md-1">Название</th>
+                                            <th class="col-md-1">Время начала</th>
+                                            <th class="col-md-3">Время окончания</th>
+                                            <th class="col-md-2">Информация</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($friday as $day=>$a)
+                                            <tr>
+                                                <th colspan="7">{{$day}}</th>
+                                            </tr>
+                                            @foreach($a as $b)
+                                                <tr>
+                                                    <td>{{$b->event_name}}</td>
+                                                    <td>{{$b->data_start}}</td>
+                                                    <td>{{$b->data_end}}</td>
+                                                    <td>{{$b->event_info}}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
+                                        </tbody>
+                                    </div>
+                                </table>
+                            </div>
+
+                            <div id="menu5" class="tab-pane fade">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <div class="container">
+                                        <thead>
+                                        <tr class="table-head">
+                                            <th class="col-md-1">Название</th>
+                                            <th class="col-md-1">Время начала</th>
+                                            <th class="col-md-3">Время окончания</th>
+                                            <th class="col-md-2">Информация</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($saturday as $day=>$a)
+                                            <tr>
+                                                <th colspan="7">{{$day}}</th>
+                                            </tr>
+                                            @foreach($a as $b)
+                                                <tr>
+                                                    <td>{{$b->event_name}}</td>
+                                                    <td>{{$b->data_start}}</td>
+                                                    <td>{{$b->data_end}}</td>
+                                                    <td>{{$b->event_info}}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
+                                        </tbody>
+                                    </div>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <!-- .cd-schedule -->
-
                 </div>
             </div>
         </div>
@@ -211,7 +339,7 @@
                     <div class="row">
                         <div class="imgSwitch">
                             <div class="row">
-                                <div class="col-xs-6 col-sm-3 col-md-3 dbox-list prod-cnt graphic">
+                                <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt graphic">
                                     <div class="itemCont">
                                         <a href="#">
                                             <div class="thumb"><img class="img-responsive center-block" alt="Blue Gate"
@@ -228,7 +356,7 @@
                                         <button type="button" class="btn btn-primary goto">view</button>
                                     </div>
                                 </div>
-                                <div class="col-xs-6 col-sm-3 col-md-3 dbox-list prod-cnt webdesign">
+                                <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt webdesign">
                                     <div class="itemCont">
                                         <a href="#">
                                             <div class="thumb"><img class="img-responsive center-block"
@@ -245,7 +373,7 @@
                                         <button type="button" class="btn btn-primary goto">view</button>
                                     </div>
                                 </div>
-                                <div class="col-xs-6 col-sm-3 col-md-3 dbox-list prod-cnt creative">
+                                <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt creative">
                                     <div class="itemCont">
                                         <a href="#">
                                             <div class="thumb"><img class="img-responsive center-block" alt="Elves Past"
@@ -262,7 +390,7 @@
                                         <button type="button" class="btn btn-primary goto">view</button>
                                     </div>
                                 </div>
-                                <div class="col-xs-6 col-sm-3 col-md-3 dbox-list prod-cnt inspiration">
+                                <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt inspiration">
                                     <div class="itemCont">
                                         <a href="#">
                                             <div class="thumb"><img class="img-responsive center-block"
@@ -279,7 +407,7 @@
                                         <button type="button" class="btn btn-primary goto">view</button>
                                     </div>
                                 </div>
-                                <div class="col-xs-6 col-sm-3 col-md-3 dbox-list prod-cnt webdesign">
+                                <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt webdesign">
                                     <div class="itemCont">
                                         <a href="#">
                                             <div class="thumb"><img class="img-responsive center-block"
@@ -295,7 +423,7 @@
                                         <button type="button" class="btn btn-primary goto">view</button>
                                     </div>
                                 </div>
-                                <div class="col-xs-6 col-sm-3 col-md-3 dbox-list prod-cnt inspiration">
+                                <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt inspiration">
                                     <div class="itemCont">
                                         <a href="#">
                                             <div class="thumb"><img class="img-responsive center-block" alt="Snow Woman"
@@ -311,7 +439,7 @@
                                         <button type="button" class="btn btn-primary goto">view</button>
                                     </div>
                                 </div>
-                                <div class="col-xs-6 col-sm-3 col-md-3 dbox-list prod-cnt graphic">
+                                <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt graphic">
                                     <div class="itemCont">
                                         <a href="#">
                                             <div class="thumb"><img class="img-responsive center-block"
@@ -328,7 +456,7 @@
                                         <button type="button" class="btn btn-primary goto">view</button>
                                     </div>
                                 </div>
-                                <div class="col-xs-6 col-sm-3 col-md-3 dbox-list prod-cnt creative">
+                                <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt creative">
                                     <div class="itemCont">
                                         <a href="#">
                                             <div class="thumb"><img class="img-responsive center-block"

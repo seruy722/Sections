@@ -24,5 +24,5 @@ Route::resource('api/users', 'Api\UserController');
 
 //Route::resource('api/schedules', 'Api\SchedulesController')
 //    ->only(['index', 'show']);
-//Route::get('/', 'SchedulesController@days');
+Route::get('/', 'SchedulesController@days');
 //Route::get('/', 'SchedulesController@friday');

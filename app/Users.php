@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Schedule extends Model
+class Users extends Model
 {
-    //
+    protected $table='users';
 }
