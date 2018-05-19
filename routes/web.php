@@ -26,5 +26,5 @@ Route::resource('/', 'SiteSettingsCotroller');
 
 //Route::resource('api/schedules', 'Api\SchedulesController')
 //    ->only(['index', 'show']);
-Route::get('/', 'SchedulesController@days');
-//Route::get('/', 'SchedulesController@friday');
+Route::get('/', 'FrontController@index');
+Route::get('/articles/{id}', 'FrontController@show')->name('articles');
