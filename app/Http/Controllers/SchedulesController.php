@@ -9,26 +9,26 @@ class SchedulesController extends Controller
 {
     public function days()
     {
-        $monday = Schedules::join('users', 'users.id', '=', 'schedules.users_id')->where('days_of_week', 'Monday')->orderBy('data_start', 'asc')->get()
+        $monday = Schedules::join('users', 'users.id', '=', 'schedules.user_id')->where('days_of_week', 'Monday')->orderBy('data_start', 'asc')->get()
       //  $monday = Schedules::where('days_of_week', 'Monday')->orderBy('data_start', 'asc')->get()
             ->groupby('name');
 
-        $tuesday = Schedules::join('users', 'users.id', '=', 'schedules.users_id')
+        $tuesday = Schedules::join('users', 'users.id', '=', 'schedules.user_id')
             ->where('days_of_week', 'Tuesday')->orderBy('data_start', 'asc')->get()
             ->groupby('name');
 
-        $wednesday = Schedules::join('users', 'users.id', '=', 'schedules.users_id')
+        $wednesday = Schedules::join('users', 'users.id', '=', 'schedules.user_id')
             ->where('days_of_week', 'Wednesday')->orderBy('data_start', 'asc')->get()
             ->groupby('name');
-        $thursday = Schedules::join('users', 'users.id', '=', 'schedules.users_id')
+        $thursday = Schedules::join('users', 'users.id', '=', 'schedules.user_id')
             ->where('days_of_week', 'Thursday')->orderBy('data_start', 'asc')->get()
             ->groupby('name');
 
-        $friday = Schedules::join('users', 'users.id', '=', 'schedules.users_id')
+        $friday = Schedules::join('users', 'users.id', '=', 'schedules.user_id')
             ->where('days_of_week', 'Friday')->orderBy('data_start', 'asc')->get()
             ->groupby('name');
 
-        $saturday = Schedules::join('users', 'users.id', '=', 'schedules.users_id')
+        $saturday = Schedules::join('users', 'users.id', '=', 'schedules.user_id')
             ->where('days_of_week', 'Tuesday')->orderBy('data_start', 'asc')->get()
             ->groupby('name');
 
