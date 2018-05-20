@@ -1,5 +1,6 @@
 <?php
-
+use App\News;
+use Illuminate\Support\Facades\Input;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,3 +28,4 @@ Route::resource('api/users', 'Api\UserController');
 Route::get('/', 'FrontController@index');
 Route::get('/articles/{id}', 'FrontController@show')->name('articles');
 Route::get('/articles', 'FrontController@all')->name('news');
+Route::any('/articles/search', 'FrontController@search');

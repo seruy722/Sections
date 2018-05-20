@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Schedules;
 use App\News;
+use Illuminate\Support\Facades\Input;
 
 class FrontController extends Controller
 {
@@ -96,9 +97,17 @@ class FrontController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function search(Request $request)
     {
-        //
+        $q = Input::get( 'q' );
+        $news = News::where ( 'title', 'LIKE', '%' . $q . '%' )
+            ->orWhere ( 'description', 'LIKE', '%' . $q . '%' )
+            ->orWhere ( 'content', 'LIKE', '%' . $q . '%' )
+            ->get();
+        if (count ( $news ) > 0)
+            return view ( 'search' )->withDetails ( $news )->withQuery ( $q );
+        else
+            return redirect('/articles')->with('msg', 'Нет результатов поиска. Попробуйте снова!' );
     }
 
     /**
