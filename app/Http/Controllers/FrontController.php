@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Schedules;
 use App\News;
+use App\Users;
+use App\Sections;
 use Illuminate\Support\Facades\Input;
 
 class FrontController extends Controller
@@ -42,7 +44,11 @@ class FrontController extends Controller
 
         $news = News::orderBy('id', 'desc')->limit(10)->get();
 
-        return view('index', ['monday' => $monday, 'tuesday' => $tuesday, 'wednesday' => $wednesday, 'thursday' => $thursday, 'friday' => $friday, 'saturday' => $saturday, 'news' => $news]);
+        $sections = Sections::join('users', 'users.id', '=', 'sections.user_id')
+            ->get()
+            ->groupby('category');
+
+        return view('index', ['monday' => $monday, 'tuesday' => $tuesday, 'wednesday' => $wednesday, 'thursday' => $thursday, 'friday' => $friday, 'saturday' => $saturday, 'news' => $news, 'sections' => $sections]);
     }
 
     /**

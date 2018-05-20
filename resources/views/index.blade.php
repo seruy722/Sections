@@ -6,112 +6,31 @@
          data-animate-up="ha-header-large">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-md-12 col-sm-12">
-                    <div class=" container TitleSection">
-                        <header class="page-head">
-                            <h3>Танцы</h3>
-                        </header>
-                    </div>
-                    <div class="row">
-                        <div class="sec_wrap_3 option3">
-                            <div class="col-xs-12 col-md-3 col-sm-12">
-                                <ul>
-                                    <li>
-                                        <div class="icon_sec"><img src="/images/favicon.png" alt=""></div>
-                                        <div class="wrap">
-                                            <h4>Клуб современного танца "Ритм"</h4>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-xs-12 col-md-3 col-sm-12">
-                                <ul>
-                                    <li>
-                                        <div class="icon_sec"><img src="/images/favicon.png" alt=""></div>
-                                        <div class="wrap">
-                                            <h4>Творческий Центр "Fleur-de-Lys"</h4>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-xs-12 col-md-3 col-sm-12">
-                                <ul>
-                                    <li>
-                                        <div class="icon_sec"><img src="/images/favicon.png" alt=""></div>
-                                        <div class="wrap">
-                                            <h4>Студия современного танца Fly dance</h4>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-xs-12 col-md-3 col-sm-12">
-                                <ul>
-                                    <li>
-                                        <div class="icon_sec"><img src="/images/favicon.png" alt=""></div>
-                                        <div class="wrap">
-                                            <h4>Танцевальный центр Элегия</h4>
-                                        </div>
-                                    </li>
-                                </ul>
+                @foreach($sections as $section=>$q)
+                    <div class="col-xs-12 col-md-12 col-sm-12">
+                        <div class=" container TitleSection">
+                            <header class="page-head">
+                                <h3>{{$section}}</h3>
+                            </header>
+                        </div>
+                        <div class="row">
+                            <div class="sec_wrap_3 option3">
+                                @foreach($q as $w)
+                                    <div class="col-xs-12 col-md-4 col-sm-12">
+                                        <ul>
+                                            <li>
+                                                <div class="icon_sec"><img src="/images/favicon.png" alt=""></div>
+                                                <div class="wrap">
+                                                    <h4>{{$w->name}}</h4>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-md-12 col-sm-12">
-                    <div class=" container TitleSection">
-                        <header class="page-head">
-                            <h3>Танцы</h3>
-                        </header>
-                    </div>
-                    <div class="row">
-                        <div class="sec_wrap_3 option3">
-                            <div class="col-xs-12 col-md-3 col-sm-12">
-                                <ul>
-                                    <li>
-                                        <div class="icon_sec"><img src="/images/favicon.png" alt=""></div>
-                                        <div class="wrap">
-                                            <h4>Клуб современного танца "Ритм"</h4>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-xs-12 col-md-3 col-sm-12">
-                                <ul>
-                                    <li>
-                                        <div class="icon_sec"><img src="/images/favicon.png" alt=""></div>
-                                        <div class="wrap">
-                                            <h4>Творческий Центр "Fleur-de-Lys"</h4>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-xs-12 col-md-3 col-sm-12">
-                                <ul>
-                                    <li>
-                                        <div class="icon_sec"><img src="/images/favicon.png" alt=""></div>
-                                        <div class="wrap">
-                                            <h4>Студия современного танца Fly dance</h4>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-xs-12 col-md-3 col-sm-12">
-                                <ul>
-                                    <li>
-                                        <div class="icon_sec"><img src="/images/favicon.png" alt=""></div>
-                                        <div class="wrap">
-                                            <h4>Танцевальный центр Элегия</h4>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -340,21 +259,24 @@
                         <div class="imgSwitch">
                             <div class="row">
                                 @foreach($news as $list)
-                                <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt graphic">
-                                    <div class="itemCont">
-                                        <a href="{{route('articles', $list->id)}}">
-                                            <div class="thumb"><img class="img-responsive center-block" alt="Blue Gate"
-                                                                    src="/images/img1.jpg"></div>
-                                            <div class="itemInfo">
-                                                <h4>{{$list->title}}</h4>
-                                                <h6>{{$list->user->name}}</h6>
-                                                <p>{{$list->description}}</p>
-                                            </div>
-                                        </a>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt graphic">
+                                        <div class="itemCont">
+                                            <a href="{{route('articles', $list->id)}}">
+                                                <div class="thumb"><img class="img-responsive center-block"
+                                                                        alt="Blue Gate"
+                                                                        src="/images/img1.jpg"></div>
+                                                <div class="itemInfo">
+                                                    <h4>{{$list->title}}</h4>
+                                                    <h6>{{$list->user->name}}</h6>
+                                                    <p>{{$list->description}}</p>
+                                                </div>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                    @endforeach
-                                <a href="{{route('news')}}"><button type="button" class="btn btn-primary goto">Посмотреть все новости</button></a>
+                                @endforeach
+                                <a href="{{route('news')}}">
+                                    <button type="button" class="btn btn-primary goto">Посмотреть все новости</button>
+                                </a>
                             </div>
                         </div>
                     </div>
