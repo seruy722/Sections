@@ -19,6 +19,22 @@ const News = Vue.component('News', require('./components/admin/News.vue'));
 const Dashboard = Vue.component('Dashboard', require('./components/admin/Dashboard.vue'));
 
 
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue')
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue')
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue')
+);
+
+
 const Login = Vue.component('Login', require('./components/Login.vue'));
 const Register = Vue.component('Register', require('./components/Register.vue'));
 
@@ -59,7 +75,7 @@ const routes = [
     },
     {
         name: 'Login',
-        path: '/login',
+        path: '/lo',
         component: Login,
         meta:{
             adminAuth:true,moderAuth:false

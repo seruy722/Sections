@@ -66,16 +66,16 @@
         methods:{
             logIn(){
                 let data = {
-                    client_id:2,
-                    client_secret:'P36OiGkGhqdS3tfN8NMEQmxPUfGoxLECl7sOf0cb',
-                    grant_type:'passport',
-                    username:this.email,
-                    password:this.password
+                    name: 'Laravel Password Grant Client',
+                    redirect: this.$store.state.url
                 };
-                Axios.post(this.$store.state.url+'oauth/token',data)
-                    .then(response=>{
-                        console.log(response);
+                Axios.post(this.$store.state.url+'oauth/clients', data)
+                    .then(response => {
+                        console.log(response.data);
                     })
+                    .catch (response => {
+                        // List errors on response...
+                    });
             }
         }
     }
