@@ -19,6 +19,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+<div id="app">
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -37,10 +38,15 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
+
                     @guest
-                        <li><a class="nav-link" href="{{ route('login') }}">{{ __('Вход') }}</a></li>
-                        <li><a class="nav-link" href="{{ route('register') }}">{{ __('Регистрация') }}</a></li>
+                        <router-link to="/login" tag='li'>
+                            <a>Login</a>
+                        </router-link>
+                        <router-link to="/register" tag='li'>
+                            <a>Register</a>
+                        </router-link>
+                        <!-- Authentication Links -->
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -69,7 +75,14 @@
 
     <main class="py-4">
         @yield('content')
+        <router-view></router-view>
     </main>
-
+</div>
+    <script>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

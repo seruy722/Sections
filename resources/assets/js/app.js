@@ -1,3 +1,5 @@
+require('./bootstrap');
+
 window.Vue = require('vue');
 window.VueRouter = require('vue-router').default;
 window.VueAxios = require('vue-axios').default;
@@ -49,7 +51,7 @@ const routes = [
     },
     {
         name: 'Dashboard',
-        path: '/admin',
+        path: '/adm',
         component: Dashboard,
         meta:{
             adminAuth:true,moderAuth:false
