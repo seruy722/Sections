@@ -22,8 +22,6 @@ Route::resource('api/news', 'Api\NewsController');
 Route::resource('api/users', 'Api\UserController');
 
 
-Route::resource('/', 'SiteSettingsCotroller');
-
 //Route::resource('api/schedules', 'Api\SchedulesController')
 //    ->only(['index', 'show']);
 Route::get('/', 'FrontController@index');

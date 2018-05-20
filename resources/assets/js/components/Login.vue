@@ -21,7 +21,7 @@
                                 <label for="password" class="col-md-4 control-label">Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" v-model="password" required>
+                                    <input id="password" type="password" class="form-control" v-model="password" >
 
                                 </div>
                             </div>
@@ -65,14 +65,16 @@
         },
         methods:{
             logIn(){
-                axios.post('/login',{email:this.email,password:this.password})
+                let data = {
+                    client_id:2,
+                    client_secret:'P36OiGkGhqdS3tfN8NMEQmxPUfGoxLECl7sOf0cb',
+                    grant_type:'passport',
+                    username:this.email,
+                    password:this.password
+                };
+                Axios.post(this.$store.state.url+'oauth/token',data)
                     .then(response=>{
-
-                        let token= response.data.token;
-                        if(token){
-                            localStorage.setItem('token',token);
-                        }
-                        console.log(token);
+                        console.log(response);
                     })
             }
         }
