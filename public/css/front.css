@@ -8048,3 +8048,8 @@ table th {
         font-weight: bold;
     }
 }
+
+.msg{
+    padding-bottom: 2%;
+    padding-left: 4%;
+}
