@@ -27,4 +27,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(News::class);
     }
+    
+    protected $table='users';
+
+    public function sections()
+    {
+        return $this->hasOne('App\Sections','user_id');
+    }
 }

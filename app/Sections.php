@@ -9,7 +9,4 @@ class Sections extends Model
 {
     protected $table='sections';
 
-    public function users() {
-        return $this->belongsTo('App\Users', 'users_id');
-    }
 }

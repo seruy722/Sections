@@ -69,7 +69,7 @@
                 <li class="active"><a href="http://sections.loc#home">Главная</a></li>
                 <li><a href="http://sections.loc#sections">Кружки</a></li>
                 <li><a href="http://sections.loc#schedule">Расписание</a></li>
-                <li><a href="http://sections.loc/#news">Новости</a></li>
+                <li><a href="http://sections.loc#news">Новости</a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
@@ -142,7 +142,7 @@
 
            $('html, body').stop().animate({
                'scrollTop': $target.offset().top
-           }, 500, 'swing', function () {
+           }, 2000, 'swing', function () {
                window.location.hash = target;
            });
        });
@@ -160,6 +160,7 @@
    }
    if (!document.location.hash) {
        $('.top-menu li.active').removeClass('active');
+       $('.navbar-default').removeClass('ha-header-large');
    }
 
 </script>

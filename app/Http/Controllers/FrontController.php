@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Schedules;
 use App\News;
-use App\Users;
 use App\Sections;
 use Illuminate\Support\Facades\Input;
 

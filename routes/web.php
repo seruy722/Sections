@@ -31,3 +31,5 @@ Route::get('/articles/{id}', 'FrontController@show')->name('articles');
 Route::get('/articles', 'FrontController@all')->name('news');
 Route::any('/articles/search', 'FrontController@search');
 Route::any('/search', 'FrontController@searchAll');
+
+Route::get('/section/{id}', 'SectionsController@index')->name('sections');
