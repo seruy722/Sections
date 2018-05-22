@@ -19,7 +19,8 @@ class UsersTableSeeder extends Seeder
                 'password' => $faker->password,
                 'category' => $faker->title,
                 'address' => $faker->address,
-                'phone' => $faker->phoneNumber,
+                'photo' => $faker->shuffle('$Ukraine$, $Kramatorsk$'),
+                'api_token'=>$faker->shuffle('hello, world'),
             ]);
         }
     }

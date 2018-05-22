@@ -1,75 +1,96 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Register</div>
-                    <div class="panel-body">
-                        <form @submit.prevent='registerUser'>
+  <div>
+      <v-container>
+          <v-layout>
+              <v-flex sm4 offset-sm4>
+                  <v-card>
+                      <v-card-title>
+                          <h2>Create An Account</h2>
+                      </v-card-title>
 
-                            <div class="form-group">
-                                <label for="name" class="col-md-4 control-label">Name</label>
+                      <v-card-text>
+                          <v-layout row>
+                              <v-text-field
+                                label="Name"
+                                v-model="form.name"
+                                :error-messages="checkError('name')"
+                              ></v-text-field>
+                          </v-layout>
 
-                                <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" v-model="register.name"  required autofocus>
+                          <v-layout row>
+                              <v-text-field
+                                label="Email"
+                                v-model="form.email"
+                                :error-messages="checkError('email')"
+                              ></v-text-field>
+                          </v-layout>
 
-                                </div>
-                            </div>
+                          <v-layout row>
+                              <v-text-field
+                                label="Password"
+                                v-model="form.password"
+                                :error-messages="checkError('password')"
+                                type="password"
+                              ></v-text-field>
+                          </v-layout>
 
-                            <div class="form-group">
-                                <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                          <v-layout row>
+                              <v-text-field
+                                label="Confirm Password"
+                                v-model="form.password_confirmation"
+                                type="password"
+                              ></v-text-field>
+                          </v-layout>
 
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" v-model="register.email" value="" required>
-
-
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="password" class="col-md-4 control-label">Password</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" v-model="register.password" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Register
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                          <v-layout row>
+                              <v-flex xs12 class="text-xs-center">
+                                  <v-btn @click="onRegister">
+                                      Register
+                                  </v-btn>
+                              </v-flex>
+                          </v-layout>
+                      </v-card-text>
+                  </v-card>
+              </v-flex>
+          </v-layout>
+      </v-container>
+  </div>
 </template>
 
 <script>
-    export default {
-        data(){
-            return {
-                register:{
-                    name:"",
-                    email:"",
-                    password:""
-                }
-            }
+export default {
+    data() {
+        return {
+            form: {
+                name: null,
+                email: null,
+                password: null,
+                password_confirmation: null
+            },
+
+            errors: {}
+        };
+    },
+
+    methods: {
+        onRegister() {
+            this.errors = {};
+
+            axios
+                .post("/api/register", this.form)
+                .then(response => {
+                    if (response.data.success) {
+                        this.$router.push("/");
+                    }
+                })
+                .catch(error => {
+                    this.errors = error.response.data.errors;
+                });
         },
-        methods:{
-            registerUser(){
-                axios.post('/register',this.register)
-                    .then(response=>{
-                        console.log(response);
-                    })
-                    .catch(error=>{
-                        console.log(error.response)
-                    })
-            }
+
+        checkError(field) {
+            return this.errors.hasOwnProperty(field) ? this.errors[field] : [];
         }
     }
+};
 </script>
