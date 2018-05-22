@@ -4735,7 +4735,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-default .navbar-nav > li > a:focus,
 .navbar-default .navbar-nav > li > a:hover {
-    color: #333;
+    color: #eb5055;
     background-color: transparent
 }
 
@@ -8147,3 +8147,8 @@ table th {
 #input:focus {
     box-shadow: 0 0 30px #666d89
 }
+
+.holder { overflow:hidden }
+.holder > img { transition: all 0.5s ease-in-out; -webkit-transition: all 0.5s ease-in-out; -moz-transition: all 0.5s ease-in-out; -o-transition: all 0.5s ease-in-out; }
+.about_wrap { margin-top: 20px; }
+.about_wrap:hover img { -webkit-transform: scale(1.1) rotate(3deg); -moz-transform: scale(1.1) rotate(3deg); -o-transform: scale(1.1) rotate(3deg); -ms-transform: scale(1.1) rotate(3deg); }

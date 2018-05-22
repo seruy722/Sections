@@ -1,25 +1,25 @@
-@extends('layouts.app')
+@extends('layouts.ap')
 
 @section('content')
     <div class="row search">
-        <div class="col-xs-12 col-md-12 col-sm-12">
-            <form action="/search" method="POST" role="search" class="form-search">
-                {{ csrf_field() }}
-                <div class="row">
-                    <div class="col-xs-11">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="q" value="{{ old('q') }}" required>
-                        </div>
-                    </div>
-                    <div class="col-xs-1">
-                        <div class="form-group">
-                            <input class="btn btn-info" type="submit" value="Поиск">
-                        </div>
+            <div class="col-xs-12 col-md-12 col-sm-12">
+        <form action="/search" method="POST" role="search" class="form-search">
+            {{ csrf_field() }}
+            <div class="row">
+                <div class="col-xs-11">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="q" value="{{ old('q') }}" required>
                     </div>
                 </div>
-            </form>
-            <div class="msg">{{Session::get('msg')}}</div>
-        </div>
+                <div class="col-xs-1">
+                    <div class="form-group">
+                        <input class="btn btn-info" type="submit" value="Поиск">
+                    </div>
+                </div>
+            </div>
+        </form>
+                <div class="msg">{{Session::get('msg')}}</div>
+    </div>
     </div>
     <!-- Sections -->
     <div id="sections" class="sections ha-waypoint page-section" data-animate-down="ha-header-small "
@@ -40,8 +40,7 @@
                                         <ul>
                                             <li>
                                                 <div class="about_wrap_one">
-                                                    <div class="hexagon"><a href="#"> <span class="mask"></span> <img
-                                                                    src="/images/favicon.png" alt="filter"> </a>
+                                                    <div class="hexagon"> <a href="{{route('sections', $w->id)}}"> <span class="mask"></span> <img src="/images/favicon.png" alt="filter"> </a>
                                                     </div>
                                                     <div class="wrap">
                                                         <h4>{{$w->name}}</h4>
@@ -286,9 +285,9 @@
                                     <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt graphic">
                                         <div class="itemCont">
                                             <a href="{{route('articles', $list->id)}}">
-                                                <div class="thumb"><img class="img-responsive center-block"
-                                                                        alt="Blue Gate"
-                                                                        src="/images/img1.jpg"></div>
+                                                <div class="about_wrap thumb">
+                                                    <div class="holder"> <img class="img-responsive center-block" src="/images/img1.jpg" alt="about"> </div>
+                                                </div>
                                                 <div class="itemInfo">
                                                     <h4>{{$list->title}}</h4>
                                                     <h6>{{$list->user->name}}</h6>
