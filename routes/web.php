@@ -37,3 +37,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::any('/articles/search', 'FrontController@search');
+Route::any('/search', 'FrontController@searchAll');

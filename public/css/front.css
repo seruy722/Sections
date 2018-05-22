@@ -4942,9 +4942,11 @@ textarea.input-group-sm > .input-group-btn > .btn {
     margin: 20px 0;
     border-radius: 4px;
 }
+
 .paginate {
     text-align: center;
 }
+
 .pagination > li {
     display: inline
 }
@@ -7608,7 +7610,7 @@ h1 small {
 
 .schedule,
 .about,
-.contact{
+.contact {
     background-color: #F2F2F2;
     border-bottom: 5px solid #e1e2e7;
     color: #767E9E;
@@ -7620,11 +7622,11 @@ h1 small {
     padding: 10px 0
 }
 
-.scheduleContainer .hexagon a span.mask {
+.hexagon a span.mask {
     background: url(../images/hexagon_mask_2.png) no-repeat
 }
 
-.scheduleContainer .hexagon {
+.hexagon {
     margin: 0 25px 25px 0
 }
 
@@ -7632,6 +7634,83 @@ h1 small {
     font-family: Helvetica;
     font-size: 15px;
     text-transform: uppercase
+}
+
+
+.hexagon {
+    margin: 10px auto 5px;
+    overflow: hidden;
+    width: 193px
+}
+
+.hexagon a {
+    float: left;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    display: block;
+    position: relative;
+}
+
+.hexagon a img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    -webkit-transition: 300ms ease-out;
+    -moz-transition: 300ms ease-out;
+    -o-transition: 300ms ease-out;
+    transition: 300ms ease-out;
+    -webkit-backface-visibility: hidden;
+}
+
+.hexagon a span.mask {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    z-index: 2;
+    background: url("../images/hexagon_mask.png") no-repeat;
+    -webkit-transition: -webkit-transform 300ms ease-out;
+    -moz-transition: -moz-transform 300ms ease-out;
+    -o-transition: -o-transform 300ms ease-out;
+    transition: transform 300ms ease-out;
+    -webkit-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.hexagon a span.mask:hover {
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    -o-transform: rotate(30deg);
+    transform: rotate(30deg);
+}
+
+.portfolio-title {
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 20px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.portfolio-title h4 {
+    position: relative;
+    line-height: 20px;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+
+.portfolio-title h4 span {
+    width: 100%;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    color: #A3A7B9;
+    top: 20px;
 }
 
 .isotope-item {
@@ -7754,7 +7833,7 @@ h1 small {
     border-top: 1px solid #767e9e
 }
 
-.cbp-ig-grid li:nth-child(-n+3) {
+.cbp-ig-grid li:nth-child(-n + 3) {
     border-top: none
 }
 
@@ -7855,14 +7934,14 @@ h1 small {
     .cbp-ig-grid li {
         width: 50%
     }
-    .cbp-ig-grid li:nth-child(-n+3) {
+    .cbp-ig-grid li:nth-child(-n + 3) {
         border-top: 1px solid #767e9e
     }
     .cbp-ig-grid li:nth-child(3n-1),
     .cbp-ig-grid li:nth-child(3n-2) {
         box-shadow: none
     }
-    .cbp-ig-grid li:nth-child(-n+2) {
+    .cbp-ig-grid li:nth-child(-n + 2) {
         border-top: none
     }
     .cbp-ig-grid li:nth-child(2n-1) {
@@ -7874,7 +7953,7 @@ h1 small {
     .cbp-ig-grid li {
         width: 100%
     }
-    .cbp-ig-grid li:nth-child(-n+2) {
+    .cbp-ig-grid li:nth-child(-n + 2) {
         border-top: 1px solid #767e9e
     }
     .cbp-ig-grid li:nth-child(2n-1) {
@@ -8049,7 +8128,22 @@ table th {
     }
 }
 
-.msg{
-    padding-bottom: 2%;
+.msg {
+
     padding-left: 4%;
+}
+
+.search {
+    background: #f2f2f2;
+    border-bottom: 5px solid #e1e2e7;
+    color: #666d89;
+    padding-top: 30px;
+}
+
+#input:active {
+    box-shadow: 0 0 30px #666d89
+}
+
+#input:focus {
+    box-shadow: 0 0 30px #666d89
 }

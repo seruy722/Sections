@@ -1,8 +1,28 @@
 @extends('layouts.ap')
 
 @section('content')
+    <div class="row search">
+            <div class="col-xs-12 col-md-12 col-sm-12">
+        <form action="/search" method="POST" role="search" class="form-search">
+            {{ csrf_field() }}
+            <div class="row">
+                <div class="col-xs-11">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="q" value="{{ old('q') }}" required>
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="form-group">
+                        <input class="btn btn-info" type="submit" value="Поиск">
+                    </div>
+                </div>
+            </div>
+        </form>
+                <div class="msg">{{Session::get('msg')}}</div>
+    </div>
+    </div>
     <!-- Sections -->
-    <div id="sections" class="sections ha-waypoint" data-animate-down="ha-header-small"
+    <div id="sections" class="sections ha-waypoint page-section" data-animate-down="ha-header-small "
          data-animate-up="ha-header-large">
         <div class="container">
             <div class="row">
@@ -19,9 +39,12 @@
                                     <div class="col-xs-12 col-md-4 col-sm-12">
                                         <ul>
                                             <li>
-                                                <div class="icon_sec"><img src="/images/favicon.png" alt=""></div>
-                                                <div class="wrap">
-                                                    <h4>{{$w->name}}</h4>
+                                                <div class="about_wrap_one">
+                                                    <div class="hexagon"> <a href="#"> <span class="mask"></span> <img src="/images/favicon.png" alt="filter"> </a>
+                                                    </div>
+                                                    <div class="wrap">
+                                                        <h4>{{$w->name}}</h4>
+                                                    </div>
                                                 </div>
                                             </li>
                                         </ul>
@@ -37,7 +60,7 @@
     <!-- /Sections -->
 
     <!-- Schedule -->
-    <div id="schedule" class="schedule">
+    <div id="schedule" class="schedule page-section">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-12 col-sm-12">
@@ -246,7 +269,7 @@
 
 
     <!-- News-->
-    <div id="news" class="news">
+    <div id="news" class="news page-section">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-12 col-sm-12">

@@ -1,13 +1,56 @@
 @extends('layouts.ap')
 
 @section('content')
-    <div class="container">
-        @if(isset($details))
+
+            <div class="col-xs-12 col-sm-12 col-md-12" search>
+                <div class="msg" style="padding-top: 2.5%; padding-bottom: 2.5%;">Результаты поиска по вашему запросу
+                    <b> {{ $query }} </b>:
+                </div>
+            </div>
+
+    @if(isset($detail))
+        <div id="sections" class="sections ha-waypoint" data-animate-down="ha-header-small"
+             data-animate-up="ha-header-large">
+
+                    @foreach($detail as $section=>$q)
+                        <div class="col-xs-12 col-md-12 col-sm-12">
+                            <div class=" container TitleSection">
+                                <header class="page-head">
+                                    <h3>{{$section}}</h3>
+                                </header>
+                            </div>
+                            <div class="row">
+                                <div class="sec_wrap_3 option3">
+                                    @foreach($q as $w)
+                                        <div class="col-xs-12 col-md-4 col-sm-12">
+                                            <ul>
+                                                <li>
+                                                    <div class="about_wrap_one">
+                                                        <div class="hexagon"> <a href="#"> <span class="mask"></span> <img src="/images/favicon.png" alt="filter"> </a>
+                                                        </div>
+                                                        <div class="wrap">
+                                                            <h4>{{$w->name}}</h4>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+    @endif
+
+
+    @if(isset($details))
+        <div id="news" class="news">
+
             <div class="imgSwitch">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt graphic">
-                        <div class="msg" style="padding-top: 2%;">Результаты поиска по вашему запросу
-                            <b> {{ $query }} </b>: {{count($details)}}</div>
                         @foreach($details as $news)
                             <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt graphic">
                                 <div class="itemCont">
@@ -27,6 +70,8 @@
                     </div>
                 </div>
             </div>
-        @endif
-    </div>
+        </div>
+
+    @endif
+
 @endsection

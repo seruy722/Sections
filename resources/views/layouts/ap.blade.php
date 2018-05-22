@@ -11,6 +11,7 @@
     <link rel="shortcut icon" href="images/favicon.png">
     <title>Секции, Кружки, Студии</title>
     <link href="{{ asset('css/front.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -64,13 +65,12 @@
                     </li>
                 @endguest
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#home">Главная</a></li>
-                <li><a href="#sections">Кружки</a></li>
-                <li><a href="#schedule">Расписание</a></li>
-                <li><a href="#news">Новости</a></li>
+            <ul class="nav navbar-nav navbar-right top-menu">
+                <li class="active"><a href="http://sections.loc#home">Главная</a></li>
+                <li><a href="http://sections.loc#sections">Кружки</a></li>
+                <li><a href="http://sections.loc#schedule">Расписание</a></li>
+                <li><a href="http://sections.loc/#news">Новости</a></li>
             </ul>
-
         </div>
         <!--/.nav-collapse -->
     </div>
@@ -78,7 +78,7 @@
 <!-- End Fixed navbar -->
 
 <!-- Full Page Image Header Area -->
-<div id="home" class="home">
+<div id="home" class="home page-section">
     <div class="header_img">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
@@ -96,17 +96,21 @@
 
 <!-- Footer -->
 <footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-md-9 col-sm-12">
-                <p>Copyright &copy; 2018 Coyier. All rights reserved.</p>
-            </div>
-            <div class="col-xs-12 col-md-3 col-sm-12">
-                <ul class=" footer_social clearfix">
-                    <li><a href="#"><img src="./images/favicon.png" alt=""></a></li>
-                    <li><a href="#"><img src="./images/favicon.png" alt=""></a></li>
-                    <li><a href="#"><img src="./images/favicon.png" alt=""></a></li>
-                </ul>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-9 col-sm-12">
+                    <p>Copyright &copy; 2018 Coyier. All rights reserved.</p>
+                </div>
+                <div class="col-xs-12 col-md-3 col-sm-12">
+                    <ul class=" footer_social clearfix">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-vk"></i></a></li>
+                        <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                        <li class="go_top"><a href="#top"><i class="fa fa-chevron-circle-up"></i></a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -127,7 +131,38 @@
 
 <script src="/js/main.js"></script>
 <!-- Resource jQuery -->
+<script type="text/javascript">
+   if (document.location.hash) {
 
+       $('a[href^="http://sections.loc#"]').bind('click.smoothscroll', function (e) {
+           e.preventDefault();
+
+           var target = this.hash,
+               $target = $(target);
+
+           $('html, body').stop().animate({
+               'scrollTop': $target.offset().top
+           }, 500, 'swing', function () {
+               window.location.hash = target;
+           });
+       });
+
+       $(window).scroll(function () {
+           var scrollDistance = $(window).scrollTop();
+           // Assign active class to nav links while scolling
+           $('.page-section').each(function (i) {
+               if ($(this).position().top <= scrollDistance) {
+                   $('.top-menu li.active').removeClass('active');
+                   $('.top-menu li').eq(i).addClass('active');
+               }
+           });
+       }).scroll();
+   }
+   if (!document.location.hash) {
+       $('.top-menu li.active').removeClass('active');
+   }
+
+</script>
 </body>
 
 </html>

@@ -1,28 +1,32 @@
 @extends('layouts.ap')
 
 @section('content')
+    <div class="row search">
+        <div class="col-xs-12 col-md-12 col-sm-12">
+            <form action="/articles/search" method="POST" role="search" class="form-search">
+                {{ csrf_field() }}
+                <div class="row">
+                    <div class="col-xs-11">
+                        <div class="form-group">
+                            <input id="input" type="text" class="form-control" name="q" value="{{ old('q') }}" required>
+                        </div>
+                    </div>
+                    <div class="col-xs-1">
+                        <div class="form-group">
+                            <input class="btn btn-info" type="submit" value="Поиск">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="msg">{{Session::get('msg')}}</div>
+        </div>
+    </div>
     <!-- News-->
     <div id="news" class="news">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-12 col-sm-12">
                     <div class="row">
-                        <form action="/articles/search" method="POST" role="search" class="form-search">
-                            {{ csrf_field() }}
-                            <div class="row">
-                                <div class="col-xs-11">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="q" value="{{ old('q') }}" required>
-                                    </div>
-                                </div>
-                                <div class="col-xs-1">
-                                    <div class="form-group">
-                                        <input class="btn btn-info" type="submit" value="Поиск">
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="msg">{{Session::get('msg')}}</div>
                         <div class="imgSwitch">
                             <div class="row">
                                 @foreach($all as $list)

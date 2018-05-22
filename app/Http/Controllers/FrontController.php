@@ -103,17 +103,23 @@ class FrontController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function search(Request $request)
+    public function searchAll(Request $request)
     {
         $q = Input::get( 'q' );
         $news = News::where ( 'title', 'LIKE', '%' . $q . '%' )
             ->orWhere ( 'description', 'LIKE', '%' . $q . '%' )
             ->orWhere ( 'content', 'LIKE', '%' . $q . '%' )
             ->get();
-        if (count ( $news ) > 0)
-            return view ( 'search' )->withDetails ( $news )->withQuery ( $q );
+        $sections = Sections::where ( 'category', 'LIKE', '%' . $q . '%' )
+            ->orWhere ( 'name', 'LIKE', '%' . $q . '%' )
+            ->orWhere ( 'info', 'LIKE', '%' . $q . '%' )
+            ->join('users', 'users.id', '=', 'sections.user_id')
+            ->get()
+            ->groupby('category');
+        if ((count ( $sections ) > 0)||(count ( $news ) > 0))
+            return view ( 'search' )->withDetail($sections)->withDetails($news)->withQuery ( $q );
         else
-            return redirect('/articles')->with('msg', 'Нет результатов поиска. Попробуйте снова!' );
+            return redirect('/')->with('msg', 'Нет результатов поиска. Попробуйте снова!' );
     }
 
     /**
@@ -122,8 +128,16 @@ class FrontController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function search(Request $request)
     {
-        //
+        $q = Input::get( 'q' );
+        $news = News::where ( 'title', 'LIKE', '%' . $q . '%' )
+            ->orWhere ( 'description', 'LIKE', '%' . $q . '%' )
+            ->orWhere ( 'content', 'LIKE', '%' . $q . '%' )
+            ->get();
+        if (count ( $news ) > 0)
+            return view ( 'search' )->withDetails($news )->withQuery ( $q );
+        else
+            return redirect('/articles')->with('msg', 'Нет результатов поиска. Попробуйте снова!' );
     }
 }
