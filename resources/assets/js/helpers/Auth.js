@@ -8,19 +8,21 @@ export default {
     },
 
     login(data) {
-        localStorage.setItem("user_id", data.user_id);
+        localStorage.setItem("id", data.id);
         localStorage.setItem("api_token", data.api_token);
         localStorage.setItem("name", data.name);
         localStorage.setItem("photo", data.photo);
+        localStorage.setItem("role", data.role);
 
         this.init();
     },
 
     logout() {
-        localStorage.removeItem("user_id");
+        localStorage.removeItem("id");
         localStorage.removeItem("api_token");
         localStorage.removeItem("name");
         localStorage.removeItem("photo");
+        localStorage.removeItem("role");
 
         this.init();
     },

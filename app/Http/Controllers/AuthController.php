@@ -68,7 +68,7 @@ class AuthController extends Controller
         if ($user) {
             return response()->json([
                 'success' => true,
-                'user' => $user->info()
+                'user' => $user
             ]);
         }
         return response()->json(['success' => false]);
@@ -88,20 +88,22 @@ class AuthController extends Controller
                 $user->save();
                 return response()->json([
                     'success' => true,
-                    'user' => $user->info()
+                    'user' => $user
                 ]);
                 break;
             case 'profile':
                 $this->validate($request, [
-                    'name' => 'required|max:255'
+                    'name' => 'required|max:255',
+                    'address'=>'max:255'
                 ]);
                 if ($user) {
                     $user->name = $request->name;
+                    $user->address = $request->address;
                     $user->save();
 
                     return response()->json([
                         'success' => true,
-                        'user' => $user->info()
+                        'user' => $user
                     ]);
                 }
                 break;
@@ -116,7 +118,7 @@ class AuthController extends Controller
                     $user->save();
                     return response()->json([
                         'success' => true,
-                        'user' => $user->info()
+                        'user' => $user
                     ]);
                 }
                 return response()->json([

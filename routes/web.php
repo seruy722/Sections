@@ -21,7 +21,7 @@ Route::get('/admin', 'HomeController@index')->name('admin');
 Route::resource('api/news', 'Api\NewsController');
 Route::resource('api/users', 'Api\UserController');
 
-Route::view('/profile', 'profile')->where('profile', '.*');
+Route::view('/controls', 'controls')->where('controls', '.*');
 
 
 //Route::resource('api/schedules', 'Api\SchedulesController')
@@ -29,12 +29,5 @@ Route::view('/profile', 'profile')->where('profile', '.*');
 Route::get('/', 'FrontController@index');
 Route::get('/articles/{id}', 'FrontController@show')->name('articles');
 Route::get('/articles', 'FrontController@all')->name('news');
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 Route::any('/articles/search', 'FrontController@search');
 Route::any('/search', 'FrontController@searchAll');

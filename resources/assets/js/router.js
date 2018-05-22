@@ -1,21 +1,25 @@
 import Home from "./components/Home";
 import UploadFile from "./components/UploadFile";
 import BrowseFiles from "./components/BrowseFiles";
-import Carousel from "./components/Carousel";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
+import Users from "./components/admin/Users";
+import News from "./components/admin/News";
+import Settings from "./components/admin/Settings";
 
 import VueRouter from "vue-router";
 
 const routes = [
-    { path: "/", component: Home },
-    { path: "/upload_file", component: UploadFile },
-    { path: "/browse_files", component: BrowseFiles },
-    { path: "/carousel", component: Carousel },
-    { path: "/register", component: Register },
-    { path: "/login", component: Login },
-    { path: "/profile", component: Profile }
+    {path: "/controls", component: Home},
+    {path: "/upload_file", component: UploadFile},
+    {path: "/browse_files", component: BrowseFiles},
+    {path: "/register", component: Register},
+    {path: "/login", component: Login},
+    {path: "/profile", component: Profile},
+    {path: "/users", component: Users},
+    {path: "/news", component: News},
+    {path: "/settings", component: Settings}
 ];
 
 export default new VueRouter({

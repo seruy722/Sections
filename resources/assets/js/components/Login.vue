@@ -64,6 +64,7 @@
                 axios.post("/api/login", this.form)
                     .then(response => {
                         if (response.data.success) {
+                            console.log(response.data.user.id);
                             Auth.login(response.data.user);
                             this.$router.push("/");
                         }

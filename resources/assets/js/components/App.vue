@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <v-toolbar dark color="primary">
-            <v-toolbar-title>FUpload</v-toolbar-title>
+            <v-toolbar-title>Админ панель</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn
                 flat
@@ -52,7 +52,7 @@
             color="info"
         >
             {{ info.text }}
-            <v-btn dark flat @click.native="info.show = false">Close</v-btn>
+            <v-btn dark flat @click.native="info.show = false">Закрыть</v-btn>
         </v-snackbar>
 
     </v-app>
@@ -95,7 +95,7 @@ export default {
             axios.post("/api/logout").then(response => {
                 if (response.data.success) {
                     Auth.logout();
-                    this.$router.push("/");
+                    this.$router.push("/controls");
                 }
             });
         }

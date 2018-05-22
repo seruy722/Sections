@@ -9,12 +9,13 @@ export default {
     },
 
     Login(state) {
-        state.Auth.user_id = localStorage.getItem("user_id");
+        state.Auth.id = localStorage.getItem("id");
         state.Auth.api_token = localStorage.getItem("api_token");
         state.Auth.name = localStorage.getItem("name");
         state.Auth.photo = localStorage.getItem("photo");
+        state.Auth.role = localStorage.getItem("role");
         state.Auth.login =
-            state.Auth.user_id !== null &&
+            state.Auth.id !== null &&
             state.Auth.api_token !== null &&
             state.Auth.name !== null;
     }

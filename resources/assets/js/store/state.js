@@ -8,27 +8,29 @@ export default {
     imagesList: [],
 
     nav: [
-        { path: "/", title: "Home", auth: "both" },
-        { path: "/upload_file", title: "File upload", auth: true },
-        { path: "/browse_files", title: "Browse files", auth: true },
-        { path: "/carousel", title: "Carousel", auth: true }
+        { path: "/controls", title: "Главная", auth: "both" },
+        { path: "/users", title: "Пользователи", auth: true },
+        { path: "/news", title: "Новости", auth: true },
+        { path: "/settings", title: "Настройки", auth: true },
+        { path: "/browse_files", title: "Показать файлы", auth: true }
     ],
 
     authNav: [
-        { path: "/register", title: "Register", auth: false },
-        { path: "/login", title: "Login", auth: false }
+        { path: "/register", title: "Регистрация", auth: false },
+        { path: "/login", title: "Вход", auth: false }
     ],
 
     profileNav: [
-        { path: "/profile", title: "Profile", auth: true },
-        { path: "/logout", title: "Logout", auth: true }
+        { path: "/profile", title: "Профиль", auth: true },
+        { path: "/logout", title: "Выход", auth: true }
     ],
 
     Auth: {
         login: false,
-        user_id: null,
+        id: null,
         api_token: null,
         name: null,
-        photo: null
+        photo: null,
+        role:null
     }
 };

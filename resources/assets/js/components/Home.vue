@@ -1,27 +1,27 @@
 <template>
-  <div>
-      <v-container>
-        <v-layout row>
-          <v-btn @click="onUpload">Upload new image</v-btn>
-        </v-layout>
+    <div>
+        <v-container>
+            <v-layout row>
+                <v-btn @click="onUpload">Загрузить изображение</v-btn>
+            </v-layout>
 
-        <v-layout row>
-          <v-btn @click="onBrowse">Browse uploaded images</v-btn>
-        </v-layout>
-      </v-container>
-  </div>
+            <v-layout row>
+                <v-btn @click="onBrowse">Показать загруженные изображения</v-btn>
+            </v-layout>
+        </v-container>
+    </div>
 </template>
 
 <script>
-export default {
-  methods: {
-    onUpload() {
-      this.$router.push("/upload_file");
-    },
+    export default {
+        methods: {
+            onUpload() {
+                this.$router.push("/upload_file");
+            },
 
-    onBrowse() {
-      this.$router.push("/browse_files");
-    }
-  }
-};
+            onBrowse() {
+                this.$router.push("/browse_files");
+            }
+        }
+    };
 </script>
