@@ -21,7 +21,7 @@ Route::get('/admin', 'HomeController@index')->name('admin');
 Route::resource('api/news', 'Api\NewsController');
 Route::resource('api/users', 'Api\UserController');
 
-Route::view('/{any}', 'profile')->where('any', '.*');
+Route::view('/profile', 'profile')->where('profile', '.*');
 
 
 //Route::resource('api/schedules', 'Api\SchedulesController')
