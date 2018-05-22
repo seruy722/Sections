@@ -8,7 +8,7 @@ export default {
     imagesList: [],
 
     nav: [
-        { path: "/controls", title: "Главная", auth: "both" },
+        { path: "/controls", title: "Консоль", auth: true },
         { path: "/users", title: "Пользователи", auth: true },
         { path: "/news", title: "Новости", auth: true },
         { path: "/settings", title: "Настройки", auth: true },

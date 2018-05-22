@@ -1,25 +1,25 @@
-@extends('layouts.ap')
+@extends('layouts.app')
 
 @section('content')
     <div class="row search">
-            <div class="col-xs-12 col-md-12 col-sm-12">
-        <form action="/search" method="POST" role="search" class="form-search">
-            {{ csrf_field() }}
-            <div class="row">
-                <div class="col-xs-11">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="q" value="{{ old('q') }}" required>
+        <div class="col-xs-12 col-md-12 col-sm-12">
+            <form action="/search" method="POST" role="search" class="form-search">
+                {{ csrf_field() }}
+                <div class="row">
+                    <div class="col-xs-11">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="q" value="{{ old('q') }}" required>
+                        </div>
+                    </div>
+                    <div class="col-xs-1">
+                        <div class="form-group">
+                            <input class="btn btn-info" type="submit" value="Поиск">
+                        </div>
                     </div>
                 </div>
-                <div class="col-xs-1">
-                    <div class="form-group">
-                        <input class="btn btn-info" type="submit" value="Поиск">
-                    </div>
-                </div>
-            </div>
-        </form>
-                <div class="msg">{{Session::get('msg')}}</div>
-    </div>
+            </form>
+            <div class="msg">{{Session::get('msg')}}</div>
+        </div>
     </div>
     <!-- Sections -->
     <div id="sections" class="sections ha-waypoint page-section" data-animate-down="ha-header-small "
@@ -40,7 +40,8 @@
                                         <ul>
                                             <li>
                                                 <div class="about_wrap_one">
-                                                    <div class="hexagon"> <a href="#"> <span class="mask"></span> <img src="/images/favicon.png" alt="filter"> </a>
+                                                    <div class="hexagon"><a href="#"> <span class="mask"></span> <img
+                                                                    src="/images/favicon.png" alt="filter"> </a>
                                                     </div>
                                                     <div class="wrap">
                                                         <h4>{{$w->name}}</h4>

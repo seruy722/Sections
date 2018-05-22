@@ -2,7 +2,7 @@
   <div>
       <v-btn @click="onButtonClick">
         <v-icon>attach_file</v-icon>
-        Select File
+        Файл
       </v-btn>
 
       <v-text-field
@@ -18,7 +18,7 @@
 
       <v-btn v-if="readyToUpload" @click="uploadImage">
         <v-icon left>cloud_upload</v-icon>
-        Upload File
+        Загрузить файл
       </v-btn>
   </div>
 </template>
@@ -80,7 +80,7 @@ export default {
             data.append("fupload", this.formData.file);
 
             axios.post("/api/upload_file", data).then(response => {
-                this.showInfo("File was successfuly uploaded!");
+                this.showInfo("Файл успешно загружен!");
                 this.formData = {
                     displayFileName: null,
                     uploadFileData: null,

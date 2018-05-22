@@ -1,4 +1,4 @@
-import Home from "./components/Home";
+import Console from "./components/Console";
 import UploadFile from "./components/UploadFile";
 import BrowseFiles from "./components/BrowseFiles";
 import Register from "./components/Register";
@@ -11,7 +11,7 @@ import Settings from "./components/admin/Settings";
 import VueRouter from "vue-router";
 
 const routes = [
-    {path: "/controls", component: Home},
+    {path: "/controls", component: Console},
     {path: "/upload_file", component: UploadFile},
     {path: "/browse_files", component: BrowseFiles},
     {path: "/register", component: Register},

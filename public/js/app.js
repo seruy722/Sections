@@ -63574,7 +63574,7 @@ webpackContext.id = 149;
 
     imagesList: [],
 
-    nav: [{ path: "/controls", title: "Главная", auth: "both" }, { path: "/users", title: "Пользователи", auth: true }, { path: "/news", title: "Новости", auth: true }, { path: "/settings", title: "Настройки", auth: true }, { path: "/browse_files", title: "Показать файлы", auth: true }],
+    nav: [{ path: "/controls", title: "Консоль", auth: true }, { path: "/users", title: "Пользователи", auth: true }, { path: "/news", title: "Новости", auth: true }, { path: "/settings", title: "Настройки", auth: true }, { path: "/browse_files", title: "Показать файлы", auth: true }],
 
     authNav: [{ path: "/register", title: "Регистрация", auth: false }, { path: "/login", title: "Вход", auth: false }],
 
@@ -85679,6 +85679,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
 
 
 
@@ -85721,6 +85724,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                     _this.$router.push("/controls");
                 }
             });
+        },
+        mainPage: function mainPage() {
+            window.location = window.location.origin;
         }
     }
 });
@@ -85749,7 +85755,7 @@ var render = function() {
               ? _c(
                   "v-btn",
                   { key: item.path, attrs: { flat: "", to: item.path } },
-                  [_vm._v(_vm._s(item.title))]
+                  [_vm._v(_vm._s(item.title) + "\n        ")]
                 )
               : _vm._e()
           }),
@@ -85761,10 +85767,14 @@ var render = function() {
               ? _c(
                   "v-btn",
                   { key: item.path, attrs: { flat: "", to: item.path } },
-                  [_vm._v(_vm._s(item.title))]
+                  [_vm._v(_vm._s(item.title) + "\n        ")]
                 )
               : _vm._e()
           }),
+          _vm._v(" "),
+          _c("v-btn", { attrs: { flat: "" }, on: { click: _vm.mainPage } }, [
+            _vm._v("На главную")
+          ]),
           _vm._v(" "),
           _vm.auth.login
             ? _c("v-avatar", { attrs: { size: "55" } }, [
@@ -85805,7 +85815,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v(_vm._s(item.title))]
+                        [_vm._v(_vm._s(item.title) + "\n                ")]
                       )
                     })
                   )
@@ -85822,7 +85832,7 @@ var render = function() {
       _c(
         "v-snackbar",
         {
-          attrs: { top: "", timeout: _vm.info.timeout, color: "info" },
+          attrs: { top: "", timeout: _vm.info.timeout, color: "success" },
           model: {
             value: _vm.info.show,
             callback: function($$v) {
@@ -85867,8 +85877,8 @@ if (false) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Home__ = __webpack_require__(178);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Home___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Home__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Console__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Console___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Console__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_UploadFile__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_UploadFile___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_UploadFile__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_BrowseFiles__ = __webpack_require__(187);
@@ -85898,7 +85908,7 @@ if (false) {
 
 
 
-var routes = [{ path: "/controls", component: __WEBPACK_IMPORTED_MODULE_0__components_Home___default.a }, { path: "/upload_file", component: __WEBPACK_IMPORTED_MODULE_1__components_UploadFile___default.a }, { path: "/browse_files", component: __WEBPACK_IMPORTED_MODULE_2__components_BrowseFiles___default.a }, { path: "/register", component: __WEBPACK_IMPORTED_MODULE_3__components_Register___default.a }, { path: "/login", component: __WEBPACK_IMPORTED_MODULE_4__components_Login___default.a }, { path: "/profile", component: __WEBPACK_IMPORTED_MODULE_5__components_Profile___default.a }, { path: "/users", component: __WEBPACK_IMPORTED_MODULE_6__components_admin_Users___default.a }, { path: "/news", component: __WEBPACK_IMPORTED_MODULE_7__components_admin_News___default.a }, { path: "/settings", component: __WEBPACK_IMPORTED_MODULE_8__components_admin_Settings___default.a }];
+var routes = [{ path: "/controls", component: __WEBPACK_IMPORTED_MODULE_0__components_Console___default.a }, { path: "/upload_file", component: __WEBPACK_IMPORTED_MODULE_1__components_UploadFile___default.a }, { path: "/browse_files", component: __WEBPACK_IMPORTED_MODULE_2__components_BrowseFiles___default.a }, { path: "/register", component: __WEBPACK_IMPORTED_MODULE_3__components_Register___default.a }, { path: "/login", component: __WEBPACK_IMPORTED_MODULE_4__components_Login___default.a }, { path: "/profile", component: __WEBPACK_IMPORTED_MODULE_5__components_Profile___default.a }, { path: "/users", component: __WEBPACK_IMPORTED_MODULE_6__components_admin_Users___default.a }, { path: "/news", component: __WEBPACK_IMPORTED_MODULE_7__components_admin_News___default.a }, { path: "/settings", component: __WEBPACK_IMPORTED_MODULE_8__components_admin_Settings___default.a }];
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_9_vue_router__["a" /* default */]({
     routes: routes,
@@ -85907,137 +85917,9 @@ var routes = [{ path: "/controls", component: __WEBPACK_IMPORTED_MODULE_0__compo
 }));
 
 /***/ }),
-/* 178 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(179)
-/* template */
-var __vue_template__ = __webpack_require__(180)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\Home.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-85ef4954", Component.options)
-  } else {
-    hotAPI.reload("data-v-85ef4954", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 179 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    methods: {
-        onUpload: function onUpload() {
-            this.$router.push("/upload_file");
-        },
-        onBrowse: function onBrowse() {
-            this.$router.push("/browse_files");
-        }
-    }
-});
-
-/***/ }),
-/* 180 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "v-container",
-        [
-          _c(
-            "v-layout",
-            { attrs: { row: "" } },
-            [
-              _c("v-btn", { on: { click: _vm.onUpload } }, [
-                _vm._v("Загрузить изображение")
-              ])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-layout",
-            { attrs: { row: "" } },
-            [
-              _c("v-btn", { on: { click: _vm.onBrowse } }, [
-                _vm._v("Показать загруженные изображения")
-              ])
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-85ef4954", module.exports)
-  }
-}
-
-/***/ }),
+/* 178 */,
+/* 179 */,
+/* 180 */,
 /* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -86247,7 +86129,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             data.append("fupload", this.formData.file);
 
             axios.post("/api/upload_file", data).then(function (response) {
-                _this2.showInfo("File was successfuly uploaded!");
+                _this2.showInfo("Файл успешно загружен!");
                 _this2.formData = {
                     displayFileName: null,
                     uploadFileData: null,
@@ -86275,10 +86157,7 @@ var render = function() {
       _c(
         "v-btn",
         { on: { click: _vm.onButtonClick } },
-        [
-          _c("v-icon", [_vm._v("attach_file")]),
-          _vm._v("\n      Select File\n    ")
-        ],
+        [_c("v-icon", [_vm._v("attach_file")]), _vm._v("\n      Файл\n    ")],
         1
       ),
       _vm._v(" "),
@@ -86315,7 +86194,7 @@ var render = function() {
             { on: { click: _vm.uploadImage } },
             [
               _c("v-icon", { attrs: { left: "" } }, [_vm._v("cloud_upload")]),
-              _vm._v("\n      Upload File\n    ")
+              _vm._v("\n      Загрузить файл\n    ")
             ],
             1
           )
@@ -88580,7 +88459,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 axios.delete('/api/users/' + item.id).then(function (response) {
                     if (response.data.status == 'success') {
                         _this2.users.splice(index, 1);
-                        _this2.$store.commit("showInfo", "Your profile was successfuly updated.");
+                        _this2.$store.commit("showInfo", response.data.message);
                     }
                 });
             }
@@ -88599,7 +88478,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if (this.editedIndex > -1) {
                 axios.patch('/api/users/' + this.users[this.editedIndex]['id'], Object.assign(this.users[this.editedIndex], this.editedItem)).then(function (response) {
-                    console.log(response.data);
+                    _this4.$store.commit("showInfo", response.data.message);
                 });
             } else {
                 var item = this.editedItem;
@@ -88607,6 +88486,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 axios.post('/api/users', this.editedItem).then(function (response) {
                     if (response.data.status === 'success') {
                         _this4.users.push(item);
+                        _this4.$store.commit("showInfo", response.data.message);
                     }
                 });
             }
@@ -89079,6 +88959,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -89103,14 +88995,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.news = response.data.data;
             });
         },
-        activeItem: function activeItem(item) {
+        deleteItem: function deleteItem(item) {
             var _this2 = this;
+
+            var index = this.news.indexOf(item);
+            var answer = confirm('Вы действительно хотите удалить эту запись?');
+            if (answer) {
+                axios.delete('/api/news/' + item.id).then(function (response) {
+                    if (response.data.status == 'success') {
+                        _this2.news.splice(index, 1);
+                        _this2.$store.commit("showInfo", response.data.message);
+                    }
+                });
+            }
+        },
+        activeItem: function activeItem(item) {
+            var _this3 = this;
 
             var index = this.news.indexOf(item);
             item.active = true;
             axios.patch('/api/news/' + item.id, item).then(function (response) {
                 if (response.data.status === 'success') {
-                    _this2.news.splice(index, 1);
+                    _this3.news.splice(index, 1);
+                    _this3.$store.commit("showInfo", response.data.message);
                 }
             });
             this.dialog = false;
@@ -89118,6 +89025,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         viewItem: function viewItem(item) {
             this.itemForView = item;
             this.dialog = true;
+        },
+        getPath: function getPath() {
+            return "/images/" + this.itemForView.img_filename;
         }
     }
 });
@@ -89209,10 +89119,7 @@ var render = function() {
                         "v-card-media",
                         {
                           staticClass: "white--text",
-                          attrs: {
-                            height: "200px",
-                            src: "/static/doc-images/cards/docks.jpg"
-                          }
+                          attrs: { height: "200px", src: _vm.getPath() }
                         },
                         [
                           _c(
@@ -89233,7 +89140,7 @@ var render = function() {
                                       }
                                     },
                                     [
-                                      _c("span", { staticClass: "headline" }, [
+                                      _c("h3", { staticClass: "headline" }, [
                                         _vm._v(_vm._s(_vm.itemForView.title))
                                       ])
                                     ]
@@ -89248,19 +89155,21 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
-                      _c("v-card-title", [
+                      _c("v-card-text", [
+                        _c("div", [
+                          _c("h2", { staticClass: "grey--text" }, [
+                            _vm._v(_vm._s(_vm.itemForView.description))
+                          ]),
+                          _c("br")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("v-card-text", [
                         _c("div", [
                           _c("span", { staticClass: "grey--text" }, [
-                            _vm._v("Number 10")
+                            _vm._v(_vm._s(_vm.itemForView.content))
                           ]),
-                          _c("br"),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("Whitehaven Beach")]),
-                          _c("br"),
-                          _vm._v(" "),
-                          _c("span", [
-                            _vm._v("Whitsunday Island, Whitsunday Islands")
-                          ])
+                          _c("br")
                         ])
                       ]),
                       _vm._v(" "),
@@ -89269,14 +89178,44 @@ var render = function() {
                         [
                           _c(
                             "v-btn",
-                            { attrs: { flat: "", color: "orange" } },
-                            [_vm._v("Share")]
+                            {
+                              attrs: { color: "success" },
+                              on: {
+                                click: function($event) {
+                                  _vm.activeItem(_vm.itemForView)
+                                }
+                              }
+                            },
+                            [
+                              _c("v-icon", { attrs: { dark: "", left: "" } }, [
+                                _vm._v("check_circle")
+                              ]),
+                              _vm._v(
+                                "\n                            Активировать\n                        "
+                              )
+                            ],
+                            1
                           ),
                           _vm._v(" "),
                           _c(
                             "v-btn",
-                            { attrs: { flat: "", color: "orange" } },
-                            [_vm._v("Explore")]
+                            {
+                              attrs: { color: "orange darken-2" },
+                              nativeOn: {
+                                click: function($event) {
+                                  _vm.dialog = false
+                                }
+                              }
+                            },
+                            [
+                              _c("v-icon", { attrs: { dark: "", left: "" } }, [
+                                _vm._v("arrow_back")
+                              ]),
+                              _vm._v(
+                                "\n                            Назад\n                        "
+                              )
+                            ],
+                            1
                           )
                         ],
                         1
@@ -89379,6 +89318,25 @@ var render = function() {
                             [
                               _c("v-icon", { attrs: { color: "green" } }, [
                                 _vm._v("offline_pin")
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              staticClass: "mx-0",
+                              attrs: { icon: "" },
+                              on: {
+                                click: function($event) {
+                                  _vm.deleteItem(props.item)
+                                }
+                              }
+                            },
+                            [
+                              _c("v-icon", { attrs: { color: "pink" } }, [
+                                _vm._v("delete")
                               ])
                             ],
                             1
@@ -89486,6 +89444,9 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
+//
+//
+//
 //
 //
 //
@@ -89770,54 +89731,69 @@ var render = function() {
                           _vm._v(" "),
                           _c("v-container", { attrs: { fluid: "" } }, [
                             _c(
-                              "form",
-                              {
-                                on: {
-                                  submit: function($event) {
-                                    $event.preventDefault()
-                                  }
-                                }
-                              },
+                              "div",
                               [
                                 _c(
-                                  "v-layout",
-                                  { attrs: { row: "" } },
+                                  "v-btn",
+                                  { on: { click: _vm.onButtonClick } },
                                   [
-                                    _c(
-                                      "v-flex",
-                                      { attrs: { xs4: "" } },
-                                      [
-                                        _c("v-subheader", [
-                                          _vm._v("Главная картинка")
-                                        ])
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c("v-flex", { attrs: { xs8: "" } }, [
-                                      _c("input", { attrs: { type: "file" } })
-                                    ])
+                                    _c("v-icon", [_vm._v("attach_file")]),
+                                    _vm._v(
+                                      "\n                                Файл\n                            "
+                                    )
                                   ],
                                   1
                                 ),
                                 _vm._v(" "),
-                                _c(
-                                  "v-layout",
-                                  { attrs: { row: "" } },
-                                  [
-                                    _c(
-                                      "v-flex",
-                                      { attrs: { xs4: "" } },
-                                      [_c("v-subheader", [_vm._v("Логотип")])],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c("v-flex", { attrs: { xs8: "" } }, [
-                                      _c("input", { attrs: { type: "file" } })
+                                _c("v-text-field", {
+                                  attrs: { readonly: "" },
+                                  model: {
+                                    value: _vm.formData.displayFileName,
+                                    callback: function($$v) {
+                                      _vm.$set(
+                                        _vm.formData,
+                                        "displayFileName",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "formData.displayFileName"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("input", {
+                                  ref: "fupload",
+                                  refInFor: true,
+                                  staticClass: "input-field-file",
+                                  attrs: { type: "file" },
+                                  on: { change: _vm.onFileChange }
+                                }),
+                                _vm._v(" "),
+                                _vm.readyToUpload
+                                  ? _c("div", [
+                                      _c("img", {
+                                        staticClass: "preview-image",
+                                        attrs: {
+                                          src: _vm.formData.uploadFileData
+                                        }
+                                      })
                                     ])
-                                  ],
-                                  1
-                                )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.readyToUpload
+                                  ? _c(
+                                      "v-btn",
+                                      { on: { click: _vm.uploadImage } },
+                                      [
+                                        _c("v-icon", { attrs: { left: "" } }, [
+                                          _vm._v("cloud_upload")
+                                        ]),
+                                        _vm._v(
+                                          "\n                                Загрузить файл\n                            "
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  : _vm._e()
                               ],
                               1
                             )
@@ -90011,6 +89987,140 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-a9d90d72", module.exports)
+  }
+}
+
+/***/ }),
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(220)
+/* template */
+var __vue_template__ = __webpack_require__(221)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\Console.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-b3f3aea0", Component.options)
+  } else {
+    hotAPI.reload("data-v-b3f3aea0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 220 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    methods: {
+        onUpload: function onUpload() {
+            this.$router.push("/upload_file");
+        },
+        onBrowse: function onBrowse() {
+            this.$router.push("/browse_files");
+        }
+    }
+});
+
+/***/ }),
+/* 221 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-container",
+        [
+          _c(
+            "v-layout",
+            { attrs: { row: "" } },
+            [
+              _c("v-btn", { on: { click: _vm.onUpload } }, [
+                _vm._v("Загрузить изображение")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-layout",
+            { attrs: { row: "" } },
+            [
+              _c("v-btn", { on: { click: _vm.onBrowse } }, [
+                _vm._v("Показать загруженные изображения")
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-b3f3aea0", module.exports)
   }
 }
 

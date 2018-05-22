@@ -45,24 +45,24 @@
                     <v-card-text v-if="item=='Изображения'">
                         <h2>{{ item }}</h2>
                         <v-container fluid>
-                            <form v-on:submit.prevent="">
-                                <v-layout row>
-                                    <v-flex xs4>
-                                        <v-subheader>Главная картинка</v-subheader>
-                                    </v-flex>
-                                    <v-flex xs8>
-                                        <input type="file">
-                                    </v-flex>
-                                </v-layout>
-                                <v-layout row>
-                                    <v-flex xs4>
-                                        <v-subheader>Логотип</v-subheader>
-                                    </v-flex>
-                                    <v-flex xs8>
-                                        <input type="file">
-                                    </v-flex>
-                                </v-layout>
-                            </form>
+                            <div>
+                                <v-btn @click="onButtonClick">
+                                    <v-icon>attach_file</v-icon>
+                                    Файл
+                                </v-btn>
+                                <v-text-field
+                                        v-model="formData.displayFileName"
+                                        readonly
+                                ></v-text-field>
+                                <input type="file" class="input-field-file" ref="fupload" @change="onFileChange">
+                                <div v-if="readyToUpload">
+                                    <img :src="formData.uploadFileData" class="preview-image">
+                                </div>
+                                <v-btn v-if="readyToUpload" @click="uploadImage">
+                                    <v-icon left>cloud_upload</v-icon>
+                                    Загрузить файл
+                                </v-btn>
+                            </div>
                         </v-container>
                     </v-card-text>
                     <v-card-text v-if="item=='Меню'">
@@ -80,18 +80,21 @@
                                 <div v-for="(more,index) in posty">
                                     <div class="row">
                                         <div class="col-xs-2">
-                                            <button type="button" @click="removePost(index)" class="btn btn-block btn-danger">
+                                            <button type="button" @click="removePost(index)"
+                                                    class="btn btn-block btn-danger">
                                                 <span class="glyphicon glyphicon-minus"></span>
                                                 Удалить
                                             </button>
                                         </div>
                                         <div class="form-group col-xs-5">
                                             <label>Price (HUF)</label>
-                                            <input v-model="more.price" type="number" class="form-control" placeholder="Price">
+                                            <input v-model="more.price" type="number" class="form-control"
+                                                   placeholder="Price">
                                         </div>
                                         <div class="form-group col-xs-5">
                                             <label>Rooms (PCS)</label>
-                                            <input v-model="more.kg" type="number" class="form-control" placeholder="Rooms">
+                                            <input v-model="more.kg" type="number" class="form-control"
+                                                   placeholder="Rooms">
                                         </div>
                                     </div>
                                 </div>
@@ -121,7 +124,7 @@
             more: [
                 'News', 'Maps', 'Books', 'Flights', 'Apps'
             ],
-            posty:[]
+            posty: []
         }),
 
         methods: {

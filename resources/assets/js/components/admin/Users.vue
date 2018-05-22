@@ -140,7 +140,7 @@
                             this.users.splice(index, 1);
                             this.$store.commit(
                                 "showInfo",
-                                "Your profile was successfuly updated."
+                                response.data.message
                             );
                         }
                     });
@@ -158,7 +158,10 @@
             save() {
                 if (this.editedIndex > -1) {
                     axios.patch(`/api/users/` + this.users[this.editedIndex]['id'], Object.assign(this.users[this.editedIndex], this.editedItem)).then(response => {
-                        console.log(response.data);
+                        this.$store.commit(
+                            "showInfo",
+                            response.data.message
+                        );
                     });
                 } else {
                     let item = this.editedItem;
@@ -166,6 +169,10 @@
                     axios.post(`/api/users`, this.editedItem).then(response => {
                         if(response.data.status === 'success'){
                             this.users.push(item);
+                            this.$store.commit(
+                                "showInfo",
+                                response.data.message
+                            );
                         }
                     });
                 }

@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\User;
 use App\News;
-use App\Schedule;
+use App\Schedules;
+use App\Sections;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -41,9 +42,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         $data = $request->all();
         $data['password'] = Hash::make($request->password);
-        User::create($data);
+        if(User::create($data)){
+            return response()->json(['status' => 'success', 'message' => 'Запись успешно обновлена']);
+        }else{
+            return response()->json(['status' => 'error', 'message' => 'Ошибка при обновлении записи']);
+        }
     }
 
     /**
@@ -105,11 +111,12 @@ class UserController extends Controller
         $user = User::find($id);
         if ($user) {
             News::where('user_id',$id)->delete();
-            Schedule::where('user_id',$id)->delete();
+            Schedules::where('user_id',$id)->delete();
+            Sections::where('user_id',$id)->delete();
             $user->delete();
-            return response()->json(['status' => 'success', 'msg' => 'Запись успешно удалена']);
+            return response()->json(['status' => 'success', 'message' => 'Запись успешно удалена']);
         } else {
-            return response()->json(['status' => 'error', 'msg' => 'Ошибка при удалении записи']);
+            return response()->json(['status' => 'error', 'message' => 'Ошибка при удалении записи']);
         }
     }
 }

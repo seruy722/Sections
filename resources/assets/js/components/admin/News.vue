@@ -17,26 +17,35 @@
                         <v-card-media
                                 class="white--text"
                                 height="200px"
-                                src="/static/doc-images/cards/docks.jpg"
+                                :src="getPath()"
                         >
                             <v-container fill-height fluid>
                                 <v-layout fill-height>
                                     <v-flex xs12 align-end flexbox>
-                                        <span class="headline">{{itemForView.title}}</span>
+                                        <h3 class="headline">{{itemForView.title}}</h3>
                                     </v-flex>
                                 </v-layout>
                             </v-container>
                         </v-card-media>
-                        <v-card-title>
+                        <v-card-text>
                             <div>
-                                <span class="grey--text">Number 10</span><br>
-                                <span>Whitehaven Beach</span><br>
-                                <span>Whitsunday Island, Whitsunday Islands</span>
+                                <h2 class="grey--text">{{itemForView.description}}</h2><br>
                             </div>
-                        </v-card-title>
+                        </v-card-text>
+                        <v-card-text>
+                            <div>
+                                <span class="grey--text">{{itemForView.content}}</span><br>
+                            </div>
+                        </v-card-text>
                         <v-card-actions>
-                            <v-btn flat color="orange">Share</v-btn>
-                            <v-btn flat color="orange">Explore</v-btn>
+                            <v-btn color="success" @click="activeItem(itemForView)">
+                                <v-icon dark left>check_circle</v-icon>
+                                Активировать
+                            </v-btn>
+                            <v-btn color="orange darken-2" @click.native="dialog = false">
+                                <v-icon dark left>arrow_back</v-icon>
+                                Назад
+                            </v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -71,6 +80,9 @@
                         <v-btn icon class="mx-0" @click="activeItem(props.item)">
                             <v-icon color="green">offline_pin</v-icon>
                         </v-btn>
+                        <v-btn icon class="mx-0" @click="deleteItem(props.item)">
+                            <v-icon color="pink">delete</v-icon>
+                        </v-btn>
                     </td>
                 </template>
                 <v-alert slot="no-results" :value="true" color="error" icon="warning">
@@ -95,7 +107,7 @@
                 news: [],
                 url: "http://sections.loc/",
                 dialog: false,
-                itemForView:{}
+                itemForView: {}
             }
         },
         created() {
@@ -107,12 +119,31 @@
                     this.news = response.data.data;
                 });
             },
+            deleteItem(item) {
+                const index = this.news.indexOf(item);
+                let answer = confirm('Вы действительно хотите удалить эту запись?');
+                if (answer) {
+                    axios.delete(`/api/news/` + item.id).then(response => {
+                        if (response.data.status == 'success') {
+                            this.news.splice(index, 1);
+                            this.$store.commit(
+                                "showInfo",
+                                response.data.message
+                            );
+                        }
+                    });
+                }
+            },
             activeItem(item) {
                 const index = this.news.indexOf(item);
                 item.active = true;
                 axios.patch(`/api/news/` + item.id, item).then(response => {
                     if (response.data.status === 'success') {
                         this.news.splice(index, 1);
+                        this.$store.commit(
+                            "showInfo",
+                            response.data.message
+                        );
                     }
                 });
                 this.dialog = false;
@@ -120,6 +151,9 @@
             viewItem(item) {
                 this.itemForView = item;
                 this.dialog = true;
+            },
+            getPath() {
+                return "/images/" + this.itemForView.img_filename;
             }
         }
     }

@@ -77,9 +77,9 @@ class NewsController extends Controller
         $user = News::find($id);
         if ($user) {
             $user->update($data);
-            return response()->json(['status' => 'success', 'message' => 'Запись успешно обновлена']);
+            return response()->json(['status' => 'success', 'message' => 'Запись успешно активирована']);
         } else {
-            return response()->json(['status' => 'error', 'message' => 'Ошибка при обновлении записи']);
+            return response()->json(['status' => 'error', 'message' => 'Ошибка при активации записи']);
         }
     }
 
@@ -96,6 +96,12 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $news = News::find($id);
+        if ($news) {
+            $news->delete();
+            return response()->json(['status' => 'success', 'message' => 'Запись успешно удалена']);
+        } else {
+            return response()->json(['status' => 'error', 'message' => 'Ошибка при удалении записи']);
+        }
     }
 }
