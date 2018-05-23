@@ -34,3 +34,4 @@ Route::any('/articles/search', 'FrontController@search');
 Route::any('/search', 'FrontController@searchAll');
 
 Route::get('/section/{id}', 'SectionsController@index')->name('sections');
+Route::any('/section/send', 'SectionsController@mail')->name('mail');
