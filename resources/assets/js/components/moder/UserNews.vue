@@ -6,43 +6,84 @@
                     <v-btn icon dark @click.native="dialog = false">
                         <v-icon>close</v-icon>
                     </v-btn>
-                    <v-toolbar-title>Просмотр новости</v-toolbar-title>
+                    <v-toolbar-title>Редактирование новости</v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-toolbar-items>
 
                     </v-toolbar-items>
                 </v-toolbar>
                 <v-flex xs12 sm6 offset-sm3>
-                    <v-card>
-                        <v-card-media
-                                class="white--text"
-                                :src="getPath()"
-                        >
-                            <v-container fill-height fluid>
-                                <v-layout fill-height>
-                                    <v-flex xs12 align-end flexbox>
-                                        <h3 class="headline">{{itemForView.title}}</h3>
-                                    </v-flex>
-                                </v-layout>
-                            </v-container>
-                        </v-card-media>
-                        <v-card-text>
-                            <div>
-                                <h2 class="grey--text">{{itemForView.description}}</h2><br>
-                            </div>
-                        </v-card-text>
-                        <v-card-text>
-                            <div>
-                                <span class="grey--text">{{itemForView.content}}</span><br>
-                            </div>
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-btn color="orange darken-2" @click.native="dialog = false">
-                                <v-icon dark left>arrow_back</v-icon>
-                                Назад
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
+                    <v-container fluid>
+                        <v-layout row>
+                            <v-flex xs4>
+                                <v-subheader>Заголовок</v-subheader>
+                            </v-flex>
+                            <v-flex xs8>
+                                <v-text-field
+                                        name="input-1-3"
+                                        label="Заголовок"
+                                        single-line
+                                        v-model="itemForView.title"
+                                ></v-text-field>
+                            </v-flex>
+                        </v-layout>
+                        <v-layout row>
+                            <v-flex xs4>
+                                <v-subheader>Изображение</v-subheader>
+                            </v-flex>
+                            <v-flex xs8>
+                                <div>
+                                    <v-btn @click="onButtonClick">
+                                        <v-icon>attach_file</v-icon>
+                                        Файл
+                                    </v-btn>
+                                    <input style="display:none" type="file" class="input-field-file" ref="fupload" @change="onFileSelected">
+                                    <div>
+                                        <img :src="getPath()" class="preview-image">
+                                    </div>
+                                </div>
+                            </v-flex>
+                        </v-layout>
+                        <v-layout row>
+                            <v-flex xs4>
+                                <v-subheader>Описание</v-subheader>
+                            </v-flex>
+                            <v-flex xs8>
+                                <v-text-field
+                                        name="input-2-3"
+                                        label="Описание"
+                                        single-line
+                                        v-model="itemForView.description"
+                                ></v-text-field>
+                            </v-flex>
+                        </v-layout>
+                        <v-layout row>
+                            <v-flex xs4>
+                                <v-subheader>Контент</v-subheader>
+                            </v-flex>
+                            <v-flex xs8>
+                                <v-text-field
+                                        name="input-4"
+                                        label="Контент"
+                                        textarea
+                                        v-model="itemForView.content"
+                                ></v-text-field>
+                            </v-flex>
+                        </v-layout>
+                        <v-layout row>
+                            <v-flex xs4>
+
+                            </v-flex>
+                            <v-flex xs8>
+                                <v-btn color="primary" dark @click="updateItem">Сохранить
+                                    <v-icon dark right>check_circle</v-icon>
+                                </v-btn>
+                                <v-btn color="red" dark @click="">Отмена
+                                    <v-icon dark right>block</v-icon>
+                                </v-btn>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
                 </v-flex>
                 <v-divider></v-divider>
             </v-card>
@@ -72,7 +113,7 @@
                     <td>{{ props.item.user_name }}</td>
                     <td>
                         <v-btn icon class="mx-0" @click="viewItem(props.item)">
-                            <v-icon color="teal">pageview</v-icon>
+                            <v-icon color="teal">edit</v-icon>
                         </v-btn>
                         <v-btn icon class="mx-0" @click="deleteItem(props.item)">
                             <v-icon color="pink">delete</v-icon>
@@ -109,7 +150,7 @@
         },
         methods: {
             initialize() {
-                axios.post(`/api/userNews`,{id:this.$store.state.Auth.id}).then(response => {
+                axios.post(`/api/userNews`, {id: this.$store.state.Auth.id}).then(response => {
                     this.news = response.data.data;
                 });
             },
@@ -128,16 +169,34 @@
                     });
                 }
             },
+            onFileSelected(event) {
+                if (event.target.files && event.target.files.length) {
+                    let file = event.target.files[0];
+                    this.itemForView.file = file;
+
+                    let reader = new FileReader();
+                    reader.onload = e => {
+                        this.itemForView.img_filename = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            },
             viewItem(item) {
                 this.itemForView = item;
                 this.dialog = true;
             },
+            updateItem(){
+
+            },
             getPath() {
                 return "/images/" + this.itemForView.img_filename;
             },
-            onAddNews(){
+            onAddNews() {
                 this.$router.push("/add_news");
-            }
+            },
+            onButtonClick() {
+                this.$refs.fupload.click();
+            },
         }
     }
 </script>

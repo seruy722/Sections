@@ -89589,6 +89589,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -89627,15 +89668,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             }
         },
+        onFileSelected: function onFileSelected(event) {
+            var _this3 = this;
+
+            if (event.target.files && event.target.files.length) {
+                var file = event.target.files[0];
+                this.itemForView.file = file;
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    _this3.itemForView.img_filename = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        },
         viewItem: function viewItem(item) {
             this.itemForView = item;
             this.dialog = true;
         },
+        updateItem: function updateItem() {},
         getPath: function getPath() {
             return "/images/" + this.itemForView.img_filename;
         },
         onAddNews: function onAddNews() {
             this.$router.push("/add_news");
+        },
+        onButtonClick: function onButtonClick() {
+            this.$refs.fupload.click();
         }
     }
 });
@@ -89690,7 +89749,7 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c("v-toolbar-title", [_vm._v("Просмотр новости")]),
+                  _c("v-toolbar-title", [_vm._v("Редактирование новости")]),
                   _vm._v(" "),
                   _c("v-spacer"),
                   _vm._v(" "),
@@ -89704,41 +89763,38 @@ var render = function() {
                 { attrs: { xs12: "", sm6: "", "offset-sm3": "" } },
                 [
                   _c(
-                    "v-card",
+                    "v-container",
+                    { attrs: { fluid: "" } },
                     [
                       _c(
-                        "v-card-media",
-                        {
-                          staticClass: "white--text",
-                          attrs: { src: _vm.getPath() }
-                        },
+                        "v-layout",
+                        { attrs: { row: "" } },
                         [
                           _c(
-                            "v-container",
-                            { attrs: { "fill-height": "", fluid: "" } },
+                            "v-flex",
+                            { attrs: { xs4: "" } },
+                            [_c("v-subheader", [_vm._v("Заголовок")])],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs8: "" } },
                             [
-                              _c(
-                                "v-layout",
-                                { attrs: { "fill-height": "" } },
-                                [
-                                  _c(
-                                    "v-flex",
-                                    {
-                                      attrs: {
-                                        xs12: "",
-                                        "align-end": "",
-                                        flexbox: ""
-                                      }
-                                    },
-                                    [
-                                      _c("h3", { staticClass: "headline" }, [
-                                        _vm._v(_vm._s(_vm.itemForView.title))
-                                      ])
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
+                              _c("v-text-field", {
+                                attrs: {
+                                  name: "input-1-3",
+                                  label: "Заголовок",
+                                  "single-line": ""
+                                },
+                                model: {
+                                  value: _vm.itemForView.title,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.itemForView, "title", $$v)
+                                  },
+                                  expression: "itemForView.title"
+                                }
+                              })
                             ],
                             1
                           )
@@ -89746,43 +89802,177 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
-                      _c("v-card-text", [
-                        _c("div", [
-                          _c("h2", { staticClass: "grey--text" }, [
-                            _vm._v(_vm._s(_vm.itemForView.description))
-                          ]),
-                          _c("br")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("v-card-text", [
-                        _c("div", [
-                          _c("span", { staticClass: "grey--text" }, [
-                            _vm._v(_vm._s(_vm.itemForView.content))
-                          ]),
-                          _c("br")
-                        ])
-                      ]),
-                      _vm._v(" "),
                       _c(
-                        "v-card-actions",
+                        "v-layout",
+                        { attrs: { row: "" } },
                         [
                           _c(
-                            "v-btn",
-                            {
-                              attrs: { color: "orange darken-2" },
-                              nativeOn: {
-                                click: function($event) {
-                                  _vm.dialog = false
-                                }
-                              }
-                            },
+                            "v-flex",
+                            { attrs: { xs4: "" } },
+                            [_c("v-subheader", [_vm._v("Изображение")])],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-flex", { attrs: { xs8: "" } }, [
+                            _c(
+                              "div",
+                              [
+                                _c(
+                                  "v-btn",
+                                  { on: { click: _vm.onButtonClick } },
+                                  [
+                                    _c("v-icon", [_vm._v("attach_file")]),
+                                    _vm._v(
+                                      "\n                                    Файл\n                                "
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c("input", {
+                                  ref: "fupload",
+                                  staticClass: "input-field-file",
+                                  staticStyle: { display: "none" },
+                                  attrs: { type: "file" },
+                                  on: { change: _vm.onFileSelected }
+                                }),
+                                _vm._v(" "),
+                                _c("div", [
+                                  _c("img", {
+                                    staticClass: "preview-image",
+                                    attrs: { src: _vm.getPath() }
+                                  })
+                                ])
+                              ],
+                              1
+                            )
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-layout",
+                        { attrs: { row: "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs4: "" } },
+                            [_c("v-subheader", [_vm._v("Описание")])],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs8: "" } },
                             [
-                              _c("v-icon", { attrs: { dark: "", left: "" } }, [
-                                _vm._v("arrow_back")
-                              ]),
-                              _vm._v(
-                                "\n                            Назад\n                        "
+                              _c("v-text-field", {
+                                attrs: {
+                                  name: "input-2-3",
+                                  label: "Описание",
+                                  "single-line": ""
+                                },
+                                model: {
+                                  value: _vm.itemForView.description,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.itemForView,
+                                      "description",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "itemForView.description"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-layout",
+                        { attrs: { row: "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs4: "" } },
+                            [_c("v-subheader", [_vm._v("Контент")])],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs8: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  name: "input-4",
+                                  label: "Контент",
+                                  textarea: ""
+                                },
+                                model: {
+                                  value: _vm.itemForView.content,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.itemForView, "content", $$v)
+                                  },
+                                  expression: "itemForView.content"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-layout",
+                        { attrs: { row: "" } },
+                        [
+                          _c("v-flex", { attrs: { xs4: "" } }),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs8: "" } },
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: { color: "primary", dark: "" },
+                                  on: { click: _vm.updateItem }
+                                },
+                                [
+                                  _vm._v(
+                                    "Сохранить\n                                "
+                                  ),
+                                  _c(
+                                    "v-icon",
+                                    { attrs: { dark: "", right: "" } },
+                                    [_vm._v("check_circle")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: { color: "red", dark: "" },
+                                  on: { click: function($event) {} }
+                                },
+                                [
+                                  _vm._v(
+                                    "Отмена\n                                "
+                                  ),
+                                  _c(
+                                    "v-icon",
+                                    { attrs: { dark: "", right: "" } },
+                                    [_vm._v("block")]
+                                  )
+                                ],
+                                1
                               )
                             ],
                             1
@@ -89877,7 +90067,7 @@ var render = function() {
                             },
                             [
                               _c("v-icon", { attrs: { color: "teal" } }, [
-                                _vm._v("pageview")
+                                _vm._v("edit")
                               ])
                             ],
                             1
@@ -90570,7 +90760,7 @@ var render = function() {
                   { on: { click: _vm.onButtonClick } },
                   [
                     _c("v-icon", [_vm._v("attach_file")]),
-                    _vm._v("\n                    Логотип\n                ")
+                    _vm._v("\n                    Файл\n                ")
                   ],
                   1
                 ),
@@ -90864,6 +91054,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             data.append('description', this.news.description);
             data.append('content', this.news.content);
             data.append('user_id', this.news.user_id);
+
             axios.post("/api/addNews", data).then(function (response) {
                 if (response.data.status === 'success') {
                     _this.$store.commit("showInfo", response.data.message);

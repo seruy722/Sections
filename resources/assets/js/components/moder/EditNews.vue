@@ -116,7 +116,6 @@
                 data.append('description',this.news.description);
                 data.append('content',this.news.content);
                 data.append('user_id',this.news.user_id);
-
                 axios.post(`/api/addNews`, data).then(response => {
                     if (response.data.status === 'success') {
                         this.$store.commit(
