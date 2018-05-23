@@ -85726,7 +85726,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             });
         },
         mainPage: function mainPage() {
-            window.location = window.location.origin;
+            window.location = window.location.origin + '#home';
         }
     }
 });
@@ -87437,7 +87437,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (response.data.success) {
                     console.log(response.data.user.id);
                     __WEBPACK_IMPORTED_MODULE_0__helpers_Auth__["a" /* default */].login(response.data.user);
-                    _this.$router.push("/");
+                    _this.$router.push("/controls");
                 }
             }).catch(function (error) {
                 _this.errors = error.response.data.errors;

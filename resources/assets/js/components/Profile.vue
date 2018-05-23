@@ -140,8 +140,7 @@
 
         methods: {
             edit_profile() {
-                axios
-                    .post("/api/edit_profile")
+                axios.post("/api/edit_profile")
                     .then(response => {
                         if (response.data.success) {
                             this.form = response.data.user;
@@ -159,8 +158,7 @@
                 this.errors = {};
                 this.form.action = action;
 
-                axios
-                    .post("/api/update_profile", this.form)
+                axios         .post("/api/update_profile", this.form)
                     .then(response => {
                         if (response.data.success) {
                             Auth.login(response.data.user);
