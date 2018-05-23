@@ -33,8 +33,9 @@
                         </v-btn>
                     </div>
                 </v-card>
-                <v-btn color="primary" @click.native="e1 = 2">Continue</v-btn>
-                <v-btn flat>Cancel</v-btn>
+                <v-btn color="primary" @click.native="e1 = 2">Вперед
+                    <v-icon dark right>arrow_forward</v-icon>
+                </v-btn>
             </v-stepper-content>
             <v-stepper-content step="2">
                 <v-card color="grey lighten-1" class="mb-5">
@@ -61,8 +62,13 @@
                         </v-btn>
                     </div>
                 </v-card>
-                <v-btn color="primary" @click.native="e1 = 3">Continue</v-btn>
-                <v-btn flat>Cancel</v-btn>
+                <v-btn color="primary" dark @click.native="e1 = 1">
+                    <v-icon dark left>arrow_back</v-icon>
+                    Назад
+                </v-btn>
+                <v-btn color="primary" @click.native="e1 = 3">Вперед
+                    <v-icon dark right>arrow_forward</v-icon>
+                </v-btn>
             </v-stepper-content>
             <v-stepper-content step="3">
                 <v-card color="grey lighten-1" class="mb-5">
@@ -75,7 +81,7 @@
                                 <v-text-field
                                         name="input-1"
                                         label="Заголовок"
-                                        v-model="headerText"
+                                        v-model="headers.headerText"
                                 ></v-text-field>
                             </v-flex>
                         </v-layout>
@@ -85,16 +91,24 @@
                             </v-flex>
                             <v-flex xs8>
                                 <v-text-field
-                                        name="input-1"
-                                        label="Label Text"
-                                        v-model="copyright"
+                                        name="input-2"
+                                        label="Сopyright"
+                                        v-model="headers.copyright"
                                 ></v-text-field>
+                            </v-flex>
+                        </v-layout>
+                        <v-layout row>
+                            <v-flex xs4>
+                                <v-btn color="primary" dark @click="saveHeaders">Accept
+                                    <v-icon dark right>check_circle</v-icon>
+                                </v-btn>
                             </v-flex>
                         </v-layout>
                     </v-container>
                 </v-card>
-                <v-btn color="primary" @click.native="e1 = 1">Continue</v-btn>
-                <v-btn flat>Cancel</v-btn>
+                <v-btn color="primary" @click.native="e1 = 1">Вперед
+                    <v-icon dark right>arrow_forward</v-icon>
+                </v-btn>
             </v-stepper-content>
         </v-stepper-items>
     </v-stepper>
@@ -126,8 +140,11 @@
                     file: null
                 },
                 e1: 0,
-                headerText:'',
-                copyright:''
+                headers: {
+                    headerText: null,
+                    copyright: null
+                }
+
             };
         },
 
@@ -172,7 +189,17 @@
                     };
                 });
             },
-
+            saveHeaders() {
+                axios.post("/api/save_headers", this.headers).then(response => {
+                    if (response.data.status == 'success') {
+                        this.showInfo(response.data.message);
+                        this.headers = {
+                            headerText: null,
+                            copyright: null
+                        };
+                    }
+                });
+            },
             showInfo(message) {
                 this.$store.commit("showInfo", message);
             }

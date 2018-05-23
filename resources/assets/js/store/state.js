@@ -8,11 +8,13 @@ export default {
     imagesList: [],
 
     nav: [
-        { path: "/controls", title: "Консоль", auth: true },
-        { path: "/users", title: "Пользователи", auth: true },
-        { path: "/news", title: "Новости", auth: true },
-        { path: "/settings", title: "Настройки", auth: true },
-        { path: "/browse_files", title: "Показать файлы", auth: true }
+        { path: "/controls", title: "Консоль",auth: true,role:'admin'},
+        { path: "/users", title: "Пользователи",auth: true,role:'admin'},
+        { path: "/news", title: "Новости",auth: true,role:'admin'},
+        { path: "/settings", title: "Настройки",auth: true,role:'admin'},
+        { path: "/browse_files", title: "Показать файлы",auth: true,role:'admin'},
+
+        { path: "/user_news", title: "Новости", auth: true,role:'moder'},
     ],
 
     authNav: [

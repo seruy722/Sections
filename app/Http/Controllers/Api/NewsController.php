@@ -20,6 +20,12 @@ class NewsController extends Controller
         return NewsResource::collection($news);
     }
 
+    public function userNews(Request $request)
+    {
+        $news = News::where('user_id', $request->id)->get();
+        return NewsResource::collection($news);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

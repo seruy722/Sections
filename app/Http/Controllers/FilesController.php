@@ -51,4 +51,36 @@ class FilesController extends Controller
         }
         return response()->json($result);
     }
+
+    public function saveHeaders(Request $request)
+    {
+        $headerText = $request->headerText;;
+        $copyright = $request->copyright;
+
+        if (File::where('name', 'header')->first()) {
+            File::where('name', 'header')->update([
+                'name' => 'header',
+                'file_name' => $headerText
+            ]);
+        } else {
+            File::create([
+                'name' => 'header',
+                'file_name' => $headerText
+            ]);
+        }
+
+        if (File::where('name', 'copyright')->first()) {
+            File::where('name', 'copyright')->update([
+                'name' => 'copyright',
+                'file_name' => $copyright
+            ]);
+        } else {
+            File::create([
+                'name' => 'copyright',
+                'file_name' => $copyright
+            ]);
+        }
+        return response()->json(['status'=>'success','message'=>'Данные успешно записаны.']);
+
+    }
 }

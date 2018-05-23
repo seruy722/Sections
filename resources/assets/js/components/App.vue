@@ -8,7 +8,7 @@
                     v-for="item in nav"
                     :to="item.path"
                     :key="item.path"
-                    v-if="item.auth === 'both' || item.auth === auth.login"
+                    v-if="item.role === role && item.auth === auth.login"
             >{{ item.title }}
             </v-btn>
 
@@ -68,6 +68,7 @@
     export default {
         created() {
             Auth.init();
+            Auth.check();
         },
 
         computed: {
@@ -78,6 +79,9 @@
 
             profileImage() {
                 return this.$store.state.Auth.photo;
+            },
+            role(){
+                return this.$store.state.Auth.role;
             }
         },
 
