@@ -18,13 +18,13 @@
                                 <form method="post" id="mail_form">
                                     {{ csrf_field() }}
                                     <div class="form-group">
-                                        <input type="text" size="50" name="name" id="name" value="" class="form-control required" placeholder="Введите Ваше имя *" required/>
+                                        <input type="text" size="50" name="name" id="name" value="" class="form-control required" placeholder="Введите Ваше имя*" required/>
                                     </div>
                                     <div class="form-group">
                                         <input type="email" size="50" name="email" id="email" value="" class="form-control required email" placeholder="Введите Ваш E-mail*" required/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="tel" pattern="[0-9]{10}" size="50" name="phone" id="phone" value="" class="form-control required phone" placeholder="Ваш номер мобильного телефона*" required/>
+                                        <input type="tel" pattern="[0-9]{10}" size="50" name="phone" id="phone" value="" class="form-control required phone" placeholder="Введите номер телефона в формате +38 ХХX XXX XX XX*" required/>
                                     </div>
                                     <div class="form-group">
                                         <input type="text" size="50" name="subject" id="subject" value="" class="form-control" placeholder="Введите тему сообщения"/>

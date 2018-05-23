@@ -8334,3 +8334,7 @@ label {
 #modal {
     color: #eb5055;
 }
+
+.jumbotron a {
+    color: #767E9E;
+}
