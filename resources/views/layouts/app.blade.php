@@ -42,7 +42,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @guest
-                    <li><a class="nav-link" href="{{ Route::currentRouteName().'controls' }}">{{ __('Профиль') }}</a></li>
+                    <li><a class="nav-link" href="{{ url('/controls') }}">{{ __('Профиль') }}</a></li>
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
