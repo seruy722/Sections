@@ -8338,3 +8338,9 @@ label {
 .jumbotron a {
     color: #767E9E;
 }
+
+.log {
+    height: auto;
+    float: left;
+    margin-right: 2%;
+}
