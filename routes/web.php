@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/admin', 'HomeController@index')->name('admin');
 Route::resource('api/news', 'Api\NewsController');
+Route::resource('api/addNews', 'Api\NewsController');
 Route::post('api/userNews', 'Api\NewsController@userNews');
 Route::resource('api/users', 'Api\UserController');
 

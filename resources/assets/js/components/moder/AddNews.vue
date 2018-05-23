@@ -7,78 +7,73 @@
             <v-flex xs8>
                 <v-text-field
                         name="input-1-3"
-                        label="Hint Text"
+                        label="Заголовок"
                         single-line
+                        v-model="news.title"
                 ></v-text-field>
             </v-flex>
         </v-layout>
         <v-layout row>
             <v-flex xs4>
-                <v-subheader>Press</v-subheader>
+                <v-subheader>Изображение</v-subheader>
+            </v-flex>
+            <v-flex xs8>
+                <div>
+                    <v-btn @click="onButtonClick">
+                        <v-icon>attach_file</v-icon>
+                        Логотип
+                    </v-btn>
+
+                    <v-text-field
+                            v-model="formData.displayFileName"
+                            readonly
+                    ></v-text-field>
+
+                    <input style="display:none" type="file" class="input-field-file" ref="fupload" @change="onFileSelected">
+
+                    <div v-if="readyToUpload">
+                        <img :src="formData.uploadFileData" class="preview-image">
+                    </div>
+                </div>
+            </v-flex>
+        </v-layout>
+        <v-layout row>
+            <v-flex xs4>
+                <v-subheader>Описание</v-subheader>
             </v-flex>
             <v-flex xs8>
                 <v-text-field
                         name="input-2-3"
-                        label="Hint Text"
-                        class="input-group--focused"
+                        label="Описание"
                         single-line
+                        v-model="news.description"
                 ></v-text-field>
             </v-flex>
         </v-layout>
         <v-layout row>
             <v-flex xs4>
-                <v-subheader>Focus</v-subheader>
+                <v-subheader>Контент</v-subheader>
             </v-flex>
             <v-flex xs8>
                 <v-text-field
-                        name="input-3-3"
-                        label="Hint Text"
-                        value="Input text"
-                        class="input-group--focused"
-                        single-line
+                        name="input-4"
+                        label="Контент"
+                        textarea
+                        v-model="news.content"
                 ></v-text-field>
             </v-flex>
         </v-layout>
         <v-layout row>
             <v-flex xs4>
-                <v-subheader>Normal with input text</v-subheader>
+
             </v-flex>
             <v-flex xs8>
-                <v-text-field
-                        name="input-3-4"
-                        label="Hint Text"
-                        value="Input text"
-                        single-line
-                ></v-text-field>
-            </v-flex>
-        </v-layout>
-        <v-layout row>
-            <v-flex xs4>
-                <v-subheader>Error</v-subheader>
-            </v-flex>
-            <v-flex xs8>
-                <v-text-field
-                        :rules="[() => 'Username or Password is incorrect.']"
-                        name="input-3-5"
-                        label="Hint Text"
-                        value="Input text"
-                        error
-                        single-line
-                ></v-text-field>
-            </v-flex>
-        </v-layout>
-        <v-layout row>
-            <v-flex xs4>
-                <v-subheader>Disabled</v-subheader>
-            </v-flex>
-            <v-flex xs8>
-                <v-text-field
-                        name="input-3"
-                        label="Label Text"
-                        value="Input text"
-                        disabled
-                        single-line
-                ></v-text-field>
+                <v-btn color="primary" dark @click="addItem">Сохранить
+                    <v-icon dark right>check_circle</v-icon>
+                </v-btn>
+                <v-btn color="red" dark @click="onUserNews">Отмена
+                    <v-icon dark right>block</v-icon>
+                </v-btn>
             </v-flex>
         </v-layout>
     </v-container>
@@ -86,12 +81,90 @@
 
 <script>
     export default {
-        data () {
+        data() {
             return {
-                rules: [
-                    () => 'Username or Password is incorrect'
-                ]
+                news: {
+                    title: null,
+                    description: null,
+                    content: null,
+                    img_filename: null,
+                    user_id: null
+                },
+                formData: {
+                    displayFileName: null,
+                    uploadFileData: null,
+                    file: null
+                },
             }
+        },
+        computed: {
+            readyToUpload() {
+                return (
+                    this.formData.displayFileName && this.formData.uploadFileData
+                );
+            }
+        },
+        methods: {
+            onUserNews() {
+                this.$router.push("/user_news");
+            },
+            addItem() {
+                this.news.user_id = this.$store.state.Auth.id;
+                let data = new FormData();
+                data.append("fupload",  this.news.img_filename);
+                data.append('title',this.news.title);
+                data.append('description',this.news.description);
+                data.append('content',this.news.content);
+                data.append('user_id',this.news.user_id);
+                axios.post(`/api/addNews`, data).then(response => {
+                    if (response.data.status === 'success') {
+                        this.$store.commit(
+                            "showInfo",
+                            response.data.message
+                        );
+                    }
+                });
+
+            },
+            onFileSelected(event) {
+                if (event.target.files && event.target.files.length) {
+                    let file = event.target.files[0];
+                    this.news.img_filename = file;
+                    this.formData.displayFileName =
+                        event.target.files[0].name +
+                        " (" +
+                        this.calcSize(file.size) +
+                        "Kb)";
+
+                    let reader = new FileReader();
+                    reader.onload = e => {
+                        this.formData.uploadFileData = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            },
+
+            onButtonClick() {
+                this.$refs.fupload.click();
+            },
+
+            calcSize(size) {
+                return Math.round(size / 1024);
+            },
+
+            uploadImage() {
+                let data = new FormData();
+                data.append("fupload", this.formData.file);
+
+                axios.post("/api/upload_file", data).then(response => {
+                    this.showInfo("Файл успешно загружен!");
+                    this.formData = {
+                        displayFileName: null,
+                        uploadFileData: null,
+                        file: null
+                    };
+                });
+            },
         }
     }
 </script>

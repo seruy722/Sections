@@ -16,7 +16,6 @@
                     <v-card>
                         <v-card-media
                                 class="white--text"
-                                height="200px"
                                 :src="getPath()"
                         >
                             <v-container fill-height fluid>
@@ -89,7 +88,6 @@
 </template>
 
 <script>
-    import Auth from "../../helpers/Auth";
     export default {
         data() {
             return {
@@ -111,7 +109,7 @@
         },
         methods: {
             initialize() {
-                axios.post(`/api/userNews`,{id:24}).then(response => {
+                axios.post(`/api/userNews`,{id:this.$store.state.Auth.id}).then(response => {
                     this.news = response.data.data;
                 });
             },

@@ -89500,7 +89500,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_Auth__ = __webpack_require__(3);
 //
 //
 //
@@ -89590,8 +89589,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -89612,7 +89609,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         initialize: function initialize() {
             var _this = this;
 
-            axios.post('/api/userNews', { id: 24 }).then(function (response) {
+            axios.post('/api/userNews', { id: this.$store.state.Auth.id }).then(function (response) {
                 _this.news = response.data.data;
             });
         },
@@ -89713,7 +89710,7 @@ var render = function() {
                         "v-card-media",
                         {
                           staticClass: "white--text",
-                          attrs: { height: "200px", src: _vm.getPath() }
+                          attrs: { src: _vm.getPath() }
                         },
                         [
                           _c(
@@ -90535,8 +90532,15 @@ var render = function() {
               _c("v-text-field", {
                 attrs: {
                   name: "input-1-3",
-                  label: "Hint Text",
+                  label: "Заголовок",
                   "single-line": ""
+                },
+                model: {
+                  value: _vm.news.title,
+                  callback: function($$v) {
+                    _vm.$set(_vm.news, "title", $$v)
+                  },
+                  expression: "news.title"
                 }
               })
             ],
@@ -90553,7 +90557,67 @@ var render = function() {
           _c(
             "v-flex",
             { attrs: { xs4: "" } },
-            [_c("v-subheader", [_vm._v("Press")])],
+            [_c("v-subheader", [_vm._v("Изображение")])],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-flex", { attrs: { xs8: "" } }, [
+            _c(
+              "div",
+              [
+                _c(
+                  "v-btn",
+                  { on: { click: _vm.onButtonClick } },
+                  [
+                    _c("v-icon", [_vm._v("attach_file")]),
+                    _vm._v("\n                    Логотип\n                ")
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("v-text-field", {
+                  attrs: { readonly: "" },
+                  model: {
+                    value: _vm.formData.displayFileName,
+                    callback: function($$v) {
+                      _vm.$set(_vm.formData, "displayFileName", $$v)
+                    },
+                    expression: "formData.displayFileName"
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  ref: "fupload",
+                  staticClass: "input-field-file",
+                  staticStyle: { display: "none" },
+                  attrs: { type: "file" },
+                  on: { change: _vm.onFileSelected }
+                }),
+                _vm._v(" "),
+                _vm.readyToUpload
+                  ? _c("div", [
+                      _c("img", {
+                        staticClass: "preview-image",
+                        attrs: { src: _vm.formData.uploadFileData }
+                      })
+                    ])
+                  : _vm._e()
+              ],
+              1
+            )
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs4: "" } },
+            [_c("v-subheader", [_vm._v("Описание")])],
             1
           ),
           _vm._v(" "),
@@ -90562,11 +90626,17 @@ var render = function() {
             { attrs: { xs8: "" } },
             [
               _c("v-text-field", {
-                staticClass: "input-group--focused",
                 attrs: {
                   name: "input-2-3",
-                  label: "Hint Text",
+                  label: "Описание",
                   "single-line": ""
+                },
+                model: {
+                  value: _vm.news.description,
+                  callback: function($$v) {
+                    _vm.$set(_vm.news, "description", $$v)
+                  },
+                  expression: "news.description"
                 }
               })
             ],
@@ -90583,7 +90653,7 @@ var render = function() {
           _c(
             "v-flex",
             { attrs: { xs4: "" } },
-            [_c("v-subheader", [_vm._v("Focus")])],
+            [_c("v-subheader", [_vm._v("Контент")])],
             1
           ),
           _vm._v(" "),
@@ -90592,12 +90662,13 @@ var render = function() {
             { attrs: { xs8: "" } },
             [
               _c("v-text-field", {
-                staticClass: "input-group--focused",
-                attrs: {
-                  name: "input-3-3",
-                  label: "Hint Text",
-                  value: "Input text",
-                  "single-line": ""
+                attrs: { name: "input-4", label: "Контент", textarea: "" },
+                model: {
+                  value: _vm.news.content,
+                  callback: function($$v) {
+                    _vm.$set(_vm.news, "content", $$v)
+                  },
+                  expression: "news.content"
                 }
               })
             ],
@@ -90611,92 +90682,41 @@ var render = function() {
         "v-layout",
         { attrs: { row: "" } },
         [
-          _c(
-            "v-flex",
-            { attrs: { xs4: "" } },
-            [_c("v-subheader", [_vm._v("Normal with input text")])],
-            1
-          ),
+          _c("v-flex", { attrs: { xs4: "" } }),
           _vm._v(" "),
           _c(
             "v-flex",
             { attrs: { xs8: "" } },
             [
-              _c("v-text-field", {
-                attrs: {
-                  name: "input-3-4",
-                  label: "Hint Text",
-                  value: "Input text",
-                  "single-line": ""
-                }
-              })
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-layout",
-        { attrs: { row: "" } },
-        [
-          _c(
-            "v-flex",
-            { attrs: { xs4: "" } },
-            [_c("v-subheader", [_vm._v("Error")])],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs8: "" } },
-            [
-              _c("v-text-field", {
-                attrs: {
-                  rules: [
-                    function() {
-                      return "Username or Password is incorrect."
-                    }
-                  ],
-                  name: "input-3-5",
-                  label: "Hint Text",
-                  value: "Input text",
-                  error: "",
-                  "single-line": ""
-                }
-              })
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-layout",
-        { attrs: { row: "" } },
-        [
-          _c(
-            "v-flex",
-            { attrs: { xs4: "" } },
-            [_c("v-subheader", [_vm._v("Disabled")])],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs8: "" } },
-            [
-              _c("v-text-field", {
-                attrs: {
-                  name: "input-3",
-                  label: "Label Text",
-                  value: "Input text",
-                  disabled: "",
-                  "single-line": ""
-                }
-              })
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "primary", dark: "" },
+                  on: { click: _vm.addItem }
+                },
+                [
+                  _vm._v("Сохранить\n                "),
+                  _c("v-icon", { attrs: { dark: "", right: "" } }, [
+                    _vm._v("check_circle")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "red", dark: "" },
+                  on: { click: _vm.onUserNews }
+                },
+                [
+                  _vm._v("Отмена\n                "),
+                  _c("v-icon", { attrs: { dark: "", right: "" } }, [
+                    _vm._v("block")
+                  ])
+                ],
+                1
+              )
             ],
             1
           )
@@ -90806,19 +90826,86 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            rules: [function () {
-                return 'Username or Password is incorrect';
-            }]
+            news: {
+                title: null,
+                description: null,
+                content: null,
+                img_filename: null,
+                user_id: null
+            },
+            formData: {
+                displayFileName: null,
+                uploadFileData: null,
+                file: null
+            }
         };
+    },
+
+    computed: {
+        readyToUpload: function readyToUpload() {
+            return this.formData.displayFileName && this.formData.uploadFileData;
+        }
+    },
+    methods: {
+        onUserNews: function onUserNews() {
+            this.$router.push("/user_news");
+        },
+        addItem: function addItem() {
+            var _this = this;
+
+            this.news.user_id = this.$store.state.Auth.id;
+            var data = new FormData();
+            data.append("fupload", this.news.img_filename);
+            data.append('title', this.news.title);
+            data.append('description', this.news.description);
+            data.append('content', this.news.content);
+            data.append('user_id', this.news.user_id);
+            axios.post("/api/addNews", data).then(function (response) {
+                if (response.data.status === 'success') {
+                    _this.$store.commit("showInfo", response.data.message);
+                }
+            });
+        },
+        onFileSelected: function onFileSelected(event) {
+            var _this2 = this;
+
+            if (event.target.files && event.target.files.length) {
+                var file = event.target.files[0];
+                this.news.img_filename = file;
+                this.formData.displayFileName = event.target.files[0].name + " (" + this.calcSize(file.size) + "Kb)";
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    _this2.formData.uploadFileData = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        },
+        onButtonClick: function onButtonClick() {
+            this.$refs.fupload.click();
+        },
+        calcSize: function calcSize(size) {
+            return Math.round(size / 1024);
+        },
+        uploadImage: function uploadImage() {
+            var _this3 = this;
+
+            var data = new FormData();
+            data.append("fupload", this.formData.file);
+
+            axios.post("/api/upload_file", data).then(function (response) {
+                _this3.showInfo("Файл успешно загружен!");
+                _this3.formData = {
+                    displayFileName: null,
+                    uploadFileData: null,
+                    file: null
+                };
+            });
+        }
     }
 });
 

@@ -22,7 +22,7 @@ class NewsController extends Controller
 
     public function userNews(Request $request)
     {
-        $news = News::where('user_id', $request->id)->get();
+        $news = News::where('user_id', $request->id)->orderBy('id','DESC')->get();
         return NewsResource::collection($news);
     }
 
@@ -44,7 +44,17 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $file = $request->fupload;
+        $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
+        $file->move('images', $filename);
+        News::create([
+            'title'=>$request->title,
+            'description'=>$request->description,
+            'content'=>$request->content,
+            'img_filename'=>$filename,
+            'user_id'=>$request->user_id
+        ]);
+        return response()->json(['status' => 'success', 'message' => 'Запись успешно добавлена']);
     }
 
     /**
