@@ -12,7 +12,7 @@ import VueRouter from "vue-router";
 
 const routes = [
     {path: "/controls", component: Console},
-    {path: "/upload_file", component: UploadFile},
+    {path: "/settings", component: UploadFile},
     {path: "/browse_files", component: BrowseFiles},
     {path: "/register", component: Register},
     {path: "/login", component: Login},

@@ -11,23 +11,21 @@ class FilesController extends Controller
     {
         $result = ['success' => true];
         if ($request->fupload) {
+            $name = $request->name;
             $file = $request->fupload;
-            $ext = $file->getClientOriginalExtension();
-            $filename = $file->getClientOriginalName();
-            $mime = $file->getClientMimeType();
-            $size = $file->getClientSize();
+            $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
             try {
                 $file->move('images', $filename);
-                $info = getimagesize(public_path() . '/images/' . $filename);
                 $newFile = [
-                    'name' => $filename,
-                    'ext' => $ext,
-                    'mime' => $mime,
-                    'size' => $size,
-                    'width' => $info[0],
-                    'height' => $info[1]
+                    'name' => $name,
+                    'file_name' => $filename
                 ];
-                File::create($newFile);
+                if (File::where('name', $name)->first()) {
+                    File::where('name', $name)->update($newFile);
+                } else {
+                    File::create($newFile);
+                }
+
             } catch (Exception $e) {
                 $result['success'] = false;
                 $result['error'] = $e->getMessage();
@@ -46,7 +44,7 @@ class FilesController extends Controller
         $result = ['success' => true];
 
         if ($file) {
-            unlink(public_path() . '/images/' . $file->name);
+            unlink(public_path() . '/images/' . $file->file_name);
             $file->delete();
         } else {
             $result['success'] = false;

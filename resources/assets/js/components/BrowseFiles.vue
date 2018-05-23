@@ -12,11 +12,6 @@
               <v-card-title primary-title>
                 <div>
                   <h3 class="headline mb-0">{{ file.name }}</h3>
-                  <div>
-                    Size: <strong>{{ calcSize(file.size) }}Kb</strong><br>
-                    Mime Type: <strong>{{ file.mime }}</strong><br>
-                    Uploaded: <strong>{{ humanDate(file) }}</strong>
-                  </div>
                 </div>
               </v-card-title>
               <v-card-actions>
@@ -67,15 +62,13 @@ export default {
             viewer: {
                 show: false,
                 path: null,
-                width: null,
-                height: null
             }
         };
     },
 
     methods: {
         getPath(file) {
-            return "/images/" + file.name;
+            return "/images/" + file.file_name;
         },
 
         onDelete(file) {
@@ -92,20 +85,8 @@ export default {
             });
         },
 
-        calcSize(size) {
-            return Math.round(size / 1024);
-        },
-
-        humanDate(file) {
-            let dat = new moment(file.created_at);
-
-            return dat.fromNow();
-        },
-
         onClickImage(file) {
-            this.viewer.path = "/images/" + file.name;
-            this.viewer.width = file.width;
-            this.viewer.height = file.height;
+            this.viewer.path = "/images/" + file.file_name;
             this.viewer.show = true;
         },
 
