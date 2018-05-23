@@ -22,13 +22,15 @@ class SectionsController extends Controller
     {
        // $sections = Users::join('sections', 'sections.user_id', '=', 'users.id')->get();
         $users = User::findOrFail($id);
+
         $origin = urlencode($users->address);
         $a=file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?address=.$origin.&key=AIzaSyB1Ths24pUitBJWCL2hVzX58hz4qMjsKGA");
         $d= json_decode($a);
         $lat=($d->results[0]->geometry->location->lat);
         $lng=($d->results[0]->geometry->location->lng);
 
-        return view('section', ['lat' => $lat, 'lng' => $lng, 'users' => $users]);
+        $news = $users->news()->paginate(10);
+        return view('section', ['lat' => $lat, 'lng' => $lng, 'users' => $users, 'news' => $news]);
     }
 
     /**
