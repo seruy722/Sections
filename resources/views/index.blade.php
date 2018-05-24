@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-xs-11">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="q" value="{{ old('q') }}" required>
+                        <input id="input" type="text" class="form-control" name="q" value="{{ old('q') }}" required>
                     </div>
                 </div>
                 <div class="col-xs-1">

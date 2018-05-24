@@ -38,7 +38,7 @@ class FrontController extends Controller
             ->groupby('name');
 
         $saturday = Schedules::join('users', 'users.id', '=', 'schedules.user_id')
-            ->where('days_of_week', 'Tuesday')->orderBy('data_start', 'asc')->get()
+            ->where('days_of_week', 'Saturday')->orderBy('data_start', 'asc')->get()
             ->groupby('name');
 
         $news = News::orderBy('id', 'desc')->limit(10)->get();
@@ -47,7 +47,9 @@ class FrontController extends Controller
             ->get()
             ->groupby('category');
 
-        return view('index', ['monday' => $monday, 'tuesday' => $tuesday, 'wednesday' => $wednesday, 'thursday' => $thursday, 'friday' => $friday, 'saturday' => $saturday, 'news' => $news, 'sections' => $sections]);
+        return view('index', ['monday' => $monday, 'tuesday' => $tuesday, 'wednesday' => $wednesday,
+            'thursday' => $thursday, 'friday' => $friday, 'saturday' => $saturday, 'news' => $news,
+            'sections' => $sections]);
     }
 
     /**
@@ -63,7 +65,7 @@ class FrontController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -74,19 +76,19 @@ class FrontController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $post=News::where('id', $id)->firstOrFail();
+        $post = News::where('id', $id)->firstOrFail();
         return view('article', compact('post'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function all()
@@ -98,45 +100,45 @@ class FrontController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function searchAll(Request $request)
     {
-        $q = Input::get( 'q' );
-        $news = News::where ( 'title', 'LIKE', '%' . $q . '%' )
-            ->orWhere ( 'description', 'LIKE', '%' . $q . '%' )
-            ->orWhere ( 'content', 'LIKE', '%' . $q . '%' )
+        $q = Input::get('q');
+        $news = News::where('title', 'LIKE', '%' . $q . '%')
+            ->orWhere('description', 'LIKE', '%' . $q . '%')
+            ->orWhere('content', 'LIKE', '%' . $q . '%')
             ->get();
-        $sections = Sections::where ( 'category', 'LIKE', '%' . $q . '%' )
-            ->orWhere ( 'name', 'LIKE', '%' . $q . '%' )
-            ->orWhere ( 'info', 'LIKE', '%' . $q . '%' )
+        $sections = Sections::where('category', 'LIKE', '%' . $q . '%')
+            ->orWhere('name', 'LIKE', '%' . $q . '%')
+            ->orWhere('info', 'LIKE', '%' . $q . '%')
             ->join('users', 'users.id', '=', 'sections.user_id')
             ->get()
             ->groupby('category');
-        if ((count ( $sections ) > 0)||(count ( $news ) > 0))
-            return view ( 'search' )->withDetail($sections)->withDetails($news)->withQuery ( $q );
+        if ((count($sections) > 0) || (count($news) > 0))
+            return view('search')->withDetail($sections)->withDetails($news)->withQuery($q);
         else
-            return redirect('/')->with('msg', 'Нет результатов поиска. Попробуйте снова!' );
+            return redirect('/')->with('msg', 'Нет результатов поиска. Попробуйте снова!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function search(Request $request)
     {
-        $q = Input::get( 'q' );
-        $news = News::where ( 'title', 'LIKE', '%' . $q . '%' )
-            ->orWhere ( 'description', 'LIKE', '%' . $q . '%' )
-            ->orWhere ( 'content', 'LIKE', '%' . $q . '%' )
+        $q = Input::get('q');
+        $news = News::where('title', 'LIKE', '%' . $q . '%')
+            ->orWhere('description', 'LIKE', '%' . $q . '%')
+            ->orWhere('content', 'LIKE', '%' . $q . '%')
             ->get();
-        if (count ( $news ) > 0)
-            return view ( 'search' )->withDetails($news )->withQuery ( $q );
+        if (count($news) > 0)
+            return view('search')->withDetails($news)->withQuery($q);
         else
-            return redirect('/articles')->with('msg', 'Нет результатов поиска. Попробуйте снова!' );
+            return redirect('/articles')->with('msg', 'Нет результатов поиска. Попробуйте снова!');
     }
 }
