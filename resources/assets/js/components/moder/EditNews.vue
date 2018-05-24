@@ -2,7 +2,7 @@
     <v-container fluid>
         <v-layout row>
             <v-flex xs4>
-                <v-subheader>Заголовок</v-subheader>
+                <v-subheader>Заголовок fgfgdfgdf</v-subheader>
             </v-flex>
             <v-flex xs8>
                 <v-text-field
@@ -13,6 +13,7 @@
                 ></v-text-field>
             </v-flex>
         </v-layout>
+
         <v-layout row>
             <v-flex xs4>
                 <v-subheader>Изображение</v-subheader>
@@ -23,20 +24,24 @@
                         <v-icon>attach_file</v-icon>
                         Файл
                     </v-btn>
-
                     <v-text-field
                             v-model="formData.displayFileName"
                             readonly
                     ></v-text-field>
 
-                    <input style="display:none" type="file" class="input-field-file" ref="fupload" @change="onFileSelected">
+                    <input style="display:none" type="file" class="input-field-file" ref="fupload"
+                           @change="onFileSelected">
 
                     <div v-if="readyToUpload">
                         <img :src="formData.uploadFileData" class="preview-image">
                     </div>
+                    <div v-if="image">
+                        <img :src="getPath()" class="preview-image">
+                    </div>
                 </div>
             </v-flex>
         </v-layout>
+
         <v-layout row>
             <v-flex xs4>
                 <v-subheader>Описание</v-subheader>
@@ -50,6 +55,7 @@
                 ></v-text-field>
             </v-flex>
         </v-layout>
+
         <v-layout row>
             <v-flex xs4>
                 <v-subheader>Контент</v-subheader>
@@ -63,21 +69,17 @@
                 ></v-text-field>
             </v-flex>
         </v-layout>
+
         <v-layout row>
             <v-flex xs4>
-                <v-btn color="red" dark @click="change">Vhange
-                    <v-icon dark right>block</v-icon>
-                </v-btn>
-
             </v-flex>
             <v-flex xs8>
-                <v-btn color="primary" dark @click="addItem">Сохранить
+                <v-btn color="primary" dark @click="updateItem">Обновить
                     <v-icon dark right>check_circle</v-icon>
                 </v-btn>
                 <v-btn color="red" dark @click="onUserNews">Отмена
                     <v-icon dark right>block</v-icon>
                 </v-btn>
-
             </v-flex>
         </v-layout>
     </v-container>
@@ -87,21 +89,16 @@
     export default {
         data() {
             return {
-                news: {
-                    title: null,
-                    description: null,
-                    content: null,
-                    img_filename: null,
-                    user_id: null
-                },
+                news: {},
                 formData: {
                     displayFileName: null,
                     uploadFileData: null,
                     file: null
                 },
+                image: true
             }
         },
-        created(){
+        created() {
             this.news = this.$route.params.item;
         },
         computed: {
@@ -115,28 +112,33 @@
             onUserNews() {
                 this.$router.push("/user_news");
             },
-            addItem() {
+            updateItem() {
                 this.news.user_id = this.$store.state.Auth.id;
                 let data = new FormData();
-                data.append("fupload",  this.news.img_filename);
-                data.append('title',this.news.title);
-                data.append('description',this.news.description);
-                data.append('content',this.news.content);
-                data.append('user_id',this.news.user_id);
-                axios.post(`/api/addNews`, data).then(response => {
+                data.append("fupload", this.news.file);
+                data.append("id", this.news.id);
+                data.append('title', this.news.title);
+                data.append('description', this.news.description);
+                data.append('content', this.news.content);
+                data.append('user_id', this.news.user_id);
+                axios.post(`/api/updateNews`, data).then(response => {
                     if (response.data.status === 'success') {
                         this.$store.commit(
                             "showInfo",
                             response.data.message
                         );
                     }
+                    setTimeout(this.onUserNews, 3000);
                 });
 
             },
+
             onFileSelected(event) {
                 if (event.target.files && event.target.files.length) {
+                    this.image = false;
                     let file = event.target.files[0];
-                    this.news.img_filename = file;
+                    this.news.file = file;
+                    this.news.img_filename = event.target.files[0].name;
                     this.formData.displayFileName =
                         event.target.files[0].name +
                         " (" +
@@ -158,23 +160,9 @@
             calcSize(size) {
                 return Math.round(size / 1024);
             },
-
-            uploadImage() {
-                let data = new FormData();
-                data.append("fupload", this.formData.file);
-
-                axios.post("/api/upload_file", data).then(response => {
-                    this.showInfo("Файл успешно загружен!");
-                    this.formData = {
-                        displayFileName: null,
-                        uploadFileData: null,
-                        file: null
-                    };
-                });
+            getPath() {
+                return "/images/" + this.news.img_filename;
             },
-            change(){
-                console.log(this.news);
-            }
         }
     }
 </script>

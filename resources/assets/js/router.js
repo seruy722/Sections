@@ -8,7 +8,7 @@ import Users from "./components/admin/Users";
 import News from "./components/admin/News";
 import UserNews from "./components/moder/UserNews";
 import AddNews from "./components/moder/AddNews";
-import EditNews from "./components/moder/AddNews";
+import EditNews from "./components/moder/EditNews";
 
 import VueRouter from "vue-router";
 

@@ -105,9 +105,6 @@
             }
         },
         methods: {
-            onUserNews() {
-                this.$router.push("/user_news");
-            },
             addItem() {
                 this.news.user_id = this.$store.state.Auth.id;
                 let data = new FormData();
@@ -123,6 +120,7 @@
                             "showInfo",
                             response.data.message
                         );
+                        this.onUserNews();
                     }
                 });
 
@@ -152,20 +150,9 @@
             calcSize(size) {
                 return Math.round(size / 1024);
             },
-
-            uploadImage() {
-                let data = new FormData();
-                data.append("fupload", this.formData.file);
-
-                axios.post("/api/upload_file", data).then(response => {
-                    this.showInfo("Файл успешно загружен!");
-                    this.formData = {
-                        displayFileName: null,
-                        uploadFileData: null,
-                        file: null
-                    };
-                });
-            },
+            onUserNews() {
+                this.$router.push("/user_news");
+            }
         }
     }
 </script>

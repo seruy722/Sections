@@ -85948,7 +85948,9 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_moder_UserNews___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_moder_UserNews__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_moder_AddNews__ = __webpack_require__(144);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_moder_AddNews___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_moder_AddNews__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_vue_router__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_moder_EditNews__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_moder_EditNews___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_moder_EditNews__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_vue_router__ = __webpack_require__(9);
 
 
 
@@ -85963,9 +85965,9 @@ if (false) {
 
 
 
-var routes = [{ path: "/controls", component: __WEBPACK_IMPORTED_MODULE_0__components_Console___default.a }, { path: "/settings", component: __WEBPACK_IMPORTED_MODULE_1__components_UploadFile___default.a }, { path: "/browse_files", component: __WEBPACK_IMPORTED_MODULE_2__components_BrowseFiles___default.a }, { path: "/register", component: __WEBPACK_IMPORTED_MODULE_3__components_Register___default.a }, { path: "/login", component: __WEBPACK_IMPORTED_MODULE_4__components_Login___default.a }, { path: "/profile", component: __WEBPACK_IMPORTED_MODULE_5__components_Profile___default.a }, { path: "/users", component: __WEBPACK_IMPORTED_MODULE_6__components_admin_Users___default.a }, { path: "/news", component: __WEBPACK_IMPORTED_MODULE_7__components_admin_News___default.a }, { path: "/user_news", component: __WEBPACK_IMPORTED_MODULE_8__components_moder_UserNews___default.a }, { path: "/add_news", component: __WEBPACK_IMPORTED_MODULE_9__components_moder_AddNews___default.a }, { name: 'EditNews', path: "/edit_news", component: __WEBPACK_IMPORTED_MODULE_9__components_moder_AddNews___default.a }];
+var routes = [{ path: "/controls", component: __WEBPACK_IMPORTED_MODULE_0__components_Console___default.a }, { path: "/settings", component: __WEBPACK_IMPORTED_MODULE_1__components_UploadFile___default.a }, { path: "/browse_files", component: __WEBPACK_IMPORTED_MODULE_2__components_BrowseFiles___default.a }, { path: "/register", component: __WEBPACK_IMPORTED_MODULE_3__components_Register___default.a }, { path: "/login", component: __WEBPACK_IMPORTED_MODULE_4__components_Login___default.a }, { path: "/profile", component: __WEBPACK_IMPORTED_MODULE_5__components_Profile___default.a }, { path: "/users", component: __WEBPACK_IMPORTED_MODULE_6__components_admin_Users___default.a }, { path: "/news", component: __WEBPACK_IMPORTED_MODULE_7__components_admin_News___default.a }, { path: "/user_news", component: __WEBPACK_IMPORTED_MODULE_8__components_moder_UserNews___default.a }, { path: "/add_news", component: __WEBPACK_IMPORTED_MODULE_9__components_moder_AddNews___default.a }, { name: 'EditNews', path: "/edit_news", component: __WEBPACK_IMPORTED_MODULE_10__components_moder_EditNews___default.a }];
 
-/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_10_vue_router__["a" /* default */]({
+/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_11_vue_router__["a" /* default */]({
     routes: routes,
 
     mode: "history"
@@ -89591,201 +89593,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             search: '',
             headers: [{ text: 'Дата создания', value: 'created_at' }, { text: 'Заголовок', value: 'title' }, { text: 'Пользователь', value: 'user_name' }, { text: 'Управление', sortable: false }],
-            news: [],
-            url: "http://sections.loc/",
-            dialog: false,
-            itemForView: {},
-            formData: {
-                displayFileName: null,
-                uploadFileData: null,
-                file: null
-            },
-            image: true
+            news: []
         };
     },
     created: function created() {
         this.initialize();
     },
 
-    computed: {
-        readyToUpload: function readyToUpload() {
-            return this.formData.displayFileName && this.formData.uploadFileData;
-        }
-    },
     methods: {
-        onFileChange: function onFileChange(event) {
+        initialize: function initialize() {
             var _this = this;
 
-            this.image = false;
-            if (event.target.files && event.target.files.length) {
-                var file = event.target.files[0];
-                this.formData.file = file;
-                this.formData.displayFileName = event.target.files[0].name + " (" + this.calcSize(file.size) + "Kb)";
-
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    _this.formData.uploadFileData = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        },
-        onButtonClick: function onButtonClick() {
-            this.$refs.fupload.click();
-        },
-        calcSize: function calcSize(size) {
-            return Math.round(size / 1024);
-        },
-        uploadImage: function uploadImage(name) {
-            var _this2 = this;
-
-            var data = new FormData();
-            data.append("fupload", this.formData.file);
-            data.append("name", name);
-
-            axios.post("/api/upload_file", data).then(function (response) {
-                _this2.showInfo("Файл успешно загружен!");
-                _this2.formData = {
-                    displayFileName: null,
-                    uploadFileData: null,
-                    file: null
-                };
-            });
-        },
-        initialize: function initialize() {
-            var _this3 = this;
-
             axios.post('/api/userNews', { id: this.$store.state.Auth.id }).then(function (response) {
-                _this3.news = response.data.data;
+                _this.news = response.data.data;
             });
         },
         deleteItem: function deleteItem(item) {
-            var _this4 = this;
+            var _this2 = this;
 
             var index = this.news.indexOf(item);
             var answer = confirm('Вы действительно хотите удалить эту запись?');
             if (answer) {
                 axios.delete('/api/news/' + item.id).then(function (response) {
                     if (response.data.status == 'success') {
-                        _this4.news.splice(index, 1);
-                        _this4.$store.commit("showInfo", response.data.message);
+                        _this2.news.splice(index, 1);
+                        _this2.$store.commit("showInfo", response.data.message);
                     }
                 });
             }
         },
-        viewItem: function viewItem(item) {
-            this.itemForView = item;
-            this.dialog = true;
-        },
-        updateItem: function updateItem() {},
-        getPath: function getPath() {
-            return "/images/" + this.itemForView.img_filename;
-        },
         onAddNews: function onAddNews() {
             this.$router.push("/add_news");
-        },
-        close: function close() {
-            this.dialog = false;
-            this.$router.push("/user_news");
         }
     }
 });
@@ -89802,309 +89646,6 @@ var render = function() {
     "div",
     { staticClass: "wrapper" },
     [
-      _c(
-        "v-dialog",
-        {
-          attrs: {
-            fullscreen: "",
-            "hide-overlay": "",
-            transition: "dialog-bottom-transition"
-          },
-          model: {
-            value: _vm.dialog,
-            callback: function($$v) {
-              _vm.dialog = $$v
-            },
-            expression: "dialog"
-          }
-        },
-        [
-          _c(
-            "v-card",
-            [
-              _c(
-                "v-toolbar",
-                { attrs: { color: "primary", dark: "" } },
-                [
-                  _c(
-                    "v-btn",
-                    { attrs: { icon: "", dark: "" }, on: { click: _vm.close } },
-                    [_c("v-icon", [_vm._v("close")])],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("v-toolbar-title", [_vm._v("Редактирование новости")]),
-                  _vm._v(" "),
-                  _c("v-spacer"),
-                  _vm._v(" "),
-                  _c("v-toolbar-items")
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", sm6: "", "offset-sm3": "" } },
-                [
-                  _c(
-                    "v-container",
-                    { attrs: { fluid: "" } },
-                    [
-                      _c(
-                        "v-layout",
-                        { attrs: { row: "" } },
-                        [
-                          _c(
-                            "v-flex",
-                            { attrs: { xs4: "" } },
-                            [_c("v-subheader", [_vm._v("Заголовок")])],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs8: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: {
-                                  name: "input-1-3",
-                                  label: "Заголовок",
-                                  "single-line": ""
-                                },
-                                model: {
-                                  value: _vm.itemForView.title,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.itemForView, "title", $$v)
-                                  },
-                                  expression: "itemForView.title"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-layout",
-                        { attrs: { row: "" } },
-                        [
-                          _c(
-                            "v-flex",
-                            { attrs: { xs4: "" } },
-                            [_c("v-subheader", [_vm._v("Изображение")])],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs8: "" } },
-                            [
-                              _c(
-                                "v-btn",
-                                { on: { click: _vm.onButtonClick } },
-                                [
-                                  _c("v-icon", [_vm._v("attach_file")]),
-                                  _vm._v(
-                                    "\n                                Файл\n                            "
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("v-text-field", {
-                                attrs: { readonly: "" },
-                                model: {
-                                  value: _vm.formData.displayFileName,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      _vm.formData,
-                                      "displayFileName",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "formData.displayFileName"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("input", {
-                                ref: "fupload",
-                                staticClass: "input-field-file",
-                                attrs: { type: "file" },
-                                on: { change: _vm.onFileChange }
-                              }),
-                              _vm._v(" "),
-                              _vm.readyToUpload
-                                ? _c("div", [
-                                    _c("img", {
-                                      staticClass: "preview-image",
-                                      attrs: {
-                                        src: _vm.formData.uploadFileData
-                                      }
-                                    })
-                                  ])
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.image
-                                ? _c("div", [
-                                    _c("img", {
-                                      staticClass: "preview-image",
-                                      attrs: { src: _vm.getPath() }
-                                    })
-                                  ])
-                                : _vm._e()
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-layout",
-                        { attrs: { row: "" } },
-                        [
-                          _c(
-                            "v-flex",
-                            { attrs: { xs4: "" } },
-                            [_c("v-subheader", [_vm._v("Описание")])],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs8: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: {
-                                  name: "input-2-3",
-                                  label: "Описание",
-                                  "single-line": ""
-                                },
-                                model: {
-                                  value: _vm.itemForView.description,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      _vm.itemForView,
-                                      "description",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "itemForView.description"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-layout",
-                        { attrs: { row: "" } },
-                        [
-                          _c(
-                            "v-flex",
-                            { attrs: { xs4: "" } },
-                            [_c("v-subheader", [_vm._v("Контент")])],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs8: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: {
-                                  name: "input-4",
-                                  label: "Контент",
-                                  textarea: ""
-                                },
-                                model: {
-                                  value: _vm.itemForView.content,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.itemForView, "content", $$v)
-                                  },
-                                  expression: "itemForView.content"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-layout",
-                        { attrs: { row: "" } },
-                        [
-                          _c("v-flex", { attrs: { xs4: "" } }),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs8: "" } },
-                            [
-                              _c(
-                                "v-btn",
-                                {
-                                  attrs: { color: "primary", dark: "" },
-                                  on: { click: _vm.updateItem }
-                                },
-                                [
-                                  _vm._v(
-                                    "Сохранить\n                                "
-                                  ),
-                                  _c(
-                                    "v-icon",
-                                    { attrs: { dark: "", right: "" } },
-                                    [_vm._v("check_circle")]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-btn",
-                                {
-                                  attrs: { color: "red", dark: "" },
-                                  on: { click: function($event) {} }
-                                },
-                                [
-                                  _vm._v(
-                                    "Отмена\n                                "
-                                  ),
-                                  _c(
-                                    "v-icon",
-                                    { attrs: { dark: "", right: "" } },
-                                    [_vm._v("block")]
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("v-divider")
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
       _c(
         "v-card",
         [
@@ -90362,9 +89903,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
-        onUserNews: function onUserNews() {
-            this.$router.push("/user_news");
-        },
         addItem: function addItem() {
             var _this = this;
 
@@ -90376,9 +89914,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             data.append('content', this.news.content);
             data.append('user_id', this.news.user_id);
 
-            axios.post("/api/addNews", data).then(function (response) {
+            axios.post('/api/addNews', data).then(function (response) {
                 if (response.data.status === 'success') {
                     _this.$store.commit("showInfo", response.data.message);
+                    _this.onUserNews();
                 }
             });
         },
@@ -90403,20 +89942,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         calcSize: function calcSize(size) {
             return Math.round(size / 1024);
         },
-        uploadImage: function uploadImage() {
-            var _this3 = this;
-
-            var data = new FormData();
-            data.append("fupload", this.formData.file);
-
-            axios.post("/api/upload_file", data).then(function (response) {
-                _this3.showInfo("Файл успешно загружен!");
-                _this3.formData = {
-                    displayFileName: null,
-                    uploadFileData: null,
-                    file: null
-                };
-            });
+        onUserNews: function onUserNews() {
+            this.$router.push("/user_news");
         }
     }
 });
@@ -91160,6 +90687,464 @@ module.exports = function (css) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 218 */,
+/* 219 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(220)
+/* template */
+var __vue_template__ = __webpack_require__(221)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\moder\\EditNews.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-55d16c41", Component.options)
+  } else {
+    hotAPI.reload("data-v-55d16c41", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 220 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            news: {},
+            formData: {
+                displayFileName: null,
+                uploadFileData: null,
+                file: null
+            },
+            image: true
+        };
+    },
+    created: function created() {
+        this.news = this.$route.params.item;
+    },
+
+    computed: {
+        readyToUpload: function readyToUpload() {
+            return this.formData.displayFileName && this.formData.uploadFileData;
+        }
+    },
+    methods: {
+        onUserNews: function onUserNews() {
+            this.$router.push("/user_news");
+        },
+        updateItem: function updateItem() {
+            var _this = this;
+
+            this.news.user_id = this.$store.state.Auth.id;
+            var data = new FormData();
+            data.append("fupload", this.news.file);
+            data.append("id", this.news.id);
+            data.append('title', this.news.title);
+            data.append('description', this.news.description);
+            data.append('content', this.news.content);
+            data.append('user_id', this.news.user_id);
+            axios.post("/api/updateNews", data).then(function (response) {
+                if (response.data.status === 'success') {
+                    _this.$store.commit("showInfo", response.data.message);
+                }
+                setTimeout(_this.onUserNews, 3000);
+            });
+        },
+        onFileSelected: function onFileSelected(event) {
+            var _this2 = this;
+
+            if (event.target.files && event.target.files.length) {
+                this.image = false;
+                var file = event.target.files[0];
+                this.news.file = file;
+                this.news.img_filename = event.target.files[0].name;
+                this.formData.displayFileName = event.target.files[0].name + " (" + this.calcSize(file.size) + "Kb)";
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    _this2.formData.uploadFileData = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        },
+        onButtonClick: function onButtonClick() {
+            this.$refs.fupload.click();
+        },
+        calcSize: function calcSize(size) {
+            return Math.round(size / 1024);
+        },
+        getPath: function getPath() {
+            return "/images/" + this.news.img_filename;
+        }
+    }
+});
+
+/***/ }),
+/* 221 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { fluid: "" } },
+    [
+      _c(
+        "v-layout",
+        { attrs: { row: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs4: "" } },
+            [_c("v-subheader", [_vm._v("Заголовок fgfgdfgdf")])],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs8: "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  name: "input-1-3",
+                  label: "Заголовок",
+                  "single-line": ""
+                },
+                model: {
+                  value: _vm.news.title,
+                  callback: function($$v) {
+                    _vm.$set(_vm.news, "title", $$v)
+                  },
+                  expression: "news.title"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs4: "" } },
+            [_c("v-subheader", [_vm._v("Изображение")])],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-flex", { attrs: { xs8: "" } }, [
+            _c(
+              "div",
+              [
+                _c(
+                  "v-btn",
+                  { on: { click: _vm.onButtonClick } },
+                  [
+                    _c("v-icon", [_vm._v("attach_file")]),
+                    _vm._v("\n                    Файл\n                ")
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("v-text-field", {
+                  attrs: { readonly: "" },
+                  model: {
+                    value: _vm.formData.displayFileName,
+                    callback: function($$v) {
+                      _vm.$set(_vm.formData, "displayFileName", $$v)
+                    },
+                    expression: "formData.displayFileName"
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  ref: "fupload",
+                  staticClass: "input-field-file",
+                  staticStyle: { display: "none" },
+                  attrs: { type: "file" },
+                  on: { change: _vm.onFileSelected }
+                }),
+                _vm._v(" "),
+                _vm.readyToUpload
+                  ? _c("div", [
+                      _c("img", {
+                        staticClass: "preview-image",
+                        attrs: { src: _vm.formData.uploadFileData }
+                      })
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.image
+                  ? _c("div", [
+                      _c("img", {
+                        staticClass: "preview-image",
+                        attrs: { src: _vm.getPath() }
+                      })
+                    ])
+                  : _vm._e()
+              ],
+              1
+            )
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs4: "" } },
+            [_c("v-subheader", [_vm._v("Описание")])],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs8: "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  name: "input-2-3",
+                  label: "Описание",
+                  "single-line": ""
+                },
+                model: {
+                  value: _vm.news.description,
+                  callback: function($$v) {
+                    _vm.$set(_vm.news, "description", $$v)
+                  },
+                  expression: "news.description"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs4: "" } },
+            [_c("v-subheader", [_vm._v("Контент")])],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs8: "" } },
+            [
+              _c("v-text-field", {
+                attrs: { name: "input-4", label: "Контент", textarea: "" },
+                model: {
+                  value: _vm.news.content,
+                  callback: function($$v) {
+                    _vm.$set(_vm.news, "content", $$v)
+                  },
+                  expression: "news.content"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "" } },
+        [
+          _c("v-flex", { attrs: { xs4: "" } }),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs8: "" } },
+            [
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "primary", dark: "" },
+                  on: { click: _vm.updateItem }
+                },
+                [
+                  _vm._v("Обновить\n                "),
+                  _c("v-icon", { attrs: { dark: "", right: "" } }, [
+                    _vm._v("check_circle")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "red", dark: "" },
+                  on: { click: _vm.onUserNews }
+                },
+                [
+                  _vm._v("Отмена\n                "),
+                  _c("v-icon", { attrs: { dark: "", right: "" } }, [
+                    _vm._v("block")
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-55d16c41", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
