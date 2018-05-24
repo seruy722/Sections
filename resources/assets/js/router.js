@@ -8,6 +8,7 @@ import Users from "./components/admin/Users";
 import News from "./components/admin/News";
 import UserNews from "./components/moder/UserNews";
 import AddNews from "./components/moder/AddNews";
+import EditNews from "./components/moder/AddNews";
 
 import VueRouter from "vue-router";
 
@@ -23,6 +24,7 @@ const routes = [
 
     {path: "/user_news", component: UserNews},
     {path: "/add_news", component: AddNews},
+    {name:'EditNews',path: "/edit_news", component: EditNews},
 ];
 
 export default new VueRouter({

@@ -65,6 +65,9 @@
         </v-layout>
         <v-layout row>
             <v-flex xs4>
+                <v-btn color="red" dark @click="change">Vhange
+                    <v-icon dark right>block</v-icon>
+                </v-btn>
 
             </v-flex>
             <v-flex xs8>
@@ -74,6 +77,7 @@
                 <v-btn color="red" dark @click="onUserNews">Отмена
                     <v-icon dark right>block</v-icon>
                 </v-btn>
+
             </v-flex>
         </v-layout>
     </v-container>
@@ -96,6 +100,9 @@
                     file: null
                 },
             }
+        },
+        created(){
+            this.news = this.$route.params.item;
         },
         computed: {
             readyToUpload() {
@@ -165,6 +172,9 @@
                     };
                 });
             },
+            change(){
+                console.log(this.news);
+            }
         }
     }
 </script>

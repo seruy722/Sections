@@ -3,7 +3,7 @@
         <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
             <v-card>
                 <v-toolbar color="primary" dark>
-                    <v-btn icon dark @click.native="dialog = false">
+                    <v-btn icon dark @click="close">
                         <v-icon>close</v-icon>
                     </v-btn>
                     <v-toolbar-title>Редактирование новости</v-toolbar-title>
@@ -32,15 +32,22 @@
                                 <v-subheader>Изображение</v-subheader>
                             </v-flex>
                             <v-flex xs8>
-                                <div>
-                                    <v-btn @click="onButtonClick">
-                                        <v-icon>attach_file</v-icon>
-                                        Файл
-                                    </v-btn>
-                                    <input style="display:none" type="file" class="input-field-file" ref="fupload" @change="onFileSelected">
-                                    <div>
-                                        <img :src="getPath()" class="preview-image">
-                                    </div>
+                                <v-btn @click="onButtonClick">
+                                    <v-icon>attach_file</v-icon>
+                                    Файл
+                                </v-btn>
+                                <v-text-field
+                                        v-model="formData.displayFileName"
+                                        readonly
+                                ></v-text-field>
+
+                                <input type="file" class="input-field-file" ref="fupload" @change="onFileChange">
+
+                                <div v-if="readyToUpload">
+                                    <img :src="formData.uploadFileData" class="preview-image">
+                                </div>
+                                <div v-if="image">
+                                    <img :src="getPath()" class="preview-image">
                                 </div>
                             </v-flex>
                         </v-layout>
@@ -112,7 +119,7 @@
                     <td>{{ props.item.title }}</td>
                     <td>{{ props.item.user_name }}</td>
                     <td>
-                        <v-btn icon class="mx-0" @click="viewItem(props.item)">
+                        <v-btn icon class="mx-0" v-bind:to="{name:'EditNews',params:{item:props.item}}">
                             <v-icon color="teal">edit</v-icon>
                         </v-btn>
                         <v-btn icon class="mx-0" @click="deleteItem(props.item)">
@@ -142,13 +149,63 @@
                 news: [],
                 url: "http://sections.loc/",
                 dialog: false,
-                itemForView: {}
+                itemForView: {},
+                formData: {
+                    displayFileName: null,
+                    uploadFileData: null,
+                    file: null
+                },
+                image: true
             }
         },
         created() {
             this.initialize();
         },
+        computed: {
+            readyToUpload() {
+                return this.formData.displayFileName && this.formData.uploadFileData;
+            }
+        },
         methods: {
+            onFileChange(event) {
+                this.image = false;
+                if (event.target.files && event.target.files.length) {
+                    let file = event.target.files[0];
+                    this.formData.file = file;
+                    this.formData.displayFileName =
+                        event.target.files[0].name +
+                        " (" +
+                        this.calcSize(file.size) +
+                        "Kb)";
+
+                    let reader = new FileReader();
+                    reader.onload = e => {
+                        this.formData.uploadFileData = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            },
+            onButtonClick() {
+                this.$refs.fupload.click();
+            },
+            calcSize(size) {
+                return Math.round(size / 1024);
+            },
+
+            uploadImage(name) {
+                let data = new FormData();
+                data.append("fupload", this.formData.file);
+                data.append("name", name);
+
+                axios.post("/api/upload_file", data).then(response => {
+                    this.showInfo("Файл успешно загружен!");
+                    this.formData = {
+                        displayFileName: null,
+                        uploadFileData: null,
+                        file: null
+                    };
+                });
+            },
             initialize() {
                 axios.post(`/api/userNews`, {id: this.$store.state.Auth.id}).then(response => {
                     this.news = response.data.data;
@@ -169,23 +226,11 @@
                     });
                 }
             },
-            onFileSelected(event) {
-                if (event.target.files && event.target.files.length) {
-                    let file = event.target.files[0];
-                    this.itemForView.file = file;
-
-                    let reader = new FileReader();
-                    reader.onload = e => {
-                        this.itemForView.img_filename = e.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                }
-            },
             viewItem(item) {
                 this.itemForView = item;
                 this.dialog = true;
             },
-            updateItem(){
+            updateItem() {
 
             },
             getPath() {
@@ -194,9 +239,11 @@
             onAddNews() {
                 this.$router.push("/add_news");
             },
-            onButtonClick() {
-                this.$refs.fupload.click();
-            },
+            close(){
+                this.dialog = false;
+                this.$router.push("/user_news");
+            }
+
         }
     }
 </script>

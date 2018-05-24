@@ -198,7 +198,7 @@
 
                             this.$store.commit(
                                 "showInfo",
-                                "Your photo was successfuly updated."
+                                "Ваше фото обновлено."
                             );
                         }
                     });
