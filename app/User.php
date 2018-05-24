@@ -34,4 +34,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Sections','user_id');
     }
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedules::class,'user_id');
+    }
 }

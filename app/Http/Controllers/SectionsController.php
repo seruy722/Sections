@@ -20,17 +20,27 @@ class SectionsController extends Controller
      */
     public function index($id)
     {
-       // $sections = Users::join('sections', 'sections.user_id', '=', 'users.id')->get();
+        // $sections = Users::join('sections', 'sections.user_id', '=', 'users.id')->get();
         $users = User::findOrFail($id);
 
         $origin = urlencode($users->address);
-        $a=file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?address=.$origin.&key=AIzaSyB1Ths24pUitBJWCL2hVzX58hz4qMjsKGA");
-        $d= json_decode($a);
-        $lat=($d->results[0]->geometry->location->lat);
-        $lng=($d->results[0]->geometry->location->lng);
+        $a = file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?address=.$origin.&key=AIzaSyB1Ths24pUitBJWCL2hVzX58hz4qMjsKGA");
+        $d = json_decode($a);
+        $lat = ($d->results[0]->geometry->location->lat);
+        $lng = ($d->results[0]->geometry->location->lng);
 
         $news = $users->news()->paginate(10);
-        return view('section', ['lat' => $lat, 'lng' => $lng, 'users' => $users, 'news' => $news]);
+
+        $monday = $users->schedules()->where('days_of_week', 'Monday')->get();
+        $tuesday = $users->schedules()->where('days_of_week', 'Tuesday')->get();
+        $wednesday = $users->schedules()->where('days_of_week', 'Wednesday')->get();
+        $thursday = $users->schedules()->where('days_of_week', 'Thursday')->get();
+        $friday = $users->schedules()->where('days_of_week', 'Friday')->get();
+        $saturday = $users->schedules()->where('days_of_week', 'Saturday')->get();
+
+        return view('section', ['lat' => $lat, 'lng' => $lng, 'users' => $users, 'news' => $news,
+            'monday' => $monday, 'tuesday' => $tuesday, 'wednesday' => $wednesday, 'thursday' => $thursday,
+            'friday' => $friday, 'saturday' => $saturday]);
     }
 
     /**
@@ -46,7 +56,7 @@ class SectionsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function mail(Request $request)
@@ -63,7 +73,7 @@ class SectionsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -74,7 +84,7 @@ class SectionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -85,8 +95,8 @@ class SectionsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -97,7 +107,7 @@ class SectionsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

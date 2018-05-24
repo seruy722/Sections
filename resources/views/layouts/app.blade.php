@@ -128,6 +128,8 @@
 <script src="/js/custom_min.js"></script>
 <!-- Custom JavaScript  -->
 
+<script src="/js/go_top.js"></script>
+
 <script src="/js/main.js"></script>
 <!-- Resource jQuery -->
 <script type="text/javascript">

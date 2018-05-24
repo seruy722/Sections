@@ -26,7 +26,7 @@ jQuery(document).ready(function($){
 		this.modalBody = this.modal.find('.body'); 
 		this.modalBodyBg = this.modal.find('.body-bg'); 
 		this.modalMaxWidth = 800;
-		this.modalMaxHeight = 480;
+		this.modalMaxHeight = 2500;
 
 		this.animating = false;
 
@@ -67,23 +67,10 @@ jQuery(document).ready(function($){
 		this.singleEvents.each(function(){
 			//create the .event-date element for each event
 			var durationLabel = '<span class="event-date">'+$(this).data('start')+' - '+$(this).data('end')+'</span>';
-			$(this).children('a').prepend($(durationLabel));
+			$(this).children('p').prepend($(durationLabel));
 
-			//detect click on the event and open the modal
-			$(this).on('click', 'a', function(event){
-				event.preventDefault();
-				if( !self.animating ) self.openModal($(this));
-			});
 		});
 
-		//close modal window
-		this.modal.on('click', '.close', function(event){
-			event.preventDefault();
-			if( !self.animating ) self.closeModal(self.eventsGroup.find('.selected-event'));
-		});
-		this.element.on('click', '.cover-layer', function(event){
-			if( !self.animating && self.element.hasClass('modal-is-open') ) self.closeModal(self.eventsGroup.find('.selected-event'));
-		});
 	};
 
 	SchedulePlan.prototype.placeEvents = function() {
@@ -115,19 +102,10 @@ jQuery(document).ready(function($){
 		this.modalHeader.find('.event-date').text(event.find('.event-date').text());
 		this.modal.attr('data-event', event.parent().attr('data-event'));
 
-		//update event content
-//		this.modalBody.find('.event-info').load(event.parent().attr('data-content')+'.html .event-info > *', function(data){
-			//once the event content has been loaded
-//			self.element.addClass('content-loaded');
-//		});
+		
+		
 
-        
-		this.element.addClass('modal-is-open');
-
-		setTimeout(function(){
-			//fixes a flash when an event is selected - desktop version only
-			event.parent('li').addClass('selected-event');
-		}, 10);
+	
 
 		if( mq == 'mobile' ) {
 			self.modal.one(transitionEnd, function(){
@@ -195,67 +173,6 @@ jQuery(document).ready(function($){
 		//if browser do not support transitions -> no need to wait for the end of it
 		if( !transitionsSupported ) self.modal.add(self.modalHeaderBg).trigger(transitionEnd);
 	};
-
-	SchedulePlan.prototype.closeModal = function(event) {
-		var self = this;
-		var mq = self.mq();
-
-		this.animating = true;
-
-		if( mq == 'mobile' ) {
-			this.element.removeClass('modal-is-open');
-			this.modal.one(transitionEnd, function(){
-				self.modal.off(transitionEnd);
-				self.animating = false;
-				self.element.removeClass('content-loaded');
-				event.removeClass('selected-event');
-			});
-		} else {
-			var eventTop = event.offset().top - $(window).scrollTop(),
-				eventLeft = event.offset().left,
-				eventHeight = event.innerHeight(),
-				eventWidth = event.innerWidth();
-
-			var modalTop = Number(self.modal.css('top').replace('px', '')),
-				modalLeft = Number(self.modal.css('left').replace('px', ''));
-
-			var modalTranslateX = eventLeft - modalLeft,
-				modalTranslateY = eventTop - modalTop;
-
-			self.element.removeClass('animation-completed modal-is-open');
-
-			//change modal width/height and translate it
-			this.modal.css({
-				width: eventWidth+'px',
-				height: eventHeight+'px'
-			});
-			transformElement(self.modal, 'translateX('+modalTranslateX+'px) translateY('+modalTranslateY+'px)');
-			
-			//scale down modalBodyBg element
-			transformElement(self.modalBodyBg, 'scaleX(0) scaleY(1)');
-			//scale down modalHeaderBg element
-			transformElement(self.modalHeaderBg, 'scaleY(1)');
-
-			this.modalHeaderBg.one(transitionEnd, function(){
-				//wait for the  end of the modalHeaderBg transformation and reset modal style
-				self.modalHeaderBg.off(transitionEnd);
-				self.modal.addClass('no-transition');
-				setTimeout(function(){
-					self.modal.add(self.modalHeader).add(self.modalBody).add(self.modalHeaderBg).add(self.modalBodyBg).attr('style', '');
-				}, 10);
-				setTimeout(function(){
-					self.modal.removeClass('no-transition');
-				}, 20);
-
-				self.animating = false;
-				self.element.removeClass('content-loaded');
-				event.removeClass('selected-event');
-			});
-		}
-
-		//browser do not support transitions -> no need to wait for the end of it
-		if( !transitionsSupported ) self.modal.add(self.modalHeaderBg).trigger(transitionEnd);
-	}
 
 	SchedulePlan.prototype.mq = function(){
 		//get MQ value ('desktop' or 'mobile') 
