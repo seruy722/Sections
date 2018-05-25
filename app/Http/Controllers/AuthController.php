@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailClass;
 
 class AuthController extends Controller
 {
@@ -81,7 +83,6 @@ class AuthController extends Controller
         switch ($request->action) {
             case 'photo':
                 $file = $request->profilephoto;
-                $ext = $file->getClientOriginalExtension();
                 $filename = str_random(30);
                 $file->move('users', $filename);
                 $user->photo = '/users/' . $filename;
@@ -127,6 +128,24 @@ class AuthController extends Controller
                     ]
                 ]);
                 break;
+        }
+    }
+
+    public function resetPassword(Request $request){
+        $user = User::where('email',$request->email)->first();
+        if($user){
+            $name = 'dfsdfd';
+            $msg = $user->password;
+            Mail::to($request->email)->send(new MailClass($name, $msg));
+            return response()->json([
+                'status' => true,
+                'message'=>'Пароль отправлен на почту!'
+            ]);
+        }else{
+            return response()->json([
+                'status' => false,
+                'message'=>'Email не зарегестрированный!'
+            ]);
         }
     }
 }

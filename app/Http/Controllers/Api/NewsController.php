@@ -45,16 +45,24 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $file = $request->fupload;
-        $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
-        $file->move('images', $filename);
-        News::create([
+        $data = [
             'title' => $request->title,
             'description' => $request->description,
             'content' => $request->content,
-            'img_filename' => $filename,
             'user_id' => $request->user_id
-        ]);
-        return response()->json(['status' => 'success', 'message' => 'Запись успешно добавлена']);
+        ];
+
+        if (!is_string($file)) {
+            $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
+            $file->move('images', $filename);
+            $data['img_filename'] = $filename;
+            News::create($data);
+            return response()->json(['status' => 'success', 'message' => 'Запись успешно добавлена.']);
+        } else {
+            News::create($data);
+            return response()->json(['status' => 'success', 'message' => 'Запись успешно добавлена.']);
+        }
+        return response()->json(['status' => 'error', 'message' => 'Ошибка при добавлении записи.']);
     }
 
     /**
@@ -93,9 +101,9 @@ class NewsController extends Controller
         $user = News::find($id);
         if ($user) {
             $user->update($data);
-            return response()->json(['status' => 'success', 'message' => 'Запись успешно активирована']);
+            return response()->json(['status' => 'success', 'message' => 'Запись успешно активирована.']);
         } else {
-            return response()->json(['status' => 'error', 'message' => 'Ошибка при активации записи']);
+            return response()->json(['status' => 'error', 'message' => 'Ошибка при активации записи.']);
         }
     }
 
@@ -103,18 +111,30 @@ class NewsController extends Controller
     {
         $news = News::find($request->id);
         $file = $request->fupload;
-        $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
-        if ($news) {
+        $data = [
+            'title' => $request->title,
+            'description' => $request->description,
+            'content' => $request->content,
+            'user_id' => $request->user_id
+        ];
+        if (!is_string($file)) {
+            $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
             $file->move('images', $filename);
-            $news->update([
-                'title' => $request->title,
-                'description' => $request->description,
-                'content' => $request->content,
-                'img_filename' => $filename,
-                'user_id' => $request->user_id
-            ]);
-            return response()->json(['status' => 'success', 'message' => 'Данные успешно обновлены.']);
+            $data['img_filename'] = $filename;
+            if ($news) {
+                if(is_string($news->img_filename)){
+                    unlink(public_path() . '/images/' . $news->img_filename);
+                }
+                $news->update($data);
+                return response()->json(['status' => 'success', 'message' => 'Данные успешно обновлены.']);
+            }
+        } else {
+            if ($news) {
+                $news->update($data);
+                return response()->json(['status' => 'success', 'message' => 'Данные успешно обновлены.']);
+            }
         }
+        return response()->json(['status' => 'error', 'message' => 'Ошибка при обновлении.']);
     }
 
     public function needDate($date)
@@ -132,7 +152,9 @@ class NewsController extends Controller
     {
         $news = News::find($id);
         if ($news) {
-            unlink(public_path() . '/images/' . $news->img_filename);
+            if ($news->img_filename) {
+                unlink(public_path() . '/images/' . $news->img_filename);
+            }
             $news->delete();
             return response()->json(['status' => 'success', 'message' => 'Запись успешно удалена']);
         } else {

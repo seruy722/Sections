@@ -11,11 +11,11 @@ class MailClass extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $name;
-    protected $email;
-    protected $phone;
-    protected $subjec;
-    protected $message;
+    public $name;
+    public $email;
+    public $phone;
+    public $subject;
+    public $message;
 
     /**
      * Create a new message instance.

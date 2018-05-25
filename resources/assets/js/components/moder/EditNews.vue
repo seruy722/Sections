@@ -2,7 +2,7 @@
     <v-container fluid>
         <v-layout row>
             <v-flex xs4>
-                <v-subheader>Заголовок fgfgdfgdf</v-subheader>
+                <v-subheader>Заголовок</v-subheader>
             </v-flex>
             <v-flex xs8>
                 <v-text-field
@@ -121,14 +121,15 @@
                 data.append('description', this.news.description);
                 data.append('content', this.news.content);
                 data.append('user_id', this.news.user_id);
+
                 axios.post(`/api/updateNews`, data).then(response => {
                     if (response.data.status === 'success') {
-                        this.$store.commit(
-                            "showInfo",
-                            response.data.message
-                        );
+                        setTimeout(this.onUserNews, 3000);
                     }
-                    setTimeout(this.onUserNews, 3000);
+                    this.$store.commit(
+                        "showInfo",
+                        response.data.message
+                    );
                 });
 
             },
@@ -161,7 +162,9 @@
                 return Math.round(size / 1024);
             },
             getPath() {
-                return "/images/" + this.news.img_filename;
+                let path = "/images/" + this.news.img_filename;
+                let res = path.indexOf('.');
+                return (res != -1) ? path : this.image = false;
             },
         }
     }

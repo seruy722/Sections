@@ -5,7 +5,7 @@
                 <v-flex sm4 offset-sm4>
                     <v-card>
                         <v-card-title>
-                            <h2>Welcome back</h2>
+                            <h2>Добро пожаловать</h2>
                         </v-card-title>
 
                         <v-card-text>
@@ -19,7 +19,7 @@
 
                             <v-layout row>
                                 <v-text-field
-                                        label="Password"
+                                        label="Пароль"
                                         v-model="form.password"
                                         :error-messages="checkError('password')"
                                         type="password"
@@ -30,7 +30,12 @@
                             <v-layout row>
                                 <v-flex xs12 class="text-xs-center">
                                     <v-btn @click="onLogin">
-                                        Login
+                                        Вход
+                                    </v-btn>
+                                </v-flex>
+                                <v-flex xs12 class="text-xs-right">
+                                    <v-btn color="blue" flat v-bind:to="{name:'ResetPassword'}">
+                                        Забыли пароль?
                                     </v-btn>
                                 </v-flex>
                             </v-layout>

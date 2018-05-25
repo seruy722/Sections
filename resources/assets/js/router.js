@@ -9,7 +9,8 @@ import News from "./components/admin/News";
 import UserNews from "./components/moder/UserNews";
 import AddNews from "./components/moder/AddNews";
 import EditNews from "./components/moder/EditNews";
-
+// import Schedule from "./components/moder/Schedule";
+import ResetPassword from "./components/ResetPassword";
 import VueRouter from "vue-router";
 
 const routes = [
@@ -25,6 +26,8 @@ const routes = [
     {path: "/user_news", component: UserNews},
     {path: "/add_news", component: AddNews},
     {name:'EditNews',path: "/edit_news", component: EditNews},
+    {name:'ResetPassword',path: "/reset_password", component: ResetPassword},
+    // {name:'Schedule',path: "/schedule", component: Schedule},
 ];
 
 export default new VueRouter({

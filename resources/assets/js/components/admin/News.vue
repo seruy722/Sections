@@ -16,7 +16,6 @@
                     <v-card>
                         <v-card-media
                                 class="white--text"
-                                height="200px"
                                 :src="getPath()"
                         >
                             <v-container fill-height fluid>
@@ -38,13 +37,13 @@
                             </div>
                         </v-card-text>
                         <v-card-actions>
-                            <v-btn color="success" @click="activeItem(itemForView)">
-                                <v-icon dark left>check_circle</v-icon>
-                                Активировать
-                            </v-btn>
                             <v-btn color="orange darken-2" @click.native="dialog = false">
                                 <v-icon dark left>arrow_back</v-icon>
                                 Назад
+                            </v-btn>
+                            <v-btn color="success" @click="activeItem(itemForView)">
+                                <v-icon dark left>check_circle</v-icon>
+                                Активировать
                             </v-btn>
                         </v-card-actions>
                     </v-card>
