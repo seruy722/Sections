@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ResetPasswordClass;
 use App\User;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\MailClass;
 
 class AuthController extends Controller
 {
@@ -95,7 +95,7 @@ class AuthController extends Controller
             case 'profile':
                 $this->validate($request, [
                     'name' => 'required|max:255',
-                    'address'=>'max:255'
+                    'address' => 'max:255'
                 ]);
                 if ($user) {
                     $user->name = $request->name;
@@ -131,20 +131,28 @@ class AuthController extends Controller
         }
     }
 
-    public function resetPassword(Request $request){
-        $user = User::where('email',$request->email)->first();
-        if($user){
-            $name = 'dfsdfd';
-            $msg = $user->password;
-            Mail::to($request->email)->send(new MailClass($name, $msg));
+    public function resetPassword(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            $randPassword = str_shuffle('$#asdSRTD');
+            $user->password = Hash::make($randPassword);
+            $user->save();
+
+            $url = $request->url;
+            $title = 'Был произведен запрос на восстановления пароля.';
+            $subject = 'Восстановление пароля';
+            $password = 'Ваш новый пароль: ' . $randPassword;
+
+            Mail::to($request->email)->send(new ResetPasswordClass($title, $subject, $url, $password));
             return response()->json([
                 'status' => true,
-                'message'=>'Пароль отправлен на почту!'
+                'message' => 'Пароль отправлен на почту!'
             ]);
-        }else{
+        } else {
             return response()->json([
                 'status' => false,
-                'message'=>'Email не зарегестрированный!'
+                'message' => 'Email не зарегестрирован!'
             ]);
         }
     }

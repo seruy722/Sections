@@ -5,8 +5,13 @@
                 <v-flex sm6 offset-sm3>
                     <v-card>
                         <v-card-text>
-
-                            <v-form v-model="valid">
+                            <v-alert :value="success" type="success">
+                                {{success}}
+                            </v-alert>
+                            <v-alert :value="error" type="error">
+                                {{error}}
+                            </v-alert>
+                            <v-form v-model="valid" v-if="form">
                                 <v-text-field
                                         v-model="email"
                                         :rules="emailRules"
@@ -34,19 +39,36 @@
             emailRules: [
                 v => !!v || 'E-mail обязательное поле.',
                 v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail не валидный.'
-            ]
+            ],
+            success: null,
+            error: null,
+            form: true
         }),
         methods: {
             checkEmail() {
                 if (this.valid) {
-                    axios.post("/api/reset_password", {'email':this.email})
+                    axios.post("/api/reset_password", {
+                        'email': this.email,
+                        'url': this.url()
+                    })
                         .then(response => {
+                            if (response.data.status) {
+                                this.success = response.data.message;
+                                this.form = false;
+                                this.error = null;
+                                setTimeout(this.onLogin, 3000);
+                            } else {
+                                this.error = response.data.message;
+                            }
 
                         })
-                        .catch(error => {
-                            this.errors = error.response.data.errors;
-                        });
                 }
+            },
+            url() {
+                return window.location.origin;
+            },
+            onLogin() {
+                this.$router.push("/login");
             }
         }
     }
