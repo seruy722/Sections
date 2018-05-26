@@ -125,7 +125,7 @@
                     name: null,
                     email: null,
                     password: null,
-                    address:null,
+                    address: null,
                     password_confirmation: null,
                     action: null
                 },
@@ -158,14 +158,14 @@
                 this.errors = {};
                 this.form.action = action;
 
-                axios         .post("/api/update_profile", this.form)
+                axios.post("/api/update_profile", this.form)
                     .then(response => {
                         if (response.data.success) {
                             Auth.login(response.data.user);
 
                             this.$store.commit(
                                 "showInfo",
-                                "Your profile was successfuly updated."
+                                "Ваш профиль обновлен!"
                             );
                         }
                     })

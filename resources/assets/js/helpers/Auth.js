@@ -13,6 +13,7 @@ export default {
         localStorage.setItem("name", data.name);
         localStorage.setItem("photo", data.photo);
         localStorage.setItem("role", data.role);
+        localStorage.setItem("email", data.email);
 
         this.init();
     },
@@ -23,6 +24,8 @@ export default {
         localStorage.removeItem("name");
         localStorage.removeItem("photo");
         localStorage.removeItem("role");
+        localStorage.removeItem("email");
+
 
         this.init();
     },
