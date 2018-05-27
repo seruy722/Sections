@@ -2,58 +2,57 @@
 
 @section('content')
     <div class="row search">
-            <div class="col-xs-12 col-md-12 col-sm-12">
-        <form action="/search" method="POST" role="search" class="form-search">
-            {{ csrf_field() }}
-            <div class="row">
-                <div class="col-xs-11">
-                    <div class="form-group">
-                        <input id="input" type="text" class="form-control" name="q" value="{{ old('q') }}" required>
+        <div class="col-xs-12 col-md-12 col-sm-12">
+            <form action="/search" method="POST" role="search" class="form-search">
+                {{ csrf_field() }}
+                <div class="row">
+                    <div class="col-xs-11">
+                        <div class="form-group">
+                            <input id="input" type="text" class="form-control" name="q" value="{{ old('q') }}" required>
+                        </div>
+                    </div>
+                    <div class="col-xs-1">
+                        <div class="form-group">
+                            <input class="btn btn-info" type="submit" value="Поиск">
+                        </div>
                     </div>
                 </div>
-                <div class="col-xs-1">
-                    <div class="form-group">
-                        <input class="btn btn-info" type="submit" value="Поиск">
-                    </div>
-                </div>
-            </div>
-        </form>
-                <div class="msg">{{Session::get('msg')}}</div>
-    </div>
+            </form>
+            <div class="msg">{{Session::get('msg')}}</div>
+        </div>
     </div>
     <!-- Sections -->
     <div id="sections" class="sections ha-waypoint page-section" data-animate-down="ha-header-small "
          data-animate-up="ha-header-large">
         <div class="container">
             <div class="row">
-                @foreach($sections as $section=>$q)
-                    <div class="col-xs-12 col-md-12 col-sm-12">
-                        <div class=" container TitleSection">
-                            <header class="page-head">
-                                <h3>{{$section}}</h3>
-                            </header>
-                        </div>
-                        <div class="row">
+                <div class="col-xs-12 col-md-12 col-sm-12">
+                    <div class=" container TitleSection">
+                        <header class="page-head">
+                            <h2>Кружки</h2>
+                        </header>
+                    </div>
+                    <div class="row">
                             <div class="sec_wrap_3 option3">
-                                @foreach($q as $w)
-                                    <div class="col-xs-12 col-md-4 col-sm-12">
-                                        <ul>
-                                            <li>
-                                                <div class="about_wrap_one">
-                                                    <div class="hexagon"> <a href="{{route('sections', $w->id)}}"> <span class="mask"></span> <img src="/images/favicon.png" alt="filter"> </a>
-                                                    </div>
-                                                    <div class="wrap">
-                                                        <h4>{{$w->name}}</h4>
-                                                    </div>
+                                @foreach($category as $cat)
+                                <div class="col-xs-12 col-md-4 col-sm-12">
+                                    <ul>
+                                        <li>
+                                            <div class="about_wrap_one">
+                                                <div class="hexagon"><a href="{{route('sections', $cat->id)}}"> <span class="mask"></span> <img
+                                                                src="/images/content.jpg" alt="filter"> </a>
                                                 </div>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                                <div class="wrap">
+                                                    <h4>{{$cat->category_name}}</h4>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                                 @endforeach
                             </div>
-                        </div>
                     </div>
-                @endforeach
+                </div>
             </div>
         </div>
     </div>
@@ -286,11 +285,12 @@
                                         <div class="itemCont">
                                             <a href="{{route('articles', $list->id)}}">
                                                 <div class="about_wrap thumb">
-                                                    <div class="holder"> <img class="img-responsive center-block" src="/images/img1.jpg" alt="about"> </div>
+                                                    <div class="holder"><img class="img-responsive center-block"
+                                                                             src="/images/img1.jpg" alt="about"></div>
                                                 </div>
                                                 <div class="itemInfo">
                                                     <h4>{{$list->title}}</h4>
-                                                    <h6>{{$list->user->name}}</h6>
+                                                    <h6>{{$list->sections->sections_name}}</h6>
                                                     <p>{{$list->description}}</p>
                                                 </div>
                                             </a>

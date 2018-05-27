@@ -26,7 +26,12 @@ Route::resource('api/users', 'Api\UserController');
 
 Route::view('/controls', 'controls');
 
-
+Route::get('/404',function(){
+    abort(404);
+});
+Route::get('/500',function(){
+    abort(500);
+});
 //Route::resource('api/schedules', 'Api\SchedulesController')
 //    ->only(['index', 'show']);
 Route::get('/', 'FrontController@index');
@@ -35,5 +40,6 @@ Route::get('/articles', 'FrontController@all')->name('news');
 Route::any('/articles/search', 'FrontController@search');
 Route::any('/search', 'FrontController@searchAll');
 
-Route::get('/section/{id}', 'SectionsController@index')->name('sections');
+Route::get('/sections/section/{id}', 'SectionsController@index')->name('section');
+Route::get('/sections/{id}', 'SectionsController@sections')->name('sections');
 Route::any('/section/send', 'SectionsController@mail')->name('mail');
