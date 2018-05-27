@@ -54,7 +54,6 @@
                             <ul>
                                 <li class="events-group">
                                     <div class="top-info"><span>Понедельник</span></div>
-
                                     <ul>
                                         <?php $i = 0 ?>
                                         @foreach ($monday as $day)
@@ -145,9 +144,7 @@
                                 </li>
                             </ul>
                         </div>
-
                         <!-- .cd-schedule -->
-
                     </div>
                 </div>
             </div>
