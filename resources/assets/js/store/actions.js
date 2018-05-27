@@ -4,4 +4,7 @@ export default {
             commit("setImagesList", response.data);
         });
     },
+    getUrl(){
+        return window.location.href;
+    }
 };

@@ -63631,6 +63631,9 @@ webpackContext.id = 149;
         axios.post("/api/list").then(function (response) {
             commit("setImagesList", response.data);
         });
+    },
+    getUrl: function getUrl() {
+        return window.location.href;
     }
 });
 

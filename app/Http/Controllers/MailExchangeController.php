@@ -53,7 +53,6 @@ class MailExchangeController extends Controller
         MailExchange::create($request->all());
 
         $data = $request->all();
-
         Mail::send('sendMails', $data, function ($message) use ($data) {
             $message->from($data['email_from']);
             $message->to($data['email_to']);
