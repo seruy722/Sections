@@ -23,6 +23,10 @@ Route::resource('api/addNews', 'Api\NewsController');
 Route::post('api/updateNews', 'Api\NewsController@userUpdateNews');
 Route::post('api/userNews', 'Api\NewsController@userNews');
 Route::resource('api/users', 'Api\UserController');
+Route::resource('/createMail', 'MailExchangeController');
+Route::resource('/deleteMail', 'MailExchangeController');
+Route::post('/updateMail', 'MailExchangeController@updateMail');
+Route::post('/mailsForUser', 'MailExchangeController@mailsForUser');
 
 Route::view('/controls', 'controls');
 

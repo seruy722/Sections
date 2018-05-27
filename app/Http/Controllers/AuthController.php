@@ -19,9 +19,9 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:255',
+            'name' => 'required|min:2|max:255',
             'email' => 'required|email|unique:users',
-            'password' => 'required|between:6,25|confirmed'
+            'password' => 'required|between:6,100|confirmed'
         ]);
         $user = new User($request->all());
         $user->password = Hash::make($request->password);
@@ -36,7 +36,7 @@ class AuthController extends Controller
 
         $this->validate($request, [
             'email' => 'required|email',
-            'password' => 'required|between:6,25'
+            'password' => 'required|between:6,100'
         ]);
         $user = User::whereEmail($request->email)->first();
         if ($user && Hash::check($request->password, $user->password)) {
@@ -66,6 +66,11 @@ class AuthController extends Controller
 
     public function editProfile(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|min:2|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|between:6,100|confirmed'
+        ]);
         $user = $request->user();
         if ($user) {
             return response()->json([
@@ -78,6 +83,10 @@ class AuthController extends Controller
 
     public function updateProfile(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|min:2|max:255',
+            'address'=>'max:255',
+        ]);
         $user = $request->user();
 
         switch ($request->action) {

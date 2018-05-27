@@ -6,11 +6,15 @@ import Login from "./components/Login";
 import Profile from "./components/Profile";
 import Users from "./components/admin/Users";
 import News from "./components/admin/News";
-import UserNews from "./components/moder/UserNews";
-import AddNews from "./components/moder/AddNews";
-import EditNews from "./components/moder/EditNews";
-// import Schedule from "./components/moder/Schedule";
+import UserNews from "./components/moder/news/UserNews";
+import AddNews from "./components/moder/news/AddNews";
+import EditNews from "./components/moder/news/EditNews";
 import ResetPassword from "./components/ResetPassword";
+import CreateMessage from "./components/moder/mails/CreateMessage";
+import UserMessages from "./components/moder/mails/UserMessages";
+import ViewMessage from "./components/moder/mails/ViewMessage";
+import ReplyMessage from "./components/moder/mails/ReplyMessage";
+
 import VueRouter from "vue-router";
 
 const routes = [
@@ -27,7 +31,10 @@ const routes = [
     {path: "/add_news", component: AddNews},
     {name:'EditNews',path: "/edit_news", component: EditNews},
     {name:'ResetPassword',path: "/reset_password", component: ResetPassword},
-    // {name:'Schedule',path: "/schedule", component: Schedule},
+    {name:'UserMessages',path: "/user_messages", component: UserMessages},
+    {name:'CreateMessage',path: "/create_message", component: CreateMessage},
+    {name:'ViewMessage',path: "/view_message", component: ViewMessage},
+    {name:'ReplyMessage',path: "/reply_message", component: ReplyMessage},
 ];
 
 export default new VueRouter({

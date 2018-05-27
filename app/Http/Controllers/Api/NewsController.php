@@ -44,6 +44,13 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required|min:10|max:255',
+            'description' => 'required|min:10|max:1500',
+            'content' => 'max:2000',
+            'fupload' => 'mimes:jpg,jpeg,png|dimensions:max:5120'
+        ]);
+
         $file = $request->fupload;
         $data = [
             'title' => $request->title,
@@ -57,10 +64,10 @@ class NewsController extends Controller
             $file->move('images', $filename);
             $data['img_filename'] = $filename;
             News::create($data);
-            return response()->json(['status' => 'success', 'message' => 'Запись успешно добавлена.']);
+            return response()->json(['status' => true, 'message' => 'Запись успешно добавлена.']);
         } else {
             News::create($data);
-            return response()->json(['status' => 'success', 'message' => 'Запись успешно добавлена.']);
+            return response()->json(['status' => false, 'message' => 'Запись успешно добавлена.']);
         }
         return response()->json(['status' => 'error', 'message' => 'Ошибка при добавлении записи.']);
     }
@@ -109,6 +116,13 @@ class NewsController extends Controller
 
     public function userUpdateNews(Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required|min:10|max:255',
+            'description' => 'required|min:10|max:1500',
+            'content' => 'max:2000',
+            'fupload' => 'mimes:jpg,jpeg,png|dimensions:max:5120'
+        ]);
+
         $news = News::find($request->id);
         $file = $request->fupload;
         $data = [
@@ -122,7 +136,7 @@ class NewsController extends Controller
             $file->move('images', $filename);
             $data['img_filename'] = $filename;
             if ($news) {
-                if(is_string($news->img_filename)){
+                if (is_string($news->img_filename)) {
                     unlink(public_path() . '/images/' . $news->img_filename);
                 }
                 $news->update($data);

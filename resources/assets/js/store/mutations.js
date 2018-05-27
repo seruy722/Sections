@@ -14,6 +14,7 @@ export default {
         state.Auth.name = localStorage.getItem("name");
         state.Auth.photo = localStorage.getItem("photo");
         state.Auth.role = localStorage.getItem("role");
+        state.Auth.email = localStorage.getItem("email");
         state.Auth.login =
             state.Auth.id !== null &&
             state.Auth.api_token !== null &&
