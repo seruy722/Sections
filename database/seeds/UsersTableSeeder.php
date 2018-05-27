@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
             DB::table('users')->insert([
                 'name' => $faker->company,
                 'email' => $faker->email,
+                'phone' => $faker->e164PhoneNumber,
                 'password' => $faker->password,
                 'photo' => $faker->shuffle('$Ukraine$, $Kramatorsk$'),
                 'api_token'=>$faker->shuffle('hello, world'),

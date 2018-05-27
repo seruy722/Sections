@@ -21,7 +21,6 @@ class SectionsTableSeeder extends Seeder
                 'img_logo' => str_random(10) . '.jpg',
                 'img' => str_random(10) . '.jpg',
                 'info' => $faker->text($maxNbChars = 300),
-                'phone' => $faker->e164PhoneNumber,
             ]);
         }
     }
