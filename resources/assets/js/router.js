@@ -13,6 +13,7 @@ import ResetPassword from "./components/ResetPassword";
 import CreateMessage from "./components/moder/mails/CreateMessage";
 import UserMessages from "./components/moder/mails/UserMessages";
 import ViewMessage from "./components/moder/mails/ViewMessage";
+import ReplyMessage from "./components/moder/mails/ReplyMessage";
 
 import VueRouter from "vue-router";
 
@@ -33,6 +34,7 @@ const routes = [
     {name:'UserMessages',path: "/user_messages", component: UserMessages},
     {name:'CreateMessage',path: "/create_message", component: CreateMessage},
     {name:'ViewMessage',path: "/view_message", component: ViewMessage},
+    {name:'ReplyMessage',path: "/reply_message", component: ReplyMessage},
 ];
 
 export default new VueRouter({

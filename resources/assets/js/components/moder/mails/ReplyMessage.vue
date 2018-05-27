@@ -9,7 +9,7 @@
                         name="input-1-3"
                         label="Email"
                         single-line
-                        v-model="mail.email_to"
+                        v-model="mail.email_from"
                         :error-messages="checkError('email_to')"
                 ></v-text-field>
             </v-flex>
@@ -62,20 +62,18 @@
     export default {
         data() {
             return {
-                mail: {
-                    email_to: null,
-                    email_from:null,
-                    subject: null,
-                    message: null,
-                    name:null,
-                    user_id:null
-                },
+                mail: {},
                 errors: {}
             }
+        },
+        created() {
+            this.mail = this.$route.params.item;
+            this.mail.message = null;
         },
         methods: {
             sendMessage() {
                 this.errors = {};
+                this.mail.email_to = this.mail.email_from;
                 this.mail.email_from = this.$store.state.Auth.email;
                 this.mail.name = this.$store.state.Auth.name;
                 this.mail.user_id = this.$store.state.Auth.id;

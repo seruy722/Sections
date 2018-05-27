@@ -1,74 +1,6 @@
 <template>
 
     <div class="wrapper">
-        <v-layout row justify-center>
-            <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-                <v-card>
-                    <v-toolbar dark color="primary">
-                        <v-btn icon dark @click.native="dialog = false">
-                            <v-icon>close</v-icon>
-                        </v-btn>
-                        <v-toolbar-title>Settings</v-toolbar-title>
-                        <v-spacer></v-spacer>
-                        <v-toolbar-items>
-                            <v-btn dark flat @click.native="dialog = false">Save</v-btn>
-                        </v-toolbar-items>
-                    </v-toolbar>
-                    <v-list three-line subheader>
-                        <v-subheader>User Controls</v-subheader>
-                        <v-list-tile avatar>
-                            <v-list-tile-content>
-                                <v-list-tile-title>Content filtering</v-list-tile-title>
-                                <v-list-tile-sub-title>Set the content filtering level to restrict apps that can be
-                                    downloaded
-                                </v-list-tile-sub-title>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile avatar>
-                            <v-list-tile-content>
-                                <v-list-tile-title>Password</v-list-tile-title>
-                                <v-list-tile-sub-title>Require password for purchase or use password to restrict
-                                    purchase
-                                </v-list-tile-sub-title>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                    </v-list>
-                    <v-divider></v-divider>
-                    <v-list three-line subheader>
-                        <v-subheader>General</v-subheader>
-                        <v-list-tile avatar>
-                            <v-list-tile-action>
-                                <v-checkbox v-model="notifications"></v-checkbox>
-                            </v-list-tile-action>
-                            <v-list-tile-content>
-                                <v-list-tile-title>Notifications</v-list-tile-title>
-                                <v-list-tile-sub-title>Notify me about updates to apps or games that I downloaded
-                                </v-list-tile-sub-title>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile avatar>
-                            <v-list-tile-action>
-                                <v-checkbox v-model="sound"></v-checkbox>
-                            </v-list-tile-action>
-                            <v-list-tile-content>
-                                <v-list-tile-title>Sound</v-list-tile-title>
-                                <v-list-tile-sub-title>Auto-update apps at any time. Data charges may apply
-                                </v-list-tile-sub-title>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile avatar>
-                            <v-list-tile-action>
-                                <v-checkbox v-model="widgets"></v-checkbox>
-                            </v-list-tile-action>
-                            <v-list-tile-content>
-                                <v-list-tile-title>Auto-add widgets</v-list-tile-title>
-                                <v-list-tile-sub-title>Automatically add home screen widgets</v-list-tile-sub-title>
-                            </v-list-tile-content>
-                        </v-list-tile>
-                    </v-list>
-                </v-card>
-            </v-dialog>
-        </v-layout>
         <v-card>
             <v-card-title>
                 <v-btn color="primary" v-bind:to="{name:'CreateMessage'}">
@@ -85,6 +17,7 @@
                 ></v-text-field>
             </v-card-title>
             <v-data-table
+                    disable-initial-sort
                     :headers="headers"
                     :items="mails"
                     :search="search"
@@ -123,10 +56,6 @@
                     {text: 'Управление', sortable: false,}
                 ],
                 mails: [],
-                dialog: false,
-                notifications: false,
-                sound: true,
-                widgets: false
             }
         },
         created() {
@@ -140,6 +69,7 @@
                         if (item.name == this.$store.state.Auth.name) {
                             item.name = 'Я';
                         }
+                        item.created_at = this.formatDate(new Date(item.created_at));
                     });
                 });
             },
@@ -147,9 +77,9 @@
                 const index = this.mails.indexOf(item);
                 let answer = confirm('Вы действительно хотите удалить это сообщение?');
                 if (answer) {
-                    axios.delete(`/api/news/` + item.id).then(response => {
-                        if (response.data.status == 'success') {
-                            this.news.splice(index, 1);
+                    axios.delete(`/deleteMail/` + item.id).then(response => {
+                        if (response.data.status) {
+                            this.mails.splice(index, 1);
                             this.$store.commit(
                                 "showInfo",
                                 response.data.message
@@ -161,9 +91,21 @@
             readMessage(item) {
                 axios.post(`/updateMail`, item).then(response => {
                     if (response.data.status) {
-                        this.$router.push('/view_message');
+                        this.$router.push({name:'ViewMessage',params:{item:item}});
                     }
                 });
+            },
+            formatDate(date) {
+                let dd = date.getDate();
+                if (dd < 10) dd = '0' + dd;
+
+                let mm = date.getMonth() + 1;
+                if (mm < 10) mm = '0' + mm;
+
+                let yy = date.getFullYear();
+                if (yy < 10) yy = '0' + yy;
+
+                return dd + '-' + mm + '-' + yy;
             }
 
         }

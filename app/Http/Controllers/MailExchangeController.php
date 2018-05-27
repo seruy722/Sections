@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\MailExchange;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class MailExchangeController extends Controller
 {
@@ -19,9 +20,10 @@ class MailExchangeController extends Controller
 
     public function mailsForUser(Request $request)
     {
-        $mails = MailExchange::where('email_from', $request->email)->orWhere('email_to',$request->email)->get();
+        $mails = MailExchange::where('email_from', $request->email)->orWhere('email_to', $request->email)->orderBy('created_at', 'DESC')->get();
         return response()->json($mails);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -43,10 +45,21 @@ class MailExchangeController extends Controller
     {
         $this->validate($request, [
             'email_to' => 'required|email',
+            'email_from' => 'required|email',
+            'subject'=>'max:255',
             'message' => 'required|max:1000'
         ]);
+
         MailExchange::create($request->all());
-//        Mail::to($request->email_to)->send(new MessageExchange($name, $email, $phone, $subject, $msg));
+
+        $data = $request->all();
+
+        Mail::send('sendMails', $data, function ($message) use ($data) {
+            $message->from($data['email_from']);
+            $message->to($data['email_to']);
+            $message->subject($data['subject']);
+        });
+        return response()->json(['status' => true, 'message' => 'Сообщение отправлено!']);
     }
 
     /**
@@ -82,9 +95,11 @@ class MailExchangeController extends Controller
     {
 
     }
-    public function updateMail(Request $request){
-        $mail = MailExchange::where('id',$request->id)->first();
-        if($mail){
+
+    public function updateMail(Request $request)
+    {
+        $mail = MailExchange::where('id', $request->id)->first();
+        if ($mail) {
             $mail->read_it = true;
             $mail->save();
         }
@@ -101,6 +116,10 @@ class MailExchangeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $mail = MailExchange::where('id', $id)->first();
+        if ($mail) {
+            $mail->delete();
+            return response()->json(['status' => true, 'message' => 'Сообщение удалено!']);
+        }
     }
 }
