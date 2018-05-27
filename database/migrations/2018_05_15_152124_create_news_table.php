@@ -19,8 +19,8 @@ class CreateNewsTable extends Migration
             $table->text('description');
             $table->text('content');
             $table->string('img_filename')->nullable();
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('sections_id')->unsigned();
+            $table->foreign('sections_id')->references('id')->on('sections');
             $table->boolean('active')->default(false);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

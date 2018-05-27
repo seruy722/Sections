@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Mail\MailClass;
 use Illuminate\Http\Request;
 use App\Schedules;
@@ -21,7 +22,7 @@ class SectionsController extends Controller
     public function index($id)
     {
         // $sections = Users::join('sections', 'sections.user_id', '=', 'users.id')->get();
-        $users = User::findOrFail($id);
+        $users = Sections::findOrFail($id);
 
         $origin = urlencode($users->address);
         $a = file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?address=.$origin.&key=AIzaSyB1Ths24pUitBJWCL2hVzX58hz4qMjsKGA");
@@ -31,12 +32,12 @@ class SectionsController extends Controller
 
         $news = $users->news()->paginate(10);
 
-        $monday = $users->schedules()->where('days_of_week', 'Monday')->get();
-        $tuesday = $users->schedules()->where('days_of_week', 'Tuesday')->get();
-        $wednesday = $users->schedules()->where('days_of_week', 'Wednesday')->get();
-        $thursday = $users->schedules()->where('days_of_week', 'Thursday')->get();
-        $friday = $users->schedules()->where('days_of_week', 'Friday')->get();
-        $saturday = $users->schedules()->where('days_of_week', 'Saturday')->get();
+        $monday = $users->schedules()->where('days_of_week', 'Monday')->orderBy('data_start', 'asc')->get();
+        $tuesday = $users->schedules()->where('days_of_week', 'Tuesday')->orderBy('data_start', 'asc')->get();
+        $wednesday = $users->schedules()->where('days_of_week', 'Wednesday')->orderBy('data_start', 'asc')->get();
+        $thursday = $users->schedules()->where('days_of_week', 'Thursday')->orderBy('data_start', 'asc')->get();
+        $friday = $users->schedules()->where('days_of_week', 'Friday')->orderBy('data_start', 'asc')->get();
+        $saturday = $users->schedules()->where('days_of_week', 'Saturday')->orderBy('data_start', 'asc')->get();
 
         return view('section', ['lat' => $lat, 'lng' => $lng, 'users' => $users, 'news' => $news,
             'monday' => $monday, 'tuesday' => $tuesday, 'wednesday' => $wednesday, 'thursday' => $thursday,
@@ -48,9 +49,12 @@ class SectionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function sections($id)
     {
-        //
+        $sections = Category::findOrFail($id);
+        // $sections = $category->sections();
+        return view('sections', ['sections' => $sections]);
+
     }
 
     /**

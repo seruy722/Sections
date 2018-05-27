@@ -8,8 +8,8 @@ class News extends Model
 {
     protected $fillable = ['title','description','content','img_filename','user_id','active','created_at'];
 
-    public function user()
+    public function sections()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class,'sections_id');
     }
 }

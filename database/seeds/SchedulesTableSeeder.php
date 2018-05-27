@@ -20,7 +20,7 @@ class SchedulesTableSeeder extends Seeder
                 'event_info' => $faker->text($maxNbChars = 100),
                 'data_start' => $t . ':00',
                 'data_end' => ($t+1) . ':00',
-                'user_id' => rand(1, 100),
+                'sections_id' => rand(1, 100),
             ]);
         }
     }

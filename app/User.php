@@ -23,20 +23,12 @@ class User extends Authenticatable
      */
     protected $hidden = ['password', 'remember_token'];
 
-    public function news()
-    {
-        return $this->hasMany(News::class,'user_id');
-    }
     
     protected $table='users';
 
     public function sections()
     {
-        return $this->hasOne('App\Sections','user_id');
+        return $this->hasMany('App\Sections','user_id');
     }
 
-    public function schedules()
-    {
-        return $this->hasMany(Schedules::class,'user_id');
-    }
 }

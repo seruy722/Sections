@@ -15,6 +15,9 @@ class SectionsTableSeeder extends Seeder
         for ($i = 1; $i <= 100; $i++) {
             DB::table('sections')->insert([
                 'user_id' => rand(1, 100),
+                'sections_name' => $faker->company,
+                'category_id' => rand(1, 9),
+                'address' => $faker->address,
                 'img_logo' => str_random(10) . '.jpg',
                 'img' => str_random(10) . '.jpg',
                 'info' => $faker->text($maxNbChars = 300),

@@ -13,14 +13,13 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-12 col-sm-12">
                         <div class="log"><img src="/images/passion.png" alt="filter"></div>
-                        <p class="text-justify">{{$users->sections->info}}.</p>
+                        <p class="text-justify">{{$users->info}}.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- About -->
-
     <!-- Schedule -->
     <div id="schedule" class="schedule">
         <div class="container">
@@ -55,9 +54,8 @@
                             <ul>
                                 <li class="events-group">
                                     <div class="top-info"><span>Понедельник</span></div>
-
                                     <ul>
-                                        <?php $i=0 ?>
+                                        <?php $i = 0 ?>
                                         @foreach ($monday as $day)
                                             <?php $i++; ?>
                                             <li class="single-event"
@@ -72,7 +70,7 @@
                                 <li class="events-group">
                                     <div class="top-info"><span>Вторник</span></div>
                                     <ul>
-                                        <?php $i=0 ?>
+                                        <?php $i = 0 ?>
                                         @foreach ($tuesday as $day)
                                             <?php $i++; ?>
                                             <li class="single-event"
@@ -88,7 +86,7 @@
                                     <div class="top-info"><span>Среда</span></div>
 
                                     <ul>
-                                        <?php $i=0 ?>
+                                        <?php $i = 0 ?>
                                         @foreach ($wednesday as $day)
                                             <?php $i++; ?>
                                             <li class="single-event"
@@ -103,7 +101,7 @@
                                 <li class="events-group">
                                     <div class="top-info"><span>Четверг</span></div>
                                     <ul>
-                                        <?php $i=0 ?>
+                                        <?php $i = 0 ?>
                                         @foreach ($thursday as $day)
                                             <?php $i++; ?>
                                             <li class="single-event"
@@ -118,7 +116,7 @@
                                 <li class="events-group">
                                     <div class="top-info"><span>Пятница</span></div>
                                     <ul>
-                                        <?php $i=0 ?>
+                                        <?php $i = 0 ?>
                                         @foreach ($friday as $day)
                                             <?php $i++; ?>
                                             <li class="single-event"
@@ -133,7 +131,7 @@
                                 <li class="events-group">
                                     <div class="top-info"><span>Суббота</span></div>
                                     <ul>
-                                        <?php $i=0 ?>
+                                        <?php $i = 0 ?>
                                         @foreach ($saturday as $day)
                                             <?php $i++; ?>
                                             <li class="single-event"
@@ -146,172 +144,171 @@
                                 </li>
                             </ul>
                         </div>
-
                         <!-- .cd-schedule -->
-
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /Schedule -->
+    </div>
+    <!-- /Schedule -->
 
-
-        <!-- News-->
-        <div id="news" class="news">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-md-12 col-sm-12">
-                        <div class=" container TitleSection">
-                            <header class="page-head">
-                                <h2>Новости</h2>
-                            </header>
-                        </div>
-                        <div class="row">
-                            <div class="imgSwitch">
-                                <div class="row">
-                                    @foreach($news as $list)
-                                        <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt graphic">
-                                            <div class="itemCont">
-                                                <a href="{{route('articles', $list->id)}}">
-                                                    <div class="thumb"><img class="img-responsive center-block"
-                                                                            alt="Blue Gate"
-                                                                            src="/images/img1.jpg"></div>
-                                                    <div class="itemInfo">
-                                                        <h4>{{$list->title}}</h4>
-                                                        <h6>{{$list->user->name}}</h6>
-                                                        <p>{{$list->description}}</p>
-                                                    </div>
-                                                </a>
-                                            </div>
+    <!-- News-->
+    <div id="news" class="news">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-sm-12">
+                    <div class=" container TitleSection">
+                        <header class="page-head">
+                            <h2>Новости</h2>
+                        </header>
+                    </div>
+                    <div class="row">
+                        <div class="imgSwitch">
+                            <div class="row">
+                                @foreach($news as $list)
+                                    <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt graphic">
+                                        <div class="itemCont">
+                                            <a href="{{route('articles', $list->id)}}">
+                                                <div class="thumb"><img class="img-responsive center-block"
+                                                                        alt="Blue Gate"
+                                                                        src="/images/img1.jpg"></div>
+                                                <div class="itemInfo">
+                                                    <h4>{{$list->title}}</h4>
+                                                    <h6>{{$list->sections->sections_name}}</h6>
+                                                    <p>{{$list->description}}</p>
+                                                </div>
+                                            </a>
                                         </div>
-                                    @endforeach
-                                </div>
-                                <div class="paginate">{{$news->links()}}</div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="paginate">{{$news->links()}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- News-->
+
+    <!--Contact -->
+    <div id="contact" class="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-sm-12">
+                    <div class=" container TitleSection">
+                        <header class="page-head">
+                            <h2>Контакты</h2>
+                        </header>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-7 col-sm-12">
+                            <div class="contact_wrap">
+                                <h3>Напишите нам:</h3>
+                                <form method="post" id="mail_form">
+                                    {{ csrf_field() }}
+                                    <div class="form-group">
+                                        <input type="text" size="50" name="name" id="name" value=""
+                                               class="form-control required" placeholder="Введите Ваше имя*"
+                                               required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" size="50" name="email" id="email" value=""
+                                               class="form-control required email" placeholder="Введите Ваш E-mail*"
+                                               required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="tel" pattern="[0-9]{10}" size="50" name="phone" id="phone"
+                                               value=""
+                                               class="form-control required phone"
+                                               placeholder="Введите номер телефона в формате +38 ХХX XXX XX XX*"
+                                               required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" size="50" name="subject" id="subject" value=""
+                                               class="form-control" placeholder="Введите тему сообщения"/>
+                                    </div>
+                                    <div class="form-group">
+                                          <textarea class="form-control required" name="msg" rows="6" id="message"
+                                                    name="message" placeholder="Введите текст сообщения*"
+                                                    required></textarea>
+                                    </div>
+                                    <input type="hidden" value="{{$users->user->email}}" name="imail"/>
+                                    <button type="submit" class="btn btn-primary goto">Отправить сообщение</button>
+                                </form>
+                            </div>
+                            <h4 id="modal" style="display: none;">Сообщение успешно отправлено!</h4>
+                        </div>
+
+                        <div class="col-xs-12 col-md-5 col-sm-12">
+                            <div class="jumbotron">
+                                <h3>Контактная информация:</h3>
+                                <address>
+                                    <strong>{{$users->sections_name}}</strong><br>
+                                    {{$users->address}}<br>
+                                    <strong>Телефон:</strong>{{$users->phone}}<br>
+                                </address>
+                                <address>
+                                    <strong>Email:</strong> <a
+                                            href="mailto:<?php echo($users->user->email);?>">{{$users->user->email}}</a><br>
+                                </address>
+                            </div>
+                            <div class="google">
+                                <div id="map"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <!-- /contact -->
 
-        <!--Contact -->
-        <div id="contact" class="contact">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-md-12 col-sm-12">
-                        <div class=" container TitleSection">
-                            <header class="page-head">
-                                <h2>Контакты</h2>
-                            </header>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-7 col-sm-12">
-                                <div class="contact_wrap">
-                                    <h3>Напишите нам:</h3>
-                                    <form method="post" id="mail_form">
-                                        {{ csrf_field() }}
-                                        <div class="form-group">
-                                            <input type="text" size="50" name="name" id="name" value=""
-                                                   class="form-control required" placeholder="Введите Ваше имя*"
-                                                   required/>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="email" size="50" name="email" id="email" value=""
-                                                   class="form-control required email" placeholder="Введите Ваш E-mail*"
-                                                   required/>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="tel" pattern="[0-9]{10}" size="50" name="phone" id="phone"
-                                                   value=""
-                                                   class="form-control required phone"
-                                                   placeholder="Введите номер телефона в формате +38 ХХX XXX XX XX*"
-                                                   required/>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="text" size="50" name="subject" id="subject" value=""
-                                                   class="form-control" placeholder="Введите тему сообщения"/>
-                                        </div>
-                                        <div class="form-group">
-                                        <textarea class="form-control required" name="msg" rows="6" id="message"
-                                                  name="message" placeholder="Введите текст сообщения*"
-                                                  required></textarea>
-                                        </div>
-                                        <input type="hidden" value="{{$users->email}}" name="imail"/>
-                                        <button type="submit" class="btn btn-primary goto">Отправить сообщение</button>
-                                    </form>
-                                </div>
-                                <h4 id="modal" style="display: none;">Сообщение успешно отправлено!</h4>
-                            </div>
-
-                            <div class="col-xs-12 col-md-5 col-sm-12">
-                                <div class="jumbotron">
-                                    <h3>Контактная информация:</h3>
-                                    <address>
-                                        <strong>{{$users->name}}</strong><br>
-                                        {{$users->address}}<br>
-                                        <strong>Телефон:</strong>{{$users->sections->phone}}<br>
-                                    </address>
-                                    <address>
-                                        <strong>Email:</strong> <a
-                                                href="mailto:<?php echo($users->email);?>">{{$users->email}}</a><br>
-                                    </address>
-                                </div>
-                                <div class="google">
-                                    <div id="map"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /contact -->
-
-        <script type="text/javascript"
-                src="//maps.googleapis.com/maps/api/js?key=AIzaSyB1Ths24pUitBJWCL2hVzX58hz4qMjsKGA"></script>
-        <script>
-            var map;
-            google.maps.event.addDomListener(window, "load", function () {
-                var map = new google.maps.Map(document.getElementById("map"), {
-                    center: new google.maps.LatLng(<?php echo $lat ?>, <?php echo $lng ?>),
-                    zoom: 14,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                });
-                var infoWindow = new google.maps.InfoWindow();
-
-                function createMarker(options, html) {
-                    var marker = new google.maps.Marker(options);
-                    if (html) {
-                        google.maps.event.addListener(marker, "click", function () {
-                            infoWindow.setContent(html);
-                            infoWindow.open(options.map, this);
-                        });
-                    }
-                    return marker;
-                }
-
-                var marker1 = createMarker({
-                    position: new google.maps.LatLng(<?php echo $lat ?>, <?php echo $lng ?>),
-                    map: map
-                }, "<h4><?php echo($users->name); ?></h4><p><?php echo($users->sections->phone); ?></p>");
-
+    <script type="text/javascript"
+            src="//maps.googleapis.com/maps/api/js?key=AIzaSyB1Ths24pUitBJWCL2hVzX58hz4qMjsKGA"></script>
+    <script>
+        var map;
+        google.maps.event.addDomListener(window, "load", function () {
+            var map = new google.maps.Map(document.getElementById("map"), {
+                center: new google.maps.LatLng(<?php echo $lat ?>, <?php echo $lng ?>),
+                zoom: 14,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
             });
-        </script>
-        <script>
-            $(document).ready(function () {
-                $('#mail_form').on('submit', function (e) {
-                    e.preventDefault();
+            var infoWindow = new google.maps.InfoWindow();
 
-                    $.ajax({
-                        type: 'POST',
-                        url: '/section/send',
-                        data: $('#mail_form').serialize(),
-                        success: function (result) {
-                            jQuery('#mail_form')[0].reset();
-                            document.getElementById('modal').style.display = "block";
-                        }
+            function createMarker(options, html) {
+                var marker = new google.maps.Marker(options);
+                if (html) {
+                    google.maps.event.addListener(marker, "click", function () {
+                        infoWindow.setContent(html);
+                        infoWindow.open(options.map, this);
                     });
+                }
+                return marker;
+            }
+
+            var marker1 = createMarker({
+                position: new google.maps.LatLng(<?php echo $lat ?>, <?php echo $lng ?>),
+                map: map
+            }, "<h4><?php echo($users->sections_name); ?></h4><p><?php echo($users->phone); ?></p>");
+
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#mail_form').on('submit', function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/section/send',
+                    data: $('#mail_form').serialize(),
+                    success: function (result) {
+                        jQuery('#mail_form')[0].reset();
+                        document.getElementById('modal').style.display = "block";
+                    }
                 });
             });
-        </script>
+        });
+    </script>
 @endsection

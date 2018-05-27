@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use Illuminate\Http\Request;
 use App\Schedules;
 use App\News;
@@ -17,39 +18,37 @@ class FrontController extends Controller
      */
     public function index()
     {
-        $monday = Schedules::join('users', 'users.id', '=', 'schedules.user_id')
+        $monday = Schedules::join('sections', 'sections.id', '=', 'schedules.sections_id')
             ->where('days_of_week', 'Monday')->orderBy('data_start', 'asc')->get()
             //  $monday = Schedules::where('days_of_week', 'Monday')->orderBy('data_start', 'asc')->get()
-            ->groupby('name');
+            ->groupby('sections_name');
 
-        $tuesday = Schedules::join('users', 'users.id', '=', 'schedules.user_id')
+        $tuesday = Schedules::join('sections', 'sections.id', '=', 'schedules.sections_id')
             ->where('days_of_week', 'Tuesday')->orderBy('data_start', 'asc')->get()
-            ->groupby('name');
+            ->groupby('sections_name');
 
-        $wednesday = Schedules::join('users', 'users.id', '=', 'schedules.user_id')
+        $wednesday = Schedules::join('sections', 'sections.id', '=', 'schedules.sections_id')
             ->where('days_of_week', 'Wednesday')->orderBy('data_start', 'asc')->get()
-            ->groupby('name');
-        $thursday = Schedules::join('users', 'users.id', '=', 'schedules.user_id')
+            ->groupby('sections_name');
+        $thursday = Schedules::join('sections', 'sections.id', '=', 'schedules.sections_id')
             ->where('days_of_week', 'Thursday')->orderBy('data_start', 'asc')->get()
-            ->groupby('name');
+            ->groupby('sections_name');
 
-        $friday = Schedules::join('users', 'users.id', '=', 'schedules.user_id')
+        $friday = Schedules::join('sections', 'sections.id', '=', 'schedules.sections_id')
             ->where('days_of_week', 'Friday')->orderBy('data_start', 'asc')->get()
-            ->groupby('name');
+            ->groupby('sections_name');
 
-        $saturday = Schedules::join('users', 'users.id', '=', 'schedules.user_id')
+        $saturday = Schedules::join('sections', 'sections.id', '=', 'schedules.sections_id')
             ->where('days_of_week', 'Saturday')->orderBy('data_start', 'asc')->get()
-            ->groupby('name');
+            ->groupby('sections_name');
 
         $news = News::orderBy('id', 'desc')->limit(10)->get();
 
-        $sections = Sections::join('users', 'users.id', '=', 'sections.user_id')
-            ->get()
-            ->groupby('category');
+        $category = Category::all();
 
         return view('index', ['monday' => $monday, 'tuesday' => $tuesday, 'wednesday' => $wednesday,
             'thursday' => $thursday, 'friday' => $friday, 'saturday' => $saturday, 'news' => $news,
-            'sections' => $sections]);
+            'category' => $category]);
     }
 
     /**
@@ -111,12 +110,10 @@ class FrontController extends Controller
             ->orWhere('description', 'LIKE', '%' . $q . '%')
             ->orWhere('content', 'LIKE', '%' . $q . '%')
             ->get();
-        $sections = Sections::where('category', 'LIKE', '%' . $q . '%')
-            ->orWhere('name', 'LIKE', '%' . $q . '%')
+        $sections = Sections::where('sections_name', 'LIKE', '%' . $q . '%')
             ->orWhere('info', 'LIKE', '%' . $q . '%')
-            ->join('users', 'users.id', '=', 'sections.user_id')
             ->get()
-            ->groupby('category');
+            ->groupby('sections_name');
         if ((count($sections) > 0) || (count($news) > 0))
             return view('search')->withDetail($sections)->withDetails($news)->withQuery($q);
         else

@@ -20,8 +20,8 @@ class CreateSchedulesTable extends Migration
             $table->text('event_info');
             $table->time('data_start');
             $table->time('data_end');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('sections_id')->unsigned();
+            $table->foreign('sections_id')->references('id')->on('sections');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });
