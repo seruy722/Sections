@@ -246,7 +246,7 @@
                                 <address>
                                     <strong>{{$users->sections_name}}</strong><br>
                                     {{$users->address}}<br>
-                                    <strong>Телефон:</strong>{{$users->phone}}<br>
+                                    <strong>Телефон:</strong>{{$users->user->phone}}<br>
                                 </address>
                                 <address>
                                     <strong>Email:</strong> <a
@@ -290,7 +290,7 @@
             var marker1 = createMarker({
                 position: new google.maps.LatLng(<?php echo $lat ?>, <?php echo $lng ?>),
                 map: map
-            }, "<h4><?php echo($users->sections_name); ?></h4><p><?php echo($users->phone); ?></p>");
+            }, "<h4><?php echo($users->sections_name); ?></h4><p><?php echo($users->user->phone); ?></p>");
 
         });
     </script>

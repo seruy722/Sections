@@ -33,13 +33,14 @@
                         </header>
                     </div>
                     <div class="row">
-                            <div class="sec_wrap_3 option3">
-                                @foreach($category as $cat)
+                        <div class="sec_wrap_3 option3">
+                            @foreach($category as $cat)
                                 <div class="col-xs-12 col-md-4 col-sm-12">
                                     <ul>
                                         <li>
                                             <div class="about_wrap_one">
-                                                <div class="hexagon"><a href="{{route('sections', $cat->id)}}"> <span class="mask"></span> <img
+                                                <div class="hexagon"><a href="{{route('sections', $cat->id)}}"> <span
+                                                                class="mask"></span> <img
                                                                 src="/images/content.jpg" alt="filter"> </a>
                                                 </div>
                                                 <div class="wrap">
@@ -49,8 +50,8 @@
                                         </li>
                                     </ul>
                                 </div>
-                                @endforeach
-                            </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
@@ -93,7 +94,9 @@
                                         <tbody>
                                         @foreach($monday as $day=>$a)
                                             <tr>
-                                                <th colspan="7">{{$day}}</th>
+                                                <th colspan="7">@foreach ($a as $b)<a
+                                                            href="{{route('section', $b->id)}}">@endforeach{{$day}}</a>
+                                                </th>
                                             </tr>
                                             @foreach($a as $b)
                                                 <tr>
@@ -123,7 +126,9 @@
                                         <tbody>
                                         @foreach($tuesday as $day=>$a)
                                             <tr>
-                                                <th colspan="7">{{$day}}</th>
+                                                <th colspan="7">@foreach ($a as $b)<a
+                                                            href="{{route('section', $b->id)}}">@endforeach{{$day}}</a>
+                                                </th>
                                             </tr>
                                             @foreach($a as $b)
                                                 <tr>
@@ -153,7 +158,9 @@
                                         <tbody>
                                         @foreach($wednesday as $day=>$a)
                                             <tr>
-                                                <th colspan="7">{{$day}}</th>
+                                                <th colspan="7">@foreach ($a as $b)<a
+                                                            href="{{route('section', $b->id)}}">@endforeach{{$day}}</a>
+                                                </th>
                                             </tr>
                                             @foreach($a as $b)
                                                 <tr>
@@ -183,7 +190,9 @@
                                         <tbody>
                                         @foreach($thursday as $day=>$a)
                                             <tr>
-                                                <th colspan="7">{{$day}}</th>
+                                                <th colspan="7">@foreach ($a as $b)<a
+                                                            href="{{route('section', $b->id)}}">@endforeach{{$day}}</a>
+                                                </th>
                                             </tr>
                                             @foreach($a as $b)
                                                 <tr>
@@ -213,7 +222,9 @@
                                         <tbody>
                                         @foreach($friday as $day=>$a)
                                             <tr>
-                                                <th colspan="7">{{$day}}</th>
+                                                <th colspan="7">@foreach ($a as $b)<a
+                                                            href="{{route('section', $b->id)}}">@endforeach{{$day}}</a>
+                                                </th>
                                             </tr>
                                             @foreach($a as $b)
                                                 <tr>
@@ -243,7 +254,9 @@
                                         <tbody>
                                         @foreach($saturday as $day=>$a)
                                             <tr>
-                                                <th colspan="7">{{$day}}</th>
+                                                <th colspan="7">@foreach ($a as $b)<a
+                                                            href="{{route('section', $b->id)}}">@endforeach{{$day}}</a>
+                                                </th>
                                             </tr>
                                             @foreach($a as $b)
                                                 <tr>
