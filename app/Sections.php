@@ -16,11 +16,11 @@ class Sections extends Model
 
     public function news()
     {
-        return $this->hasMany(News::class,'sections_id');
+        return $this->hasMany(News::class,'section_id');
     }
 
     public function schedules()
     {
-        return $this->hasMany(Schedules::class,'sections_id');
+        return $this->hasMany(Schedules::class,'section_id');
     }
 }

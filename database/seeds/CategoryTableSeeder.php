@@ -14,7 +14,7 @@ class CategoryTableSeeder extends Seeder
         $faker = Faker\Factory::create();
         for ($i = 1; $i <= 9; $i++) {
             DB::table('category')->insert([
-                'category_name' => $faker->title,
+                'name' => $faker->title,
             ]);
         }
     }

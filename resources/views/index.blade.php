@@ -44,7 +44,7 @@
                                                                 src="/images/content.jpg" alt="filter"> </a>
                                                 </div>
                                                 <div class="wrap">
-                                                    <h4>{{$cat->category_name}}</h4>
+                                                    <h4>{{$cat->name}}</h4>
                                                 </div>
                                             </div>
                                         </li>
@@ -101,8 +101,8 @@
                                             @foreach($a as $b)
                                                 <tr>
                                                     <td>{{$b->event_name}}</td>
-                                                    <td>{{$b->data_start}}</td>
-                                                    <td>{{$b->data_end}}</td>
+                                                    <td>{{$b->event_start}}</td>
+                                                    <td>{{$b->event_end}}</td>
                                                     <td>{{$b->event_info}}</td>
                                                 </tr>
                                             @endforeach
@@ -133,8 +133,8 @@
                                             @foreach($a as $b)
                                                 <tr>
                                                     <td>{{$b->event_name}}</td>
-                                                    <td>{{$b->data_start}}</td>
-                                                    <td>{{$b->data_end}}</td>
+                                                    <td>{{$b->event_start}}</td>
+                                                    <td>{{$b->event_end}}</td>
                                                     <td>{{$b->event_info}}</td>
                                                 </tr>
                                             @endforeach
@@ -165,8 +165,8 @@
                                             @foreach($a as $b)
                                                 <tr>
                                                     <td>{{$b->event_name}}</td>
-                                                    <td>{{$b->data_start}}</td>
-                                                    <td>{{$b->data_end}}</td>
+                                                    <td>{{$b->event_start}}</td>
+                                                    <td>{{$b->event_end}}</td>
                                                     <td>{{$b->event_info}}</td>
                                                 </tr>
                                             @endforeach
@@ -197,8 +197,8 @@
                                             @foreach($a as $b)
                                                 <tr>
                                                     <td>{{$b->event_name}}</td>
-                                                    <td>{{$b->data_start}}</td>
-                                                    <td>{{$b->data_end}}</td>
+                                                    <td>{{$b->event_start}}</td>
+                                                    <td>{{$b->event_end}}</td>
                                                     <td>{{$b->event_info}}</td>
                                                 </tr>
                                             @endforeach
@@ -229,8 +229,8 @@
                                             @foreach($a as $b)
                                                 <tr>
                                                     <td>{{$b->event_name}}</td>
-                                                    <td>{{$b->data_start}}</td>
-                                                    <td>{{$b->data_end}}</td>
+                                                    <td>{{$b->event_start}}</td>
+                                                    <td>{{$b->event_end}}</td>
                                                     <td>{{$b->event_info}}</td>
                                                 </tr>
                                             @endforeach
@@ -261,8 +261,8 @@
                                             @foreach($a as $b)
                                                 <tr>
                                                     <td>{{$b->event_name}}</td>
-                                                    <td>{{$b->data_start}}</td>
-                                                    <td>{{$b->data_end}}</td>
+                                                    <td>{{$b->event_start}}</td>
+                                                    <td>{{$b->event_end}}</td>
                                                     <td>{{$b->event_info}}</td>
                                                 </tr>
                                             @endforeach
@@ -303,7 +303,7 @@
                                                 </div>
                                                 <div class="itemInfo">
                                                     <h4>{{$list->title}}</h4>
-                                                    <h6>{{$list->sections->sections_name}}</h6>
+                                                    <h6>{{$list->sections->section_name}}</h6>
                                                     <p>{{$list->description}}</p>
                                                 </div>
                                             </a>

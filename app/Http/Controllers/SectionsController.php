@@ -32,12 +32,12 @@ class SectionsController extends Controller
 
         $news = $users->news()->paginate(10);
 
-        $monday = $users->schedules()->where('days_of_week', 'Monday')->orderBy('data_start', 'asc')->get();
-        $tuesday = $users->schedules()->where('days_of_week', 'Tuesday')->orderBy('data_start', 'asc')->get();
-        $wednesday = $users->schedules()->where('days_of_week', 'Wednesday')->orderBy('data_start', 'asc')->get();
-        $thursday = $users->schedules()->where('days_of_week', 'Thursday')->orderBy('data_start', 'asc')->get();
-        $friday = $users->schedules()->where('days_of_week', 'Friday')->orderBy('data_start', 'asc')->get();
-        $saturday = $users->schedules()->where('days_of_week', 'Saturday')->orderBy('data_start', 'asc')->get();
+        $monday = $users->schedules()->where('day_of_week', 'Monday')->orderBy('event_start', 'asc')->get();
+        $tuesday = $users->schedules()->where('day_of_week', 'Tuesday')->orderBy('event_start', 'asc')->get();
+        $wednesday = $users->schedules()->where('day_of_week', 'Wednesday')->orderBy('event_start', 'asc')->get();
+        $thursday = $users->schedules()->where('day_of_week', 'Thursday')->orderBy('event_start', 'asc')->get();
+        $friday = $users->schedules()->where('day_of_week', 'Friday')->orderBy('event_start', 'asc')->get();
+        $saturday = $users->schedules()->where('day_of_week', 'Saturday')->orderBy('event_start', 'asc')->get();
 
         return view('section', ['lat' => $lat, 'lng' => $lng, 'users' => $users, 'news' => $news,
             'monday' => $monday, 'tuesday' => $tuesday, 'wednesday' => $wednesday, 'thursday' => $thursday,

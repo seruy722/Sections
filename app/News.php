@@ -10,6 +10,6 @@ class News extends Model
 
     public function sections()
     {
-        return $this->belongsTo(User::class,'sections_id');
+        return $this->belongsTo(User::class,'section_id');
     }
 }

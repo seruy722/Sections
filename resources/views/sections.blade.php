@@ -18,7 +18,7 @@
                                                                 src="/images/content.jpg" alt="filter"> </a>
                                                 </div>
                                                 <div class="wrap">
-                                                    <h4>{{$section->sections_name}}</h4>
+                                                    <h4>{{$section->section_name}}</h4>
                                                 </div>
                                             </div>
                                         </li>

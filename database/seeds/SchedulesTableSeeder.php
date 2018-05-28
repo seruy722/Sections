@@ -15,12 +15,12 @@ class SchedulesTableSeeder extends Seeder
         for ($i = 1; $i <= 100; $i++) {
             $t=rand(8, 18);
             DB::table('schedules')->insert([
-                'days_of_week' => $faker->dayOfWeek(),
+                'day_of_week' => $faker->dayOfWeek(),
                 'event_name' => $faker->text($maxNbChars = 20),
                 'event_info' => $faker->text($maxNbChars = 100),
-                'data_start' => $t . ':00',
-                'data_end' => ($t+1) . ':00',
-                'sections_id' => rand(1, 100),
+                'event_start' => $t . ':00',
+                'event_end' => ($t+1) . ':00',
+                'section_id' => rand(1, 100),
             ]);
         }
     }

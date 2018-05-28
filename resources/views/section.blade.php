@@ -59,7 +59,7 @@
                                         @foreach ($monday as $day)
                                             <?php $i++; ?>
                                             <li class="single-event"
-                                                data-start={{$day->data_start}} data-end={{$day->data_end}} data-content="event-rowing-workout"
+                                                data-start={{$day->event_start}} data-end={{$day->event_end}} data-content="event-rowing-workout"
                                                 data-event="event-2">
                                                 <p><em class="event-name">Занятие <?php echo $i; ?></em></p>
                                             </li>
@@ -74,7 +74,7 @@
                                         @foreach ($tuesday as $day)
                                             <?php $i++; ?>
                                             <li class="single-event"
-                                                data-start={{$day->data_start}} data-end={{$day->data_end}} data-content="event-rowing-workout"
+                                                data-start={{$day->event_start}} data-end={{$day->event_end}} data-content="event-rowing-workout"
                                                 data-event="event-2">
                                                 <p><em class="event-name">Занятие <?php echo $i; ?></em></p>
                                             </li>
@@ -90,7 +90,7 @@
                                         @foreach ($wednesday as $day)
                                             <?php $i++; ?>
                                             <li class="single-event"
-                                                data-start={{$day->data_start}} data-end={{$day->data_end}} data-content="event-rowing-workout"
+                                                data-start={{$day->event_start}} data-end={{$day->event_end}} data-content="event-rowing-workout"
                                                 data-event="event-2">
                                                 <p><em class="event-name">Занятие <?php echo $i; ?></em></p>
                                             </li>
@@ -105,7 +105,7 @@
                                         @foreach ($thursday as $day)
                                             <?php $i++; ?>
                                             <li class="single-event"
-                                                data-start={{$day->data_start}} data-end={{$day->data_end}} data-content="event-rowing-workout"
+                                                data-start={{$day->event_start}} data-end={{$day->event_end}} data-content="event-rowing-workout"
                                                 data-event="event-2">
                                                 <p><em class="event-name">Занятие <?php echo $i; ?></em></p>
                                             </li>
@@ -120,7 +120,7 @@
                                         @foreach ($friday as $day)
                                             <?php $i++; ?>
                                             <li class="single-event"
-                                                data-start={{$day->data_start}} data-end={{$day->data_end}} data-content="event-rowing-workout"
+                                                data-start={{$day->event_start}} data-end={{$day->event_end}} data-content="event-rowing-workout"
                                                 data-event="event-2">
                                                 <p><em class="event-name">Занятие <?php echo $i; ?></em></p>
                                             </li>
@@ -135,7 +135,7 @@
                                         @foreach ($saturday as $day)
                                             <?php $i++; ?>
                                             <li class="single-event"
-                                                data-start={{$day->data_start}} data-end={{$day->data_end}} data-content="event-rowing-workout"
+                                                data-start={{$day->event_start}} data-end={{$day->event_end}} data-content="event-rowing-workout"
                                                 data-event="event-2">
                                                 <p><em class="event-name">Занятие <?php echo $i; ?></em></p>
                                             </li>
@@ -174,7 +174,7 @@
                                                                         src="/images/img1.jpg"></div>
                                                 <div class="itemInfo">
                                                     <h4>{{$list->title}}</h4>
-                                                    <h6>{{$list->sections->sections_name}}</h6>
+                                                    <h6>{{$list->sections->section_name}}</h6>
                                                     <p>{{$list->description}}</p>
                                                 </div>
                                             </a>
@@ -244,7 +244,7 @@
                             <div class="jumbotron">
                                 <h3>Контактная информация:</h3>
                                 <address>
-                                    <strong>{{$users->sections_name}}</strong><br>
+                                    <strong>{{$users->section_name}}</strong><br>
                                     {{$users->address}}<br>
                                     <strong>Телефон:</strong>{{$users->user->phone}}<br>
                                 </address>
@@ -290,7 +290,7 @@
             var marker1 = createMarker({
                 position: new google.maps.LatLng(<?php echo $lat ?>, <?php echo $lng ?>),
                 map: map
-            }, "<h4><?php echo($users->sections_name); ?></h4><p><?php echo($users->user->phone); ?></p>");
+            }, "<h4><?php echo($users->section_name); ?></h4><p><?php echo($users->user->phone); ?></p>");
 
         });
     </script>

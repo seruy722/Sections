@@ -15,13 +15,13 @@ class CreateSchedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('days_of_week');
+            $table->string('day_of_week');
             $table->string('event_name');
             $table->text('event_info');
-            $table->time('data_start');
-            $table->time('data_end');
-            $table->integer('sections_id')->unsigned();
-            $table->foreign('sections_id')->references('id')->on('sections');
+            $table->time('event_start');
+            $table->time('event_end');
+            $table->integer('section_id')->unsigned();
+            $table->foreign('section_id')->references('id')->on('sections');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });
