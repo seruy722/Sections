@@ -26,7 +26,6 @@ class CreateNewsTable extends Migration
 //            $table->timestamp('updated_at')->useCurrent();
             $table->timestamps();
         });
-        \Illuminate\Support\Facades\DB::statement('ALTER TABLE news ADD FULLTEXT search(title, description, content)');
     }
 
     /**
