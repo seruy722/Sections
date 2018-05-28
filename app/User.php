@@ -23,12 +23,16 @@ class User extends Authenticatable
      */
     protected $hidden = ['password', 'remember_token'];
 
-    
+
     protected $table='users';
 
     public function sections()
     {
         return $this->hasMany('App\Sections','user_id');
+    }
+    public function news()
+    {
+        return $this->hasManyThrough('App\News', 'App\Sections', 'user_id', 'section_id');
     }
 
 }

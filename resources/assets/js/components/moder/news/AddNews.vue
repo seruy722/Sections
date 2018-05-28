@@ -90,7 +90,7 @@
 
             </v-flex>
             <v-flex xs8>
-                <v-btn color="primary" dark @click="addItem">Сохранить
+                <v-btn color="primary" dark @click="addNews">Сохранить
                     <v-icon dark right>check_circle</v-icon>
                 </v-btn>
                 <v-btn color="red" dark @click="onUserNews">Отмена
@@ -110,7 +110,7 @@
                     description: null,
                     content: null,
                     img_filename: null,
-                    sections_id: null
+                    section_id: null
                 },
                 formData: {
                     displayFileName: null,
@@ -124,15 +124,17 @@
             }
         },
         created() {
-            axios.post(`/userSections`, {id: this.$store.state.Auth.id}).then(response => {
-                if (response.data.status) {
-                    let data = response.data.sections;
-                    this.sections = data;
-                    this.sectionsName = data.map(item => item.sections_name);
-                }
-            }).catch(error => {
-                this.errors = error.response.data.errors;
-            });
+            this.sections = this.$route.params.sections;
+            this.sectionsName = this.sections.map(item => item.section_name);
+            // axios.post(`/userSections`, {id: this.$store.state.Auth.id}).then(response => {
+            //     if (response.data.status) {
+            //         let data = response.data.sections;
+            //         this.sections = data;
+            //         this.sectionsName = data.map(item => item.sections_name);
+            //     }
+            // }).catch(error => {
+            //     this.errors = error.response.data.errors;
+            // });
         },
         computed: {
             readyToUpload() {
@@ -142,11 +144,11 @@
             }
         },
         methods: {
-            addItem() {
+            addNews() {
                 this.errors = {};
                 this.sections.forEach(item => {
-                    if (item.sections_name === this.select) {
-                        this.news.sections_id = item.id
+                    if (item.section_name === this.select) {
+                        this.news.section_id = item.id
 
                     }
                 });
@@ -155,7 +157,7 @@
                 data.append('title', this.news.title);
                 data.append('description', this.news.description);
                 data.append('content', this.news.content);
-                data.append('sections_id', this.news.sections_id);
+                data.append('section_id', this.news.section_id);
 
                 axios.post(`/api/addNews`, data).then(response => {
                     if (response.data.status) {

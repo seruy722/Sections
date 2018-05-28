@@ -28,7 +28,7 @@ const routes = [
     {path: "/news", component: News},
 
     {path: "/user_news", component: UserNews},
-    {path: "/add_news", component: AddNews},
+    {name:'AddNews',path: "/add_news", component: AddNews},
     {name:'EditNews',path: "/edit_news", component: EditNews},
     {name:'ResetPassword',path: "/reset_password", component: ResetPassword},
     {name:'UserMessages',path: "/user_messages", component: UserMessages},

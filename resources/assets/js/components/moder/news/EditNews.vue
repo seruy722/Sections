@@ -146,7 +146,7 @@
                     this.image = false;
                     let file = event.target.files[0];
                     this.news.file = file;
-                    this.news.img_filename = event.target.files[0].name;
+                    this.news.image_name = event.target.files[0].name;
                     this.formData.displayFileName =
                         event.target.files[0].name +
                         " (" +
@@ -169,7 +169,7 @@
                 return Math.round(size / 1024);
             },
             getPath() {
-                let path = "/images/" + this.news.img_filename;
+                let path = "/images/" + this.news.image_name;
                 let res = path.indexOf('.');
                 return (res != -1) ? path : this.image = false;
             },

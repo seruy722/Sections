@@ -85942,7 +85942,7 @@ if (false) {
 
 
 
-var routes = [{ path: "/controls", component: __WEBPACK_IMPORTED_MODULE_0__components_Console___default.a }, { path: "/settings", component: __WEBPACK_IMPORTED_MODULE_1__components_UploadFile___default.a }, { path: "/browse_files", component: __WEBPACK_IMPORTED_MODULE_2__components_BrowseFiles___default.a }, { path: "/register", component: __WEBPACK_IMPORTED_MODULE_3__components_Register___default.a }, { path: "/login", component: __WEBPACK_IMPORTED_MODULE_4__components_Login___default.a }, { path: "/profile", component: __WEBPACK_IMPORTED_MODULE_5__components_Profile___default.a }, { path: "/users", component: __WEBPACK_IMPORTED_MODULE_6__components_admin_Users___default.a }, { path: "/news", component: __WEBPACK_IMPORTED_MODULE_7__components_admin_News___default.a }, { path: "/user_news", component: __WEBPACK_IMPORTED_MODULE_8__components_moder_news_UserNews___default.a }, { path: "/add_news", component: __WEBPACK_IMPORTED_MODULE_9__components_moder_news_AddNews___default.a }, { name: 'EditNews', path: "/edit_news", component: __WEBPACK_IMPORTED_MODULE_10__components_moder_news_EditNews___default.a }, { name: 'ResetPassword', path: "/reset_password", component: __WEBPACK_IMPORTED_MODULE_11__components_ResetPassword___default.a }, { name: 'UserMessages', path: "/user_messages", component: __WEBPACK_IMPORTED_MODULE_13__components_moder_mails_UserMessages___default.a }, { name: 'CreateMessage', path: "/create_message", component: __WEBPACK_IMPORTED_MODULE_12__components_moder_mails_CreateMessage___default.a }, { name: 'ViewMessage', path: "/view_message", component: __WEBPACK_IMPORTED_MODULE_14__components_moder_mails_ViewMessage___default.a }, { name: 'ReplyMessage', path: "/reply_message", component: __WEBPACK_IMPORTED_MODULE_15__components_moder_mails_ReplyMessage___default.a }];
+var routes = [{ path: "/controls", component: __WEBPACK_IMPORTED_MODULE_0__components_Console___default.a }, { path: "/settings", component: __WEBPACK_IMPORTED_MODULE_1__components_UploadFile___default.a }, { path: "/browse_files", component: __WEBPACK_IMPORTED_MODULE_2__components_BrowseFiles___default.a }, { path: "/register", component: __WEBPACK_IMPORTED_MODULE_3__components_Register___default.a }, { path: "/login", component: __WEBPACK_IMPORTED_MODULE_4__components_Login___default.a }, { path: "/profile", component: __WEBPACK_IMPORTED_MODULE_5__components_Profile___default.a }, { path: "/users", component: __WEBPACK_IMPORTED_MODULE_6__components_admin_Users___default.a }, { path: "/news", component: __WEBPACK_IMPORTED_MODULE_7__components_admin_News___default.a }, { path: "/user_news", component: __WEBPACK_IMPORTED_MODULE_8__components_moder_news_UserNews___default.a }, { name: 'AddNews', path: "/add_news", component: __WEBPACK_IMPORTED_MODULE_9__components_moder_news_AddNews___default.a }, { name: 'EditNews', path: "/edit_news", component: __WEBPACK_IMPORTED_MODULE_10__components_moder_news_EditNews___default.a }, { name: 'ResetPassword', path: "/reset_password", component: __WEBPACK_IMPORTED_MODULE_11__components_ResetPassword___default.a }, { name: 'UserMessages', path: "/user_messages", component: __WEBPACK_IMPORTED_MODULE_13__components_moder_mails_UserMessages___default.a }, { name: 'CreateMessage', path: "/create_message", component: __WEBPACK_IMPORTED_MODULE_12__components_moder_mails_CreateMessage___default.a }, { name: 'ViewMessage', path: "/view_message", component: __WEBPACK_IMPORTED_MODULE_14__components_moder_mails_ViewMessage___default.a }, { name: 'ReplyMessage', path: "/reply_message", component: __WEBPACK_IMPORTED_MODULE_15__components_moder_mails_ReplyMessage___default.a }];
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_16_vue_router__["a" /* default */]({
     routes: routes,
@@ -89602,13 +89602,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             search: '',
-            headers: [{ text: 'Дата создания', value: 'created_at' }, { text: 'Заголовок', value: 'title' }, { text: 'Пользователь', value: 'user_name' }, { text: 'Управление', sortable: false }],
-            news: []
+            headers: [{ text: 'Дата создания', value: 'created_at' }, { text: 'Заголовок', value: 'title' }, { text: 'Секция', value: 'name' }, { text: 'Управление', sortable: false }],
+            news: [],
+            sections: []
         };
     },
     created: function created() {
@@ -89620,7 +89627,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.post('/api/userNews', { id: this.$store.state.Auth.id }).then(function (response) {
-                _this.news = response.data.data;
+                var news = response.data.news;
+                _this.sections = response.data.sections;
+                news.forEach(function (elem, index) {
+                    _this.sections.forEach(function (item, index) {
+                        if (elem.section_id === item.id) {
+                            elem.name = item.section_name;
+                        }
+                    });
+                });
+                _this.news = news;
             });
         },
         deleteItem: function deleteItem(item) {
@@ -89638,7 +89654,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         onAddNews: function onAddNews() {
-            this.$router.push("/add_news");
+            this.$router.push({ name: 'AddNews', params: { sections: this.sections } });
         }
     }
 });
@@ -89696,6 +89712,7 @@ var render = function() {
             "v-data-table",
             {
               attrs: {
+                "disable-initial-sort": "",
                 headers: _vm.headers,
                 items: _vm.news,
                 search: _vm.search
@@ -89709,7 +89726,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(props.item.title))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(props.item.user_name))]),
+                      _c("td", [_vm._v(_vm._s(props.item.name))]),
                       _vm._v(" "),
                       _c(
                         "td",
@@ -89762,6 +89779,19 @@ var render = function() {
             },
             [
               _c(
+                "template",
+                { slot: "no-data" },
+                [
+                  _c("v-alert", { attrs: { value: true, type: "info" } }, [
+                    _vm._v(
+                      "\n                    Нет данных!\n                "
+                    )
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
                 "v-alert",
                 {
                   attrs: {
@@ -89781,7 +89811,7 @@ var render = function() {
                 ]
               )
             ],
-            1
+            2
           )
         ],
         1
@@ -89965,7 +89995,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 description: null,
                 content: null,
                 img_filename: null,
-                sections_id: null
+                section_id: null
             },
             formData: {
                 displayFileName: null,
@@ -89979,19 +90009,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     created: function created() {
-        var _this = this;
-
-        axios.post('/userSections', { id: this.$store.state.Auth.id }).then(function (response) {
-            if (response.data.status) {
-                var data = response.data.sections;
-                _this.sections = data;
-                _this.sectionsName = data.map(function (item) {
-                    return item.sections_name;
-                });
-            }
-        }).catch(function (error) {
-            _this.errors = error.response.data.errors;
+        this.sections = this.$route.params.sections;
+        this.sectionsName = this.sections.map(function (item) {
+            return item.section_name;
         });
+        // axios.post(`/userSections`, {id: this.$store.state.Auth.id}).then(response => {
+        //     if (response.data.status) {
+        //         let data = response.data.sections;
+        //         this.sections = data;
+        //         this.sectionsName = data.map(item => item.sections_name);
+        //     }
+        // }).catch(error => {
+        //     this.errors = error.response.data.errors;
+        // });
     },
 
     computed: {
@@ -90000,13 +90030,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
-        addItem: function addItem() {
-            var _this2 = this;
+        addNews: function addNews() {
+            var _this = this;
 
             this.errors = {};
             this.sections.forEach(function (item) {
-                if (item.sections_name === _this2.select) {
-                    _this2.news.sections_id = item.id;
+                if (item.section_name === _this.select) {
+                    _this.news.section_id = item.id;
                 }
             });
             var data = new FormData();
@@ -90014,19 +90044,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             data.append('title', this.news.title);
             data.append('description', this.news.description);
             data.append('content', this.news.content);
-            data.append('sections_id', this.news.sections_id);
+            data.append('section_id', this.news.section_id);
 
             axios.post('/api/addNews', data).then(function (response) {
                 if (response.data.status) {
-                    _this2.$store.commit("showInfo", response.data.message);
-                    _this2.onUserNews();
+                    _this.$store.commit("showInfo", response.data.message);
+                    _this.onUserNews();
                 }
             }).catch(function (error) {
-                _this2.errors = error.response.data.errors;
+                _this.errors = error.response.data.errors;
             });
         },
         onFileSelected: function onFileSelected(event) {
-            var _this3 = this;
+            var _this2 = this;
 
             delete this.errors.fupload;
             if (event.target.files && event.target.files.length) {
@@ -90036,7 +90066,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    _this3.formData.uploadFileData = e.target.result;
+                    _this2.formData.uploadFileData = e.target.result;
                 };
                 reader.readAsDataURL(file);
             }
@@ -90291,7 +90321,7 @@ var render = function() {
                 "v-btn",
                 {
                   attrs: { color: "primary", dark: "" },
-                  on: { click: _vm.addItem }
+                  on: { click: _vm.addNews }
                 },
                 [
                   _vm._v("Сохранить\n                "),
@@ -90535,7 +90565,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.image = false;
                 var file = event.target.files[0];
                 this.news.file = file;
-                this.news.img_filename = event.target.files[0].name;
+                this.news.image_name = event.target.files[0].name;
                 this.formData.displayFileName = event.target.files[0].name + " (" + this.calcSize(file.size) + "Kb)";
 
                 var reader = new FileReader();
@@ -90552,7 +90582,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return Math.round(size / 1024);
         },
         getPath: function getPath() {
-            var path = "/images/" + this.news.img_filename;
+            var path = "/images/" + this.news.image_name;
             var res = path.indexOf('.');
             return res != -1 ? path : this.image = false;
         },
@@ -91549,12 +91579,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             search: '',
-            headers: [{ text: 'Дата', value: 'created_at' }, { text: 'Заголовок', value: 'title' }, { text: 'Пользователь', value: 'user_name' }, { text: 'Управление', sortable: false }],
+            headers: [{ text: 'Дата', value: 'created_at' }, { text: 'Заголовок', value: 'subject' }, { text: 'Пользователь', value: 'name' }, { text: 'Управление', sortable: false }],
             mails: []
         };
     },
@@ -91739,6 +91774,19 @@ var render = function() {
             },
             [
               _c(
+                "template",
+                { slot: "no-data" },
+                [
+                  _c("v-alert", { attrs: { value: true, type: "info" } }, [
+                    _vm._v(
+                      "\n                    Нет данных!\n                "
+                    )
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
                 "v-alert",
                 {
                   attrs: {
@@ -91758,7 +91806,7 @@ var render = function() {
                 ]
               )
             ],
-            1
+            2
           )
         ],
         1

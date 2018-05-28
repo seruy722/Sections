@@ -15,6 +15,7 @@
                 ></v-text-field>
             </v-card-title>
             <v-data-table
+                    disable-initial-sort
                     :headers="headers"
                     :items="news"
                     :search="search"
@@ -22,7 +23,7 @@
                 <template slot="items" slot-scope="props">
                     <td>{{ props.item.created_at }}</td>
                     <td>{{ props.item.title }}</td>
-                    <td>{{ props.item.user_name }}</td>
+                    <td>{{ props.item.name }}</td>
                     <td>
                         <v-btn icon class="mx-0" v-bind:to="{name:'EditNews',params:{item:props.item}}">
                             <v-icon color="teal">edit</v-icon>
@@ -31,6 +32,11 @@
                             <v-icon color="pink">delete</v-icon>
                         </v-btn>
                     </td>
+                </template>
+                <template slot="no-data">
+                    <v-alert :value="true" type="info">
+                        Нет данных!
+                    </v-alert>
                 </template>
                 <v-alert slot="no-results" :value="true" color="error" icon="warning">
                     Ваш поиск по "{{ search }}" не дал результатов!.
@@ -49,10 +55,11 @@
                 headers: [
                     {text: 'Дата создания', value: 'created_at'},
                     {text: 'Заголовок', value: 'title'},
-                    {text: 'Пользователь', value: 'user_name'},
+                    {text: 'Секция', value: 'name'},
                     {text: 'Управление', sortable: false,}
                 ],
-                news: []
+                news: [],
+                sections: []
             }
         },
         created() {
@@ -61,7 +68,16 @@
         methods: {
             initialize() {
                 axios.post(`/api/userNews`, {id: this.$store.state.Auth.id}).then(response => {
-                    this.news = response.data.data;
+                    let news = response.data.news;
+                    this.sections = response.data.sections;
+                    news.forEach((elem, index) => {
+                        this.sections.forEach((item, index) => {
+                            if (elem.section_id === item.id) {
+                                elem.name = item.section_name;
+                            }
+                        });
+                    });
+                    this.news = news;
                 });
             },
             deleteItem(item) {
@@ -80,7 +96,7 @@
                 }
             },
             onAddNews() {
-                this.$router.push("/add_news");
+                this.$router.push({name:'AddNews',params:{sections:this.sections}});
             }
 
         }

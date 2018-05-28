@@ -35,6 +35,11 @@
                         </v-btn>
                     </td>
                 </template>
+                <template slot="no-data">
+                    <v-alert :value="true" type="info">
+                        Нет данных!
+                    </v-alert>
+                </template>
                 <v-alert slot="no-results" :value="true" color="error" icon="warning">
                     Ваш поиск по "{{ search }}" не дал результатов!.
                 </v-alert>
@@ -51,8 +56,8 @@
                 search: '',
                 headers: [
                     {text: 'Дата', value: 'created_at'},
-                    {text: 'Заголовок', value: 'title'},
-                    {text: 'Пользователь', value: 'user_name'},
+                    {text: 'Заголовок', value: 'subject'},
+                    {text: 'Пользователь', value: 'name'},
                     {text: 'Управление', sortable: false,}
                 ],
                 mails: [],

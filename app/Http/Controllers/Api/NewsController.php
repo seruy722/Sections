@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\NewsResource;
 use App\News;
+use App\User;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -22,8 +23,10 @@ class NewsController extends Controller
 
     public function userNews(Request $request)
     {
-        $news = News::where('user_id', $request->id)->orderBy('id', 'DESC')->get();
-        return NewsResource::collection($news);
+        $news = User::find($request->id)->news;
+        $sections = User::find($request->id)->sections;
+
+        return response()->json(['status' => true, 'news' => $news, 'sections' => $sections]);
     }
 
     /**
@@ -47,7 +50,7 @@ class NewsController extends Controller
         $this->validate($request, [
             'title' => 'required|min:10|max:255',
             'description' => 'required|min:10|max:1500',
-            'content' => 'max:2000',
+            'content' => 'max:3000',
             'fupload' => 'mimes:jpg,jpeg,png|dimensions:max:5120'
         ]);
 
@@ -56,13 +59,13 @@ class NewsController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'content' => $request->content,
-            'sections_id' => $request->sections_id
+            'section_id' => $request->section_id
         ];
 
         if (!is_string($file)) {
             $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
             $file->move('images', $filename);
-            $data['img_filename'] = $filename;
+            $data['image_name'] = $filename;
             News::create($data);
             return response()->json(['status' => true, 'message' => 'Запись успешно добавлена.']);
         } else {
@@ -119,7 +122,7 @@ class NewsController extends Controller
         $this->validate($request, [
             'title' => 'required|min:10|max:255',
             'description' => 'required|min:10|max:1500',
-            'content' => 'max:2000',
+            'content' => 'max:3000',
             'fupload' => 'mimes:jpg,jpeg,png|dimensions:max:5120'
         ]);
 
@@ -134,7 +137,7 @@ class NewsController extends Controller
         if (!is_string($file)) {
             $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
             $file->move('images', $filename);
-            $data['img_filename'] = $filename;
+            $data['image_name'] = $filename;
             if ($news) {
                 if (is_string($news->img_filename)) {
                     unlink(public_path() . '/images/' . $news->img_filename);
