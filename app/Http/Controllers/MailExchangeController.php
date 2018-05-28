@@ -47,13 +47,12 @@ class MailExchangeController extends Controller
             'email_to' => 'required|email',
             'email_from' => 'required|email',
             'subject'=>'max:255',
-            'message' => 'required|max:1000'
+            'msg' => 'required|max:1000'
         ]);
 
         MailExchange::create($request->all());
 
         $data = $request->all();
-
         Mail::send('sendMails', $data, function ($message) use ($data) {
             $message->from($data['email_from']);
             $message->to($data['email_to']);

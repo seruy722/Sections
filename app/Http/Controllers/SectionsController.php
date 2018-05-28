@@ -74,6 +74,14 @@ class SectionsController extends Controller
         Mail::to($imail)->send(new MailClass($name, $email, $phone, $subject, $msg));
     }
 
+
+    public function getUserSections(Request $request)
+    {
+        $sections = User::find($request->id)->sections;
+        return response()->json(['status'=>true,'sections'=>$sections]);
+
+    }
+
     /**
      * Display the specified resource.
      *
