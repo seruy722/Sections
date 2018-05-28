@@ -159,10 +159,10 @@
            });
        }).scroll();
    }
-   if (!document.location.hash) {
+   if (document.location.href != "{{url('/')}}") {
        $('.top-menu li.active').removeClass('active');
        $('.navbar-default').removeClass('ha-header-large');
-   }
+  }
 
 </script>
 </body>

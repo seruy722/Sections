@@ -8609,41 +8609,91 @@ label {
     text-align: center;
 }
 
-.cd-schedule .single-event[data-event="event-1"],
-.cd-schedule [data-event="event-1"] .header-bg {
+.cd-schedule .single-event[data-event="event-1"]:nth-child(odd),
+.cd-schedule [data-event="event-1"] .header-bg:nth-child(odd) {
     /* this is used to set a background color for the event and the modal window */
     background: #577F92;
 }
 
-.cd-schedule .single-event[data-event="event-1"]:hover {
-    background: #618da1;
+.cd-schedule .single-event[data-event="event-1"]:nth-child(even),
+.cd-schedule [data-event="event-1"] .header-bg:nth-child(even) {
+    /* this is used to set a background color for the event and the modal window */
+    background: #504F92;
 }
 
-.cd-schedule .single-event[data-event="event-2"],
-.cd-schedule [data-event="event-2"] .header-bg {
+.cd-schedule .single-event[data-event="event-1"]:hover {
+    background: #615da1;
+}
+
+.cd-schedule .single-event[data-event="event-2"]:nth-child(odd),
+.cd-schedule [data-event="event-2"] .header-bg:nth-child(odd){
     background: #443453;
 }
 
-.cd-schedule .single-event[data-event="event-2"]:hover {
-    background: #513e63;
+.cd-schedule .single-event[data-event="event-2"]:nth-child(even),
+.cd-schedule [data-event="event-2"] .header-bg:nth-child(even){
+    background: blue;
 }
 
-.cd-schedule .single-event[data-event="event-3"],
-.cd-schedule [data-event="event-3"] .header-bg {
+.cd-schedule .single-event[data-event="event-2"]:hover {
+    background: #516e63;
+}
+
+.cd-schedule .single-event[data-event="event-3"]:nth-child(odd),
+.cd-schedule [data-event="event-3"] .header-bg:nth-child(odd) {
     background: #A2B9B2;
 }
 
-.cd-schedule .single-event[data-event="event-3"]:hover {
-    background: #b1c4be;
+.cd-schedule .single-event[data-event="event-3"]:nth-child(even),
+.cd-schedule [data-event="event-3"] .header-bg:nth-child(even) {
+    background: #A9f1B5;
 }
 
-.cd-schedule .single-event[data-event="event-4"],
-.cd-schedule [data-event="event-4"] .header-bg {
+.cd-schedule .single-event[data-event="event-3"]:hover {
+    background: #b1c9bf;
+}
+
+.cd-schedule .single-event[data-event="event-4"]:nth-child(odd),
+.cd-schedule [data-event="event-4"] .header-bg:nth-child(odd) {
     background: #f6b067;
 }
 
+.cd-schedule .single-event[data-event="event-4"]:nth-child(even),
+.cd-schedule [data-event="event-4"] .header-bg:nth-child(even) {
+    background: #f1f067;
+}
+
 .cd-schedule .single-event[data-event="event-4"]:hover {
-    background: #f7bd7f;
+    background: #f7bd1f;
+}
+
+.cd-schedule .single-event[data-event="event-5"]:nth-child(odd),
+.cd-schedule [data-event="event-4"] .header-bg:nth-child(odd) {
+    background: #c1a067;
+}
+
+.cd-schedule .single-event[data-event="event-5"]:nth-child(even),
+.cd-schedule [data-event="event-4"] .header-bg:nth-child(even){
+    background: #c1e067;
+}
+
+.cd-schedule .single-event[data-event="event-5"]:hover {
+    background: #c1c999;
+}
+
+.cd-schedule .single-event[data-event="event-6"]:nth-child(odd),
+.cd-schedule [data-event="event-6"] .header-bg:nth-child(odd) {
+    background: #f16067;
+}
+
+.cd-schedule .single-event[data-event="event-6"]:nth-child(even),
+.cd-schedule [data-event="event-6"] .header-bg:nth-child(even){
+    background: #f14091;
+        
+}
+
+.cd-schedule .single-event[data-event="event-6"]:hover {
+    background: #f16047;
 }
 
 .cd-schedule .event-modal {
