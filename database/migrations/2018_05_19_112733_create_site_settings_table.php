@@ -19,8 +19,9 @@ class CreateSiteSettingsTable extends Migration
             $table->string('main_img')->default('nomain_img.jpg');
             $table->string('main_header')->default('Секции, Кружки, Студии');
             $table->string('copyright')->default('Copyright &copy; 2018 Copier. All rights reserved.');
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+//            $table->timestamp('created_at')->useCurrent();
+//            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamps();
         });
     }
 

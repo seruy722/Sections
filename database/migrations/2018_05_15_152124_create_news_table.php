@@ -22,8 +22,9 @@ class CreateNewsTable extends Migration
             $table->integer('section_id')->unsigned();
             $table->foreign('section_id')->references('id')->on('sections');
             $table->boolean('active')->default(false);
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+//            $table->timestamp('created_at')->useCurrent();
+//            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamps();
         });
         \Illuminate\Support\Facades\DB::statement('ALTER TABLE news ADD FULLTEXT search(title, description, content)');
     }

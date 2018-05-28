@@ -24,8 +24,9 @@ class CreateSectionsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('category_id')->unsigned()->nullable();
             $table->foreign('category_id')->references('id')->on('category');
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+//            $table->timestamp('created_at')->useCurrent();
+//            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamps();
         });
 
     }

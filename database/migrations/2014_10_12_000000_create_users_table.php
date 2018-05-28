@@ -23,8 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('photo')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+//            $table->timestamp('created_at')->useCurrent();
+//            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamps();
         });
     }
 
