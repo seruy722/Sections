@@ -56,7 +56,7 @@ class NewsController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'content' => $request->content,
-            'user_id' => $request->user_id
+            'sections_id' => $request->sections_id
         ];
 
         if (!is_string($file)) {

@@ -80,7 +80,7 @@ export default {
                 .post("/api/register", this.form)
                 .then(response => {
                     if (response.data.success) {
-                        this.$router.push("/");
+                        this.$router.push("/login");
                     }
                 })
                 .catch(error => {

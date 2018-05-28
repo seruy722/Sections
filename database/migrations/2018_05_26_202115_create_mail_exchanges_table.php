@@ -19,7 +19,7 @@ class CreateMailExchangesTable extends Migration
             $table->string('email_to');
             $table->string('email_from');
             $table->string('subject')->nullable();
-            $table->text('message')->nullable();
+            $table->text('msg')->nullable();
             $table->boolean('read_it')->default(false);
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');

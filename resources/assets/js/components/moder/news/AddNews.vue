@@ -2,11 +2,24 @@
     <v-container fluid>
         <v-layout row>
             <v-flex xs4>
+                <v-subheader>Секция</v-subheader>
+            </v-flex>
+            <v-flex xs8>
+                <v-select
+                        :items="sectionsName"
+                        v-model="select"
+                        label="Секция"
+                        :error-messages="checkError('select')"
+                ></v-select>
+            </v-flex>
+        </v-layout>
+
+        <v-layout row>
+            <v-flex xs4>
                 <v-subheader>Заголовок</v-subheader>
             </v-flex>
             <v-flex xs8>
                 <v-text-field
-                        name="input-1-3"
                         label="Заголовок"
                         single-line
                         v-model="news.title"
@@ -14,6 +27,7 @@
                 ></v-text-field>
             </v-flex>
         </v-layout>
+
         <v-layout row>
             <v-flex xs4>
                 <v-subheader>Изображение</v-subheader>
@@ -31,7 +45,8 @@
                             readonly
                     ></v-text-field>
 
-                    <input style="display:none" type="file" class="input-field-file" ref="fupload" @change="onFileSelected">
+                    <input style="display:none" type="file" class="input-field-file" ref="fupload"
+                           @change="onFileSelected">
 
                     <div v-if="readyToUpload">
                         <img :src="formData.uploadFileData" class="preview-image">
@@ -39,13 +54,14 @@
                 </div>
             </v-flex>
         </v-layout>
+
         <v-layout row>
             <v-flex xs4>
                 <v-subheader>Описание</v-subheader>
             </v-flex>
             <v-flex xs8>
                 <v-text-field
-                        name="input-2-3"
+                        name="input-3"
                         label="Описание"
                         single-line
                         v-model="news.description"
@@ -53,6 +69,7 @@
                 ></v-text-field>
             </v-flex>
         </v-layout>
+
         <v-layout row>
             <v-flex xs4>
                 <v-subheader>Контент</v-subheader>
@@ -67,6 +84,7 @@
                 ></v-text-field>
             </v-flex>
         </v-layout>
+
         <v-layout row>
             <v-flex xs4>
 
@@ -92,15 +110,29 @@
                     description: null,
                     content: null,
                     img_filename: null,
-                    user_id: null
+                    sections_id: null
                 },
                 formData: {
                     displayFileName: null,
                     uploadFileData: null,
                     file: null
                 },
-                errors:{}
+                errors: {},
+                select: null,
+                sectionsName: [],
+                sections: []
             }
+        },
+        created() {
+            axios.post(`/userSections`, {id: this.$store.state.Auth.id}).then(response => {
+                if (response.data.status) {
+                    let data = response.data.sections;
+                    this.sections = data;
+                    this.sectionsName = data.map(item => item.sections_name);
+                }
+            }).catch(error => {
+                this.errors = error.response.data.errors;
+            });
         },
         computed: {
             readyToUpload() {
@@ -112,13 +144,18 @@
         methods: {
             addItem() {
                 this.errors = {};
-                this.news.user_id = this.$store.state.Auth.id;
+                this.sections.forEach(item => {
+                    if (item.sections_name === this.select) {
+                        this.news.sections_id = item.id
+
+                    }
+                });
                 let data = new FormData();
-                data.append("fupload",  this.news.img_filename);
-                data.append('title',this.news.title);
-                data.append('description',this.news.description);
-                data.append('content',this.news.content);
-                data.append('user_id',this.news.user_id);
+                data.append("fupload", this.news.img_filename);
+                data.append('title', this.news.title);
+                data.append('description', this.news.description);
+                data.append('content', this.news.content);
+                data.append('sections_id', this.news.sections_id);
 
                 axios.post(`/api/addNews`, data).then(response => {
                     if (response.data.status) {
@@ -134,7 +171,7 @@
 
             },
             onFileSelected(event) {
-               delete this.errors.fupload;
+                delete this.errors.fupload;
                 if (event.target.files && event.target.files.length) {
                     let file = event.target.files[0];
                     this.news.img_filename = file;

@@ -37,8 +37,8 @@
                         name="input-4"
                         label="Сообщение"
                         textarea
-                        v-model="mail.message"
-                        :error-messages="checkError('message')"
+                        v-model="mail.msg"
+                        :error-messages="checkError('msg')"
                 ></v-text-field>
             </v-flex>
         </v-layout>
@@ -66,7 +66,7 @@
                     email_to: null,
                     email_from:null,
                     subject: null,
-                    message: null,
+                    msg: null,
                     name:null,
                     user_id:null
                 },

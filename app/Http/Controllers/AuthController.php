@@ -49,7 +49,7 @@ class AuthController extends Controller
         }
         return response()->json([
             'errors' => [
-                'email' => 'These credentials do not match our records.'
+                'email' => 'Email не зарегестрирован!'
             ]
         ], 422);
     }
@@ -66,11 +66,6 @@ class AuthController extends Controller
 
     public function editProfile(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|min:2|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|between:6,100|confirmed'
-        ]);
         $user = $request->user();
         if ($user) {
             return response()->json([
