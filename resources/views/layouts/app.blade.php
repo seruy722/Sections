@@ -65,10 +65,10 @@
                 @endguest
             </ul>
             <ul class="nav navbar-nav navbar-right top-menu">
-                <li class="active"><a href="http://sections.loc#home">Главная</a></li>
-                <li><a href="http://sections.loc#sections">Кружки</a></li>
-                <li><a href="http://sections.loc#schedule">Расписание</a></li>
-                <li><a href="http://sections.loc#news">Новости</a></li>
+                <li class="active"><a href="{{url('/#home')}}">Главная</a></li>
+                <li><a href="{{url('/#sections')}}">Кружки</a></li>
+                <li><a href="{{url('/#schedule')}}">Расписание</a></li>
+                <li><a href="{{url('/#news')}}">Новости</a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
@@ -135,7 +135,7 @@
 <script type="text/javascript">
    if (document.location.hash) {
 
-       $('a[href^="http://sections.loc#"]').bind('click.smoothscroll', function (e) {
+       $('a[href^="{{url('/#')}}"]').bind('click.smoothscroll', function (e) {
            e.preventDefault();
 
            var target = this.hash,

@@ -22,7 +22,7 @@ class CreateMailExchangesTable extends Migration
             $table->text('msg')->nullable();
             $table->boolean('read_it')->default(false);
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+//            $table->foreign('user_id')->references('id')->on('users');
 //            $table->timestamp('created_at')->useCurrent();
 //            $table->timestamp('updated_at')->useCurrent();
             $table->timestamps();
