@@ -43,9 +43,9 @@
 
                                     <v-layout row>
                                         <v-text-field
-                                                label="Адрес"
-                                                v-model="form.address"
-                                                :error-messages="checkError('address')"
+                                                label="Телефон"
+                                                v-model="form.phone"
+                                                :error-messages="checkError('phone')"
                                         ></v-text-field>
                                     </v-layout>
 
@@ -126,6 +126,7 @@
                     email: null,
                     password: null,
                     address: null,
+                    phone:null,
                     password_confirmation: null,
                     action: null
                 },

@@ -16,6 +16,7 @@ Route::resource('/createMail', 'MailExchangeController');
 Route::resource('/deleteMail', 'MailExchangeController');
 Route::post('/updateMail', 'MailExchangeController@updateMail');
 Route::post('/mailsForUser', 'MailExchangeController@mailsForUser');
+Route::resource('/add_image', 'ImageGalleryController');
 
 Route::view('/controls', 'controls');
 
@@ -38,7 +39,9 @@ Route::get('/sections/{id}', 'SectionsController@sections')->name('sections');
 Route::any('/section/send', 'SectionsController@mail')->name('mail');
 Route::post('/userSections', 'SectionsController@getUserSections');
 Route::resource('/addSections', 'SectionsController');
+Route::resource('/deleteSection', 'SectionsController');
+Route::post('/updateSection', 'SectionsController@update');
 
-Route::get('/galary', function () {
-    return view('galary');
+Route::get('/gallery', function () {
+    return view('gallery');
 });

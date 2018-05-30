@@ -1,14 +1,5 @@
 <template>
     <v-container fluid>
-        <v-layout row justify-center>
-            <v-dialog v-model="dialog" persistent>
-                <template>
-                    <div class="progress">
-                    <v-progress-circular :size="70" indeterminate color="primary"></v-progress-circular>
-                    </div>
-                </template>
-            </v-dialog>
-        </v-layout>
         <v-layout row>
             <v-flex xs4>
                 <v-subheader>Категория</v-subheader>
@@ -30,10 +21,11 @@
             </v-flex>
             <v-flex xs8>
                 <v-text-field
+                        name="input-1-3"
+                        required
                         label="Название"
                         single-line
                         v-model="section.section_name"
-                        required
                         :error-messages="checkError('section_name')"
                 ></v-text-field>
             </v-flex>
@@ -49,22 +41,21 @@
                         <v-icon>attach_file</v-icon>
                         Файл
                     </v-btn>
-
                     <v-text-field
                             v-model="formData.displayFileName"
-                            :error-messages="checkError('img_logo')"
+                            :error-messages="checkError('fupload')"
                             readonly
                     ></v-text-field>
 
                     <input style="display:none" type="file" class="input-field-file" ref="fupload"
                            @change="onFileSelected">
-                    <v-card-media
-                            v-if="readyToUpload"
-                            :src="formData.uploadFileData"
-                            height="70px"
-                            contain
-                    >
-                    </v-card-media>
+
+                    <div v-if="readyToUpload">
+                        <img :src="formData.uploadFileData" class="preview-image">
+                    </div>
+                    <div v-if="image">
+                        <img :src="getPath()" class="preview-image">
+                    </div>
                 </div>
             </v-flex>
         </v-layout>
@@ -75,8 +66,9 @@
             </v-flex>
             <v-flex xs8>
                 <v-text-field
-                        name="input-4"
-                        label="Описание"
+                        name="input-2-3"
+                        label="О нас"
+                        single-line
                         textarea
                         required
                         v-model="section.info"
@@ -90,6 +82,21 @@
                 <v-subheader>Адрес</v-subheader>
             </v-flex>
             <v-flex xs8>
+                <v-text-field
+                        name="input-2-3"
+                        label="Адрес"
+                        single-line
+                        v-model="section.address"
+                        readonly
+                ></v-text-field>
+            </v-flex>
+        </v-layout>
+
+        <v-layout row>
+            <v-flex xs4>
+                <v-subheader>Новый адрес</v-subheader>
+            </v-flex>
+            <v-flex xs8>
                 <div class="EventLocation__wrapper">
                     <div id="location">
                         <gmap-autocomplete></gmap-autocomplete>
@@ -100,14 +107,15 @@
                 </div>
             </v-flex>
         </v-layout>
-        <v-spacer></v-spacer>
+
         <v-layout row>
-            <v-flex xs4></v-flex>
+            <v-flex xs4>
+            </v-flex>
             <v-flex xs8>
-                <v-btn color="primary" dark @click="addSection">Сохранить
+                <v-btn color="primary" dark @click="updateSection">Обновить
                     <v-icon dark right>check_circle</v-icon>
                 </v-btn>
-                <v-btn color="red" dark @click="onUserNews">Отмена
+                <v-btn color="red" dark @click="onUserSections">Отмена
                     <v-icon dark right>block</v-icon>
                 </v-btn>
             </v-flex>
@@ -116,19 +124,11 @@
 </template>
 
 <script>
-
     export default {
         data() {
             return {
-                dialog: false,
-                message:null,
-                section: {
-                    section_name: '',
-                    info: '',
-                    img_logo: null,
-                    user_id: null,
-                    category_id: null
-                },
+                image: true,
+                section: {},
                 formData: {
                     displayFileName: null,
                     uploadFileData: null,
@@ -148,21 +148,29 @@
             }
         },
         created() {
+            this.section = this.$route.params.item;
             this.categories = this.$route.params.categories;
             this.sectionsCategory = this.categories.map(item => item.name);
+            this.categories.forEach(item => {
+                if (item.id === this.section.category_id) {
+                    this.select = item.name;
+                }
+            });
         },
         computed: {
             readyToUpload() {
                 return (
                     this.formData.displayFileName && this.formData.uploadFileData
                 );
-            },
+            }
         },
         methods: {
-            addSection() {
+            onUserSections() {
+                this.$router.push("/user_sections");
+            },
+            updateSection() {
                 this.errors = {};
                 const address = document.querySelector("#location>input[type=text]").value;
-                this.section.user_id = this.$store.state.Auth.id;
                 this.categories.forEach(item => {
                     if (item.name === this.select) {
                         this.section.category_id = item.id
@@ -170,29 +178,34 @@
                 });
 
                 let data = new FormData();
-                data.append("fupload", this.section.img_logo);
+                data.append("fupload", this.section.file);
                 data.append('section_name', this.section.section_name);
                 data.append('info', this.section.info);
                 data.append('category_id', this.section.category_id);
-                data.append('user_id', this.section.user_id);
                 data.append('address', address);
+                data.append('id', this.section.id);
 
-                axios.post(`/addSections`, data).then(response => {
-                    this.dialog=true;
+
+                axios.post(`/updateSection`, data).then(response => {
                     if (response.data.status) {
-                        this.message = response.data.message;
-                        setTimeout(this.onUserNews, 2000);
+                        this.$store.commit(
+                            "showInfo",
+                            response.data.message
+                        );
+                        setTimeout(this.onUserSections, 2000);
                     }
                 }).catch(error => {
-                    this.dialog = false;
                     this.errors = error.response.data.errors;
                 });
 
             },
+
             onFileSelected(event) {
+                this.image = false;
                 if (event.target.files && event.target.files.length) {
                     let file = event.target.files[0];
-                    this.section.img_logo = file;
+                    this.section.file = file;
+                    this.section.img_logo = event.target.files[0].name;
                     this.formData.displayFileName =
                         event.target.files[0].name +
                         " (" +
@@ -214,13 +227,10 @@
             calcSize(size) {
                 return Math.round(size / 1024);
             },
-            onUserNews() {
-                this.$store.commit(
-                    "showInfo",
-                    this.message
-                );
-                this.dialog = false;
-                this.$router.push("/user_sections");
+            getPath() {
+                let path = "/images/" + this.section.img_logo;
+                let res = path.indexOf('.');
+                return (res != -1) ? path : this.image = false;
             },
             checkError(field) {
                 return this.errors.hasOwnProperty(field) ? this.errors[field] : [];
@@ -247,11 +257,5 @@
         color: red;
         font-size: 12px;
         background-color: white !important;
-    }
-    .progress{
-        text-align: center;
-    }
-    .progress .progress-circular{
-        margin: 1rem;
     }
 </style>

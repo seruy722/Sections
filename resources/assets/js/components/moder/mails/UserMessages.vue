@@ -56,7 +56,7 @@
                 search: '',
                 headers: [
                     {text: 'Дата', value: 'created_at'},
-                    {text: 'Заголовок', value: 'subject'},
+                    {text: 'Тема', value: 'subject'},
                     {text: 'Пользователь', value: 'name'},
                     {text: 'Управление', sortable: false,}
                 ],

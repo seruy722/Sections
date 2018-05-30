@@ -25,10 +25,10 @@
                     <td>{{ props.item.section_name }}</td>
                     <td>{{ props.item.info }}</td>
                     <td>
-                        <v-btn icon class="mx-0" v-bind:to="{name:'EditNews',params:{item:props.item}}">
+                        <v-btn icon class="mx-0" v-bind:to="{name:'EditSection',params:{item:props.item,categories:categories}}">
                             <v-icon color="teal">edit</v-icon>
                         </v-btn>
-                        <v-btn icon class="mx-0" @click="deleteItem(props.item)">
+                        <v-btn icon class="mx-0" @click="deleteSection(props.item)">
                             <v-icon color="pink">delete</v-icon>
                         </v-btn>
                     </td>
@@ -55,7 +55,7 @@
                 headers: [
                     {text: 'Дата создания', value: 'created_at'},
                     {text: 'Название', value: 'section_name'},
-                    {text: 'Информация', value: 'info'},
+                    {text: 'О нас', value: 'info'},
                     {text: 'Управление', sortable: false,}
                 ],
                 sections: [],
@@ -72,13 +72,13 @@
                     this.categories = response.data.categories;
                 });
             },
-            deleteItem(item) {
-                const index = this.news.indexOf(item);
+            deleteSection(item) {
+                const index = this.sections.indexOf(item);
                 let answer = confirm('Вы действительно хотите удалить эту запись?');
                 if (answer) {
-                    axios.delete(`/api/news/` + item.id).then(response => {
-                        if (response.data.status == 'success') {
-                            this.news.splice(index, 1);
+                    axios.delete(`/deleteSection/`+item.id).then(response => {
+                        if (response.data.status) {
+                            this.sections.splice(index, 1);
                             this.$store.commit(
                                 "showInfo",
                                 response.data.message

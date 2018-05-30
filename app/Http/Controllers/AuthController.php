@@ -78,16 +78,12 @@ class AuthController extends Controller
 
     public function updateProfile(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|min:2|max:255',
-            'address'=>'max:255',
-        ]);
         $user = $request->user();
 
         switch ($request->action) {
             case 'photo':
                 $file = $request->profilephoto;
-                $filename = str_random(30);
+                $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
                 $file->move('users', $filename);
                 $user->photo = '/users/' . $filename;
                 $user->save();
@@ -99,11 +95,12 @@ class AuthController extends Controller
             case 'profile':
                 $this->validate($request, [
                     'name' => 'required|max:255',
-                    'address' => 'max:255'
+                    'address' => 'max:255',
+                    'phone'=>'regex:/^\+380\d{3}\d{2}\d{2}\d{2}$/'
                 ]);
                 if ($user) {
                     $user->name = $request->name;
-                    $user->address = $request->address;
+                    $user->phone = $request->phone;
                     $user->save();
 
                     return response()->json([

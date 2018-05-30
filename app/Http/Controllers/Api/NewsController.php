@@ -24,9 +24,18 @@ class NewsController extends Controller
     public function userNews(Request $request)
     {
         $news = User::find($request->id)->news;
-        $sections = User::find($request->id)->sections;
+        $sections = User::find($request->id)->sections->toArray();
+        foreach ($sections as $key => $elem) {
+            $sections[$key]['created_at'] = $this->needDates($elem['created_at']);
+        }
 
         return response()->json(['status' => true, 'news' => $news, 'sections' => $sections]);
+    }
+
+    public function needDates($date)
+    {
+        $newDate = date('d-m-Y', strtotime($date));
+        return $newDate;
     }
 
     /**
