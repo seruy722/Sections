@@ -47,11 +47,11 @@
 
             </v-flex>
             <v-flex xs8>
-                <v-btn color="primary" dark @click="sendMessage">Отправить
-                    <v-icon dark right>check_circle</v-icon>
+                <v-btn color="primary" dark @click="sendMessage">
+                    <v-icon dark left>send</v-icon>Отправить
                 </v-btn>
                 <v-btn color="red" dark @click="onUserMessages">Отмена
-                    <v-icon dark right>block</v-icon>
+                    <v-icon dark right>cancel</v-icon>
                 </v-btn>
             </v-flex>
         </v-layout>

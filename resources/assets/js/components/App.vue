@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <v-toolbar dark color="primary">
-            <v-toolbar-title>Админ панель</v-toolbar-title>
+            <v-toolbar-title>Панель управления</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn
                     flat

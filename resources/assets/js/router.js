@@ -14,6 +14,8 @@ import CreateMessage from "./components/moder/mails/CreateMessage";
 import UserMessages from "./components/moder/mails/UserMessages";
 import ViewMessage from "./components/moder/mails/ViewMessage";
 import ReplyMessage from "./components/moder/mails/ReplyMessage";
+import UserSections from "./components/moder/sections/UserSections";
+import AddSection from "./components/moder/sections/AddSection";
 
 import VueRouter from "vue-router";
 
@@ -35,6 +37,8 @@ const routes = [
     {name:'CreateMessage',path: "/create_message", component: CreateMessage},
     {name:'ViewMessage',path: "/view_message", component: ViewMessage},
     {name:'ReplyMessage',path: "/reply_message", component: ReplyMessage},
+    {name:'UserSections',path: "/user_sections", component: UserSections},
+    {name:'AddSection',path: "/add_section", component: AddSection},
 ];
 
 export default new VueRouter({

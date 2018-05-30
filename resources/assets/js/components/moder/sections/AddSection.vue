@@ -2,35 +2,37 @@
     <v-container fluid>
         <v-layout row>
             <v-flex xs4>
-                <v-subheader>Секция</v-subheader>
+                <v-subheader>Категория</v-subheader>
             </v-flex>
             <v-flex xs8>
                 <v-select
-                        :items="sectionsName"
+                        :items="sectionsCategory"
                         v-model="select"
-                        label="Секция"
-                        :error-messages="checkError('select')"
+                        label="Категория"
+                        required
+                        :error-messages="checkError('category_id')"
                 ></v-select>
             </v-flex>
         </v-layout>
 
         <v-layout row>
             <v-flex xs4>
-                <v-subheader>Заголовок</v-subheader>
+                <v-subheader>Название</v-subheader>
             </v-flex>
             <v-flex xs8>
                 <v-text-field
-                        label="Заголовок"
+                        label="Название"
                         single-line
-                        v-model="news.title"
-                        :error-messages="checkError('title')"
+                        v-model="section.section_name"
+                        required
+                        :error-messages="checkError('section_name')"
                 ></v-text-field>
             </v-flex>
         </v-layout>
 
         <v-layout row>
             <v-flex xs4>
-                <v-subheader>Изображение</v-subheader>
+                <v-subheader>Логотип</v-subheader>
             </v-flex>
             <v-flex xs8>
                 <div>
@@ -41,56 +43,59 @@
 
                     <v-text-field
                             v-model="formData.displayFileName"
-                            :error-messages="checkError('fupload')"
+                            :error-messages="checkError('img_logo')"
                             readonly
                     ></v-text-field>
 
                     <input style="display:none" type="file" class="input-field-file" ref="fupload"
                            @change="onFileSelected">
-
-                    <div v-if="readyToUpload">
-                        <img :src="formData.uploadFileData" class="preview-image">
-                    </div>
+                    <v-card-media
+                            v-if="readyToUpload"
+                            :src="formData.uploadFileData"
+                            height="70px"
+                            contain
+                    >
+                    </v-card-media>
                 </div>
             </v-flex>
         </v-layout>
 
         <v-layout row>
             <v-flex xs4>
-                <v-subheader>Описание</v-subheader>
-            </v-flex>
-            <v-flex xs8>
-                <v-text-field
-                        name="input-3"
-                        label="Описание"
-                        single-line
-                        v-model="news.description"
-                        :error-messages="checkError('description')"
-                ></v-text-field>
-            </v-flex>
-        </v-layout>
-
-        <v-layout row>
-            <v-flex xs4>
-                <v-subheader>Контент</v-subheader>
+                <v-subheader>О нас</v-subheader>
             </v-flex>
             <v-flex xs8>
                 <v-text-field
                         name="input-4"
-                        label="Контент"
+                        label="Описание"
                         textarea
-                        v-model="news.content"
-                        :error-messages="checkError('content')"
+                        required
+                        v-model="section.info"
+                        :error-messages="checkError('info')"
                 ></v-text-field>
             </v-flex>
         </v-layout>
 
         <v-layout row>
             <v-flex xs4>
-
+                <v-subheader>Адрес</v-subheader>
             </v-flex>
             <v-flex xs8>
-                <v-btn color="primary" dark @click="addNews">Сохранить
+                <div class="EventLocation__wrapper">
+                    <div id="location">
+                        <gmap-autocomplete></gmap-autocomplete>
+                        <div class="error">{{errors.address}}</div>
+                    </div>
+                    <input type="hidden" v-model="location.lat" name="lat">
+                    <input type="hidden" v-model="location.lng" name="lng">
+                </div>
+            </v-flex>
+        </v-layout>
+        <v-spacer></v-spacer>
+        <v-layout row>
+            <v-flex xs4></v-flex>
+            <v-flex xs8>
+                <v-btn color="primary" dark @click="addSection">Сохранить
                     <v-icon dark right>check_circle</v-icon>
                 </v-btn>
                 <v-btn color="red" dark @click="onUserNews">Отмена
@@ -102,15 +107,16 @@
 </template>
 
 <script>
+
     export default {
         data() {
             return {
-                news: {
-                    title: null,
-                    description: null,
-                    content: null,
-                    img_filename: null,
-                    section_id: null
+                section: {
+                    section_name: '',
+                    info: '',
+                    img_logo: null,
+                    user_id: null,
+                    category_id: null
                 },
                 formData: {
                     displayFileName: null,
@@ -119,38 +125,48 @@
                 },
                 errors: {},
                 select: null,
-                sectionsName: [],
-                sections: []
+                sectionsCategory: [],
+                categories: [],
+                location: {
+                    lat: 19.065236,
+                    lng: 72.995742
+                },
+                markers: [{
+                    position: {lat: 10.0, lng: 10.0}
+                }],
             }
         },
         created() {
-            this.sections = this.$route.params.sections;
-            this.sectionsName = this.sections.map(item => item.section_name);
+            this.categories = this.$route.params.categories;
+            this.sectionsCategory = this.categories.map(item => item.name);
         },
         computed: {
             readyToUpload() {
                 return (
                     this.formData.displayFileName && this.formData.uploadFileData
                 );
-            }
+            },
         },
         methods: {
-            addNews() {
+            addSection() {
                 this.errors = {};
-                this.sections.forEach(item => {
-                    if (item.section_name === this.select) {
-                        this.news.section_id = item.id
-
+                const address = document.querySelector("#location>input[type=text]").value;
+                this.section.user_id = this.$store.state.Auth.id;
+                this.categories.forEach(item => {
+                    if (item.name === this.select) {
+                        this.section.category_id = item.id
                     }
                 });
-                let data = new FormData();
-                data.append("fupload", this.news.img_filename);
-                data.append('title', this.news.title);
-                data.append('description', this.news.description);
-                data.append('content', this.news.content);
-                data.append('section_id', this.news.section_id);
 
-                axios.post(`/api/addNews`, data).then(response => {
+                let data = new FormData();
+                data.append("fupload", this.section.img_logo);
+                data.append('section_name', this.section.section_name);
+                data.append('info', this.section.info);
+                data.append('category_id', this.section.category_id);
+                data.append('user_id', this.section.user_id);
+                data.append('address', address);
+
+                axios.post(`/addSections`, data).then(response => {
                     if (response.data.status) {
                         this.$store.commit(
                             "showInfo",
@@ -164,10 +180,9 @@
 
             },
             onFileSelected(event) {
-                delete this.errors.fupload;
                 if (event.target.files && event.target.files.length) {
                     let file = event.target.files[0];
-                    this.news.img_filename = file;
+                    this.section.img_logo = file;
                     this.formData.displayFileName =
                         event.target.files[0].name +
                         " (" +
@@ -190,11 +205,31 @@
                 return Math.round(size / 1024);
             },
             onUserNews() {
-                this.$router.push("/user_news");
+                this.$router.push("/user_sections");
             },
             checkError(field) {
                 return this.errors.hasOwnProperty(field) ? this.errors[field] : [];
-            },
+            }
         }
     }
 </script>
+
+<style>
+    #location input {
+        display: block;
+        width: 100%;
+        height: 40px;
+        padding: 10px 15px;
+        border: 1px solid grey;
+        outline: none;
+    }
+
+    #location input:focus {
+        border: 2px solid #1976D2;
+    }
+    .error{
+        color: red;
+        font-size: 12px;
+        background-color:white !important;
+    }
+</style>

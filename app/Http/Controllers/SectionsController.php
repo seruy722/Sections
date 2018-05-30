@@ -78,16 +78,42 @@ class SectionsController extends Controller
     public function getUserSections(Request $request)
     {
         $sections = User::find($request->id)->sections;
-        return response()->json(['status'=>true,'sections'=>$sections]);
+        $categories = Category::all();
+        return response()->json(['status'=>true,'sections'=>$sections,'categories'=>$categories]);
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+    public function store(Request $request)
+    {
+
+        $this->validate($request, [
+            'section_name' => 'required|min:2|max:255',
+            'info'=>'required|min:2|max:2000',
+            'fupload'=>'mimes:jpg,jpeg,png|dimensions:max:5120',
+            'images'=>'jpeg, png, bmp, gif',
+            'category_id'=>'integer',
+            'address'=>'required|max:255',
+
+        ],[
+            'category_id.integer'=>'Поле категория обьзательное для заполнения.'
+        ]);
+        $data = $this->cleanData($request->all());
+        $file = $request->fupload;
+        $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
+        $file->move('images', $filename);
+        $data['img_logo']=$filename;
+        Sections::create($data);
+        return response()->json(['status' => true, 'message' => 'Запись успешно добавлена.']);
+    }
+
+    function cleanData($value) {
+        $arr = array_map("trim", $value);
+        $arr = array_map("strip_tags", $arr);
+        $arr = array_map("stripcslashes", $arr);
+        return $arr;
+    }
+
+
     public function show($id)
     {
         //

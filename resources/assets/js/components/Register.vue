@@ -5,13 +5,13 @@
               <v-flex sm4 offset-sm4>
                   <v-card>
                       <v-card-title>
-                          <h2>Create An Account</h2>
+                          <h2>Создать аккаунт</h2>
                       </v-card-title>
 
                       <v-card-text>
                           <v-layout row>
                               <v-text-field
-                                label="Name"
+                                label="Имя"
                                 v-model="form.name"
                                 :error-messages="checkError('name')"
                               ></v-text-field>
@@ -27,7 +27,7 @@
 
                           <v-layout row>
                               <v-text-field
-                                label="Password"
+                                label="Пароль"
                                 v-model="form.password"
                                 :error-messages="checkError('password')"
                                 type="password"
@@ -36,7 +36,7 @@
 
                           <v-layout row>
                               <v-text-field
-                                label="Confirm Password"
+                                label="Повторить пароль"
                                 v-model="form.password_confirmation"
                                 type="password"
                               ></v-text-field>
@@ -45,7 +45,7 @@
                           <v-layout row>
                               <v-flex xs12 class="text-xs-center">
                                   <v-btn @click="onRegister">
-                                      Register
+                                      Зарегистрироватся
                                   </v-btn>
                               </v-flex>
                           </v-layout>

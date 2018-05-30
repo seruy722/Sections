@@ -1,3 +1,5 @@
+// import Vue from "vue/types/index";
+
 window.Vue = require("vue");
 
 import VueRouter from "vue-router";
@@ -10,6 +12,15 @@ window.Vuetify = Vuetify;
 
 import moment from "moment";
 window.moment = moment;
+
+import * as VueGoogleMaps from 'vue2-google-maps';
+Vue.use(VueGoogleMaps, {
+    load: {
+        key: 'AIzaSyCPccyMrGiWtiY3xLhfuWAt5F57X9xGLmc',
+        libraries: 'places',
+    }
+});
+
 
 import Vuex from "vuex";
 import state from "./store/state";
