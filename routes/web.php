@@ -38,3 +38,7 @@ Route::get('/sections/{id}', 'SectionsController@sections')->name('sections');
 Route::any('/section/send', 'SectionsController@mail')->name('mail');
 Route::post('/userSections', 'SectionsController@getUserSections');
 Route::resource('/addSections', 'SectionsController');
+
+Route::get('/galary', function () {
+    return view('galary');
+});

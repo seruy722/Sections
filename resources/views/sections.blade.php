@@ -14,12 +14,26 @@
                                     <ul>
                                         <li>
                                             <div class="about_wrap_one">
-                                                <div class="hexagon"><a href="{{route('section', $section->id)}}"> <span class="mask"></span> <img
-                                                                src="/images/content.jpg" alt="filter"> </a>
-                                                </div>
-                                                <div class="wrap">
-                                                    <h4>{{$section->section_name}}</h4>
-                                                </div>
+                                                <a href="{{route('section', $section->id)}}">
+                                                    <div class="effect eff-17">
+                                                        <img
+                                                                src="/images/content.jpg" alt="filter">
+                                                        <div class="triangle-set">
+                                                            <div class="triangle triangle-1"></div>
+                                                            <div class="triangle triangle-2"></div>
+                                                            <div class="triangle triangle-3"></div>
+                                                            <div class="triangle triangle-4"></div>
+                                                        </div>
+                                                        <div class="caption">
+                                                            <p>Адрес: {{$section->address}}</p>
+                                                            <p>Телефон: {{$section->user->phone}}</p>
+                                                            <p>Email: {{$section->user->email}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="wrap">
+                                                        <h4>{{$section->section_name}}</h4>
+                                                    </div>
+                                                </a>
                                             </div>
                                         </li>
                                     </ul>
