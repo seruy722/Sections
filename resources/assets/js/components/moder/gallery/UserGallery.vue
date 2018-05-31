@@ -10,13 +10,14 @@
                         v-model="select"
                         label="Секция"
                         single-line
+                        required
                 ></v-select>
             </v-flex>
         </v-layout>
         <div>
             <v-btn @click="onButtonClick">
                 <v-icon>attach_file</v-icon>
-                Select File
+                Изображения
             </v-btn>
 
             <v-text-field
@@ -24,15 +25,15 @@
                     readonly
             ></v-text-field>
 
-            <input type="file" class="input-field-file" ref="fupload" @change="onFileChange">
+            <input type="file" class="input-field-file" ref="fupload" @change="onFileChange" multiple>
 
             <div v-if="readyToUpload">
                 <img :src="formData.uploadFileData" class="preview-image">
             </div>
 
-            <v-btn v-if="readyToUpload" @click="uploadImage">
+            <v-btn @click="uploadImage">
                 <v-icon left>cloud_upload</v-icon>
-                Upload File
+                Загрузить изображения
             </v-btn>
         </div>
     </v-container>
@@ -45,8 +46,8 @@
         data() {
             return {
                 sections: [],
-                select: null,
-                sectionsNames: null,
+                select: '',
+                sectionsNames: [],
                 formData: {
                     displayFileName: null,
                     uploadFileData: null,
@@ -71,19 +72,20 @@
         },
         methods: {
             onFileChange(event) {
+                console.log('dsfsdf');
                 if (event.target.files && event.target.files.length) {
-                    let file = event.target.files[0];
+                    let file = event.target.files;
                     this.formData.file = file;
-                    this.formData.displayFileName =
-                        event.target.files[0].name +
-                        " (" +
-                        this.calcSize(file.size) +
-                        "Kb)";
-                    let reader = new FileReader();
-                    reader.onload = e => {
-                        this.formData.uploadFileData = e.target.result;
-                    };
-                    reader.readAsDataURL(file);
+                    // this.formData.displayFileName =
+                    //     event.target.files[0].name +
+                    //     " (" +
+                    //     this.calcSize(file.size) +
+                    //     "Kb)";
+                    // let reader = new FileReader();
+                    // reader.onload = e => {
+                    //     this.formData.uploadFileData = e.target.result;
+                    // };
+                    // reader.readAsDataURL(file);
                 }
             },
             onButtonClick() {
@@ -93,13 +95,16 @@
                 return Math.round(size / 1024);
             },
             uploadImage() {
+                let files = this.formData.file;
                 this.sections.forEach(item => {
                     if (item.section_name === this.select) {
                         this.formData.section_id = item.id;
                     }
                 });
                 let data = new FormData();
-                data.append("fupload", this.formData.file);
+                for (var i = 0; i < files.length; i++) {
+                    data.append(i, files[i]);
+                }
                 data.append('section_id', this.formData.section_id);
                 axios.post("/add_image", data).then(response => {
                     if (response.data.status) {
@@ -113,7 +118,7 @@
                     }
 
                 });
-            },
+            }
         }
     };
 </script>

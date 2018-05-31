@@ -12,7 +12,7 @@ class NewsTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-        for ($i = 1; $i <= 100; $i++) {
+        for ($i = 1; $i <= 26; $i++) {
             DB::table('news')->insert([
                 'title' => $faker->text($maxNbChars = 20),
                 'description' => $faker->text($maxNbChars = 300),

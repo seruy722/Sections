@@ -12,7 +12,7 @@ class SectionsTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-        for ($i = 1; $i <= 100; $i++) {
+        for ($i = 1; $i <= 26; $i++) {
             DB::table('sections')->insert([
                 'user_id' => rand(1, 100),
                 'section_name' => $faker->company,

@@ -12,7 +12,7 @@ class SchedulesTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-        for ($i = 1; $i <= 100; $i++) {
+        for ($i = 1; $i <= 26; $i++) {
             $t=rand(8, 18);
             DB::table('schedules')->insert([
                 'day_of_week' => $faker->dayOfWeek(),
