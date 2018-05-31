@@ -27,7 +27,7 @@ class SectionsController extends Controller
         $lat = ($d->results[0]->geometry->location->lat);
         $lng = ($d->results[0]->geometry->location->lng);
 
-        $news = $users->news()->paginate(10);
+        $news = $users->news()->join('sections', 'sections.id', '=', 'news.section_id')->paginate(10);
 
         $monday = $users->schedules()->where('day_of_week', 'Monday')->orderBy('event_start', 'asc')->get();
         $tuesday = $users->schedules()->where('day_of_week', 'Tuesday')->orderBy('event_start', 'asc')->get();
