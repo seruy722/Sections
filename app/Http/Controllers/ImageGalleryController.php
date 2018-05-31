@@ -111,6 +111,7 @@ class ImageGalleryController extends Controller
     {
         $image = ImageGallery::findOrFail($id);
         if ($image) {
+            unlink(public_path() . '/images/' . $image->name);
             $image->delete();
             return response()->json(['status' => true, 'message' => 'Изображение успешно удалено.']);
         }

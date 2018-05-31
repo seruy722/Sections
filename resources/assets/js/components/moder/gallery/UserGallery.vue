@@ -17,7 +17,7 @@
         </v-layout>
 
         <div>
-            <v-subheader>Одно изображение не должно превышать 5мб.</v-subheader>
+            <v-subheader>Одно изображение не должно превышать размер 5мб.</v-subheader>
             <v-btn @click="onButtonClick">
                 <v-icon>attach_file</v-icon>
                 Изображения
