@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Schedules extends Model
 {
-    protected $table='schedules';
-
     public function sections() {
-        return $this->belongsTo('App\Sections', 'section_id');
+        return $this->belongsTo('App\Sections');
     }
 }
