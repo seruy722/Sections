@@ -126,4 +126,11 @@ class SectionsController extends Controller
     {
         //
     }
+
+    public function gallery($id)
+    {
+        $img = Sections::findOrFail($id);
+        return view('gallery', ['img' => $img]);
+    }
+
 }

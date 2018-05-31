@@ -23,4 +23,9 @@ protected $fillable =['section_name','info','img_logo','images','address','user_
     {
         return $this->hasMany(Schedules::class,'section_id');
     }
+
+    public function image()
+    {
+        return $this->hasMany(ImageGallery::class,'section_id');
+    }
 }

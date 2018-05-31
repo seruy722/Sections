@@ -190,7 +190,10 @@
         </div>
     </div>
     <!-- News-->
-
+    <div>
+    <a href="{{route('gallery', $users->id)}}">
+        <button type="button" class="btn btn-primary goto">ВСЕ ФОТОГРАФИИ</button>
+    </a></div>
     <!--Contact -->
     <div id="contact" class="contact">
         <div class="container">
