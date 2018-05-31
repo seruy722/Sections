@@ -18,6 +18,7 @@ export default {
         {path: "/user_messages", title: "Сообщения", auth: true, role: 'moder'},
         {path: "/user_sections", title: "Секции", auth: true, role: 'moder'},
         {path: "/user_gallery", title: "Галерея", auth: true, role: 'moder'},
+        {path: "/images_gallery", title: "Изображения", auth: true, role: 'moder'},
     ],
 
     authNav: [

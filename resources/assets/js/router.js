@@ -18,6 +18,7 @@ import UserSections from "./components/moder/sections/UserSections";
 import AddSection from "./components/moder/sections/AddSection";
 import EditSection from "./components/moder/sections/EditSection";
 import UserGallery from "./components/moder/gallery/UserGallery";
+import ImagesGallery from "./components/moder/gallery/ImagesGallery";
 
 import VueRouter from "vue-router";
 
@@ -43,6 +44,7 @@ const routes = [
     {name: 'AddSection', path: "/add_section", component: AddSection},
     {name: 'EditSection', path: "/edit_section", component: EditSection},
     {name: 'UserGallery', path: "/user_gallery", component: UserGallery},
+    {name: 'ImagesGallery', path: "/images_gallery", component: ImagesGallery},
 ];
 
 export default new VueRouter({

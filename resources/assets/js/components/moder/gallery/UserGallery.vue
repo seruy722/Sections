@@ -1,11 +1,12 @@
 <template>
     <v-container fluid>
         <v-layout row wrap>
-            <v-flex xs6>
+            <v-flex xs4>
                 <v-subheader>Секция</v-subheader>
             </v-flex>
-            <v-flex xs6>
+            <v-flex xs8>
                 <v-select
+                        :error-messages="checkError('section_id')"
                         :items="sectionsNames"
                         v-model="select"
                         label="Секция"
@@ -14,22 +15,23 @@
                 ></v-select>
             </v-flex>
         </v-layout>
+
         <div>
+            <v-subheader>Одно изображение не должно превышать 5мб.</v-subheader>
             <v-btn @click="onButtonClick">
                 <v-icon>attach_file</v-icon>
                 Изображения
             </v-btn>
 
             <v-text-field
-                    v-model="formData.displayFileName"
+                    :error-messages="checkError('item_0')"
+                    name="item_0"
+                    label="Изображения"
+                    single-line
                     readonly
             ></v-text-field>
 
             <input type="file" class="input-field-file" ref="fupload" @change="onFileChange" multiple>
-
-            <div v-if="readyToUpload">
-                <img :src="formData.uploadFileData" class="preview-image">
-            </div>
 
             <v-btn @click="uploadImage">
                 <v-icon left>cloud_upload</v-icon>
@@ -47,6 +49,7 @@
             return {
                 sections: [],
                 select: '',
+                errors: {},
                 sectionsNames: [],
                 formData: {
                     files: null,
@@ -71,29 +74,38 @@
                 this.$refs.fupload.click();
             },
             uploadImage() {
-                let files = this.formData.file;
+                let files = this.formData.files;
                 this.sections.forEach(item => {
                     if (item.section_name === this.select) {
                         this.formData.section_id = item.id;
                     }
                 });
+
                 let data = new FormData();
-                for (let i = 0; i < files.length; i++) {
-                    data.append(i, files[i]);
+                if (files) {
+                    for (let i = 0; i < files.length; i++) {
+                        data.append(`item_${i}`, files[i]);
+                    }
+                } else {
+                    data.append('item_0', '');
                 }
+
                 data.append('section_id', this.formData.section_id);
-                axios.post("/add_image", data).then(response => {
+
+                axios.post("/addImage", data).then(response => {
                     if (response.data.status) {
                         this.$store.commit("showInfo", response.data.message);
-                        this.formData = {
-                            files: null,
-                            section_id: null
-                        };
+                        this.formData.files = null;
+                        data = new FormData();
+                        this.errors = {};
                     }
 
                 }).catch(error => {
                     this.errors = error.response.data.errors;
                 });
+            },
+            checkError(field) {
+                return this.errors.hasOwnProperty(field) ? this.errors[field] : [];
             }
         }
     };
@@ -103,5 +115,4 @@
     .input-field-file {
         display: none;
     }
-
 </style>
