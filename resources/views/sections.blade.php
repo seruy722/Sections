@@ -26,8 +26,8 @@
                                                         </div>
                                                         <div class="caption">
                                                             <p>Адрес: {{$section->address}}</p>
-                                                            <p>Телефон: {{$section->user->phone}}</p>
-                                                            <p>Email: {{$section->user->email}}</p>
+                                                            <p>Телефон: {{optional($section->user)->phone}}</p>
+                                                            <p>Email: {{optional($section->user)->email}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="wrap">

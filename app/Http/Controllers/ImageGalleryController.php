@@ -52,7 +52,7 @@ class ImageGalleryController extends Controller
         ]);
         dd('ok');
 
-        $section_id = $request->section_id;
+
 //        $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
 //        $file->move('images', $filename);
 //        $newFile = [

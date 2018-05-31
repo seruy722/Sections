@@ -49,9 +49,7 @@
                 select: '',
                 sectionsNames: [],
                 formData: {
-                    displayFileName: null,
-                    uploadFileData: null,
-                    file: null,
+                    files: null,
                     section_id: null
                 }
             }
@@ -63,36 +61,14 @@
                 this.sectionsNames = this.sections.map(item => item.section_name);
             });
         },
-        computed: {
-            readyToUpload() {
-                return (
-                    this.formData.displayFileName && this.formData.uploadFileData
-                );
-            }
-        },
         methods: {
             onFileChange(event) {
-                console.log('dsfsdf');
                 if (event.target.files && event.target.files.length) {
-                    let file = event.target.files;
-                    this.formData.file = file;
-                    // this.formData.displayFileName =
-                    //     event.target.files[0].name +
-                    //     " (" +
-                    //     this.calcSize(file.size) +
-                    //     "Kb)";
-                    // let reader = new FileReader();
-                    // reader.onload = e => {
-                    //     this.formData.uploadFileData = e.target.result;
-                    // };
-                    // reader.readAsDataURL(file);
+                    this.formData.files = event.target.files;
                 }
             },
             onButtonClick() {
                 this.$refs.fupload.click();
-            },
-            calcSize(size) {
-                return Math.round(size / 1024);
             },
             uploadImage() {
                 let files = this.formData.file;
@@ -102,7 +78,7 @@
                     }
                 });
                 let data = new FormData();
-                for (var i = 0; i < files.length; i++) {
+                for (let i = 0; i < files.length; i++) {
                     data.append(i, files[i]);
                 }
                 data.append('section_id', this.formData.section_id);
@@ -110,13 +86,13 @@
                     if (response.data.status) {
                         this.$store.commit("showInfo", response.data.message);
                         this.formData = {
-                            displayFileName: null,
-                            uploadFileData: null,
-                            file: null,
+                            files: null,
                             section_id: null
                         };
                     }
 
+                }).catch(error => {
+                    this.errors = error.response.data.errors;
                 });
             }
         }
@@ -128,10 +104,4 @@
         display: none;
     }
 
-    .preview-image {
-        width: 250px;
-        padding: 15px;
-        border: 1px solid #999;
-        border-radius: 5px;
-    }
 </style>

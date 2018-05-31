@@ -96807,7 +96807,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.input-field-file {\n    display: none;\n}\n.preview-image {\n    width: 250px;\n    padding: 15px;\n    border: 1px solid #999;\n    border-radius: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.input-field-file {\n    display: none;\n}\n\n", ""]);
 
 // exports
 
@@ -96870,9 +96870,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             select: '',
             sectionsNames: [],
             formData: {
-                displayFileName: null,
-                uploadFileData: null,
-                file: null,
+                files: null,
                 section_id: null
             }
         };
@@ -96889,34 +96887,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
     },
 
-    computed: {
-        readyToUpload: function readyToUpload() {
-            return this.formData.displayFileName && this.formData.uploadFileData;
-        }
-    },
     methods: {
         onFileChange: function onFileChange(event) {
-            console.log('dsfsdf');
             if (event.target.files && event.target.files.length) {
-                var file = event.target.files;
-                this.formData.file = file;
-                // this.formData.displayFileName =
-                //     event.target.files[0].name +
-                //     " (" +
-                //     this.calcSize(file.size) +
-                //     "Kb)";
-                // let reader = new FileReader();
-                // reader.onload = e => {
-                //     this.formData.uploadFileData = e.target.result;
-                // };
-                // reader.readAsDataURL(file);
+                this.formData.files = event.target.files;
             }
         },
         onButtonClick: function onButtonClick() {
             this.$refs.fupload.click();
-        },
-        calcSize: function calcSize(size) {
-            return Math.round(size / 1024);
         },
         uploadImage: function uploadImage() {
             var _this2 = this;
@@ -96936,12 +96914,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (response.data.status) {
                     _this2.$store.commit("showInfo", response.data.message);
                     _this2.formData = {
-                        displayFileName: null,
-                        uploadFileData: null,
-                        file: null,
+                        files: null,
                         section_id: null
                     };
                 }
+            }).catch(function (error) {
+                _this2.errors = error.response.data.errors;
             });
         }
     }

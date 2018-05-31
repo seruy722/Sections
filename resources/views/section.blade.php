@@ -233,7 +233,7 @@
                                                     name="message" placeholder="Введите текст сообщения*"
                                                     required></textarea>
                                     </div>
-                                    <input type="hidden" value="{{$users->user->email}}" name="imail"/>
+                                    <input type="hidden" value="{{optional($users->user)->email}}" name="imail"/>
                                     <button type="submit" class="btn btn-primary goto">Отправить сообщение</button>
                                 </form>
                             </div>
@@ -246,11 +246,11 @@
                                 <address>
                                     <strong>{{$users->section_name}}</strong><br>
                                     {{$users->address}}<br>
-                                    <strong>Телефон:</strong>{{$users->user->phone}}<br>
+                                    <strong>Телефон:</strong>{{optional($users->user)->phone}}<br>
                                 </address>
                                 <address>
                                     <strong>Email:</strong> <a
-                                            href="mailto:<?php echo($users->user->email);?>">{{$users->user->email}}</a><br>
+                                            href="mailto:<?php echo(optional($users->user)->email);?>">{{optional($users->user)->email}}</a><br>
                                 </address>
                             </div>
                             <div class="google">
@@ -290,7 +290,7 @@
             var marker1 = createMarker({
                 position: new google.maps.LatLng(<?php echo $lat ?>, <?php echo $lng ?>),
                 map: map
-            }, "<h4><?php echo($users->section_name); ?></h4><p><?php echo($users->user->phone); ?></p>");
+            }, "<h4><?php echo($users->section_name); ?></h4><p><?php echo(optional($users->user)->phone); ?></p>");
 
         });
     </script>
