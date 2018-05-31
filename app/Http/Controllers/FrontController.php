@@ -42,7 +42,8 @@ class FrontController extends Controller
             ->where('day_of_week', 'Saturday')->orderBy('event_start', 'asc')->get()
             ->groupby('section_name');
 
-        $news = News::orderBy('id', 'desc')->limit(10)->get();
+        $news = News::join('sections', 'sections.id', '=', 'news.section_id')
+        ->orderBy('news.id', 'desc')->limit(10)->get();
 
         $category = Category::all();
 
@@ -80,7 +81,8 @@ class FrontController extends Controller
      */
     public function show($id)
     {
-        $post = News::where('id', $id)->firstOrFail();
+        $post = News::join('sections', 'sections.id', '=', 'news.section_id')
+        ->where('news.id', $id)->firstOrFail();
         return view('article', compact('post'));
     }
 
@@ -92,7 +94,8 @@ class FrontController extends Controller
      */
     public function all()
     {
-        $all = News::orderBy('id', 'desc')->paginate(10);
+        $all = News::join('sections', 'sections.id', '=', 'news.section_id')
+        ->orderBy('news.id', 'desc')->paginate(10);
         return view('articles', ['all' => $all]);
     }
 

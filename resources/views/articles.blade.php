@@ -38,7 +38,7 @@
                                                                         src="/images/img1.jpg"></div>
                                                 <div class="itemInfo">
                                                     <h4>{{$list->title}}</h4>
-                                                    <h6>{{$list->sections->section_name}}</h6>
+                                                    <h6>{{$list->section_name}}</h6>
                                                     <p>{{$list->description}}</p>
                                                 </div>
                                             </a>
