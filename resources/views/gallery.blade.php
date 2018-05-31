@@ -10,16 +10,15 @@
                             <h2>Галерея</h2>
                         </header>
                     </div>
-                    <div class="row">
-                        <div class="imgSwitch">
-                            <div class="row">
-                                <div class="gallery">
-                                    @foreach($img->image as $pic)
-                                    <div class="img-w">
+                    <div class="tz-gallery">
+                        <div class="row">
+                            @foreach($img->image as $pic)
+                                <div class="photo">
+                                    <a class="lightbox" href="/images/{{$pic->name}}">
                                         <img src="/images/{{$pic->name}}"
-                                             alt=""/></div>
-                                        @endforeach
-                            </div>
+                                             alt=""/></a>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

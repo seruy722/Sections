@@ -21,8 +21,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
             integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
             crossorigin="anonymous"></script>
-
-
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://rawgit.com/LeshikJanz/libraries/master/Bootstrap/baguetteBox.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -166,40 +166,9 @@
 
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
 <script>
-    $(function () {
-        $(".img-w").each(function () {
-            $(this).wrap("<div class='img-c'></div>")
-            let imgSrc = $(this).find("img").attr("src");
-            $(this).css('background-image', 'url(' + imgSrc + ')');
-        })
-
-
-        $(".img-c").click(function () {
-            let w = $(this).outerWidth()
-            let h = $(this).outerHeight()
-            let x = $(this).offset().left
-            let y = $(this).offset().top
-
-            $(".active").not($(this)).remove()
-            let copy = $(this).clone();
-            copy.insertAfter($(this)).height(h).width(w).delay(500).addClass("active")
-            $(".active").css('top', y - 8);
-            $(".active").css('left', x - 8);
-
-            setTimeout(function () {
-                copy.addClass("positioned")
-            }, 0)
-        })
-    })
-
-    $(document).on("click", ".img-c.active", function () {
-        let copy = $(this)
-        copy.removeClass("positioned active").addClass("postactive")
-        setTimeout(function () {
-            copy.remove();
-        }, 500)
-    })
+    baguetteBox.run('.tz-gallery');
 </script>
 </body>
 
