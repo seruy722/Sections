@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoryTable extends Migration
+class CreateImageInCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('category', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-//            $table->timestamp('created_at')->useCurrent();
-//            $table->timestamp('updated_at')->useCurrent();
-            $table->timestamps();
+        Schema::table('category', function (Blueprint $table) {
+            $table->string('image');
         });
     }
 
