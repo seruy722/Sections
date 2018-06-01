@@ -6,12 +6,17 @@
             </v-flex>
             <v-flex xs8>
                 <v-select
-                        :items="sectionsNames"
-                        v-model="select"
+                        :error-messages="checkError('section_id')"
+                        :items="sections"
+                        v-model="section"
                         label="Секция"
                         single-line
+                        :hint="`${section.name}`"
+                        item-text="name"
+                        item-value="id"
+                        return-object
+                        persistent-hint
                         required
-                        :error-messages="checkError('section_id')"
                 ></v-select>
             </v-flex>
         </v-layout>
@@ -134,7 +139,7 @@
                 piker1: false,
                 piker2: false,
                 sectionsNames: [],
-                select: null,
+                section: {id: '', name: ''},
                 event: '',
                 errors: {},
                 sections: [],
@@ -147,34 +152,37 @@
                     {day: 'Суббота', en: 'Saturday'}
                 ],
                 dayName: {day: '', en: ''},
+                schedule: null
             }
         },
         created() {
-            axios.post(`/userSections`, {id: this.$store.state.Auth.id}).then(response => {
-                this.sections = response.data.sections;
-                this.sectionsNames = this.sections.map(item => item.section_name);
+            this.sections = this.$route.params.sections;
+            this.schedule = this.$route.params.item;
+            this.section.id = this.schedule.section_id;
+            this.section.name = this.schedule.section_name;
+            this.event = this.schedule.event_name;
+            this.dayName.en = this.schedule.day_of_week;
+            this.time1 = this.schedule.event_start;
+            this.time2 = this.schedule.event_end;
+            this.dayOfWeek.forEach(item => {
+                if (item.en === this.schedule.day_of_week) {
+                    this.dayName.day = item.day;
+                }
             });
         },
         methods: {
             addSchedule() {
                 this.errors = {};
 
-                let sectionId = null;
-                this.sections.forEach(item => {
-                    if (item.section_name === this.select) {
-                        sectionId = item.id
-
-                    }
-                });
-
                 let data = new FormData();
-                data.append('section_id', sectionId);
+                data.append('id', this.schedule.id);
+                data.append('section_id', this.section.id);
                 data.append('day_of_week', this.dayName.en);
-                data.append('event_start', this.time1||'');
-                data.append('event_end', this.time2||'');
+                data.append('event_start', this.time1 || '');
+                data.append('event_end', this.time2 || '');
                 data.append('event_name', this.event);
 
-                axios.post('/addSchedule', data).then(response => {
+                axios.post('/editSchedule', data).then(response => {
                     if (response.data.status) {
                         this.$store.commit(
                             "showInfo",
@@ -188,7 +196,7 @@
                 });
             },
             onUserSchedules() {
-
+                this.$router.push("/schedule");
             },
             checkError(field) {
                 return this.errors.hasOwnProperty(field) ? this.errors[field] : [];

@@ -167,8 +167,8 @@ class SectionsController extends Controller
         ]);
 
         $data = $this->cleanData($request->all());
-        $section = Sections::findOrFail($data['id']);
-        if ($section) {
+        $section = Sections::find($data['id']);
+        if ($section->count()>0) {
             if (is_object($request->fupload)) {
                 $this->validate($request, [
                     'fupload' => 'mimes:jpg,jpeg,png|dimensions:max:5120',
@@ -201,7 +201,7 @@ class SectionsController extends Controller
     public function destroy($id)
     {
         $section = Sections::find($id);
-        if ($section) {
+        if ($section->count()>0) {
             if ($section->img_logo) {
                 unlink(public_path() . '/images/' . $section->img_logo);
             }

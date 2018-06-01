@@ -20,6 +20,9 @@ Route::resource('/addImage', 'ImageGalleryController');
 Route::resource('/deleteImage', 'ImageGalleryController');
 Route::post('/imagesGallery', 'ImageGalleryController@getImages');
 Route::resource('/addSchedule', 'ScheduleController');
+Route::post('/schedules', 'ScheduleController@getSchedules');
+Route::post('/editSchedule', 'ScheduleController@update');
+Route::resource('/daleteSchedule', 'ScheduleController');
 
 Route::view('/controls', 'controls');
 

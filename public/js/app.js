@@ -88511,7 +88511,11 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_moder_gallery_ImagesGallery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20__components_moder_gallery_ImagesGallery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_moder_schedule_Schedule__ = __webpack_require__(298);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_moder_schedule_Schedule___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21__components_moder_schedule_Schedule__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22_vue_router__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_moder_schedule_AddSchedule__ = __webpack_require__(303);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_moder_schedule_AddSchedule___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_22__components_moder_schedule_AddSchedule__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_moder_schedule_EditSchedule__ = __webpack_require__(308);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_moder_schedule_EditSchedule___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23__components_moder_schedule_EditSchedule__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24_vue_router__ = __webpack_require__(16);
 
 
 
@@ -88537,9 +88541,11 @@ if (false) {
 
 
 
-var routes = [{ path: "/controls", component: __WEBPACK_IMPORTED_MODULE_0__components_Console___default.a }, { path: "/settings", component: __WEBPACK_IMPORTED_MODULE_1__components_UploadFile___default.a }, { path: "/browse_files", component: __WEBPACK_IMPORTED_MODULE_2__components_BrowseFiles___default.a }, { path: "/register", component: __WEBPACK_IMPORTED_MODULE_3__components_Register___default.a }, { path: "/login", component: __WEBPACK_IMPORTED_MODULE_4__components_Login___default.a }, { path: "/profile", component: __WEBPACK_IMPORTED_MODULE_5__components_Profile___default.a }, { path: "/users", component: __WEBPACK_IMPORTED_MODULE_6__components_admin_Users___default.a }, { path: "/news", component: __WEBPACK_IMPORTED_MODULE_7__components_admin_News___default.a }, { path: "/user_news", component: __WEBPACK_IMPORTED_MODULE_8__components_moder_news_UserNews___default.a }, { name: 'AddNews', path: "/add_news", component: __WEBPACK_IMPORTED_MODULE_9__components_moder_news_AddNews___default.a }, { name: 'EditNews', path: "/edit_news", component: __WEBPACK_IMPORTED_MODULE_10__components_moder_news_EditNews___default.a }, { name: 'ResetPassword', path: "/reset_password", component: __WEBPACK_IMPORTED_MODULE_11__components_ResetPassword___default.a }, { name: 'UserMessages', path: "/user_messages", component: __WEBPACK_IMPORTED_MODULE_13__components_moder_mails_UserMessages___default.a }, { name: 'CreateMessage', path: "/create_message", component: __WEBPACK_IMPORTED_MODULE_12__components_moder_mails_CreateMessage___default.a }, { name: 'ViewMessage', path: "/view_message", component: __WEBPACK_IMPORTED_MODULE_14__components_moder_mails_ViewMessage___default.a }, { name: 'ReplyMessage', path: "/reply_message", component: __WEBPACK_IMPORTED_MODULE_15__components_moder_mails_ReplyMessage___default.a }, { name: 'UserSections', path: "/user_sections", component: __WEBPACK_IMPORTED_MODULE_16__components_moder_sections_UserSections___default.a }, { name: 'AddSection', path: "/add_section", component: __WEBPACK_IMPORTED_MODULE_17__components_moder_sections_AddSection___default.a }, { name: 'EditSection', path: "/edit_section", component: __WEBPACK_IMPORTED_MODULE_18__components_moder_sections_EditSection___default.a }, { name: 'UserGallery', path: "/user_gallery", component: __WEBPACK_IMPORTED_MODULE_19__components_moder_gallery_UserGallery___default.a }, { name: 'ImagesGallery', path: "/images_gallery", component: __WEBPACK_IMPORTED_MODULE_20__components_moder_gallery_ImagesGallery___default.a }, { name: 'Schedule', path: "/schedule", component: __WEBPACK_IMPORTED_MODULE_21__components_moder_schedule_Schedule___default.a }];
 
-/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_22_vue_router__["a" /* default */]({
+
+var routes = [{ path: "/controls", component: __WEBPACK_IMPORTED_MODULE_0__components_Console___default.a }, { path: "/settings", component: __WEBPACK_IMPORTED_MODULE_1__components_UploadFile___default.a }, { path: "/browse_files", component: __WEBPACK_IMPORTED_MODULE_2__components_BrowseFiles___default.a }, { path: "/register", component: __WEBPACK_IMPORTED_MODULE_3__components_Register___default.a }, { path: "/login", component: __WEBPACK_IMPORTED_MODULE_4__components_Login___default.a }, { path: "/profile", component: __WEBPACK_IMPORTED_MODULE_5__components_Profile___default.a }, { path: "/users", component: __WEBPACK_IMPORTED_MODULE_6__components_admin_Users___default.a }, { path: "/news", component: __WEBPACK_IMPORTED_MODULE_7__components_admin_News___default.a }, { path: "/user_news", component: __WEBPACK_IMPORTED_MODULE_8__components_moder_news_UserNews___default.a }, { name: 'AddNews', path: "/add_news", component: __WEBPACK_IMPORTED_MODULE_9__components_moder_news_AddNews___default.a }, { name: 'EditNews', path: "/edit_news", component: __WEBPACK_IMPORTED_MODULE_10__components_moder_news_EditNews___default.a }, { name: 'ResetPassword', path: "/reset_password", component: __WEBPACK_IMPORTED_MODULE_11__components_ResetPassword___default.a }, { name: 'UserMessages', path: "/user_messages", component: __WEBPACK_IMPORTED_MODULE_13__components_moder_mails_UserMessages___default.a }, { name: 'CreateMessage', path: "/create_message", component: __WEBPACK_IMPORTED_MODULE_12__components_moder_mails_CreateMessage___default.a }, { name: 'ViewMessage', path: "/view_message", component: __WEBPACK_IMPORTED_MODULE_14__components_moder_mails_ViewMessage___default.a }, { name: 'ReplyMessage', path: "/reply_message", component: __WEBPACK_IMPORTED_MODULE_15__components_moder_mails_ReplyMessage___default.a }, { name: 'UserSections', path: "/user_sections", component: __WEBPACK_IMPORTED_MODULE_16__components_moder_sections_UserSections___default.a }, { name: 'AddSection', path: "/add_section", component: __WEBPACK_IMPORTED_MODULE_17__components_moder_sections_AddSection___default.a }, { name: 'EditSection', path: "/edit_section", component: __WEBPACK_IMPORTED_MODULE_18__components_moder_sections_EditSection___default.a }, { name: 'UserGallery', path: "/user_gallery", component: __WEBPACK_IMPORTED_MODULE_19__components_moder_gallery_UserGallery___default.a }, { name: 'ImagesGallery', path: "/images_gallery", component: __WEBPACK_IMPORTED_MODULE_20__components_moder_gallery_ImagesGallery___default.a }, { name: 'Schedule', path: "/schedule", component: __WEBPACK_IMPORTED_MODULE_21__components_moder_schedule_Schedule___default.a }, { name: 'AddSchedule', path: "/add_schedule", component: __WEBPACK_IMPORTED_MODULE_22__components_moder_schedule_AddSchedule___default.a }, { name: 'EditSchedule', path: "/edit_schedule", component: __WEBPACK_IMPORTED_MODULE_23__components_moder_schedule_EditSchedule___default.a }];
+
+/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_24_vue_router__["a" /* default */]({
     routes: routes,
 
     mode: "history"
@@ -97865,11 +97871,12 @@ module.exports = function (css) {
 /* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(299)
 /* template */
-var __vue_template__ = null
+var __vue_template__ = __webpack_require__(300)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -97888,8 +97895,1623 @@ var Component = normalizeComponent(
 )
 Component.options.__file = "resources\\assets\\js\\components\\moder\\schedule\\Schedule.vue"
 
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-98ba3f30", Component.options)
+  } else {
+    hotAPI.reload("data-v-98ba3f30", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
 module.exports = Component.exports
 
+
+/***/ }),
+/* 299 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            search: '',
+            headers: [{ text: 'Дата создания', value: 'created_at' }, { text: 'День недели', value: 'day_of_week' }, { text: 'Событие', value: 'event_name' }, { text: 'Начало', value: 'event_start' }, { text: 'Конец', value: 'event_end' }, { text: 'Секция', value: 'section_name' }, { text: 'Управление', sortable: false }],
+            sections: [],
+            categories: [],
+            schedules: []
+        };
+    },
+    created: function created() {
+        this.initialize();
+    },
+
+    methods: {
+        initialize: function initialize() {
+            var _this = this;
+
+            axios.post('/schedules', { id: this.$store.state.Auth.id }).then(function (response) {
+                _this.sections = response.data.sections;
+                _this.schedules = response.data.schedules;
+                _this.schedules.forEach(function (item) {
+                    item.created_at = _this.formatDate(item.created_at);
+                    _this.sections.forEach(function (elem) {
+                        if (item.section_id === elem.id) {
+                            item.section_name = elem.name;
+                        }
+                    });
+                });
+            });
+        },
+        deleteSchedule: function deleteSchedule(item) {
+            var _this2 = this;
+
+            var index = this.schedules.indexOf(item);
+            var answer = confirm('Вы действительно хотите удалить эту запись?');
+            if (answer) {
+                axios.delete('/daleteSchedule/' + item.id).then(function (response) {
+                    if (response.data.status) {
+                        _this2.schedules.splice(index, 1);
+                        _this2.$store.commit("showInfo", response.data.message);
+                    }
+                });
+            }
+        },
+        onAddSchedule: function onAddSchedule() {
+            this.$router.push({ name: 'AddSchedule', params: { 'sections': this.sections } });
+        },
+        formatDate: function formatDate(date) {
+            var data = new Date(date);
+            var dd = data.getDate();
+            if (dd < 10) dd = '0' + dd;
+            var mm = data.getMonth() + 1;
+            if (mm < 10) mm = '0' + mm;
+            var yy = data.getFullYear();
+            if (yy < 10) yy = '0' + yy;
+
+            return dd + '.' + mm + '.' + yy;
+        }
+    }
+});
+
+/***/ }),
+/* 300 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "wrapper" },
+    [
+      _c(
+        "v-card",
+        [
+          _c(
+            "v-card-title",
+            [
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "primary" },
+                  on: { click: _vm.onAddSchedule }
+                },
+                [
+                  _vm._v("Добавить\n                "),
+                  _c("v-icon", [_vm._v("add")])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-spacer"),
+              _vm._v(" "),
+              _c("v-text-field", {
+                attrs: {
+                  "append-icon": "search",
+                  label: "Поиск",
+                  "single-line": "",
+                  "hide-details": ""
+                },
+                model: {
+                  value: _vm.search,
+                  callback: function($$v) {
+                    _vm.search = $$v
+                  },
+                  expression: "search"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-data-table",
+            {
+              attrs: {
+                "disable-initial-sort": "",
+                headers: _vm.headers,
+                items: _vm.schedules,
+                search: _vm.search
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "items",
+                  fn: function(props) {
+                    return [
+                      _c("td", [_vm._v(_vm._s(props.item.created_at))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(props.item.day_of_week))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(props.item.event_name))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(props.item.event_start))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(props.item.event_end))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(props.item.section_name))]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              staticClass: "mx-0",
+                              attrs: {
+                                icon: "",
+                                to: {
+                                  name: "EditSchedule",
+                                  params: {
+                                    item: props.item,
+                                    sections: _vm.sections
+                                  }
+                                }
+                              }
+                            },
+                            [
+                              _c("v-icon", { attrs: { color: "teal" } }, [
+                                _vm._v("edit")
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              staticClass: "mx-0",
+                              attrs: { icon: "" },
+                              on: {
+                                click: function($event) {
+                                  _vm.deleteSchedule(props.item)
+                                }
+                              }
+                            },
+                            [
+                              _c("v-icon", { attrs: { color: "pink" } }, [
+                                _vm._v("delete")
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  }
+                }
+              ])
+            },
+            [
+              _c(
+                "template",
+                { slot: "no-data" },
+                [
+                  _c("v-alert", { attrs: { value: true, type: "info" } }, [
+                    _vm._v(
+                      "\n                    Нет данных!\n                "
+                    )
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-alert",
+                {
+                  attrs: {
+                    slot: "no-results",
+                    value: true,
+                    color: "error",
+                    icon: "warning"
+                  },
+                  slot: "no-results"
+                },
+                [
+                  _vm._v(
+                    '\n                Ваш поиск по "' +
+                      _vm._s(_vm.search) +
+                      '" не дал результатов!.\n            '
+                  )
+                ]
+              )
+            ],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-98ba3f30", module.exports)
+  }
+}
+
+/***/ }),
+/* 301 */,
+/* 302 */,
+/* 303 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(304)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(306)
+/* template */
+var __vue_template__ = __webpack_require__(307)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\moder\\schedule\\AddSchedule.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2b0ec0d2", Component.options)
+  } else {
+    hotAPI.reload("data-v-2b0ec0d2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 304 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(305);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("4d641a5e", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2b0ec0d2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AddSchedule.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2b0ec0d2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AddSchedule.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 305 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.top {\n    margin-top: 30px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 306 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            time1: null,
+            time2: null,
+            piker1: false,
+            piker2: false,
+            sectionsNames: [],
+            section: { id: '', name: '' },
+            event: '',
+            errors: {},
+            sections: [],
+            dayOfWeek: [{ day: 'Понедельник', en: 'Monday' }, { day: 'Вторник', en: 'Tuesday' }, { day: 'Среда', en: 'Wednesday' }, { day: 'Четверг', en: 'Thursday' }, { day: 'Пятница', en: 'Friday' }, { day: 'Суббота', en: 'Saturday' }],
+            dayName: { day: '', en: '' }
+        };
+    },
+    created: function created() {
+        this.sections = this.$route.params.sections;
+    },
+
+    methods: {
+        addSchedule: function addSchedule() {
+            var _this = this;
+
+            this.errors = {};
+
+            var data = new FormData();
+            data.append('section_id', this.section.id);
+            data.append('day_of_week', this.dayName.en);
+            data.append('event_start', this.time1 || '');
+            data.append('event_end', this.time2 || '');
+            data.append('event_name', this.event);
+
+            axios.post('/addSchedule', data).then(function (response) {
+                if (response.data.status) {
+                    _this.$store.commit("showInfo", response.data.message);
+                    data = new FormData();
+                    _this.onUserSchedules();
+                }
+            }).catch(function (error) {
+                _this.errors = error.response.data.errors;
+            });
+        },
+        onUserSchedules: function onUserSchedules() {
+            this.$router.push("/schedule");
+        },
+        checkError: function checkError(field) {
+            return this.errors.hasOwnProperty(field) ? this.errors[field] : [];
+        }
+    }
+});
+
+/***/ }),
+/* 307 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    [
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs4: "" } },
+            [_c("v-subheader", [_vm._v("Секция")])],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs8: "" } },
+            [
+              _c("v-select", {
+                attrs: {
+                  "error-messages": _vm.checkError("section_id"),
+                  items: _vm.sections,
+                  label: "Секция",
+                  "single-line": "",
+                  hint: "" + _vm.section.name,
+                  "item-text": "name",
+                  "item-value": "id",
+                  "return-object": "",
+                  "persistent-hint": "",
+                  required: ""
+                },
+                model: {
+                  value: _vm.section,
+                  callback: function($$v) {
+                    _vm.section = $$v
+                  },
+                  expression: "section"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs4: "" } },
+            [_c("v-subheader", [_vm._v("Событие")])],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs8: "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  "error-messages": _vm.checkError("event_name"),
+                  label: "Событие",
+                  "single-line": "",
+                  required: ""
+                },
+                model: {
+                  value: _vm.event,
+                  callback: function($$v) {
+                    _vm.event = $$v
+                  },
+                  expression: "event"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs4: "" } },
+            [_c("v-subheader", [_vm._v("День недели")])],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs8: "" } },
+            [
+              _c("v-select", {
+                attrs: {
+                  "error-messages": _vm.checkError("day_of_week"),
+                  items: _vm.dayOfWeek,
+                  label: "День недели",
+                  "single-line": "",
+                  hint: "" + _vm.dayName.day,
+                  "item-text": "day",
+                  "item-value": "en",
+                  "return-object": "",
+                  "persistent-hint": "",
+                  required: ""
+                },
+                model: {
+                  value: _vm.dayName,
+                  callback: function($$v) {
+                    _vm.dayName = $$v
+                  },
+                  expression: "dayName"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", color: "blue" } },
+            [
+              _c("v-subheader", { staticClass: "justify-center" }, [
+                _vm._v("Время проведения:")
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs11: "", sm5: "" } },
+            [
+              _c(
+                "v-menu",
+                {
+                  ref: "menu",
+                  attrs: {
+                    "close-on-content-click": false,
+                    "nudge-right": 40,
+                    lazy: "",
+                    transition: "scale-transition",
+                    "offset-y": "",
+                    "full-width": "",
+                    "max-width": "290px",
+                    "min-width": "290px"
+                  },
+                  model: {
+                    value: _vm.piker1,
+                    callback: function($$v) {
+                      _vm.piker1 = $$v
+                    },
+                    expression: "piker1"
+                  }
+                },
+                [
+                  _c("v-text-field", {
+                    attrs: {
+                      slot: "activator",
+                      label: "Начало",
+                      "prepend-icon": "access_time",
+                      readonly: "",
+                      required: "",
+                      "error-messages": _vm.checkError("event_start")
+                    },
+                    slot: "activator",
+                    model: {
+                      value: _vm.time1,
+                      callback: function($$v) {
+                        _vm.time1 = $$v
+                      },
+                      expression: "time1"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-time-picker", {
+                    attrs: { format: "24hr" },
+                    on: {
+                      change: function($event) {
+                        _vm.$refs.menu.save(_vm.time1)
+                      }
+                    },
+                    model: {
+                      value: _vm.time1,
+                      callback: function($$v) {
+                        _vm.time1 = $$v
+                      },
+                      expression: "time1"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs11: "", sm5: "" } },
+            [
+              _c(
+                "v-menu",
+                {
+                  ref: "menu",
+                  attrs: {
+                    "close-on-content-click": false,
+                    "nudge-right": 40,
+                    lazy: "",
+                    transition: "scale-transition",
+                    "offset-y": "",
+                    "full-width": "",
+                    "max-width": "290px",
+                    "min-width": "290px"
+                  },
+                  model: {
+                    value: _vm.piker2,
+                    callback: function($$v) {
+                      _vm.piker2 = $$v
+                    },
+                    expression: "piker2"
+                  }
+                },
+                [
+                  _c("v-text-field", {
+                    attrs: {
+                      slot: "activator",
+                      "error-messages": _vm.checkError("event_end"),
+                      label: "Конец",
+                      "prepend-icon": "access_time",
+                      readonly: "",
+                      required: ""
+                    },
+                    slot: "activator",
+                    model: {
+                      value: _vm.time2,
+                      callback: function($$v) {
+                        _vm.time2 = $$v
+                      },
+                      expression: "time2"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-time-picker", {
+                    attrs: { format: "24hr" },
+                    on: {
+                      change: function($event) {
+                        _vm.$refs.menu.save(_vm.time2)
+                      }
+                    },
+                    model: {
+                      value: _vm.time2,
+                      callback: function($$v) {
+                        _vm.time2 = $$v
+                      },
+                      expression: "time2"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-spacer"),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { staticClass: "top", attrs: { row: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs8: "" } },
+            [
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "primary", dark: "" },
+                  on: { click: _vm.addSchedule }
+                },
+                [
+                  _vm._v("Сохранить\n                "),
+                  _c("v-icon", { attrs: { dark: "", right: "" } }, [
+                    _vm._v("check_circle")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "red", dark: "" },
+                  on: { click: _vm.onUserSchedules }
+                },
+                [
+                  _vm._v("Отмена\n                "),
+                  _c("v-icon", { attrs: { dark: "", right: "" } }, [
+                    _vm._v("block")
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2b0ec0d2", module.exports)
+  }
+}
+
+/***/ }),
+/* 308 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(309)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(311)
+/* template */
+var __vue_template__ = __webpack_require__(312)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\moder\\schedule\\EditSchedule.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-25a6df12", Component.options)
+  } else {
+    hotAPI.reload("data-v-25a6df12", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 309 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(310);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("0e416460", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-25a6df12\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./EditSchedule.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-25a6df12\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./EditSchedule.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 310 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.top {\n    margin-top: 30px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 311 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            time1: null,
+            time2: null,
+            piker1: false,
+            piker2: false,
+            sectionsNames: [],
+            section: { id: '', name: '' },
+            event: '',
+            errors: {},
+            sections: [],
+            dayOfWeek: [{ day: 'Понедельник', en: 'Monday' }, { day: 'Вторник', en: 'Tuesday' }, { day: 'Среда', en: 'Wednesday' }, { day: 'Четверг', en: 'Thursday' }, { day: 'Пятница', en: 'Friday' }, { day: 'Суббота', en: 'Saturday' }],
+            dayName: { day: '', en: '' },
+            schedule: null
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        this.sections = this.$route.params.sections;
+        this.schedule = this.$route.params.item;
+        this.section.id = this.schedule.section_id;
+        this.section.name = this.schedule.section_name;
+        this.event = this.schedule.event_name;
+        this.dayName.en = this.schedule.day_of_week;
+        this.time1 = this.schedule.event_start;
+        this.time2 = this.schedule.event_end;
+        this.dayOfWeek.forEach(function (item) {
+            if (item.en === _this.schedule.day_of_week) {
+                _this.dayName.day = item.day;
+            }
+        });
+    },
+
+    methods: {
+        addSchedule: function addSchedule() {
+            var _this2 = this;
+
+            this.errors = {};
+
+            var data = new FormData();
+            data.append('id', this.schedule.id);
+            data.append('section_id', this.section.id);
+            data.append('day_of_week', this.dayName.en);
+            data.append('event_start', this.time1 || '');
+            data.append('event_end', this.time2 || '');
+            data.append('event_name', this.event);
+
+            axios.post('/editSchedule', data).then(function (response) {
+                if (response.data.status) {
+                    _this2.$store.commit("showInfo", response.data.message);
+                    data = new FormData();
+                    _this2.onUserSchedules();
+                }
+            }).catch(function (error) {
+                _this2.errors = error.response.data.errors;
+            });
+        },
+        onUserSchedules: function onUserSchedules() {
+            this.$router.push("/schedule");
+        },
+        checkError: function checkError(field) {
+            return this.errors.hasOwnProperty(field) ? this.errors[field] : [];
+        }
+    }
+});
+
+/***/ }),
+/* 312 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    [
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs4: "" } },
+            [_c("v-subheader", [_vm._v("Секция")])],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs8: "" } },
+            [
+              _c("v-select", {
+                attrs: {
+                  "error-messages": _vm.checkError("section_id"),
+                  items: _vm.sections,
+                  label: "Секция",
+                  "single-line": "",
+                  hint: "" + _vm.section.name,
+                  "item-text": "name",
+                  "item-value": "id",
+                  "return-object": "",
+                  "persistent-hint": "",
+                  required: ""
+                },
+                model: {
+                  value: _vm.section,
+                  callback: function($$v) {
+                    _vm.section = $$v
+                  },
+                  expression: "section"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs4: "" } },
+            [_c("v-subheader", [_vm._v("Событие")])],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs8: "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  "error-messages": _vm.checkError("event_name"),
+                  label: "Событие",
+                  "single-line": "",
+                  required: ""
+                },
+                model: {
+                  value: _vm.event,
+                  callback: function($$v) {
+                    _vm.event = $$v
+                  },
+                  expression: "event"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs4: "" } },
+            [_c("v-subheader", [_vm._v("День недели")])],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs8: "" } },
+            [
+              _c("v-select", {
+                attrs: {
+                  "error-messages": _vm.checkError("day_of_week"),
+                  items: _vm.dayOfWeek,
+                  label: "День недели",
+                  "single-line": "",
+                  hint: "" + _vm.dayName.day,
+                  "item-text": "day",
+                  "item-value": "en",
+                  "return-object": "",
+                  "persistent-hint": "",
+                  required: ""
+                },
+                model: {
+                  value: _vm.dayName,
+                  callback: function($$v) {
+                    _vm.dayName = $$v
+                  },
+                  expression: "dayName"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", color: "blue" } },
+            [
+              _c("v-subheader", { staticClass: "justify-center" }, [
+                _vm._v("Время проведения:")
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs11: "", sm5: "" } },
+            [
+              _c(
+                "v-menu",
+                {
+                  ref: "menu",
+                  attrs: {
+                    "close-on-content-click": false,
+                    "nudge-right": 40,
+                    lazy: "",
+                    transition: "scale-transition",
+                    "offset-y": "",
+                    "full-width": "",
+                    "max-width": "290px",
+                    "min-width": "290px"
+                  },
+                  model: {
+                    value: _vm.piker1,
+                    callback: function($$v) {
+                      _vm.piker1 = $$v
+                    },
+                    expression: "piker1"
+                  }
+                },
+                [
+                  _c("v-text-field", {
+                    attrs: {
+                      slot: "activator",
+                      label: "Начало",
+                      "prepend-icon": "access_time",
+                      readonly: "",
+                      required: "",
+                      "error-messages": _vm.checkError("event_start")
+                    },
+                    slot: "activator",
+                    model: {
+                      value: _vm.time1,
+                      callback: function($$v) {
+                        _vm.time1 = $$v
+                      },
+                      expression: "time1"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-time-picker", {
+                    attrs: { format: "24hr" },
+                    on: {
+                      change: function($event) {
+                        _vm.$refs.menu.save(_vm.time1)
+                      }
+                    },
+                    model: {
+                      value: _vm.time1,
+                      callback: function($$v) {
+                        _vm.time1 = $$v
+                      },
+                      expression: "time1"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs11: "", sm5: "" } },
+            [
+              _c(
+                "v-menu",
+                {
+                  ref: "menu",
+                  attrs: {
+                    "close-on-content-click": false,
+                    "nudge-right": 40,
+                    lazy: "",
+                    transition: "scale-transition",
+                    "offset-y": "",
+                    "full-width": "",
+                    "max-width": "290px",
+                    "min-width": "290px"
+                  },
+                  model: {
+                    value: _vm.piker2,
+                    callback: function($$v) {
+                      _vm.piker2 = $$v
+                    },
+                    expression: "piker2"
+                  }
+                },
+                [
+                  _c("v-text-field", {
+                    attrs: {
+                      slot: "activator",
+                      "error-messages": _vm.checkError("event_end"),
+                      label: "Конец",
+                      "prepend-icon": "access_time",
+                      readonly: "",
+                      required: ""
+                    },
+                    slot: "activator",
+                    model: {
+                      value: _vm.time2,
+                      callback: function($$v) {
+                        _vm.time2 = $$v
+                      },
+                      expression: "time2"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-time-picker", {
+                    attrs: { format: "24hr" },
+                    on: {
+                      change: function($event) {
+                        _vm.$refs.menu.save(_vm.time2)
+                      }
+                    },
+                    model: {
+                      value: _vm.time2,
+                      callback: function($$v) {
+                        _vm.time2 = $$v
+                      },
+                      expression: "time2"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-spacer"),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { staticClass: "top", attrs: { row: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs8: "" } },
+            [
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "primary", dark: "" },
+                  on: { click: _vm.addSchedule }
+                },
+                [
+                  _vm._v("Сохранить\n                "),
+                  _c("v-icon", { attrs: { dark: "", right: "" } }, [
+                    _vm._v("check_circle")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "red", dark: "" },
+                  on: { click: _vm.onUserSchedules }
+                },
+                [
+                  _vm._v("Отмена\n                "),
+                  _c("v-icon", { attrs: { dark: "", right: "" } }, [
+                    _vm._v("block")
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-25a6df12", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
