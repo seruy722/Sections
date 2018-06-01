@@ -40,7 +40,7 @@ class ImageGalleryController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $this->cleanData($request->all());
         foreach ($data as $key => $element) {
             $this->validate($request, [
                 $key => 'required|mimes:jpg,jpeg,png|dimensions:max:5120',
@@ -65,6 +65,14 @@ class ImageGalleryController extends Controller
         }
 
         return response()->json(['status' => true, 'message' => 'Изображения успешно загружены.']);
+    }
+
+    function cleanData($value)
+    {
+        $arr = array_map("trim", $value);
+        $arr = array_map("strip_tags", $arr);
+        $arr = array_map("stripcslashes", $arr);
+        return $arr;
     }
 
     /**

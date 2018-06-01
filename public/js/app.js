@@ -66155,7 +66155,7 @@ if (false) {
 
     imagesList: [],
 
-    nav: [{ path: "/controls", title: "Консоль", auth: true, role: 'admin' }, { path: "/users", title: "Пользователи", auth: true, role: 'admin' }, { path: "/news", title: "Новости", auth: true, role: 'admin' }, { path: "/settings", title: "Настройки", auth: true, role: 'admin' }, { path: "/browse_files", title: "Показать файлы", auth: true, role: 'admin' }, { path: "/user_news", title: "Новости", auth: true, role: 'moder' }, { path: "/user_messages", title: "Сообщения", auth: true, role: 'moder' }, { path: "/user_sections", title: "Секции", auth: true, role: 'moder' }, { path: "/user_gallery", title: "Галерея", auth: true, role: 'moder' }, { path: "/images_gallery", title: "Изображения", auth: true, role: 'moder' }, { path: "/schedule", title: "Расписание", auth: true, role: 'moder' }],
+    nav: [{ path: "/controls", title: "Консоль", auth: true, role: 'admin' }, { path: "/users", title: "Пользователи", auth: true, role: 'admin' }, { path: "/news", title: "Новости", auth: true, role: 'admin' }, { path: "/settings", title: "Настройки", auth: true, role: 'admin' }, { path: "/user_messages", title: "Сообщения", auth: true, role: 'admin' }, { path: "/sections_categoties", title: "Категории", auth: true, role: 'admin' }, { path: "/user_news", title: "Новости", auth: true, role: 'moder' }, { path: "/user_messages", title: "Сообщения", auth: true, role: 'moder' }, { path: "/user_sections", title: "Секции", auth: true, role: 'moder' }, { path: "/user_gallery", title: "Галерея", auth: true, role: 'moder' }, { path: "/images_gallery", title: "Изображения", auth: true, role: 'moder' }, { path: "/schedule", title: "Расписание", auth: true, role: 'moder' }],
 
     authNav: [{ path: "/register", title: "Регистрация", auth: false }, { path: "/login", title: "Вход", auth: false }],
 
@@ -88471,50 +88471,50 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Console___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Console__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_UploadFile__ = __webpack_require__(220);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_UploadFile___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_UploadFile__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_BrowseFiles__ = __webpack_require__(225);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_BrowseFiles___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_BrowseFiles__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Register__ = __webpack_require__(228);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Register___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Register__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Login__ = __webpack_require__(231);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Login__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Profile__ = __webpack_require__(234);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Profile___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Profile__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_admin_Users__ = __webpack_require__(239);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_admin_Users___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_admin_Users__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_admin_News__ = __webpack_require__(242);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_admin_News___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_admin_News__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_moder_news_UserNews__ = __webpack_require__(245);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_moder_news_UserNews___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_moder_news_UserNews__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_moder_news_AddNews__ = __webpack_require__(248);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_moder_news_AddNews___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_moder_news_AddNews__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_moder_news_EditNews__ = __webpack_require__(251);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_moder_news_EditNews___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_moder_news_EditNews__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_ResetPassword__ = __webpack_require__(254);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_ResetPassword___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_ResetPassword__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_moder_mails_CreateMessage__ = __webpack_require__(257);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_moder_mails_CreateMessage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_moder_mails_CreateMessage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_moder_mails_UserMessages__ = __webpack_require__(260);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_moder_mails_UserMessages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_moder_mails_UserMessages__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_moder_mails_ViewMessage__ = __webpack_require__(265);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_moder_mails_ViewMessage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_moder_mails_ViewMessage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_moder_mails_ReplyMessage__ = __webpack_require__(268);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_moder_mails_ReplyMessage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_moder_mails_ReplyMessage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_moder_sections_UserSections__ = __webpack_require__(271);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_moder_sections_UserSections___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_moder_sections_UserSections__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_moder_sections_AddSection__ = __webpack_require__(274);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_moder_sections_AddSection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17__components_moder_sections_AddSection__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_moder_sections_EditSection__ = __webpack_require__(279);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_moder_sections_EditSection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18__components_moder_sections_EditSection__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_moder_gallery_UserGallery__ = __webpack_require__(284);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_moder_gallery_UserGallery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19__components_moder_gallery_UserGallery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_moder_gallery_ImagesGallery__ = __webpack_require__(289);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_moder_gallery_ImagesGallery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20__components_moder_gallery_ImagesGallery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_moder_schedule_Schedule__ = __webpack_require__(298);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_moder_schedule_Schedule___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21__components_moder_schedule_Schedule__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_moder_schedule_AddSchedule__ = __webpack_require__(303);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_moder_schedule_AddSchedule___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_22__components_moder_schedule_AddSchedule__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_moder_schedule_EditSchedule__ = __webpack_require__(308);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_moder_schedule_EditSchedule___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23__components_moder_schedule_EditSchedule__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Register__ = __webpack_require__(228);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Register___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Register__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Login__ = __webpack_require__(231);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Login__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Profile__ = __webpack_require__(234);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Profile___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Profile__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_admin_Users__ = __webpack_require__(239);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_admin_Users___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_admin_Users__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_admin_News__ = __webpack_require__(242);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_admin_News___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_admin_News__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_moder_news_UserNews__ = __webpack_require__(245);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_moder_news_UserNews___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_moder_news_UserNews__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_moder_news_AddNews__ = __webpack_require__(248);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_moder_news_AddNews___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_moder_news_AddNews__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_moder_news_EditNews__ = __webpack_require__(251);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_moder_news_EditNews___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_moder_news_EditNews__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_ResetPassword__ = __webpack_require__(254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_ResetPassword___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_ResetPassword__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_moder_mails_CreateMessage__ = __webpack_require__(257);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_moder_mails_CreateMessage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_moder_mails_CreateMessage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_moder_mails_UserMessages__ = __webpack_require__(260);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_moder_mails_UserMessages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_moder_mails_UserMessages__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_moder_mails_ViewMessage__ = __webpack_require__(265);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_moder_mails_ViewMessage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_moder_mails_ViewMessage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_moder_mails_ReplyMessage__ = __webpack_require__(268);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_moder_mails_ReplyMessage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_moder_mails_ReplyMessage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_moder_sections_UserSections__ = __webpack_require__(271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_moder_sections_UserSections___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_moder_sections_UserSections__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_moder_sections_AddSection__ = __webpack_require__(274);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_moder_sections_AddSection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_moder_sections_AddSection__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_moder_sections_EditSection__ = __webpack_require__(279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_moder_sections_EditSection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17__components_moder_sections_EditSection__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_moder_gallery_UserGallery__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_moder_gallery_UserGallery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18__components_moder_gallery_UserGallery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_moder_gallery_ImagesGallery__ = __webpack_require__(289);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_moder_gallery_ImagesGallery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19__components_moder_gallery_ImagesGallery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_moder_schedule_Schedule__ = __webpack_require__(298);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_moder_schedule_Schedule___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20__components_moder_schedule_Schedule__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_moder_schedule_AddSchedule__ = __webpack_require__(303);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_moder_schedule_AddSchedule___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21__components_moder_schedule_AddSchedule__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_moder_schedule_EditSchedule__ = __webpack_require__(308);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_moder_schedule_EditSchedule___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_22__components_moder_schedule_EditSchedule__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_admin_categories_Categories__ = __webpack_require__(313);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_admin_categories_Categories___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23__components_admin_categories_Categories__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24_vue_router__ = __webpack_require__(16);
 
 
@@ -88543,7 +88543,7 @@ if (false) {
 
 
 
-var routes = [{ path: "/controls", component: __WEBPACK_IMPORTED_MODULE_0__components_Console___default.a }, { path: "/settings", component: __WEBPACK_IMPORTED_MODULE_1__components_UploadFile___default.a }, { path: "/browse_files", component: __WEBPACK_IMPORTED_MODULE_2__components_BrowseFiles___default.a }, { path: "/register", component: __WEBPACK_IMPORTED_MODULE_3__components_Register___default.a }, { path: "/login", component: __WEBPACK_IMPORTED_MODULE_4__components_Login___default.a }, { path: "/profile", component: __WEBPACK_IMPORTED_MODULE_5__components_Profile___default.a }, { path: "/users", component: __WEBPACK_IMPORTED_MODULE_6__components_admin_Users___default.a }, { path: "/news", component: __WEBPACK_IMPORTED_MODULE_7__components_admin_News___default.a }, { path: "/user_news", component: __WEBPACK_IMPORTED_MODULE_8__components_moder_news_UserNews___default.a }, { name: 'AddNews', path: "/add_news", component: __WEBPACK_IMPORTED_MODULE_9__components_moder_news_AddNews___default.a }, { name: 'EditNews', path: "/edit_news", component: __WEBPACK_IMPORTED_MODULE_10__components_moder_news_EditNews___default.a }, { name: 'ResetPassword', path: "/reset_password", component: __WEBPACK_IMPORTED_MODULE_11__components_ResetPassword___default.a }, { name: 'UserMessages', path: "/user_messages", component: __WEBPACK_IMPORTED_MODULE_13__components_moder_mails_UserMessages___default.a }, { name: 'CreateMessage', path: "/create_message", component: __WEBPACK_IMPORTED_MODULE_12__components_moder_mails_CreateMessage___default.a }, { name: 'ViewMessage', path: "/view_message", component: __WEBPACK_IMPORTED_MODULE_14__components_moder_mails_ViewMessage___default.a }, { name: 'ReplyMessage', path: "/reply_message", component: __WEBPACK_IMPORTED_MODULE_15__components_moder_mails_ReplyMessage___default.a }, { name: 'UserSections', path: "/user_sections", component: __WEBPACK_IMPORTED_MODULE_16__components_moder_sections_UserSections___default.a }, { name: 'AddSection', path: "/add_section", component: __WEBPACK_IMPORTED_MODULE_17__components_moder_sections_AddSection___default.a }, { name: 'EditSection', path: "/edit_section", component: __WEBPACK_IMPORTED_MODULE_18__components_moder_sections_EditSection___default.a }, { name: 'UserGallery', path: "/user_gallery", component: __WEBPACK_IMPORTED_MODULE_19__components_moder_gallery_UserGallery___default.a }, { name: 'ImagesGallery', path: "/images_gallery", component: __WEBPACK_IMPORTED_MODULE_20__components_moder_gallery_ImagesGallery___default.a }, { name: 'Schedule', path: "/schedule", component: __WEBPACK_IMPORTED_MODULE_21__components_moder_schedule_Schedule___default.a }, { name: 'AddSchedule', path: "/add_schedule", component: __WEBPACK_IMPORTED_MODULE_22__components_moder_schedule_AddSchedule___default.a }, { name: 'EditSchedule', path: "/edit_schedule", component: __WEBPACK_IMPORTED_MODULE_23__components_moder_schedule_EditSchedule___default.a }];
+var routes = [{ path: "/controls", component: __WEBPACK_IMPORTED_MODULE_0__components_Console___default.a }, { path: "/settings", component: __WEBPACK_IMPORTED_MODULE_1__components_UploadFile___default.a }, { path: "/register", component: __WEBPACK_IMPORTED_MODULE_2__components_Register___default.a }, { path: "/login", component: __WEBPACK_IMPORTED_MODULE_3__components_Login___default.a }, { path: "/profile", component: __WEBPACK_IMPORTED_MODULE_4__components_Profile___default.a }, { path: "/users", component: __WEBPACK_IMPORTED_MODULE_5__components_admin_Users___default.a }, { path: "/news", component: __WEBPACK_IMPORTED_MODULE_6__components_admin_News___default.a }, { path: "/user_news", component: __WEBPACK_IMPORTED_MODULE_7__components_moder_news_UserNews___default.a }, { name: 'AddNews', path: "/add_news", component: __WEBPACK_IMPORTED_MODULE_8__components_moder_news_AddNews___default.a }, { name: 'EditNews', path: "/edit_news", component: __WEBPACK_IMPORTED_MODULE_9__components_moder_news_EditNews___default.a }, { name: 'ResetPassword', path: "/reset_password", component: __WEBPACK_IMPORTED_MODULE_10__components_ResetPassword___default.a }, { name: 'UserMessages', path: "/user_messages", component: __WEBPACK_IMPORTED_MODULE_12__components_moder_mails_UserMessages___default.a }, { name: 'CreateMessage', path: "/create_message", component: __WEBPACK_IMPORTED_MODULE_11__components_moder_mails_CreateMessage___default.a }, { name: 'ViewMessage', path: "/view_message", component: __WEBPACK_IMPORTED_MODULE_13__components_moder_mails_ViewMessage___default.a }, { name: 'ReplyMessage', path: "/reply_message", component: __WEBPACK_IMPORTED_MODULE_14__components_moder_mails_ReplyMessage___default.a }, { name: 'UserSections', path: "/user_sections", component: __WEBPACK_IMPORTED_MODULE_15__components_moder_sections_UserSections___default.a }, { name: 'AddSection', path: "/add_section", component: __WEBPACK_IMPORTED_MODULE_16__components_moder_sections_AddSection___default.a }, { name: 'EditSection', path: "/edit_section", component: __WEBPACK_IMPORTED_MODULE_17__components_moder_sections_EditSection___default.a }, { name: 'UserGallery', path: "/user_gallery", component: __WEBPACK_IMPORTED_MODULE_18__components_moder_gallery_UserGallery___default.a }, { name: 'ImagesGallery', path: "/images_gallery", component: __WEBPACK_IMPORTED_MODULE_19__components_moder_gallery_ImagesGallery___default.a }, { name: 'Schedule', path: "/schedule", component: __WEBPACK_IMPORTED_MODULE_20__components_moder_schedule_Schedule___default.a }, { name: 'AddSchedule', path: "/add_schedule", component: __WEBPACK_IMPORTED_MODULE_21__components_moder_schedule_AddSchedule___default.a }, { name: 'EditSchedule', path: "/edit_schedule", component: __WEBPACK_IMPORTED_MODULE_22__components_moder_schedule_EditSchedule___default.a }, { name: 'Categories', path: "/sections_categoties", component: __WEBPACK_IMPORTED_MODULE_23__components_admin_categories_Categories___default.a }];
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_24_vue_router__["a" /* default */]({
     routes: routes,
@@ -88555,12 +88555,11 @@ var routes = [{ path: "/controls", component: __WEBPACK_IMPORTED_MODULE_0__compo
 /* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(218)
+var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(219)
+var __vue_template__ = null
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -88579,110 +88578,12 @@ var Component = normalizeComponent(
 )
 Component.options.__file = "resources\\assets\\js\\components\\Console.vue"
 
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-b3f3aea0", Component.options)
-  } else {
-    hotAPI.reload("data-v-b3f3aea0", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
 module.exports = Component.exports
 
 
 /***/ }),
-/* 218 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    methods: {
-        onUpload: function onUpload() {
-            this.$router.push("/upload_file");
-        },
-        onBrowse: function onBrowse() {
-            this.$router.push("/browse_files");
-        }
-    }
-});
-
-/***/ }),
-/* 219 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "v-container",
-        [
-          _c(
-            "v-layout",
-            { attrs: { row: "" } },
-            [
-              _c("v-btn", { on: { click: _vm.onUpload } }, [
-                _vm._v("Загрузить изображение")
-              ])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-layout",
-            { attrs: { row: "" } },
-            [
-              _c("v-btn", { on: { click: _vm.onBrowse } }, [
-                _vm._v("Показать загруженные изображения")
-              ])
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-b3f3aea0", module.exports)
-  }
-}
-
-/***/ }),
+/* 218 */,
+/* 219 */,
 /* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -89403,290 +89304,9 @@ if (false) {
 }
 
 /***/ }),
-/* 225 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(226)
-/* template */
-var __vue_template__ = __webpack_require__(227)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\BrowseFiles.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-402699e6", Component.options)
-  } else {
-    hotAPI.reload("data-v-402699e6", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 226 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_Auth__ = __webpack_require__(6);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    created: function created() {
-        __WEBPACK_IMPORTED_MODULE_0__helpers_Auth__["a" /* default */].check();
-    },
-
-
-    computed: {
-        files: function files() {
-            return this.$store.state.imagesList;
-        }
-    },
-
-    data: function data() {
-        return {
-            viewer: {
-                show: false,
-                path: null
-            }
-        };
-    },
-
-
-    methods: {
-        getPath: function getPath(file) {
-            return "/images/" + file.file_name;
-        },
-        onDelete: function onDelete(file) {
-            var _this = this;
-
-            axios.post("/api/delete/" + file.id).then(function (response) {
-                _this.showInfo("File was successfuly deleted!");
-
-                var id = _this.files.findIndex(function (item) {
-                    return item.id === file.id;
-                });
-
-                if (id > -1) {
-                    _this.files.splice(id, 1);
-                }
-            });
-        },
-        onClickImage: function onClickImage(file) {
-            this.viewer.path = "/images/" + file.file_name;
-            this.viewer.show = true;
-        },
-        showInfo: function showInfo(message) {
-            this.$store.commit("showInfo", message);
-        }
-    }
-});
-
-/***/ }),
-/* 227 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "v-container",
-        [
-          _c(
-            "v-layout",
-            { attrs: { row: "", wrap: "" } },
-            _vm._l(_vm.files, function(file) {
-              return _c(
-                "v-flex",
-                { key: file.id, attrs: { xs12: "", sm6: "", md4: "" } },
-                [
-                  _c(
-                    "v-card",
-                    { staticClass: "mr-3 mb-3" },
-                    [
-                      _c("v-card-media", {
-                        staticStyle: { cursor: "pointer" },
-                        attrs: {
-                          src: _vm.getPath(file),
-                          height: "250px",
-                          contain: ""
-                        },
-                        on: {
-                          click: function($event) {
-                            _vm.onClickImage(file)
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-card-title", { attrs: { "primary-title": "" } }, [
-                        _c("div", [
-                          _c("h3", { staticClass: "headline mb-0" }, [
-                            _vm._v(_vm._s(file.name))
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "v-card-actions",
-                        [
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: { flat: "" },
-                              on: {
-                                click: function($event) {
-                                  _vm.onDelete(file)
-                                }
-                              }
-                            },
-                            [
-                              _c("v-icon", [_vm._v("delete")]),
-                              _vm._v("\n                Delete\n              ")
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            })
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-layout",
-        { attrs: { row: "", "justify-center": "" } },
-        [
-          _c(
-            "v-dialog",
-            {
-              attrs: {
-                "max-width": _vm.viewer.width,
-                "max-height": _vm.viewer.height
-              },
-              model: {
-                value: _vm.viewer.show,
-                callback: function($$v) {
-                  _vm.$set(_vm.viewer, "show", $$v)
-                },
-                expression: "viewer.show"
-              }
-            },
-            [
-              _c(
-                "v-card",
-                [
-                  _c("v-card-media", {
-                    attrs: { src: _vm.viewer.path, height: _vm.viewer.height }
-                  })
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-402699e6", module.exports)
-  }
-}
-
-/***/ }),
+/* 225 */,
+/* 226 */,
+/* 227 */,
 /* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -99510,6 +99130,320 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-25a6df12", module.exports)
+  }
+}
+
+/***/ }),
+/* 313 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(314)
+/* template */
+var __vue_template__ = __webpack_require__(315)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\admin\\categories\\Categories.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6868f7b0", Component.options)
+  } else {
+    hotAPI.reload("data-v-6868f7b0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 314 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            search: '',
+            headers: [{ text: 'Дата создания', value: 'created_at' }, { text: 'Название', value: 'name' }, { text: 'Управление', sortable: false }],
+            categories: []
+        };
+    },
+    created: function created() {
+        this.initialize();
+    },
+
+    methods: {
+        initialize: function initialize() {
+            var _this = this;
+
+            axios.get('/categories').then(function (response) {
+                _this.categories = response.data.categories;
+            });
+        },
+        deleteCategory: function deleteCategory(item) {
+            var _this2 = this;
+
+            var index = this.categories.indexOf(item);
+            var answer = confirm('Вы действительно хотите удалить эту запись?');
+            if (answer) {
+                axios.delete('/deleteCategories/' + item.id).then(function (response) {
+                    if (response.data.status) {
+                        _this2.categories.splice(index, 1);
+                        _this2.$store.commit("showInfo", response.data.message);
+                    }
+                });
+            }
+        },
+        onAddCategory: function onAddCategory() {
+            this.$router.push({ name: 'AddNews', params: { sections: this.sections } });
+        }
+    }
+});
+
+/***/ }),
+/* 315 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "wrapper" },
+    [
+      _c(
+        "v-card",
+        [
+          _c(
+            "v-card-title",
+            [
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "primary" },
+                  on: { click: _vm.onAddCategory }
+                },
+                [
+                  _vm._v("Добавить\n                "),
+                  _c("v-icon", [_vm._v("add")])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-spacer"),
+              _vm._v(" "),
+              _c("v-text-field", {
+                attrs: {
+                  "append-icon": "search",
+                  label: "Поиск",
+                  "single-line": "",
+                  "hide-details": ""
+                },
+                model: {
+                  value: _vm.search,
+                  callback: function($$v) {
+                    _vm.search = $$v
+                  },
+                  expression: "search"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-data-table",
+            {
+              attrs: {
+                "disable-initial-sort": "",
+                headers: _vm.headers,
+                items: _vm.categories,
+                search: _vm.search
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "items",
+                  fn: function(props) {
+                    return [
+                      _c("td", [_vm._v(_vm._s(props.item.created_at))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(props.item.name))]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              staticClass: "mx-0",
+                              attrs: {
+                                icon: "",
+                                to: {
+                                  name: "EditNews",
+                                  params: { item: props.item }
+                                }
+                              }
+                            },
+                            [
+                              _c("v-icon", { attrs: { color: "teal" } }, [
+                                _vm._v("edit")
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              staticClass: "mx-0",
+                              attrs: { icon: "" },
+                              on: {
+                                click: function($event) {
+                                  _vm.deleteCategory(props.item)
+                                }
+                              }
+                            },
+                            [
+                              _c("v-icon", { attrs: { color: "pink" } }, [
+                                _vm._v("delete")
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  }
+                }
+              ])
+            },
+            [
+              _c(
+                "template",
+                { slot: "no-data" },
+                [
+                  _c("v-alert", { attrs: { value: true, type: "info" } }, [
+                    _vm._v(
+                      "\n                    Нет данных!\n                "
+                    )
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-alert",
+                {
+                  attrs: {
+                    slot: "no-results",
+                    value: true,
+                    color: "error",
+                    icon: "warning"
+                  },
+                  slot: "no-results"
+                },
+                [
+                  _vm._v(
+                    '\n                Ваш поиск по "' +
+                      _vm._s(_vm.search) +
+                      '" не дал результатов!.\n            '
+                  )
+                ]
+              )
+            ],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6868f7b0", module.exports)
   }
 }
 

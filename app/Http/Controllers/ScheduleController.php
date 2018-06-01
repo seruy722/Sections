@@ -47,12 +47,6 @@ class ScheduleController extends Controller
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -67,6 +61,7 @@ class ScheduleController extends Controller
         ]);
         $data = $this->cleanData($request->all());
         Schedules::create($data);
+
         return response()->json(['status' => true, 'message' => 'Запись успешно добавлена.']);
     }
 

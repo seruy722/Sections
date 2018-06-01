@@ -1,6 +1,5 @@
 import Console from "./components/Console";
 import UploadFile from "./components/UploadFile";
-import BrowseFiles from "./components/BrowseFiles";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
@@ -22,13 +21,13 @@ import ImagesGallery from "./components/moder/gallery/ImagesGallery";
 import Schedule from "./components/moder/schedule/Schedule";
 import AddSchedule from "./components/moder/schedule/AddSchedule";
 import EditSchedule from "./components/moder/schedule/EditSchedule";
+import Categories from "./components/admin/categories/Categories";
 
 import VueRouter from "vue-router";
 
 const routes = [
     {path: "/controls", component: Console},
     {path: "/settings", component: UploadFile},
-    {path: "/browse_files", component: BrowseFiles},
     {path: "/register", component: Register},
     {path: "/login", component: Login},
     {path: "/profile", component: Profile},
@@ -51,6 +50,7 @@ const routes = [
     {name: 'Schedule', path: "/schedule", component: Schedule},
     {name: 'AddSchedule', path: "/add_schedule", component: AddSchedule},
     {name: 'EditSchedule', path: "/edit_schedule", component: EditSchedule},
+    {name: 'Categories', path: "/sections_categoties", component: Categories},
 ];
 
 export default new VueRouter({

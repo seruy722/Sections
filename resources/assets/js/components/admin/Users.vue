@@ -167,7 +167,7 @@
                     let item = this.editedItem;
                     item.created_at = this.formatDate(new Date());
                     axios.post(`/api/users`, this.editedItem).then(response => {
-                        if(response.data.status === 'success'){
+                        if (response.data.status === 'success') {
                             this.users.push(item);
                             this.$store.commit(
                                 "showInfo",

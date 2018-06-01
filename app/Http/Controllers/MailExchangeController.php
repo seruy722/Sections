@@ -49,10 +49,9 @@ class MailExchangeController extends Controller
             'subject'=>'max:255',
             'msg' => 'required|max:1000'
         ]);
+        $data = $this->cleanData($request->all());
+        MailExchange::create($data);
 
-        MailExchange::create($request->all());
-
-        $data = $request->all();
         Mail::send('sendMails', $data, function ($message) use ($data) {
             $message->from($data['email_from']);
             $message->to($data['email_to']);
@@ -105,6 +104,14 @@ class MailExchangeController extends Controller
         return response()->json([
             'status' => true
         ]);
+    }
+
+    function cleanData($value)
+    {
+        $arr = array_map("trim", $value);
+        $arr = array_map("strip_tags", $arr);
+        $arr = array_map("stripcslashes", $arr);
+        return $arr;
     }
 
     /**

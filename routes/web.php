@@ -4,9 +4,7 @@ Route::get('/', function () {
     return view('index');
 });
 
-Auth::routes();
 
-Route::get('/admin', 'HomeController@index')->name('admin');
 Route::resource('api/news', 'Api\NewsController');
 Route::resource('api/addNews', 'Api\NewsController');
 Route::post('api/updateNews', 'Api\NewsController@userUpdateNews');
@@ -23,6 +21,8 @@ Route::resource('/addSchedule', 'ScheduleController');
 Route::post('/schedules', 'ScheduleController@getSchedules');
 Route::post('/editSchedule', 'ScheduleController@update');
 Route::resource('/daleteSchedule', 'ScheduleController');
+Route::resource('/categories', 'CategoryController');
+Route::resource('/deleteCategories', 'CategoryController');
 
 Route::view('/controls', 'controls');
 

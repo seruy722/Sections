@@ -16,6 +16,12 @@ class AuthController extends Controller
             ->only('logout', 'editProfile', 'updateProfile');
     }
 
+    public function allUsers()
+    {
+        dd('dfas');
+
+    }
+
     public function register(Request $request)
     {
         $this->validate($request, [
