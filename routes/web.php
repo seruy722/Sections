@@ -19,6 +19,7 @@ Route::post('/mailsForUser', 'MailExchangeController@mailsForUser');
 Route::resource('/addImage', 'ImageGalleryController');
 Route::resource('/deleteImage', 'ImageGalleryController');
 Route::post('/imagesGallery', 'ImageGalleryController@getImages');
+Route::resource('/addSchedule', 'ScheduleController');
 
 Route::view('/controls', 'controls');
 

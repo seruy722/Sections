@@ -4,12 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Mail\MailClass;
-use Illuminate\Http\Request;
-use App\Schedules;
-use App\News;
-use App\User;
 use App\Sections;
-use Illuminate\Support\Facades\Input;
+use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class SectionsController extends Controller
@@ -77,9 +74,50 @@ class SectionsController extends Controller
 
     public function getUserSections(Request $request)
     {
-        $sections = User::find($request->id)->sections;
-        return response()->json(['status'=>true,'sections'=>$sections]);
+        $sections = User::find($request->id)->sections->toArray();
+        foreach ($sections as $key => $elem) {
+            $sections[$key]['created_at'] = $this->needDate($elem['created_at']);
+        }
+        $categories = Category::all();
+        return response()->json(['status' => true, 'sections' => $sections, 'categories' => $categories]);
 
+    }
+
+    public function needDate($date)
+    {
+        $newDate = date('d-m-Y', strtotime($date));
+        return $newDate;
+    }
+
+    public function store(Request $request)
+    {
+
+        $this->validate($request, [
+            'section_name' => 'required|min:2|max:255',
+            'info' => 'required|min:2|max:2000',
+            'fupload' => 'mimes:jpg,jpeg,png|dimensions:max:5120',
+            'images' => 'jpeg, png, bmp, gif',
+            'category_id' => 'integer',
+            'address' => 'required|max:255',
+
+        ], [
+            'category_id.integer' => 'Поле категория обьзательное для заполнения.'
+        ]);
+        $data = $this->cleanData($request->all());
+        $file = $request->fupload;
+        $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
+        $file->move('images', $filename);
+        $data['img_logo'] = $filename;
+        Sections::create($data);
+        return response()->json(['status' => true, 'message' => 'Запись успешно добавлена.']);
+    }
+
+    function cleanData($value)
+    {
+        $arr = array_map("trim", $value);
+        $arr = array_map("strip_tags", $arr);
+        $arr = array_map("stripcslashes", $arr);
+        return $arr;
     }
 
     /**
@@ -111,9 +149,42 @@ class SectionsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $this->validate($request, [
+            'section_name' => 'required|min:2|max:255',
+            'info' => 'required|min:2|max:2000',
+            'images' => 'jpeg, png, bmp, gif',
+            'category_id' => 'integer',
+
+        ], [
+            'category_id.integer' => 'Поле категория обьзательное для заполнения.'
+        ]);
+
+        $data = $this->cleanData($request->all());
+        $section = Sections::findOrFail($data['id']);
+        if ($section) {
+            if (is_object($request->fupload)) {
+                $this->validate($request, [
+                    'fupload' => 'mimes:jpg,jpeg,png|dimensions:max:5120',
+                ]);
+                unlink(public_path() . '/images/' . $section->img_logo);
+                $file = $request->fupload;
+                $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
+                $file->move('images', $filename);
+                $data['img_logo'] = $filename;
+            } else {
+                unset($data['fupload']);
+            }
+
+            if (!$data['address']) {
+                unset($data['address']);
+            }
+
+            $section->update($data);
+            return response()->json(['status' => true, 'message' => 'Запись успешно обновлена.']);
+        }
+        return response()->json(['status' => false, 'message' => 'Ошибка при обновлении записи.']);
     }
 
     /**
@@ -124,7 +195,14 @@ class SectionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $section = Sections::find($id);
+        if ($section) {
+            if ($section->img_logo) {
+                unlink(public_path() . '/images/' . $section->img_logo);
+            }
+            $section->delete();
+            return response()->json(['status' => true, 'message' => 'Запись успешно удалена.']);
+        }
     }
 
     public function gallery($id)
