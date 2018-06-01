@@ -190,7 +190,8 @@
         </div>
     </div>
     <!-- News-->
-    <div >
+    <!--Photos-->
+    <div id="photos" class="photos">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -200,7 +201,7 @@
                         </header>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+                        <div class="col-xs-12 col-sm-12 col-md-12 ">
                             <section class="slider">
                                 <div class="flexslider">
                                     <ul class="slides">
@@ -218,6 +219,7 @@
             </div>
         </div>
     <div>
+    <!--/Photos-->
     <a href="{{route('gallery', $users->id)}}">
         <button type="button" class="btn btn-primary goto">ВСЕ ФОТОГРАФИИ</button>
     </a></div>
