@@ -13,7 +13,7 @@
                                     <div class="itemCont">
                                         <h2>{{$post->title}}</h2>
                                         <h4>{{$post->sections->section_name}}</h4>
-                                        <div class="thumb_img"><img class="img-responsive center-block" alt="Blue Gate" src="/images/img1.jpg"></div>
+                                        <div class="thumb_img"><img class="img-responsive center-block" alt="Blue Gate" src="/images/{{$post->image_name}}"></div>
                                         <div class="itemInfo">
                                             <p>{{$post->content}}</p>
                                         </div>

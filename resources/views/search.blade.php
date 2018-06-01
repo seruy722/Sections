@@ -23,7 +23,7 @@
                                                     <a href="{{route('section', $a->id)}}">
                                                         <div class="effect eff-17">
                                                             <img
-                                                                    src="/images/content.jpg" alt="filter">
+                                                                    src="/images/{{$a->img_logo}}" alt="filter">
                                                             <div class="triangle-set">
                                                                 <div class="triangle triangle-1"></div>
                                                                 <div class="triangle triangle-2"></div>
@@ -63,9 +63,10 @@
                             <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt graphic">
                                 <div class="itemCont">
                                     <a href="{{route('articles', $news->id)}}">
-                                        <div class="thumb"><img class="img-responsive center-block"
-                                                                alt="Blue Gate"
-                                                                src="/images/img1.jpg"></div>
+                                        <div class="about_wrap thumb">
+                                            <div class="holder"><img class="img-responsive center-block"
+                                                                     src="/images/{{$news->image_name}}" alt="about"></div>
+                                        </div>
                                         <div class="itemInfo">
                                             <h4>{{$news->title}}</h4>
                                             <h6>{{$news->sections->section_name}}</h6>

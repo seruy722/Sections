@@ -17,7 +17,7 @@
                                                 <a href="{{route('section', $section->id)}}">
                                                     <div class="effect eff-17">
                                                         <img
-                                                                src="/images/content.jpg" alt="filter">
+                                                                src="/images/{{$section->img_logo}}" alt="filter">
                                                         <div class="triangle-set">
                                                             <div class="triangle triangle-1"></div>
                                                             <div class="triangle triangle-2"></div>

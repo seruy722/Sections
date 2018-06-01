@@ -8378,6 +8378,7 @@ label {
     height: auto;
     float: left;
     margin-right: 2%;
+    width: 100px;
 }
 
 .cd-schedule {

@@ -12,7 +12,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-md-12 col-sm-12">
-                        <div class="log"><img src="/images/passion.png" alt="filter"></div>
+                        <div class="log"><img src="/images/{{$users->img_logo}}" alt="filter"></div>
                         <p class="text-justify">{{$users->info}}.</p>
                     </div>
                 </div>
