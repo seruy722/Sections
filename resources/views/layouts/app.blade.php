@@ -26,6 +26,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/flexslider.css" type="text/css" media="screen" />
 </head>
 
 <body data-spy="scroll" data-target="#ha-header">
@@ -170,6 +171,24 @@
 <script>
     baguetteBox.run('.tz-gallery');
 </script>
+
+<script defer src="/js/jquery.flexslider.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+        <!-- SyntaxHighlighter.all(); -->
+    });
+    $(window).load(function(){
+        $('.flexslider').flexslider({
+            animation: "slide",
+            controlNav: "thumbnails",
+            start: function(slider){
+                $('body').removeClass('loading');
+            }
+        });
+    });
+</script>
+
 </body>
 
 </html>

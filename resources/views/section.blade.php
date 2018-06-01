@@ -190,6 +190,33 @@
         </div>
     </div>
     <!-- News-->
+    <div >
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class=" container TitleSection">
+                        <header class="page-head">
+                            <h2>Фото</h2>
+                        </header>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+                            <section class="slider">
+                                <div class="flexslider">
+                                    <ul class="slides">
+                                        @foreach($photos as $one)
+                                        <li data-thumb="/images/{{$one->name}}">
+                                            <img src="/images/{{$one->name}}" class="center-block"/>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <div>
     <a href="{{route('gallery', $users->id)}}">
         <button type="button" class="btn btn-primary goto">ВСЕ ФОТОГРАФИИ</button>

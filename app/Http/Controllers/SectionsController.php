@@ -9,6 +9,8 @@ use App\Schedules;
 use App\News;
 use App\User;
 use App\Sections;
+use App\ImageGallery;
+
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 
@@ -32,6 +34,8 @@ class SectionsController extends Controller
 
         $news = $users->news()->paginate(10);
 
+        $photos = ImageGallery::where('section_id', $id)->orderBy('id', 'desc')->limit(10)->get();
+
         $monday = $users->schedules()->where('day_of_week', 'Monday')->orderBy('event_start', 'asc')->get();
         $tuesday = $users->schedules()->where('day_of_week', 'Tuesday')->orderBy('event_start', 'asc')->get();
         $wednesday = $users->schedules()->where('day_of_week', 'Wednesday')->orderBy('event_start', 'asc')->get();
@@ -41,7 +45,7 @@ class SectionsController extends Controller
 
         return view('section', ['lat' => $lat, 'lng' => $lng, 'users' => $users, 'news' => $news,
             'monday' => $monday, 'tuesday' => $tuesday, 'wednesday' => $wednesday, 'thursday' => $thursday,
-            'friday' => $friday, 'saturday' => $saturday]);
+            'friday' => $friday, 'saturday' => $saturday, 'photos'=>$photos]);
     }
 
     /**
