@@ -16,6 +16,11 @@
                     ></v-select>
                 </v-flex>
             </v-layout>
+            <template>
+                <v-alert v-if="images==false" :value="true" type="info">
+                    Нет данных!
+                </v-alert>
+            </template>
             <v-layout row wrap>
                 <v-flex xs12 sm6 md4
                         v-for="file in files"
@@ -25,9 +30,9 @@
                         <v-card-media :src="getPath(file)" height="250px" contain
                                       style="cursor: pointer">
                         </v-card-media>
-                        <v-card-actions>
+                        <v-card-actions class="justify-center">
                             <v-btn flat @click="onDelete(file)">
-                                <v-icon>delete</v-icon>
+                                <v-icon color="pink">delete</v-icon>
                                 Удалить
                             </v-btn>
                         </v-card-actions>
@@ -47,16 +52,15 @@
             return {
                 sectionsNames: [],
                 sections: [],
-                select: 'Выбор секции...',
-                sectionId: null,
+                select: '',
                 images: [],
+                sectionId:null
             };
         },
         created() {
             Auth.check();
             this.getSections();
         },
-
         computed: {
             files() {
                 return this.images;
@@ -69,7 +73,7 @@
             getImages() {
                 this.sections.forEach(item => {
                     if (item.section_name === this.select) {
-                        this.sectionId = item.id;
+                       this.sectionId = item.id;
                     }
                 });
                 axios.post(`/imagesGallery`, {section_id: this.sectionId}).then(response => {

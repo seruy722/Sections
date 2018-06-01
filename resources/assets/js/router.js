@@ -19,6 +19,7 @@ import AddSection from "./components/moder/sections/AddSection";
 import EditSection from "./components/moder/sections/EditSection";
 import UserGallery from "./components/moder/gallery/UserGallery";
 import ImagesGallery from "./components/moder/gallery/ImagesGallery";
+import Schedule from "./components/moder/schedule/Schedule";
 
 import VueRouter from "vue-router";
 
@@ -45,6 +46,7 @@ const routes = [
     {name: 'EditSection', path: "/edit_section", component: EditSection},
     {name: 'UserGallery', path: "/user_gallery", component: UserGallery},
     {name: 'ImagesGallery', path: "/images_gallery", component: ImagesGallery},
+    {name: 'Schedule', path: "/schedule", component: Schedule},
 ];
 
 export default new VueRouter({
