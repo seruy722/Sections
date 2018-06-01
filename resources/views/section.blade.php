@@ -197,7 +197,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class=" container TitleSection">
                         <header class="page-head">
-                            <h2>Фото</h2>
+                            <h2>Галерея</h2>
                         </header>
                     </div>
                     <div class="row">
@@ -214,15 +214,18 @@
                                 </div>
                             </section>
                         </div>
+                        <a href="{{route('gallery', $users->id)}}">
+                            <button type="button" class="btn btn-primary goto">ВСЕ ФОТОГРАФИИ</button>
+                        </a>
                     </div>
+
                 </div>
+</div>
             </div>
         </div>
     <div>
     <!--/Photos-->
-    <a href="{{route('gallery', $users->id)}}">
-        <button type="button" class="btn btn-primary goto">ВСЕ ФОТОГРАФИИ</button>
-    </a></div>
+
     <!--Contact -->
     <div id="contact" class="contact">
         <div class="container">

@@ -17,8 +17,8 @@ class CreateSectionsTable extends Migration
             $table->increments('id');
             $table->string('section_name');
             $table->text('info');
-            $table->string('img_logo');
             $table->string('images');
+            $table->string('img_logo');
             $table->string('address');
             $table->integer('user_id')->unsigned();
 //            $table->foreign('user_id')->references('id')->on('users');
