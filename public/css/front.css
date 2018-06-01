@@ -8134,7 +8134,7 @@ table th {
     position: relative;
     width: 50%;
     margin-left: 25%;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 #search-form {
@@ -8196,10 +8196,6 @@ table th {
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
-}
-
-.about_wrap {
-    margin-top: 20px;
 }
 
 .about_wrap:hover img {

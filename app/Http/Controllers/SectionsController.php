@@ -30,6 +30,7 @@ class SectionsController extends Controller
         $lat = ($d->results[0]->geometry->location->lat);
         $lng = ($d->results[0]->geometry->location->lng);
 
+
         $news = $users->news()->paginate(10);
 
         $monday = $users->schedules()->where('day_of_week', 'Monday')->orderBy('event_start', 'asc')->get();
@@ -39,6 +40,7 @@ class SectionsController extends Controller
         $friday = $users->schedules()->where('day_of_week', 'Friday')->orderBy('event_start', 'asc')->get();
         $saturday = $users->schedules()->where('day_of_week', 'Saturday')->orderBy('event_start', 'asc')->get();
 
+        $photos = ImageGallery::where('section_id', $id)->orderBy('id', 'desc')->limit(10)->get();
         return view('section', ['lat' => $lat, 'lng' => $lng, 'users' => $users, 'news' => $news,
             'monday' => $monday, 'tuesday' => $tuesday, 'wednesday' => $wednesday, 'thursday' => $thursday,
             'friday' => $friday, 'saturday' => $saturday, 'photos'=>$photos]);

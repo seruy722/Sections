@@ -15,6 +15,7 @@ class CategoryTableSeeder extends Seeder
         for ($i = 1; $i <= 9; $i++) {
             DB::table('category')->insert([
                 'name' => $faker->title,
+                'image' => str_random(10) . '.jpg',
             ]);
         }
     }

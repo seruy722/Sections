@@ -170,9 +170,10 @@
                                         <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt graphic">
                                             <div class="itemCont">
                                                 <a href="{{route('articles', $list->id)}}">
-                                                    <div class="thumb"><img class="img-responsive center-block"
-                                                                            alt="Blue Gate"
-                                                                            src="/images/img1.jpg"></div>
+                                                    <div class="about_wrap thumb">
+                                                        <div class="holder"><img class="img-responsive center-block"
+                                                                                 src="/images/{{$list->image_name}}" alt="about"></div>
+                                                    </div>
                                                     <div class="itemInfo">
                                                         <h4>{{$list->title}}</h4>
                                                         <h6>{{$list->sections->section_name}}</h6>

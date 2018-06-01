@@ -35,7 +35,7 @@
                                             <div class="about_wrap_one">
                                                 <div class="hexagon"><a href="{{route('sections', $cat->id)}}"> <span
                                                                 class="mask"></span> <img
-                                                                src="/images/content.jpg" alt="filter"> </a>
+                                                                src="/images/{{$cat->image}}" alt="filter"> </a>
                                                 </div>
                                                 <div class="wrap">
                                                     <h4>{{$cat->name}}</h4>
@@ -79,10 +79,9 @@
                                     <div class="container">
                                         <thead>
                                         <tr class="table-head">
+                                            <th class="col-md-1">Время начала занятия</th>
+                                            <th class="col-md-1">Время окончания занятия</th>
                                             <th class="col-md-1">Название</th>
-                                            <th class="col-md-1">Время начала</th>
-                                            <th class="col-md-3">Время окончания</th>
-                                            <th class="col-md-2">Информация</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -94,10 +93,9 @@
                                             </tr>
                                             @foreach($a as $b)
                                                 <tr>
-                                                    <td>{{$b->event_name}}</td>
                                                     <td>{{$b->event_start}}</td>
                                                     <td>{{$b->event_end}}</td>
-                                                    <td>{{$b->event_info}}</td>
+                                                    <td>{{$b->event_name}}</td>
                                                 </tr>
                                             @endforeach
                                         @endforeach
@@ -111,10 +109,9 @@
                                     <div class="container">
                                         <thead>
                                         <tr class="table-head">
+                                            <th class="col-md-1">Время начала занятия</th>
+                                            <th class="col-md-1">Время окончания занятия</th>
                                             <th class="col-md-1">Название</th>
-                                            <th class="col-md-1">Время начала</th>
-                                            <th class="col-md-3">Время окончания</th>
-                                            <th class="col-md-2">Информация</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -126,10 +123,9 @@
                                             </tr>
                                             @foreach($a as $b)
                                                 <tr>
-                                                    <td>{{$b->event_name}}</td>
                                                     <td>{{$b->event_start}}</td>
                                                     <td>{{$b->event_end}}</td>
-                                                    <td>{{$b->event_info}}</td>
+                                                    <td>{{$b->event_name}}</td>
                                                 </tr>
                                             @endforeach
                                         @endforeach
@@ -143,10 +139,9 @@
                                     <div class="container">
                                         <thead>
                                         <tr class="table-head">
+                                            <th class="col-md-1">Время начала занятия</th>
+                                            <th class="col-md-1">Время окончания занятия</th>
                                             <th class="col-md-1">Название</th>
-                                            <th class="col-md-1">Время начала</th>
-                                            <th class="col-md-3">Время окончания</th>
-                                            <th class="col-md-2">Информация</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -158,10 +153,9 @@
                                             </tr>
                                             @foreach($a as $b)
                                                 <tr>
-                                                    <td>{{$b->event_name}}</td>
                                                     <td>{{$b->event_start}}</td>
                                                     <td>{{$b->event_end}}</td>
-                                                    <td>{{$b->event_info}}</td>
+                                                    <td>{{$b->event_name}}</td>
                                                 </tr>
                                             @endforeach
                                         @endforeach
@@ -175,10 +169,9 @@
                                     <div class="container">
                                         <thead>
                                         <tr class="table-head">
+                                            <th class="col-md-1">Время начала занятия</th>
+                                            <th class="col-md-1">Время окончания занятия</th>
                                             <th class="col-md-1">Название</th>
-                                            <th class="col-md-1">Время начала</th>
-                                            <th class="col-md-3">Время окончания</th>
-                                            <th class="col-md-2">Информация</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -190,10 +183,9 @@
                                             </tr>
                                             @foreach($a as $b)
                                                 <tr>
-                                                    <td>{{$b->event_name}}</td>
                                                     <td>{{$b->event_start}}</td>
                                                     <td>{{$b->event_end}}</td>
-                                                    <td>{{$b->event_info}}</td>
+                                                    <td>{{$b->event_name}}</td>
                                                 </tr>
                                             @endforeach
                                         @endforeach
@@ -207,10 +199,9 @@
                                     <div class="container">
                                         <thead>
                                         <tr class="table-head">
+                                            <th class="col-md-1">Время начала занятия</th>
+                                            <th class="col-md-1">Время окончания занятия</th>
                                             <th class="col-md-1">Название</th>
-                                            <th class="col-md-1">Время начала</th>
-                                            <th class="col-md-3">Время окончания</th>
-                                            <th class="col-md-2">Информация</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -222,10 +213,9 @@
                                             </tr>
                                             @foreach($a as $b)
                                                 <tr>
-                                                    <td>{{$b->event_name}}</td>
                                                     <td>{{$b->event_start}}</td>
                                                     <td>{{$b->event_end}}</td>
-                                                    <td>{{$b->event_info}}</td>
+                                                    <td>{{$b->event_name}}</td>
                                                 </tr>
                                             @endforeach
                                         @endforeach
@@ -239,10 +229,9 @@
                                     <div class="container">
                                         <thead>
                                         <tr class="table-head">
+                                            <th class="col-md-1">Время начала занятия</th>
+                                            <th class="col-md-1">Время окончания занятия</th>
                                             <th class="col-md-1">Название</th>
-                                            <th class="col-md-1">Время начала</th>
-                                            <th class="col-md-3">Время окончания</th>
-                                            <th class="col-md-2">Информация</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -254,10 +243,9 @@
                                             </tr>
                                             @foreach($a as $b)
                                                 <tr>
-                                                    <td>{{$b->event_name}}</td>
                                                     <td>{{$b->event_start}}</td>
                                                     <td>{{$b->event_end}}</td>
-                                                    <td>{{$b->event_info}}</td>
+                                                    <td>{{$b->event_name}}</td>
                                                 </tr>
                                             @endforeach
                                         @endforeach
@@ -273,7 +261,7 @@
     </div>
     <!-- /Schedule -->
 
-
+    @if(count($news) > 0)
     <!-- News-->
     <div id="news" class="news page-section">
         <div class="container">
@@ -293,7 +281,7 @@
                                             <a href="{{route('articles', $list->id)}}">
                                                 <div class="about_wrap thumb">
                                                     <div class="holder"><img class="img-responsive center-block"
-                                                                             src="/images/img1.jpg" alt="about"></div>
+                                                                             src="/images/{{$list->image_name}}" alt="about"></div>
                                                 </div>
                                                 <div class="itemInfo">
                                                     <h4>{{$list->title}}</h4>
@@ -314,5 +302,6 @@
             </div>
         </div>
     </div>
+    @endif
     <!-- news -->
 @endsection

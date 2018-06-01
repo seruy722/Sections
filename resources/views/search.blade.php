@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -10,66 +9,76 @@
     </div>
 
     @if(isset($detail))
-        <div id="sections" class="sections ha-waypoint page-section" data-animate-down="ha-header-small "
-             data-animate-up="ha-header-large">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-md-12 col-sm-12">
-                        <div class="row">
-                            <div class="sec_wrap_3 option3">
-                                @foreach($detail as $section=>$q)
-                                    <div class="col-xs-12 col-md-4 col-sm-12">
-                                        <ul>
-                                            <li>
-                                                <div class="about_wrap_one">
-                                                    @foreach ($q as $a)
-                                                    <div class="hexagon"><a href="{{route('section', $a->id)}}"> <span class="mask"></span> <img
-                                                                    src="/images/content.jpg" alt="filter"> </a>
-                                                    </div>
-                                                    @endforeach
-                                                    <div class="wrap">
-                                                        <h4>{{$section}}</h4>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                @endforeach
-                            </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-sm-12">
+                    <div class="row">
+                        <div class="sec_wrap_3 option3">
+                            @foreach($detail as $section=>$q)
+                                <div class="col-xs-12 col-md-4 col-sm-12">
+                                    <ul>
+                                        <li>
+                                            <div class="about_wrap_one">
+                                                @foreach ($q as $a)
+                                                    <a href="{{route('section', $a->id)}}">
+                                                        <div class="effect eff-17">
+                                                            <img
+                                                                    src="/images/content.jpg" alt="filter">
+                                                            <div class="triangle-set">
+                                                                <div class="triangle triangle-1"></div>
+                                                                <div class="triangle triangle-2"></div>
+                                                                <div class="triangle triangle-3"></div>
+                                                                <div class="triangle triangle-4"></div>
+                                                            </div>
+                                                            <div class="caption">
+                                                                <p>Адрес: {{$a->address}}</p>
+                                                                <p>Телефон: {{optional($a->user)->phone}}</p>
+                                                                <p>Email: {{optional($a->user)->email}}</p>
+                                                            </div>
+                                                        </div>
+                                                        @endforeach
+                                                        <div class="wrap">
+                                                            <h4>{{$section}}</h4>
+                                                        </div>
+                                                    </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
-                @endif
+        </div>
+    @endif
 
 
-                @if(isset($details))
-                    <div id="news" class="news">
-
-                        <div class="imgSwitch">
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt graphic">
-                                    @foreach($details as $news)
-                                        <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt graphic">
-                                            <div class="itemCont">
-                                                <a href="{{route('articles', $news->id)}}">
-                                                    <div class="thumb"><img class="img-responsive center-block"
-                                                                            alt="Blue Gate"
-                                                                            src="/images/img1.jpg"></div>
-                                                    <div class="itemInfo">
-                                                        <h4>{{$news->title}}</h4>
-                                                        <h6>{{$news->sections->section_name}}</h6>
-                                                        <p>{{$news->description}}</p>
-                                                    </div>
-                                                </a>
-                                            </div>
+    @if(isset($details))
+        <div id="news" class="news">
+            <div class="imgSwitch">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt graphic">
+                        @foreach($details as $news)
+                            <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt graphic">
+                                <div class="itemCont">
+                                    <a href="{{route('articles', $news->id)}}">
+                                        <div class="thumb"><img class="img-responsive center-block"
+                                                                alt="Blue Gate"
+                                                                src="/images/img1.jpg"></div>
+                                        <div class="itemInfo">
+                                            <h4>{{$news->title}}</h4>
+                                            <h6>{{$news->sections->section_name}}</h6>
+                                            <p>{{$news->description}}</p>
                                         </div>
-                                    @endforeach
+                                    </a>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-
+                </div>
+            </div>
+        </div>
     @endif
 
 @endsection
