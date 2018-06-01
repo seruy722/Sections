@@ -1,23 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row search">
+    <div class="row">
         <div class="col-xs-12 col-md-12 col-sm-12">
-            <form action="/articles/search" method="POST" role="search" class="form-search">
-                {{ csrf_field() }}
-                <div class="row">
-                    <div class="col-xs-11">
-                        <div class="form-group">
-                            <input id="input" type="text" class="form-control" name="q" value="{{ old('q') }}" required>
-                        </div>
-                    </div>
-                    <div class="col-xs-1">
-                        <div class="form-group">
-                            <input class="btn btn-info" type="submit" value="Поиск">
-                        </div>
-                    </div>
-                </div>
-            </form>
+            <div id='search-box'>
+                <form action="/articles/search" method="POST" id='search-form' target='_top'>
+                    {{ csrf_field() }}
+                    <input id="input" type="text" id='search-text' name="q" value="{{ old('q') }}" required>
+                    <button id='search-button' type='submit'>
+                        <span>Поиск</span>
+                    </button>
+                </form>
+            </div>
             <div class="msg">{{Session::get('msg')}}</div>
         </div>
     </div>

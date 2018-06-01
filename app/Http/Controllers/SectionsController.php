@@ -7,6 +7,9 @@ use App\Mail\MailClass;
 use App\Sections;
 use App\User;
 use Illuminate\Http\Request;
+use App\ImageGallery;
+
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 
 class SectionsController extends Controller
@@ -38,7 +41,7 @@ class SectionsController extends Controller
 
         return view('section', ['lat' => $lat, 'lng' => $lng, 'users' => $users, 'news' => $news,
             'monday' => $monday, 'tuesday' => $tuesday, 'wednesday' => $wednesday, 'thursday' => $thursday,
-            'friday' => $friday, 'saturday' => $saturday]);
+            'friday' => $friday, 'saturday' => $saturday, 'photos'=>$photos]);
     }
 
     /**

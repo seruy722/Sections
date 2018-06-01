@@ -153,47 +153,81 @@
     <!-- /Schedule -->
 
     <!-- News-->
-    <div id="news" class="news">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-md-12 col-sm-12">
-                    <div class=" container TitleSection">
-                        <header class="page-head">
-                            <h2>Новости</h2>
-                        </header>
-                    </div>
-                    <div class="row">
-                        <div class="imgSwitch">
-                            <div class="row">
-                                @foreach($news as $list)
-                                    <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt graphic">
-                                        <div class="itemCont">
-                                            <a href="{{route('articles', $list->id)}}">
-                                                <div class="thumb"><img class="img-responsive center-block"
-                                                                        alt="Blue Gate"
-                                                                        src="/images/img1.jpg"></div>
-                                                <div class="itemInfo">
-                                                    <h4>{{$list->title}}</h4>
-                                                    <h6>{{$list->sections->section_name}}</h6>
-                                                    <p>{{$list->description}}</p>
-                                                </div>
-                                            </a>
+    @if(count($news) > 0)
+        <div id="news" class="news">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12 col-sm-12">
+                        <div class=" container TitleSection">
+                            <header class="page-head">
+                                <h2>Новости</h2>
+                            </header>
+                        </div>
+                        <div class="row">
+                            <div class="imgSwitch">
+                                <div class="row">
+                                    @foreach($news as $list)
+                                        <div class="col-xs-12 col-sm-12 col-md-12 dbox-list prod-cnt graphic">
+                                            <div class="itemCont">
+                                                <a href="{{route('articles', $list->id)}}">
+                                                    <div class="thumb"><img class="img-responsive center-block"
+                                                                            alt="Blue Gate"
+                                                                            src="/images/img1.jpg"></div>
+                                                    <div class="itemInfo">
+                                                        <h4>{{$list->title}}</h4>
+                                                        <h6>{{$list->sections->section_name}}</h6>
+                                                        <p>{{$list->description}}</p>
+                                                    </div>
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </div>
+                                <div class="paginate">{{$news->links()}}</div>
                             </div>
-                            <div class="paginate">{{$news->links()}}</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
     <!-- News-->
-    <div>
-    <a href="{{route('gallery', $users->id)}}">
-        <button type="button" class="btn btn-primary goto">ВСЕ ФОТОГРАФИИ</button>
-    </a></div>
+    <!--Photos-->
+    @if(count($photos) > 0)
+        <div id="photos" class="photos">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class=" container TitleSection">
+                            <header class="page-head">
+                                <h2>Галерея</h2>
+                            </header>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 ">
+                                <section class="slider">
+                                    <div class="flexslider">
+                                        <ul class="slides">
+                                            @foreach($photos as $one)
+                                            <li data-thumb="/images/{{$one->name}}">
+                                                <img src="/images/{{$one->name}}" class="center-block"/>
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </section>
+                            </div>
+                            <a href="{{route('gallery', $users->id)}}">
+                                <button type="button" class="btn btn-primary goto">ВСЕ ФОТОГРАФИИ</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+    <!--/Photos-->
+
     <!--Contact -->
     <div id="contact" class="contact">
         <div class="container">

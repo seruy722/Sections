@@ -17,10 +17,9 @@ class SchedulesTableSeeder extends Seeder
             DB::table('schedules')->insert([
                 'day_of_week' => $faker->dayOfWeek(),
                 'event_name' => $faker->text($maxNbChars = 20),
-                'event_info' => $faker->text($maxNbChars = 100),
                 'event_start' => $t . ':00',
                 'event_end' => ($t+1) . ':00',
-                'section_id' => rand(1, 100),
+                'section_id' => rand(1, 26),
             ]);
         }
     }

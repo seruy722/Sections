@@ -13,11 +13,11 @@
                     <div class="tz-gallery">
                         <div class="row">
                             @foreach($img->image as $pic)
-                                <div class="photo">
-                                    <a class="lightbox" href="/images/{{$pic->name}}">
-                                        <img src="/images/{{$pic->name}}"
-                                             alt=""/></a>
-                                </div>
+                                    <div class="photo">
+                                        <a class="lightbox" href="/images/{{$pic->name}}">
+                                            <img src="/images/{{$pic->name}}"
+                                                 alt=""/></a>
+                                    </div>
                             @endforeach
                         </div>
                     </div>
