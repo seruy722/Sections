@@ -11,6 +11,6 @@ class News extends Model
 
     public function sections()
     {
-        return $this->belongsTo('App\Sections','section_id');
+        return $this->belongsTo(Sections::class,'section_id');
     }
 }

@@ -16,7 +16,9 @@ Route::resource('/createMail', 'MailExchangeController');
 Route::resource('/deleteMail', 'MailExchangeController');
 Route::post('/updateMail', 'MailExchangeController@updateMail');
 Route::post('/mailsForUser', 'MailExchangeController@mailsForUser');
-Route::resource('/add_image', 'ImageGalleryController');
+Route::resource('/addImage', 'ImageGalleryController');
+Route::resource('/deleteImage', 'ImageGalleryController');
+Route::post('/imagesGallery', 'ImageGalleryController@getImages');
 
 Route::view('/controls', 'controls');
 

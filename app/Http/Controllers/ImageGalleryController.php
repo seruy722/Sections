@@ -22,9 +22,14 @@ class ImageGalleryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getImages(Request $request)
     {
-        //
+        $images = ImageGallery::where('section_id', $request->section_id)->get();
+        if ($images) {
+            return response()->json(['status' => true, 'images' => $images]);
+        } else {
+            return response()->json(['status' => false, 'error' => 'Нет изображений.']);
+        }
     }
 
     /**
@@ -37,29 +42,28 @@ class ImageGalleryController extends Controller
     {
         $data = $request->all();
         foreach ($data as $key => $element) {
+            $this->validate($request, [
+                $key => 'required|mimes:jpg,jpeg,png|dimensions:max:5120',
+                'section_id' => 'required|integer',
+            ], [
+                "$key.mimes" => 'Один из файлов не является изображением.',
+                "$key.required" => 'Выбирите изображение.',
+                'section_id.integer' => 'Поле секция обьзательное для заполнения.'
+            ]);
+        }
+
+        foreach ($data as $key => $elem) {
             if ($key != 'section_id') {
-                $this->validate($request, [
-                    $key => 'mimes:jpg,jpeg,png|dimensions:max:5120',
-                ], [
-                    "$key.mimes" => 'Один из файлов не является изображением.'
-                ]);
+                $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $elem->getClientOriginalExtension();
+                $elem->move('images', $filename);
+                $newFile = [
+                    'name' => $filename,
+                    'section_id' => $data['section_id']
+                ];
+                ImageGallery::create($newFile);
             }
         }
-        $this->validate($request, [
-            'section_id' => 'required|integer',
-        ], [
-            'section_id.integer' => 'Поле Секция обьзательное для заполнения.'
-        ]);
-        dd('ok');
 
-
-//        $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
-//        $file->move('images', $filename);
-//        $newFile = [
-//            'name' => $filename,
-//            'section_id' => $section_id
-//        ];
-        ImageGallery::create();
         return response()->json(['status' => true, 'message' => 'Изображения успешно загружены.']);
     }
 
@@ -105,6 +109,12 @@ class ImageGalleryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $image = ImageGallery::findOrFail($id);
+        if ($image) {
+            unlink(public_path() . '/images/' . $image->name);
+            $image->delete();
+            return response()->json(['status' => true, 'message' => 'Изображение успешно удалено.']);
+        }
+        return response()->json(['status' => false, 'message' => 'Ошибка при удвлении изображения.']);
     }
 }

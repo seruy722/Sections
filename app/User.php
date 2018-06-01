@@ -9,30 +9,15 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *a
-     * @var array
-     */
     protected $fillable = ['name', 'email', 'password', 'role','api_token', 'photo'];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = ['password', 'remember_token'];
-
-
-    protected $table='users';
 
     public function sections()
     {
-        return $this->hasMany('App\Sections','user_id');
+        return $this->hasMany(Sections::class,'user_id');
     }
     public function news()
     {
-        return $this->hasManyThrough('App\News', 'App\Sections', 'user_id', 'section_id');
+        return $this->hasManyThrough(News::class, Sections::class, 'user_id', 'section_id');
     }
 
 }
