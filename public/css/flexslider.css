@@ -111,8 +111,8 @@ html[xmlns] .flexslider .slides {
 .flex-direction-nav a {
   text-decoration: none;
   display: block;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   margin: -20px 0 0;
   position: absolute;
   top: 50%;
@@ -131,23 +131,22 @@ html[xmlns] .flexslider .slides {
   transition: all 0.3s ease-in-out;
 }
 .flex-direction-nav a:before {
-  padding-left: 10px;
   font-family: "flexslider-icon";
-  font-size: 30px;
+  font-size: 37px;
   display: inline-block;
   content: '\f001';
+  padding: 0 11px;
   color: rgba(0, 0, 0, 0.8);
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
 }
 .flex-direction-nav a.flex-next:before {
   content: '\f002';
-  padding-right: 10px;
 }
 .flex-direction-nav .flex-prev {
-  left: 10px;
+  left: 30px;
 }
 .flex-direction-nav .flex-next {
-  right: 10px;
+  right: 30px;
   text-align: right;
 }
 .flexslider:hover .flex-direction-nav .flex-prev {
