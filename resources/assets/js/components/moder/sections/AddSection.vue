@@ -254,4 +254,10 @@
     .progress .progress-circular{
         margin: 1rem;
     }
+
+
+     .input-field-file {
+         display: none;
+     }
+
 </style>

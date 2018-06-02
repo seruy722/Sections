@@ -23,6 +23,8 @@ Route::post('/editSchedule', 'ScheduleController@update');
 Route::resource('/daleteSchedule', 'ScheduleController');
 Route::resource('/categories', 'CategoryController');
 Route::resource('/deleteCategories', 'CategoryController');
+Route::resource('/addCategory', 'CategoryController');
+Route::post('/editCategory', 'CategoryController@update');
 
 Route::view('/controls', 'controls');
 

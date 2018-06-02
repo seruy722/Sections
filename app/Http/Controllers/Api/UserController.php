@@ -108,15 +108,35 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+//        $allSections = User::find($id)->sections;
+//        $sections = [];
+//        $schedules = [];
+//
+//        foreach ($allSections as $key => $item) {
+//            $sections[] = (object)array('id' => $item->id, 'name' => $item->section_name);
+//            if ($item->schedules->count() > 0) {
+//                foreach ($item->schedules as $elem) {
+//                    $schedules[] = $elem;
+//                }
+//            }
+//        }
+
         $user = User::find($id);
-        if ($user) {
+        if ($user->count()>0) {
+            $res = $user->sections;
+            foreach ($res as $elem){
+                if($elem->news->count()>0){
+                    dd($elem->news);
+                }
+            }
+            dd('ok');
+            Sections::where('user_id',$id)->delete();
             News::where('user_id',$id)->delete();
             Schedules::where('user_id',$id)->delete();
-            Sections::where('user_id',$id)->delete();
             $user->delete();
-            return response()->json(['status' => 'success', 'message' => 'Запись успешно удалена']);
+            return response()->json(['status' => true, 'message' => 'Запись успешно удалена']);
         } else {
-            return response()->json(['status' => 'error', 'message' => 'Ошибка при удалении записи']);
+            return response()->json(['status' => false, 'message' => 'Ошибка при удалении записи']);
         }
     }
 }

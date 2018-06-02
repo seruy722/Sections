@@ -198,3 +198,16 @@
         }
     }
 </script>
+
+<style>
+    .input-field-file {
+        display: none;
+    }
+
+    .preview-image {
+        width: 250px;
+        padding: 15px;
+        border: 1px solid #999;
+        border-radius: 5px;
+    }
+</style>

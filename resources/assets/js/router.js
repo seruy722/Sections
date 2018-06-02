@@ -22,6 +22,8 @@ import Schedule from "./components/moder/schedule/Schedule";
 import AddSchedule from "./components/moder/schedule/AddSchedule";
 import EditSchedule from "./components/moder/schedule/EditSchedule";
 import Categories from "./components/admin/categories/Categories";
+import AddCategory from "./components/admin/categories/AddCategory";
+import EditCategory from "./components/admin/categories/EditCategory";
 
 import VueRouter from "vue-router";
 
@@ -50,7 +52,9 @@ const routes = [
     {name: 'Schedule', path: "/schedule", component: Schedule},
     {name: 'AddSchedule', path: "/add_schedule", component: AddSchedule},
     {name: 'EditSchedule', path: "/edit_schedule", component: EditSchedule},
-    {name: 'Categories', path: "/sections_categoties", component: Categories},
+    {name: 'Categories', path: "/sections_categories", component: Categories},
+    {name: 'AddCategory', path: "/add_category", component: AddCategory},
+    {name: 'EditCategory', path: "/edit_category", component: EditCategory},
 ];
 
 export default new VueRouter({

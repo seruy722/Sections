@@ -45,7 +45,27 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:2|max:255',
+            'image' => 'mimes:jpg,jpeg,png|dimensions:max:5120'
+        ]);
+
+        $data = $this->cleanData($request->all());
+        $file = $request->image;
+        $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
+        $file->move('images', $filename);
+        $data['image'] = $filename;
+        Category::create($data);
+
+        return response()->json(['status' => true, 'message' => 'Категория успешно добавлена.']);
+    }
+
+    function cleanData($value)
+    {
+        $arr = array_map("trim", $value);
+        $arr = array_map("strip_tags", $arr);
+        $arr = array_map("stripcslashes", $arr);
+        return $arr;
     }
 
     /**
@@ -77,9 +97,30 @@ class CategoryController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:2|max:255',
+            'image' => 'mimes:jpg,jpeg,png|dimensions:max:5120'
+        ]);
+
+        $category = Category::find($request->id);
+
+        if ($category->count() > 0) {
+            $data = $this->cleanData($request->all());
+            $file = $request->image;
+            if ($file) {
+                $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
+                $file->move('images', $filename);
+                $data['image'] = $filename;
+            }
+            $category->update($data);
+            return response()->json(['status' => true, 'message' => 'Категория успешно обновлена.']);
+        } else {
+            return response()->json(['status' => false, 'message' => 'Ошибка при обновлении категории.']);
+        }
+
+
     }
 
     /**
@@ -92,6 +133,9 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         if ($category->count() > 0) {
+            if ($category->image) {
+                unlink(public_path() . '/images/' . $category->image);
+            }
             $category->delete();
             return response()->json(['status' => true, 'message' => 'Запись успешно удалена.']);
         }

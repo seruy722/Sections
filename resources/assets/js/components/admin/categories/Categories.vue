@@ -24,7 +24,7 @@
                     <td>{{ props.item.created_at }}</td>
                     <td>{{ props.item.name }}</td>
                     <td>
-                        <v-btn icon class="mx-0" v-bind:to="{name:'EditNews',params:{item:props.item}}">
+                        <v-btn icon class="mx-0" v-bind:to="{name:'EditCategory',params:{item:props.item}}">
                             <v-icon color="teal">edit</v-icon>
                         </v-btn>
                         <v-btn icon class="mx-0" @click="deleteCategory(props.item)">
@@ -84,7 +84,7 @@
                 }
             },
             onAddCategory() {
-                this.$router.push({name:'AddNews',params:{sections:this.sections}});
+                this.$router.push({name:'AddCategory'});
             }
         }
     }

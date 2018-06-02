@@ -136,7 +136,7 @@
                 let answer = confirm('Вы действительно хотите удалить этого пользователя?');
                 if (answer) {
                     axios.delete(`/api/users/` + item.id).then(response => {
-                        if (response.data.status == 'success') {
+                        if (response.data.status) {
                             this.users.splice(index, 1);
                             this.$store.commit(
                                 "showInfo",
@@ -167,7 +167,7 @@
                     let item = this.editedItem;
                     item.created_at = this.formatDate(new Date());
                     axios.post(`/api/users`, this.editedItem).then(response => {
-                        if (response.data.status === 'success') {
+                        if (response.data.status) {
                             this.users.push(item);
                             this.$store.commit(
                                 "showInfo",
