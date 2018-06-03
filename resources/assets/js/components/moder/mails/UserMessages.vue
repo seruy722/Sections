@@ -1,6 +1,16 @@
 <template>
 
     <div class="wrapper">
+        <v-layout row justify-center>
+            <v-dialog v-model="dialog" persistent>
+                <template>
+                    <div class="progress">
+                        <v-progress-circular :size="70" indeterminate color="primary"></v-progress-circular>
+                    </div>
+                </template>
+            </v-dialog>
+        </v-layout>
+
         <v-card>
             <v-card-title>
                 <v-btn color="primary" v-bind:to="{name:'CreateMessage'}">
@@ -30,7 +40,7 @@
                         <v-btn icon class="mx-0" @click="readMessage(props.item)">
                             <v-icon color="teal">pageview</v-icon>
                         </v-btn>
-                        <v-btn icon class="mx-0" @click="deleteItem(props.item)">
+                        <v-btn icon class="mx-0" @click="deleteMessage(props.item)">
                             <v-icon color="pink">delete</v-icon>
                         </v-btn>
                     </td>
@@ -53,6 +63,7 @@
     export default {
         data() {
             return {
+                dialog:false,
                 search: '',
                 headers: [
                     {text: 'Дата', value: 'created_at'},
@@ -78,25 +89,30 @@
                     });
                 });
             },
-            deleteItem(item) {
+            deleteMessage(item) {
+                this.dialog = true;
                 const index = this.mails.indexOf(item);
                 let answer = confirm('Вы действительно хотите удалить это сообщение?');
+
                 if (answer) {
                     axios.delete(`/deleteMail/` + item.id).then(response => {
                         if (response.data.status) {
                             this.mails.splice(index, 1);
-                            this.$store.commit(
-                                "showInfo",
-                                response.data.message
-                            );
+                            this.$store.commit("showInfo", response.data.message);
+                            this.dialog = false;
                         }
+                    }).catch(error => {
+                        if (error.response.status === 404) {
+                            this.$store.commit("showError", 'Произошла ошибка при удалении. (Запись не существует.)');
+                        }
+                        this.dialog = false;
                     });
                 }
             },
             readMessage(item) {
                 axios.post(`/updateMail`, item).then(response => {
                     if (response.data.status) {
-                        this.$router.push({name:'ViewMessage',params:{item:item}});
+                        this.$router.push({name: 'ViewMessage', params: {item: item}});
                     }
                 });
             },
@@ -120,5 +136,13 @@
 <style>
     .danger {
         color: red;
+    }
+
+    .progress {
+        text-align: center;
+    }
+
+    .progress .progress-circular {
+        margin: 1rem;
     }
 </style>

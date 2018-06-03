@@ -108,12 +108,15 @@ class SectionsController extends Controller
         ], [
             'category_id.integer' => 'Поле категория обьзательное для заполнения.'
         ]);
+
         $data = $this->cleanData($request->all());
         $file = $request->fupload;
         $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
         $file->move('images', $filename);
         $data['img_logo'] = $filename;
+
         Sections::create($data);
+
         return response()->json(['status' => true, 'message' => 'Запись успешно добавлена.']);
     }
 
@@ -167,29 +170,28 @@ class SectionsController extends Controller
         ]);
 
         $data = $this->cleanData($request->all());
-        $section = Sections::find($data['id']);
-        if ($section->count() > 0) {
-            if (is_object($request->fupload)) {
-                $this->validate($request, [
-                    'fupload' => 'mimes:jpg,jpeg,png|dimensions:max:5120',
-                ]);
-                unlink(public_path() . '/images/' . $section->img_logo);
-                $file = $request->fupload;
-                $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
-                $file->move('images', $filename);
-                $data['img_logo'] = $filename;
-            } else {
-                unset($data['fupload']);
-            }
+        $section = Sections::findOrFail($data['id']);
 
-            if (!$data['address']) {
-                unset($data['address']);
-            }
-
-            $section->update($data);
-            return response()->json(['status' => true, 'message' => 'Запись успешно обновлена.']);
+        if (is_object($request->fupload)) {
+            $this->validate($request, [
+                'fupload' => 'mimes:jpg,jpeg,png|dimensions:max:5120',
+            ]);
+            unlink(public_path() . '/images/' . $section->img_logo);
+            $file = $request->fupload;
+            $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
+            $file->move('images', $filename);
+            $data['img_logo'] = $filename;
+        } else {
+            unset($data['fupload']);
         }
-        return response()->json(['status' => false, 'message' => 'Ошибка при обновлении записи.']);
+
+        if (!$data['address']) {
+            unset($data['address']);
+        }
+
+        $section->update($data);
+        return response()->json(['status' => true, 'message' => 'Запись успешно обновлена.']);
+
     }
 
     /**
@@ -200,44 +202,41 @@ class SectionsController extends Controller
      */
     public function destroy($id)
     {
-        $section = Sections::find($id);
-        if ($section->count() > 0) {
+        $section = Sections::findOrFail($id);
 
-            $images = Sections::find($id)->image;
-            if ($images->count() > 0) {
-                $arr = $images->toArray();
-                foreach ($arr as $item) {
-                    unlink(public_path() . '/images/' . $item['name']);
-                    ImageGallery::destroy($item['id']);
-                }
+        $images = Sections::find($id)->image;
+        if ($images->count() > 0) {
+            $arr = $images->toArray();
+            foreach ($arr as $item) {
+                unlink(public_path() . '/images/' . $item['name']);
+                ImageGallery::destroy($item['id']);
             }
-
-            $news = Sections::find($id)->news;
-            if ($news->count() > 0) {
-                $arr = $news->toArray();
-                foreach ($arr as $item) {
-                    unlink(public_path() . '/images/' . $item['image_name']);
-                    News::destroy($item['id']);
-                }
-            }
-
-            $schedules = Sections::find($id)->schedules;
-            if ($schedules->count() > 0) {
-                $arr = $schedules->toArray();
-                foreach ($arr as $item) {
-                    Schedules::destroy($item['id']);
-                }
-            }
-
-
-            if ($section->img_logo) {
-                unlink(public_path() . '/images/' . $section->img_logo);
-            }
-
-            $section->delete();
-            return response()->json(['status' => true, 'message' => 'Запись успешно удалена.']);
         }
-        return response()->json(['status' => true, 'message' => 'Ошибка при удалении записи.']);
+
+        $news = Sections::find($id)->news;
+        if ($news->count() > 0) {
+            $arr = $news->toArray();
+            foreach ($arr as $item) {
+                unlink(public_path() . '/images/' . $item['image_name']);
+                News::destroy($item['id']);
+            }
+        }
+
+        $schedules = Sections::find($id)->schedules;
+        if ($schedules->count() > 0) {
+            $arr = $schedules->toArray();
+            foreach ($arr as $item) {
+                Schedules::destroy($item['id']);
+            }
+        }
+
+
+        if ($section->img_logo) {
+            unlink(public_path() . '/images/' . $section->img_logo);
+        }
+
+        $section->delete();
+        return response()->json(['status' => true, 'message' => 'Запись успешно удалена.']);
     }
 
     public function gallery($id)

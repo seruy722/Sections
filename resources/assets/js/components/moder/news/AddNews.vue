@@ -148,12 +148,14 @@
         methods: {
             addNews() {
                 this.errors = {};
+                this.dialog = true;
                 this.sections.forEach(item => {
                     if (item.section_name === this.select) {
                         this.news.section_id = item.id
 
                     }
                 });
+
                 let data = new FormData();
                 data.append("fupload", this.news.img_filename);
                 data.append('title', this.news.title);
@@ -162,7 +164,7 @@
                 data.append('section_id', this.news.section_id);
 
                 axios.post(`/api/addNews`, data).then(response => {
-                    this.dialog = true;
+
                     if (response.data.status) {
                         this.$store.commit(
                             "showInfo",

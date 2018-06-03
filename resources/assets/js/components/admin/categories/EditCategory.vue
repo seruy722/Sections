@@ -99,19 +99,12 @@
 
                 axios.post('/editCategory', data).then(response => {
                     if (response.data.status) {
-                        this.$store.commit(
-                            "showInfo",
-                            response.data.message
-                        );
+                        this.$store.commit("showInfo", response.data.message);
                         data = new FormData();
                         this.onUserCategories();
                     }
                 }).catch(error => {
                     this.errors = error.response.data.errors;
-                    this.$store.commit(
-                        "showInfo",
-                        this.errors.message
-                    );
                 });
 
             },

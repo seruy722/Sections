@@ -171,6 +171,7 @@
         methods: {
             addSchedule() {
                 this.errors = {};
+                this.dialog = true;
 
                 let data = new FormData();
                 data.append('section_id', this.section.id);
@@ -180,7 +181,6 @@
                 data.append('event_name', this.event);
 
                 axios.post('/addSchedule', data).then(response => {
-                    this.dialog = true;
                     if (response.data.status) {
                         this.$store.commit(
                             "showInfo",

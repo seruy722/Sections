@@ -10,6 +10,7 @@ class ImageGalleryController extends Controller
 
     public function getImages(Request $request)
     {
+
         $images = ImageGallery::where('section_id', $request->section_id)->get();
         if ($images) {
             return response()->json(['status' => true, 'images' => $images]);
@@ -20,6 +21,15 @@ class ImageGalleryController extends Controller
 
     public function store(Request $request)
     {
+        $allowedImges = 100;
+        $countImages = ImageGallery::where('section_id', $request->section_id)->count();
+
+        if ($countImages <= $allowedImges) {
+            $count = $allowedImges - $countImages;
+        } else {
+            return response()->json(['status' => false, 'message' => 'Нельзя загрузить больше 100 изображений.']);
+        }
+
         $data = $request->all();
         foreach ($data as $key => $element) {
             $this->validate($request, [
@@ -32,8 +42,11 @@ class ImageGalleryController extends Controller
             ]);
         }
 
+        $countIterations = 0;
         foreach ($data as $key => $elem) {
             if ($key != 'section_id') {
+                $countIterations++;
+                if($countIterations <= $count) break;
                 $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $elem->getClientOriginalExtension();
                 $elem->move('images', $filename);
                 $newFile = [
@@ -44,7 +57,7 @@ class ImageGalleryController extends Controller
             }
         }
 
-        return response()->json(['status' => true, 'message' => 'Изображения успешно загружены.']);
+        return response()->json(['status' => true, 'message' => "Загружено: $countImages/$allowedImges изображений."]);
     }
 
     public function destroy($id)

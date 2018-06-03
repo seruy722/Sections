@@ -90,8 +90,8 @@
         },
         methods: {
             sendMessage() {
-                this.dialog = true;
                 this.errors = {};
+                this.dialog = true;
                 this.mail.email_from = this.$store.state.Auth.email;
                 this.mail.name = this.$store.state.Auth.name;
                 this.mail.user_id = this.$store.state.Auth.id;

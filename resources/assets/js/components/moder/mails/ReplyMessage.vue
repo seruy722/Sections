@@ -1,5 +1,15 @@
 <template>
     <v-container fluid>
+        <v-layout row justify-center>
+            <v-dialog v-model="dialog" persistent>
+                <template>
+                    <div class="progress">
+                        <v-progress-circular :size="70" indeterminate color="primary"></v-progress-circular>
+                    </div>
+                </template>
+            </v-dialog>
+        </v-layout>
+
         <v-layout row>
             <v-flex xs4>
                 <v-subheader>Кому</v-subheader>
@@ -59,33 +69,36 @@
 </template>
 
 <script>
+    import Auth from "../../../helpers/Auth";
     export default {
         data() {
             return {
+                dialog: false,
                 mail: {},
                 errors: {}
             }
         },
         created() {
+            Auth.check();
             this.mail = this.$route.params.item;
             this.mail.message = null;
         },
         methods: {
             sendMessage() {
                 this.errors = {};
+                this.dialog = true;
                 this.mail.email_to = this.mail.email_from;
                 this.mail.email_from = this.$store.state.Auth.email;
                 this.mail.name = this.$store.state.Auth.name;
                 this.mail.user_id = this.$store.state.Auth.id;
+
                 axios.post(`/createMail`, this.mail).then(response => {
                     if (response.data.status) {
-                        this.$store.commit(
-                            "showInfo",
-                            response.data.message
-                        );
+                        this.$store.commit("showInfo", response.data.message);
                         this.onUserMessages();
                     }
                 }).catch(error => {
+                    this.dialog = false;
                     this.errors = error.response.data.errors;
                 });
 
@@ -93,9 +106,19 @@
             checkError(field) {
                 return this.errors.hasOwnProperty(field) ? this.errors[field] : [];
             },
-            onUserMessages(){
+            onUserMessages() {
                 this.$router.push('/user_messages');
             }
         }
     }
 </script>
+
+<style>
+    .progress {
+        text-align: center;
+    }
+
+    .progress .progress-circular {
+        margin: 1rem;
+    }
+</style>

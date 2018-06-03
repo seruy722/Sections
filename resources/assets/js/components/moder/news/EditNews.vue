@@ -129,6 +129,7 @@
                 this.$router.push("/user_news");
             },
             updateItem() {
+                this.dialog = true;
                 this.news.user_id = this.$store.state.Auth.id;
                 let data = new FormData();
                 data.append("fupload", this.news.file);
@@ -139,13 +140,15 @@
                 data.append('user_id', this.news.user_id);
 
                 axios.post(`/api/updateNews`, data).then(response => {
-                    this.dialog = true;
                     if (response.data.status) {
                         this.$store.commit("showInfo", response.data.message);
                         this.onUserNews();
                     }
 
                 }).catch(error => {
+                    if (error.response.status === 404) {
+                        this.$store.commit("showError", 'Произошла ошибка при обновлении. (Запись не существует.)');
+                    }
                     this.dialog = false;
                     this.errors = error.response.data.errors;
                 });

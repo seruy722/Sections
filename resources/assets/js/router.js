@@ -1,14 +1,14 @@
-import Console from "./components/Console";
-import UploadFile from "./components/UploadFile";
-import Register from "./components/Register";
-import Login from "./components/Login";
-import Profile from "./components/Profile";
+import AdminConsole from "./components/admin/AdminConsole";
+import Settings from "./components/admin/Settings";
+import Register from "./components/admin/Register";
+import Login from "./components/admin/Login";
+import Profile from "./components/admin/Profile";
 import Users from "./components/admin/Users";
 import News from "./components/admin/News";
 import UserNews from "./components/moder/news/UserNews";
 import AddNews from "./components/moder/news/AddNews";
 import EditNews from "./components/moder/news/EditNews";
-import ResetPassword from "./components/ResetPassword";
+import ResetPassword from "./components/admin/ResetPassword";
 import CreateMessage from "./components/moder/mails/CreateMessage";
 import UserMessages from "./components/moder/mails/UserMessages";
 import ViewMessage from "./components/moder/mails/ViewMessage";
@@ -28,8 +28,8 @@ import EditCategory from "./components/admin/categories/EditCategory";
 import VueRouter from "vue-router";
 
 const routes = [
-    {path: "/controls", component: Console},
-    {path: "/settings", component: UploadFile},
+    {path: "/controls", component: AdminConsole},
+    {path: "/settings", component: Settings},
     {path: "/register", component: Register},
     {path: "/login", component: Login},
     {path: "/profile", component: Profile},
@@ -59,6 +59,5 @@ const routes = [
 
 export default new VueRouter({
     routes,
-
     mode: "history"
 });

@@ -1,5 +1,15 @@
 <template>
     <v-container fluid>
+        <v-layout row justify-center>
+            <v-dialog v-model="dialog" persistent>
+                <template>
+                    <div class="progress">
+                        <v-progress-circular :size="70" indeterminate color="primary"></v-progress-circular>
+                    </div>
+                </template>
+            </v-dialog>
+        </v-layout>
+
         <v-layout row wrap>
             <v-flex xs4>
                 <v-subheader>Секция</v-subheader>
@@ -47,6 +57,7 @@
     export default {
         data() {
             return {
+                dialog: false,
                 sections: [],
                 select: '',
                 errors: {},
@@ -74,6 +85,7 @@
                 this.$refs.fupload.click();
             },
             uploadImage() {
+                this.dialog = true;
                 let files = this.formData.files;
                 this.sections.forEach(item => {
                     if (item.section_name === this.select) {
@@ -98,9 +110,14 @@
                         this.formData.files = null;
                         data = new FormData();
                         this.errors = {};
+                        this.dialog = false;
+                    }else {
+                        this.dialog = false;
+                        this.$store.commit("showError", response.data.message);
                     }
 
                 }).catch(error => {
+                    this.dialog = false;
                     this.errors = error.response.data.errors;
                 });
             },
@@ -114,5 +131,13 @@
 <style>
     .input-field-file {
         display: none;
+    }
+
+    .progress {
+        text-align: center;
+    }
+
+    .progress .progress-circular {
+        margin: 1rem;
     }
 </style>

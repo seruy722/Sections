@@ -5,6 +5,12 @@ export default {
         text: null
     },
 
+    error: {
+        timeout: 5000,
+        show: false,
+        text: null
+    },
+
     nav: [
         {path: "/controls", title: "Консоль", auth: true, role: 'admin'},
         {path: "/user_messages", title: "Сообщения", auth: true, role: 'admin'},

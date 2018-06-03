@@ -110,7 +110,7 @@
 </template>
 
 <script>
-    import Auth from "../helpers/Auth";
+    import Auth from "../../helpers/Auth";
 
     export default {
         computed: {
@@ -125,7 +125,7 @@
                     name: null,
                     email: null,
                     password: null,
-                    phone:null,
+                    phone: null,
                     password_confirmation: null,
                     action: null
                 },

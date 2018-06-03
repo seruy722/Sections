@@ -11,16 +11,37 @@
                     <v-container grid-list-md>
                         <v-layout wrap>
                             <v-flex xs12 sm6 md4>
-                                <v-text-field v-model="editedItem.name" label="Пользователь"></v-text-field>
+                                <v-text-field
+                                        v-model="editedItem.name"
+                                        label="Пользователь"
+                                        required
+                                        :error-messages="checkError('name')"
+                                ></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6 md4>
-                                <v-text-field v-model="editedItem.email" label="Email"></v-text-field>
+                                <v-text-field
+                                        v-model="editedItem.email"
+                                        label="Email"
+                                        required
+                                        :error-messages="checkError('email')"
+                                ></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6 md4>
-                                <v-text-field v-model="editedItem.role" label="Роль"></v-text-field>
+                                <v-select
+                                        :items="select"
+                                        v-model="editedItem.role"
+                                        label="Роль"
+                                        required
+                                        :error-messages="checkError('role')"
+                                ></v-select>
                             </v-flex>
                             <v-flex xs12 sm6 md4>
-                                <v-text-field v-model="editedItem.password" label="Пароль"></v-text-field>
+                                <v-text-field
+                                        v-model="editedItem.password"
+                                        label="Пароль"
+                                        required
+                                        :error-messages="checkError('password')"
+                                ></v-text-field>
                             </v-flex>
                         </v-layout>
                     </v-container>
@@ -55,10 +76,10 @@
                     <td>{{ props.item.email }}</td>
                     <td>{{ props.item.role }}</td>
                     <td>
-                        <v-btn icon class="mx-0" @click="editItem(props.item)">
+                        <v-btn icon class="mx-0" @click="editUser(props.item)">
                             <v-icon color="teal">edit</v-icon>
                         </v-btn>
-                        <v-btn icon class="mx-0" @click="deleteItem(props.item)">
+                        <v-btn icon class="mx-0" @click="deleteUser(props.item)">
                             <v-icon color="pink">delete</v-icon>
                         </v-btn>
                     </td>
@@ -76,6 +97,7 @@
         data() {
             return {
                 search: '',
+                select: ['moder', 'admin'],
                 dialog: false,
                 headers: [
                     {text: 'Дата создания', value: 'created_at'},
@@ -102,6 +124,7 @@
                     role: '',
                     password: ''
                 },
+                errors: {}
             }
         },
         computed: {
@@ -125,23 +148,20 @@
                 });
             },
 
-            editItem(item) {
+            editUser(item) {
                 this.editedIndex = this.users.indexOf(item);
                 this.editedItem = Object.assign({}, item);
                 this.dialog = true;
             },
 
-            deleteItem(item) {
+            deleteUser(item) {
                 const index = this.users.indexOf(item);
                 let answer = confirm('Вы действительно хотите удалить этого пользователя?');
                 if (answer) {
                     axios.delete(`/api/users/` + item.id).then(response => {
                         if (response.data.status) {
                             this.users.splice(index, 1);
-                            this.$store.commit(
-                                "showInfo",
-                                response.data.message
-                            );
+                            this.$store.commit("showInfo", response.data.message);
                         }
                     });
                 }
@@ -156,27 +176,31 @@
             },
 
             save() {
+                this.errors = {};
                 if (this.editedIndex > -1) {
                     axios.patch(`/api/users/` + this.users[this.editedIndex]['id'], Object.assign(this.users[this.editedIndex], this.editedItem)).then(response => {
-                        this.$store.commit(
-                            "showInfo",
-                            response.data.message
-                        );
+                        if (response.data.status) {
+                            this.$store.commit("showInfo", response.data.message);
+                            this.close();
+                        }
+                    }).catch(error => {
+                        this.errors = error.response.data.errors;
                     });
                 } else {
                     let item = this.editedItem;
                     item.created_at = this.formatDate(new Date());
+
                     axios.post(`/api/users`, this.editedItem).then(response => {
                         if (response.data.status) {
                             this.users.push(item);
-                            this.$store.commit(
-                                "showInfo",
-                                response.data.message
-                            );
+                            this.$store.commit("showInfo", response.data.message);
+                            this.close();
                         }
+                    }).catch(error => {
+                        this.errors = error.response.data.errors;
                     });
                 }
-                this.close();
+
             },
             formatDate(date) {
                 let dd = date.getDate();
@@ -186,6 +210,9 @@
                 let yy = date.getFullYear();
                 if (yy < 10) yy = '0' + yy;
                 return dd + '-' + mm + '-' + yy;
+            },
+            checkError(field) {
+                return this.errors.hasOwnProperty(field) ? this.errors[field] : [];
             }
         }
     }

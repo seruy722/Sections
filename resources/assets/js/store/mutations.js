@@ -4,6 +4,11 @@ export default {
         state.info.show = true;
     },
 
+    showError(state, message) {
+        state.error.text = message;
+        state.error.show = true;
+    },
+
     Login(state) {
         state.Auth.id = localStorage.getItem("id");
         state.Auth.api_token = localStorage.getItem("api_token");

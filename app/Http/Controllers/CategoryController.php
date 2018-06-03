@@ -101,15 +101,18 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|min:2|max:255',
-            'image' => 'mimes:jpg,jpeg,png|dimensions:max:5120'
         ]);
 
-        $category = Category::find($request->id);
+
+        $category = Category::findOrFail($request->id);
 
         if ($category->count() > 0) {
             $data = $this->cleanData($request->all());
             $file = $request->image;
-            if ($file) {
+            if (is_object($request->image)) {
+                $this->validate($request, [
+                    'image' => 'mimes:jpg,jpeg,png|dimensions:max:5120'
+                ]);
                 $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
                 $file->move('images', $filename);
                 $data['image'] = $filename;

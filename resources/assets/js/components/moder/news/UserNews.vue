@@ -92,17 +92,20 @@
                 });
             },
             deleteNews(item) {
+                this.dialog = true;
                 const index = this.news.indexOf(item);
                 let answer = confirm('Вы действительно хотите удалить эту запись?');
                 if (answer) {
                     axios.delete(`/api/news/` + item.id).then(response => {
-                        this.dialog = true;
                         if (response.data.status) {
                             this.news.splice(index, 1);
                             this.$store.commit("showInfo", response.data.message);
                             this.dialog = false;
                         }
                     }).catch(error => {
+                        if (error.response.status === 404) {
+                            this.$store.commit("showError", 'Произошла ошибка при удалении. (Запись не существует.)');
+                        }
                         this.dialog = false;
                     });
                 }

@@ -84,8 +84,13 @@
                         </v-btn>
                     </td>
                 </template>
+                <template slot="no-data">
+                    <v-alert :value="true" color="info" icon="warning">
+                        Нет данных.
+                    </v-alert>
+                </template>
                 <v-alert slot="no-results" :value="true" color="error" icon="warning">
-                    Ваш поиск по "{{ search }}" не дал результатов!.
+                    Ваш поиск по "{{ search }}" не дал результатов.
                 </v-alert>
             </v-data-table>
         </v-card>

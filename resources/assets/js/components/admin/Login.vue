@@ -48,7 +48,7 @@
 </template>
 
 <script>
-    import Auth from "../helpers/Auth";
+    import Auth from "../../helpers/Auth";
 
     export default {
         data() {

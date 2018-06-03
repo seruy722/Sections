@@ -4,7 +4,7 @@
             <v-dialog v-model="dialog" persistent>
                 <template>
                     <div class="progress">
-                    <v-progress-circular :size="70" indeterminate color="primary"></v-progress-circular>
+                        <v-progress-circular :size="70" indeterminate color="primary"></v-progress-circular>
                     </div>
                 </template>
             </v-dialog>
@@ -59,13 +59,10 @@
 
                     <input style="display:none" type="file" class="input-field-file" ref="fupload"
                            @change="onFileSelected">
-                    <v-card-media
-                            v-if="readyToUpload"
-                            :src="formData.uploadFileData"
-                            height="70px"
-                            contain
-                    >
-                    </v-card-media>
+
+                    <div v-if="readyToUpload">
+                        <img :src="formData.uploadFileData" class="preview-image">
+                    </div>
                 </div>
             </v-flex>
         </v-layout>
@@ -161,6 +158,7 @@
         methods: {
             addSection() {
                 this.errors = {};
+                this.dialog = true;
                 const address = document.querySelector("#location>input[type=text]").value;
                 this.section.user_id = this.$store.state.Auth.id;
                 this.categories.forEach(item => {
@@ -178,9 +176,8 @@
                 data.append('address', address);
 
                 axios.post(`/addSections`, data).then(response => {
-                    this.dialog=true;
                     if (response.data.status) {
-                        this.$store.commit("showInfo",response.data.message);
+                        this.$store.commit("showInfo", response.data.message);
                         this.onUserSections();
                     }
                 }).catch(error => {
@@ -243,16 +240,24 @@
         font-size: 12px;
         background-color: white !important;
     }
-    .progress{
+
+    .progress {
         text-align: center;
     }
-    .progress .progress-circular{
+
+    .progress .progress-circular {
         margin: 1rem;
     }
 
+    .input-field-file {
+        display: none;
+    }
 
-     .input-field-file {
-         display: none;
-     }
+    .preview-image {
+        width: 250px;
+        padding: 15px;
+        border: 1px solid #999;
+        border-radius: 5px;
+    }
 
 </style>

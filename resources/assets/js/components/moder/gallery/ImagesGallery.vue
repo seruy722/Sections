@@ -1,6 +1,16 @@
 <template>
     <div>
         <v-container>
+            <v-layout row justify-center>
+                <v-dialog v-model="dialog" persistent>
+                    <template>
+                        <div class="progress">
+                            <v-progress-circular :size="70" indeterminate color="primary"></v-progress-circular>
+                        </div>
+                    </template>
+                </v-dialog>
+            </v-layout>
+
             <v-layout row wrap>
                 <v-flex xs4>
                     <v-subheader>Секция</v-subheader>
@@ -56,6 +66,7 @@
     export default {
         data() {
             return {
+                dialog: false,
                 sections: [],
                 section: {section_name: ''},
                 images: []
@@ -75,9 +86,11 @@
                 return "/images/" + file.name;
             },
             getImages(event) {
+                this.dialog = true;
                 axios.post(`/imagesGallery`, {section_id: event.id}).then(response => {
                     if (response.data.status) {
                         this.images = response.data.images;
+                        this.dialog = false;
                     }
                 });
             },
@@ -97,8 +110,22 @@
                             this.images.splice(id, 1);
                         }
                     }
+                }).catch(error => {
+                    if (error.response.status === 404) {
+                        this.$store.commit("showError", 'Произошла ошибка при удалении. (Запись не существует.)');
+                    }
                 });
             }
         }
     };
 </script>
+
+<style>
+    .progress {
+        text-align: center;
+    }
+
+    .progress .progress-circular {
+        margin: 1rem;
+    }
+</style>

@@ -104,23 +104,24 @@ class ScheduleController extends Controller
      */
     public function update(Request $request)
     {
-        $schedule = Schedules::find($request->id);
-        if ($schedule->count() > 0) {
-            $this->validate($request, [
-                'section_id' => 'required|integer',
-                'day_of_week' => 'required|string',
-                'event_start' => 'required',
-                'event_end' => 'required',
-                'event_name' => 'required|min:2|max:255'
+        $schedule = Schedules::findOrFail($request->id);
 
-            ], [
-                'section_id.integer' => 'Поле секция обьзательное для заполнения.'
-            ]);
-            $data = $this->cleanData($request->all());
-            $schedule->update($data);
+        $this->validate($request, [
+            'section_id' => 'required|integer',
+            'day_of_week' => 'required|string',
+            'event_start' => 'required',
+            'event_end' => 'required',
+            'event_name' => 'required|min:2|max:255'
 
-            return response()->json(['status' => true, 'message' => 'Запись успешно обновлена.']);
-        }
+        ], [
+            'section_id.integer' => 'Поле секция обьзательное для заполнения.'
+        ]);
+
+        $data = $this->cleanData($request->all());
+        $schedule->update($data);
+
+        return response()->json(['status' => true, 'message' => 'Запись успешно обновлена.']);
+
 
     }
 

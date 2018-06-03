@@ -58,6 +58,15 @@
             <v-btn dark flat @click.native="info.show = false">Закрыть</v-btn>
         </v-snackbar>
 
+        <v-snackbar top
+                    :timeout="error.timeout"
+                    v-model="error.show"
+                    color="error"
+        >
+            {{ error.text }}
+            <v-btn dark flat @click.native="error.show = false">Закрыть</v-btn>
+        </v-snackbar>
+
     </v-app>
 </template>
 
@@ -72,7 +81,7 @@
         },
 
         computed: {
-            ...mapState(["info", "nav", "authNav", "profileNav"]),
+            ...mapState(["info", "nav", "authNav", "profileNav",'error']),
             auth() {
                 return this.$store.state.Auth;
             },
@@ -80,7 +89,7 @@
             profileImage() {
                 return this.$store.state.Auth.photo;
             },
-            role(){
+            role() {
                 return this.$store.state.Auth.role;
             }
         },

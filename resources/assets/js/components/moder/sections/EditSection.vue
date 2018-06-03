@@ -181,6 +181,7 @@
             },
             updateSection() {
                 this.errors = {};
+                this.dialog = true;
                 const address = document.querySelector("#location>input[type=text]").value;
                 this.categories.forEach(item => {
                     if (item.name === this.select) {
@@ -198,15 +199,14 @@
 
 
                 axios.post(`/updateSection`, data).then(response => {
-                    this.dialog=true;
                     if (response.data.status) {
-                        this.$store.commit(
-                            "showInfo",
-                            response.data.message
-                        );
+                        this.$store.commit("showInfo", response.data.message);
                         this.onUserSections();
                     }
                 }).catch(error => {
+                    if (error.response.status === 404) {
+                        this.$store.commit("showError", 'Произошла ошибка при обновлении. (Запись не существует.)');
+                    }
                     this.dialog = false;
                     this.errors = error.response.data.errors;
                 });
@@ -220,10 +220,7 @@
                     this.section.file = file;
                     this.section.img_logo = event.target.files[0].name;
                     this.formData.displayFileName =
-                        event.target.files[0].name +
-                        " (" +
-                        this.calcSize(file.size) +
-                        "Kb)";
+                        event.target.files[0].name + " (" + this.calcSize(file.size) + "Kb)";
 
                     let reader = new FileReader();
                     reader.onload = e => {
@@ -272,13 +269,13 @@
         background-color: white !important;
     }
 
-    .progress{
+    .progress {
         text-align: center;
     }
-    .progress .progress-circular{
+
+    .progress .progress-circular {
         margin: 1rem;
     }
-
 
     .input-field-file {
         display: none;

@@ -184,7 +184,7 @@
         methods: {
             editSchedule() {
                 this.errors = {};
-
+                this.dialog = true;
                 let data = new FormData();
                 data.append('id', this.schedule.id);
                 data.append('section_id', this.section.id);
@@ -194,7 +194,6 @@
                 data.append('event_name', this.event);
 
                 axios.post('/editSchedule', data).then(response => {
-                    this.dialog = true;
                     if (response.data.status) {
                         this.$store.commit(
                             "showInfo",
@@ -204,6 +203,9 @@
                         this.onUserSchedules();
                     }
                 }).catch(error => {
+                    if (error.response.status === 404) {
+                        this.$store.commit("showError", 'Произошла ошибка при обновлении. (Запись не существует.)');
+                    }
                     this.dialog = false;
                     this.errors = error.response.data.errors;
                 });
