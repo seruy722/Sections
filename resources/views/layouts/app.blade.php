@@ -26,7 +26,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/css/flexslider.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/css/flexslider.css" type="text/css" media="screen"/>
 </head>
 
 <body data-spy="scroll" data-target="#ha-header">
@@ -36,7 +36,7 @@
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span
                         class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
-            <a class="navbar-brand logo" href="{{url('/')}}"></a>
+            <a class="navbar-brand logo" href="{{url('/#home')}}"></a>
         </div>
         <div class="navbar-collapse collapse ">
             <ul class="nav navbar-nav navbar-right">
@@ -64,6 +64,7 @@
                     </li>
                 @endguest
             </ul>
+
             <ul class="nav navbar-nav navbar-right top-menu">
                 <li class="a active"><a href="{{url('/#home')}}">Главная</a></li>
                 <li class=""><a href="{{url('/#sections')}}">Кружки</a></li>
@@ -71,13 +72,22 @@
                 <li class=""><a href="{{url('/#news')}}">Новости</a></li>
             </ul>
 
-            <ul class="nav navbar-nav navbar-right top1-menu" style="display: none">
-                <li class="active"><a href="{{url()->current(). '/#about'}}">О нас</a></li>
-                <li><a href="{{url()->current() . '/#schedule'}}">Расписание</a></li>
-                <li><a href="{{url()->current() . '/#news'}}">Новости</a></li>
-                <li><a href="{{url()->current() . '/#photos'}}">Галерея</a></li>
-                <li><a href="{{url()->current() . '/#contact'}}">Контакты</a></li>
-            </ul>
+            @if (isset(parse_url(url()->current())['path']))
+                <?php $path = parse_url(url()->current())['path'];?>
+                @if (dirname($path) == "/sections/section")
+                    <ul class="nav navbar-nav navbar-right top1-menu" style="display: none">
+                        <li class="active"><a href="{{url()->current(). '/#about'}}">О нас</a></li>
+                        <li><a href="{{url()->current() . '/#schedule'}}">Расписание</a></li>
+                        @if(count($news) > 0)
+                            <li><a href="{{url()->current() . '/#news'}}">Новости</a></li>
+                        @endif
+                        @if(count($photos) > 0)
+                            <li><a href="{{url()->current() . '/#photos'}}">Галерея</a></li>
+                        @endif
+                        <li><a href="{{url()->current() . '/#contact'}}">Контакты</a></li>
+                    </ul>
+                @endif
+            @endif
         </div>
         <!--/.nav-collapse -->
     </div>
@@ -159,14 +169,16 @@
             var scrollDistance = $(window).scrollTop();
             // Assign active class to nav links while scolling
             $('.page-section').each(function (i) {
-                if ($(this).position().top <= scrollDistance) {
+                if ($(this).position().top <= scrollDistance + 2) {
                     $('.top-menu li.active').removeClass('active');
                     $('.top-menu li').eq(i).addClass('active');
                 }
             });
         }).scroll();
     }
-
+    if (document.location.href != "{{url('/')}}") {
+        $('.top-menu li.active').removeClass('active');
+    }
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
@@ -177,11 +189,11 @@
 <script defer src="/js/jquery.flexslider.js"></script>
 
 <script type="text/javascript">
-    $(window).load(function(){
+    $(window).load(function () {
         $('.flexslider').flexslider({
             animation: "slide",
             controlNav: "thumbnails",
-            start: function(slider){
+            start: function (slider) {
                 $('body').removeClass('loading');
             }
         });
@@ -189,7 +201,7 @@
 </script>
 <!--dynamic navbar script-->
 <script type="text/javascript">
-    function dynNav () {
+    function dynNav() {
         var path = window.location.pathname;
         var c = path.lastIndexOf('/');
         var p = path.slice(0, c);
@@ -211,8 +223,8 @@
             $(window).scroll(function () {
                 var scrollDistance = $(window).scrollTop();
                 // Assign active class to nav links while scolling
-                $('.page-section').each(function (i) {
-                    if ($(this).position().top <= scrollDistance) {
+                $('.page-section1').each(function (i) {
+                    if ($(this).position().top <= scrollDistance + 10) {
                         $('.top1-menu li.active').removeClass('active');
                         $('.top1-menu li').eq(i).addClass('active');
                     }
@@ -223,6 +235,7 @@
             $(".top1-menu").css("display", "block");
         }
     }
+
     dynNav();
 </script>
 </body>

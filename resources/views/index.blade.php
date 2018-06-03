@@ -29,6 +29,7 @@
                     <div class="row">
                         <div class="sec_wrap_3 option3">
                             @foreach($category as $cat)
+                                @if(count($cat->sections) > 0)
                                 <div class="col-xs-12 col-md-4 col-sm-6">
                                     <ul>
                                         <li>
@@ -44,6 +45,7 @@
                                         </li>
                                     </ul>
                                 </div>
+                                @endif
                             @endforeach
                         </div>
                     </div>

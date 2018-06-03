@@ -50,4 +50,4 @@ Route::resource('/addSections', 'SectionsController');
 Route::resource('/deleteSection', 'SectionsController');
 Route::post('/updateSection', 'SectionsController@update');
 
-Route::get('/sections/section/gallery/{id}', 'SectionsController@gallery')->name('gallery');
+Route::get('/sections/gallery/{id}', 'SectionsController@gallery')->name('gallery');
