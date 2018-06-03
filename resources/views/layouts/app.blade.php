@@ -73,10 +73,10 @@
 
             <ul class="nav navbar-nav navbar-right top1-menu" style="display: none">
                 <li class="active"><a href="{{url()->current(). '/#about'}}">О нас</a></li>
-                <li ><a href="{{url()->current() . '/#schedule'}}">Расписание</a></li>
-                <li ><a href="{{url()->current() . '/#news'}}">Новости</a></li>
-                <li ><a href="{{url()->current() . '/#photos'}}">Галерея</a></li>
-                <li ><a href="{{url()->current() . '/#contact'}}">Контакты</a></li>
+                <li><a href="{{url()->current() . '/#schedule'}}">Расписание</a></li>
+                <li><a href="{{url()->current() . '/#news'}}">Новости</a></li>
+                <li><a href="{{url()->current() . '/#photos'}}">Галерея</a></li>
+                <li><a href="{{url()->current() . '/#contact'}}">Контакты</a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
