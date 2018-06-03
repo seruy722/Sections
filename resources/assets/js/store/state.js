@@ -5,8 +5,6 @@ export default {
         text: null
     },
 
-    imagesList: [],
-
     nav: [
         {path: "/controls", title: "Консоль", auth: true, role: 'admin'},
         {path: "/user_messages", title: "Сообщения", auth: true, role: 'admin'},

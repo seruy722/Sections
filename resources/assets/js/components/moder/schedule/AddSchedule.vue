@@ -1,5 +1,15 @@
 <template>
     <v-container>
+        <v-layout row justify-center>
+            <v-dialog v-model="dialog" persistent>
+                <template>
+                    <div class="progress">
+                        <v-progress-circular :size="70" indeterminate color="primary"></v-progress-circular>
+                    </div>
+                </template>
+            </v-dialog>
+        </v-layout>
+
         <v-layout row wrap>
             <v-flex xs4>
                 <v-subheader>Секция</v-subheader>
@@ -134,6 +144,7 @@
     export default {
         data() {
             return {
+                dialog: false,
                 time1: null,
                 time2: null,
                 piker1: false,
@@ -169,15 +180,17 @@
                 data.append('event_name', this.event);
 
                 axios.post('/addSchedule', data).then(response => {
+                    this.dialog = true;
                     if (response.data.status) {
                         this.$store.commit(
                             "showInfo",
                             response.data.message
                         );
                         data = new FormData();
-                        this.onUserSchedules();
+                       this.onUserSchedules();
                     }
                 }).catch(error => {
+                    this.dialog = false;
                     this.errors = error.response.data.errors;
                 });
             },
@@ -194,5 +207,17 @@
 <style>
     .top {
         margin-top: 30px;
+    }
+
+    .progress {
+        text-align: center;
+    }
+
+    .progress .progress-circular {
+        margin: 1rem;
+    }
+
+    .input-field-file {
+        display: none;
     }
 </style>

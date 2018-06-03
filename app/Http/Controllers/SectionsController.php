@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\ImageGallery;
 use App\Mail\MailClass;
+use App\News;
+use App\Schedules;
 use App\Sections;
 use App\User;
 use Illuminate\Http\Request;
-use App\ImageGallery;
-
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 
 class SectionsController extends Controller
@@ -43,7 +43,7 @@ class SectionsController extends Controller
         $photos = ImageGallery::where('section_id', $id)->orderBy('id', 'desc')->limit(10)->get();
         return view('section', ['lat' => $lat, 'lng' => $lng, 'users' => $users, 'news' => $news,
             'monday' => $monday, 'tuesday' => $tuesday, 'wednesday' => $wednesday, 'thursday' => $thursday,
-            'friday' => $friday, 'saturday' => $saturday, 'photos'=>$photos]);
+            'friday' => $friday, 'saturday' => $saturday, 'photos' => $photos]);
     }
 
     /**
@@ -168,7 +168,7 @@ class SectionsController extends Controller
 
         $data = $this->cleanData($request->all());
         $section = Sections::find($data['id']);
-        if ($section->count()>0) {
+        if ($section->count() > 0) {
             if (is_object($request->fupload)) {
                 $this->validate($request, [
                     'fupload' => 'mimes:jpg,jpeg,png|dimensions:max:5120',
@@ -201,13 +201,43 @@ class SectionsController extends Controller
     public function destroy($id)
     {
         $section = Sections::find($id);
-        if ($section->count()>0) {
+        if ($section->count() > 0) {
+
+            $images = Sections::find($id)->image;
+            if ($images->count() > 0) {
+                $arr = $images->toArray();
+                foreach ($arr as $item) {
+                    unlink(public_path() . '/images/' . $item['name']);
+                    ImageGallery::destroy($item['id']);
+                }
+            }
+
+            $news = Sections::find($id)->news;
+            if ($news->count() > 0) {
+                $arr = $news->toArray();
+                foreach ($arr as $item) {
+                    unlink(public_path() . '/images/' . $item['image_name']);
+                    News::destroy($item['id']);
+                }
+            }
+
+            $schedules = Sections::find($id)->schedules;
+            if ($schedules->count() > 0) {
+                $arr = $schedules->toArray();
+                foreach ($arr as $item) {
+                    Schedules::destroy($item['id']);
+                }
+            }
+
+
             if ($section->img_logo) {
                 unlink(public_path() . '/images/' . $section->img_logo);
             }
+
             $section->delete();
             return response()->json(['status' => true, 'message' => 'Запись успешно удалена.']);
         }
+        return response()->json(['status' => true, 'message' => 'Ошибка при удалении записи.']);
     }
 
     public function gallery($id)

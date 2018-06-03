@@ -63655,16 +63655,8 @@ window.router = __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */];
 
 var app = new __WEBPACK_IMPORTED_MODULE_2_vue___default.a({
     el: "#app",
-
-    created: function created() {
-        this.$store.dispatch("loadImages");
-    },
-
-
     store: store,
-
     router: __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */],
-
     render: function render(h) {
         return h(__WEBPACK_IMPORTED_MODULE_0__components_App___default.a);
     }
@@ -66153,8 +66145,6 @@ if (false) {
         text: null
     },
 
-    imagesList: [],
-
     nav: [{ path: "/controls", title: "Консоль", auth: true, role: 'admin' }, { path: "/user_messages", title: "Сообщения", auth: true, role: 'admin' }, { path: "/users", title: "Пользователи", auth: true, role: 'admin' }, { path: "/news", title: "Новости", auth: true, role: 'admin' }, { path: "/sections_categories", title: "Категории", auth: true, role: 'admin' }, { path: "/settings", title: "Настройки", auth: true, role: 'admin' }, { path: "/user_sections", title: "Секции", auth: true, role: 'moder' }, { path: "/schedule", title: "Расписание", auth: true, role: 'moder' }, { path: "/user_news", title: "Новости", auth: true, role: 'moder' }, { path: "/user_gallery", title: "Галерея", auth: true, role: 'moder' }, { path: "/images_gallery", title: "Изображения", auth: true, role: 'moder' }, { path: "/user_messages", title: "Сообщения", auth: true, role: 'moder' }],
 
     authNav: [{ path: "/register", title: "Регистрация", auth: false }, { path: "/login", title: "Вход", auth: false }],
@@ -66181,9 +66171,6 @@ if (false) {
     showInfo: function showInfo(state, message) {
         state.info.text = message;
         state.info.show = true;
-    },
-    setImagesList: function setImagesList(state, payload) {
-        state.imagesList = payload;
     },
     Login: function Login(state) {
         state.Auth.id = localStorage.getItem("id");
@@ -90170,7 +90157,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 name: null,
                 email: null,
                 password: null,
-                address: null,
                 phone: null,
                 password_confirmation: null,
                 action: null
@@ -90191,6 +90177,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post("/api/edit_profile").then(function (response) {
                 if (response.data.success) {
                     _this.form = response.data.user;
+                    _this.form.password = null;
                 }
             }).catch(function (error) {
                 if (error.response.status === 401) {
@@ -91718,6 +91705,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(328)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(241)
@@ -91726,7 +91717,7 @@ var __vue_template__ = __webpack_require__(242)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -91815,10 +91806,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            dialog: false,
             search: '',
             headers: [{ text: 'Дата создания', value: 'created_at' }, { text: 'Заголовок', value: 'title' }, { text: 'Секция', value: 'name' }, { text: 'Управление', sortable: false }],
             news: [],
@@ -91846,17 +91848,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.news = news;
             });
         },
-        deleteItem: function deleteItem(item) {
+        deleteNews: function deleteNews(item) {
             var _this2 = this;
 
             var index = this.news.indexOf(item);
             var answer = confirm('Вы действительно хотите удалить эту запись?');
             if (answer) {
                 axios.delete('/api/news/' + item.id).then(function (response) {
-                    if (response.data.status == 'success') {
+                    _this2.dialog = true;
+                    if (response.data.status) {
                         _this2.news.splice(index, 1);
                         _this2.$store.commit("showInfo", response.data.message);
+                        _this2.dialog = false;
                     }
+                }).catch(function (error) {
+                    _this2.dialog = false;
                 });
             }
         },
@@ -91878,6 +91884,42 @@ var render = function() {
     "div",
     { staticClass: "wrapper" },
     [
+      _c(
+        "v-layout",
+        { attrs: { row: "", "justify-center": "" } },
+        [
+          _c(
+            "v-dialog",
+            {
+              attrs: { persistent: "" },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              [
+                _c(
+                  "div",
+                  { staticClass: "progress" },
+                  [
+                    _c("v-progress-circular", {
+                      attrs: { size: 70, indeterminate: "", color: "primary" }
+                    })
+                  ],
+                  1
+                )
+              ]
+            ],
+            2
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
       _c(
         "v-card",
         [
@@ -91965,7 +92007,7 @@ var render = function() {
                               attrs: { icon: "" },
                               on: {
                                 click: function($event) {
-                                  _vm.deleteItem(props.item)
+                                  _vm.deleteNews(props.item)
                                 }
                               }
                             },
@@ -92197,10 +92239,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            dialog: false,
             news: {
                 title: null,
                 description: null,
@@ -92249,11 +92302,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             data.append('section_id', this.news.section_id);
 
             axios.post('/api/addNews', data).then(function (response) {
+                _this.dialog = true;
                 if (response.data.status) {
                     _this.$store.commit("showInfo", response.data.message);
                     _this.onUserNews();
                 }
             }).catch(function (error) {
+                _this.dialog = false;
                 _this.errors = error.response.data.errors;
             });
         },
@@ -92300,6 +92355,42 @@ var render = function() {
     "v-container",
     { attrs: { fluid: "" } },
     [
+      _c(
+        "v-layout",
+        { attrs: { row: "", "justify-center": "" } },
+        [
+          _c(
+            "v-dialog",
+            {
+              attrs: { persistent: "" },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              [
+                _c(
+                  "div",
+                  { staticClass: "progress" },
+                  [
+                    _c("v-progress-circular", {
+                      attrs: { size: 70, indeterminate: "", color: "primary" }
+                    })
+                  ],
+                  1
+                )
+              ]
+            ],
+            2
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
       _c(
         "v-layout",
         { attrs: { row: "" } },
@@ -92716,10 +92807,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            dialog: false,
             news: {},
             formData: {
                 displayFileName: null,
@@ -92756,11 +92858,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             data.append('user_id', this.news.user_id);
 
             axios.post("/api/updateNews", data).then(function (response) {
-                if (response.data.status === 'success') {
-                    setTimeout(_this.onUserNews, 3000);
+                _this.dialog = true;
+                if (response.data.status) {
+                    _this.$store.commit("showInfo", response.data.message);
+                    _this.onUserNews();
                 }
-                _this.$store.commit("showInfo", response.data.message);
             }).catch(function (error) {
+                _this.dialog = false;
                 _this.errors = error.response.data.errors;
             });
         },
@@ -92810,6 +92914,42 @@ var render = function() {
     "v-container",
     { attrs: { fluid: "" } },
     [
+      _c(
+        "v-layout",
+        { attrs: { row: "", "justify-center": "" } },
+        [
+          _c(
+            "v-dialog",
+            {
+              attrs: { persistent: "" },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              [
+                _c(
+                  "div",
+                  { staticClass: "progress" },
+                  [
+                    _c("v-progress-circular", {
+                      attrs: { size: 70, indeterminate: "", color: "primary" }
+                    })
+                  ],
+                  1
+                )
+              ]
+            ],
+            2
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
       _c(
         "v-layout",
         { attrs: { row: "" } },
@@ -93310,6 +93450,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(330)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(253)
@@ -93318,7 +93462,7 @@ var __vue_template__ = __webpack_require__(254)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -93418,10 +93562,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            dialog: false,
             mail: {
                 email_to: null,
                 email_from: null,
@@ -93438,16 +93597,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         sendMessage: function sendMessage() {
             var _this = this;
 
+            this.dialog = true;
             this.errors = {};
             this.mail.email_from = this.$store.state.Auth.email;
             this.mail.name = this.$store.state.Auth.name;
             this.mail.user_id = this.$store.state.Auth.id;
+
             axios.post("/createMail", this.mail).then(function (response) {
                 if (response.data.status) {
                     _this.$store.commit("showInfo", response.data.message);
                     _this.onUserMessages();
                 }
             }).catch(function (error) {
+                _this.dialog = false;
                 _this.errors = error.response.data.errors;
             });
         },
@@ -93472,6 +93634,42 @@ var render = function() {
     "v-container",
     { attrs: { fluid: "" } },
     [
+      _c(
+        "v-layout",
+        { attrs: { row: "", "justify-center": "" } },
+        [
+          _c(
+            "v-dialog",
+            {
+              attrs: { persistent: "" },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              [
+                _c(
+                  "div",
+                  { staticClass: "progress" },
+                  [
+                    _c("v-progress-circular", {
+                      attrs: { size: 70, indeterminate: "", color: "primary" }
+                    })
+                  ],
+                  1
+                )
+              ]
+            ],
+            2
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
       _c(
         "v-layout",
         { attrs: { row: "" } },
@@ -93603,7 +93801,7 @@ var render = function() {
                   _c("v-icon", { attrs: { dark: "", left: "" } }, [
                     _vm._v("send")
                   ]),
-                  _vm._v("Отправить\n            ")
+                  _vm._v("\n                Отправить\n            ")
                 ],
                 1
               ),
@@ -94683,6 +94881,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(324)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(267)
@@ -94691,7 +94893,7 @@ var __vue_template__ = __webpack_require__(268)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -94780,11 +94982,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             search: '',
+            dialog: false,
             headers: [{ text: 'Дата создания', value: 'created_at' }, { text: 'Название', value: 'section_name' }, { text: 'О нас', value: 'info' }, { text: 'Управление', sortable: false }],
             sections: [],
             categories: []
@@ -94810,9 +95024,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var answer = confirm('Вы действительно хотите удалить эту запись?');
             if (answer) {
                 axios.delete('/deleteSection/' + item.id).then(function (response) {
+                    _this2.dialog = true;
                     if (response.data.status) {
                         _this2.sections.splice(index, 1);
                         _this2.$store.commit("showInfo", response.data.message);
+                        _this2.dialog = false;
                     }
                 });
             }
@@ -94835,6 +95051,42 @@ var render = function() {
     "div",
     { staticClass: "wrapper" },
     [
+      _c(
+        "v-layout",
+        { attrs: { row: "", "justify-center": "" } },
+        [
+          _c(
+            "v-dialog",
+            {
+              attrs: { persistent: "" },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              [
+                _c(
+                  "div",
+                  { staticClass: "progress" },
+                  [
+                    _c("v-progress-circular", {
+                      attrs: { size: 70, indeterminate: "", color: "primary" }
+                    })
+                  ],
+                  1
+                )
+              ]
+            ],
+            2
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
       _c(
         "v-card",
         [
@@ -95214,13 +95466,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             dialog: false,
-            message: null,
             section: {
                 section_name: '',
                 info: '',
@@ -95282,8 +95534,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/addSections', data).then(function (response) {
                 _this.dialog = true;
                 if (response.data.status) {
-                    _this.message = response.data.message;
-                    setTimeout(_this.onUserNews, 2000);
+                    _this.$store.commit("showInfo", response.data.message);
+                    _this.onUserSections();
                 }
             }).catch(function (error) {
                 _this.dialog = false;
@@ -95311,9 +95563,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         calcSize: function calcSize(size) {
             return Math.round(size / 1024);
         },
-        onUserNews: function onUserNews() {
-            this.$store.commit("showInfo", this.message);
-            this.dialog = false;
+        onUserSections: function onUserSections() {
             this.$router.push("/user_sections");
         },
         checkError: function checkError(field) {
@@ -95650,7 +95900,7 @@ var render = function() {
                 "v-btn",
                 {
                   attrs: { color: "red", dark: "" },
-                  on: { click: _vm.onUserNews }
+                  on: { click: _vm.onUserSections }
                 },
                 [
                   _vm._v("Отмена\n                "),
@@ -95766,7 +96016,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#location input {\n    display: block;\n    width: 100%;\n    height: 40px;\n    padding: 10px 15px;\n    border: 1px solid grey;\n    outline: none;\n}\n#location input:focus {\n    border: 2px solid #1976D2;\n}\n.loc_error {\n    color: red;\n    font-size: 12px;\n    background-color: white !important;\n}\n", ""]);
+exports.push([module.i, "\n#location input {\n    display: block;\n    width: 100%;\n    height: 40px;\n    padding: 10px 15px;\n    border: 1px solid grey;\n    outline: none;\n}\n#location input:focus {\n    border: 2px solid #1976D2;\n}\n.loc_error {\n    color: red;\n    font-size: 12px;\n    background-color: white !important;\n}\n.progress{\n    text-align: center;\n}\n.progress .progress-circular{\n    margin: 1rem;\n}\n.input-field-file {\n    display: none;\n}\n", ""]);
 
 // exports
 
@@ -95902,11 +96152,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             image: true,
+            dialog: false,
             section: {},
             formData: {
                 displayFileName: null,
@@ -95970,11 +96231,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             data.append('id', this.section.id);
 
             axios.post("/updateSection", data).then(function (response) {
+                _this2.dialog = true;
                 if (response.data.status) {
                     _this2.$store.commit("showInfo", response.data.message);
-                    setTimeout(_this2.onUserSections, 2000);
+                    _this2.onUserSections();
                 }
             }).catch(function (error) {
+                _this2.dialog = false;
                 _this2.errors = error.response.data.errors;
             });
         },
@@ -96024,6 +96287,42 @@ var render = function() {
     "v-container",
     { attrs: { fluid: "" } },
     [
+      _c(
+        "v-layout",
+        { attrs: { row: "", "justify-center": "" } },
+        [
+          _c(
+            "v-dialog",
+            {
+              attrs: { persistent: "" },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              [
+                _c(
+                  "div",
+                  { staticClass: "progress" },
+                  [
+                    _c("v-progress-circular", {
+                      attrs: { size: 70, indeterminate: "", color: "primary" }
+                    })
+                  ],
+                  1
+                )
+              ]
+            ],
+            2
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
       _c(
         "v-layout",
         { attrs: { row: "" } },
@@ -96805,17 +97104,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            sectionsNames: [],
             sections: [],
-            select: '',
-            images: [],
-            sectionId: null
+            section: { section_name: '' },
+            images: []
         };
     },
     created: function created() {
@@ -96832,15 +97135,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getPath: function getPath(file) {
             return "/images/" + file.name;
         },
-        getImages: function getImages() {
+        getImages: function getImages(event) {
             var _this = this;
 
-            this.sections.forEach(function (item) {
-                if (item.section_name === _this.select) {
-                    _this.sectionId = item.id;
-                }
-            });
-            axios.post("/imagesGallery", { section_id: this.sectionId }).then(function (response) {
+            axios.post("/imagesGallery", { section_id: event.id }).then(function (response) {
                 if (response.data.status) {
                     _this.images = response.data.images;
                 }
@@ -96851,9 +97149,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post("/userSections", { id: this.$store.state.Auth.id }).then(function (response) {
                 _this2.sections = response.data.sections;
-                _this2.sectionsNames = _this2.sections.map(function (item) {
-                    return item.section_name;
-                });
             });
         },
         onDelete: function onDelete(file) {
@@ -96905,18 +97200,23 @@ var render = function() {
                 [
                   _c("v-select", {
                     attrs: {
-                      items: _vm.sectionsNames,
+                      items: _vm.sections,
                       label: "Секция",
                       "single-line": "",
+                      hint: "" + _vm.section.section_name,
+                      "item-text": "section_name",
+                      "item-value": "section_name",
+                      "return-object": "",
+                      "persistent-hint": "",
                       required: ""
                     },
                     on: { change: _vm.getImages },
                     model: {
-                      value: _vm.select,
+                      value: _vm.section,
                       callback: function($$v) {
-                        _vm.select = $$v
+                        _vm.section = $$v
                       },
-                      expression: "select"
+                      expression: "section"
                     }
                   })
                 ],
@@ -97012,6 +97312,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(326)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(288)
@@ -97020,7 +97324,7 @@ var __vue_template__ = __webpack_require__(289)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -97113,10 +97417,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            dialog: false,
             search: '',
             headers: [{ text: 'Дата создания', value: 'created_at' }, { text: 'День недели', value: 'day_of_week' }, { text: 'Событие', value: 'event_name' }, { text: 'Начало', value: 'event_start' }, { text: 'Конец', value: 'event_end' }, { text: 'Секция', value: 'section_name' }, { text: 'Управление', sortable: false }],
             sections: [],
@@ -97152,9 +97470,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var answer = confirm('Вы действительно хотите удалить эту запись?');
             if (answer) {
                 axios.delete('/daleteSchedule/' + item.id).then(function (response) {
+                    _this2.dialog = true;
                     if (response.data.status) {
                         _this2.schedules.splice(index, 1);
                         _this2.$store.commit("showInfo", response.data.message);
+                        _this2.dialog = false;
                     }
                 });
             }
@@ -97188,6 +97508,42 @@ var render = function() {
     "div",
     { staticClass: "wrapper" },
     [
+      _c(
+        "v-layout",
+        { attrs: { row: "", "justify-center": "" } },
+        [
+          _c(
+            "v-dialog",
+            {
+              attrs: { persistent: "" },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              [
+                _c(
+                  "div",
+                  { staticClass: "progress" },
+                  [
+                    _c("v-progress-circular", {
+                      attrs: { size: 70, indeterminate: "", color: "primary" }
+                    })
+                  ],
+                  1
+                )
+              ]
+            ],
+            2
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
       _c(
         "v-card",
         [
@@ -97445,7 +97801,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.top {\n    margin-top: 30px;\n}\n", ""]);
+exports.push([module.i, "\n.top {\n    margin-top: 30px;\n}\n.progress {\n    text-align: center;\n}\n.progress .progress-circular {\n    margin: 1rem;\n}\n.input-field-file {\n    display: none;\n}\n", ""]);
 
 // exports
 
@@ -97588,10 +97944,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            dialog: false,
             time1: null,
             time2: null,
             piker1: false,
@@ -97623,12 +97990,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             data.append('event_name', this.event);
 
             axios.post('/addSchedule', data).then(function (response) {
+                _this.dialog = true;
                 if (response.data.status) {
                     _this.$store.commit("showInfo", response.data.message);
                     data = new FormData();
                     _this.onUserSchedules();
                 }
             }).catch(function (error) {
+                _this.dialog = false;
                 _this.errors = error.response.data.errors;
             });
         },
@@ -97652,6 +98021,42 @@ var render = function() {
   return _c(
     "v-container",
     [
+      _c(
+        "v-layout",
+        { attrs: { row: "", "justify-center": "" } },
+        [
+          _c(
+            "v-dialog",
+            {
+              attrs: { persistent: "" },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              [
+                _c(
+                  "div",
+                  { staticClass: "progress" },
+                  [
+                    _c("v-progress-circular", {
+                      attrs: { size: 70, indeterminate: "", color: "primary" }
+                    })
+                  ],
+                  1
+                )
+              ]
+            ],
+            2
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
       _c(
         "v-layout",
         { attrs: { row: "", wrap: "" } },
@@ -98083,7 +98488,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.top {\n    margin-top: 30px;\n}\n", ""]);
+exports.push([module.i, "\n.top {\n    margin-top: 30px;\n}\n.progress {\n    text-align: center;\n}\n.progress .progress-circular {\n    margin: 1rem;\n}\n", ""]);
 
 // exports
 
@@ -98226,10 +98631,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            dialog: false,
             time1: null,
             time2: null,
             piker1: false,
@@ -98263,7 +98679,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        addSchedule: function addSchedule() {
+        editSchedule: function editSchedule() {
             var _this2 = this;
 
             this.errors = {};
@@ -98277,12 +98693,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             data.append('event_name', this.event);
 
             axios.post('/editSchedule', data).then(function (response) {
+                _this2.dialog = true;
                 if (response.data.status) {
                     _this2.$store.commit("showInfo", response.data.message);
                     data = new FormData();
                     _this2.onUserSchedules();
                 }
             }).catch(function (error) {
+                _this2.dialog = false;
                 _this2.errors = error.response.data.errors;
             });
         },
@@ -98306,6 +98724,42 @@ var render = function() {
   return _c(
     "v-container",
     [
+      _c(
+        "v-layout",
+        { attrs: { row: "", "justify-center": "" } },
+        [
+          _c(
+            "v-dialog",
+            {
+              attrs: { persistent: "" },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              [
+                _c(
+                  "div",
+                  { staticClass: "progress" },
+                  [
+                    _c("v-progress-circular", {
+                      attrs: { size: 70, indeterminate: "", color: "primary" }
+                    })
+                  ],
+                  1
+                )
+              ]
+            ],
+            2
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
       _c(
         "v-layout",
         { attrs: { row: "", wrap: "" } },
@@ -98606,10 +99060,10 @@ var render = function() {
                 "v-btn",
                 {
                   attrs: { color: "primary", dark: "" },
-                  on: { click: _vm.addSchedule }
+                  on: { click: _vm.editSchedule }
                 },
                 [
-                  _vm._v("Сохранить\n                "),
+                  _vm._v("Обновить\n                "),
                   _c("v-icon", { attrs: { dark: "", right: "" } }, [
                     _vm._v("check_circle")
                   ])
@@ -99961,7 +100415,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.input-field-file {\n    display: none;\n}\n.preview-image {\n    width: 250px;\n    padding: 15px;\n    border: 1px solid #999;\n    border-radius: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.input-field-file {\n    display: none;\n}\n.preview-image {\n    width: 250px;\n    padding: 15px;\n    border: 1px solid #999;\n    border-radius: 5px;\n}\n.progress {\n    text-align: center;\n}\n.progress .progress-circular {\n    margin: 1rem;\n}\n", ""]);
 
 // exports
 
@@ -100001,7 +100455,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.input-field-file {\n    display: none;\n}\n.preview-image {\n    width: 250px;\n    padding: 15px;\n    border: 1px solid #999;\n    border-radius: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.input-field-file {\n    display: none;\n}\n.preview-image {\n    width: 250px;\n    padding: 15px;\n    border: 1px solid #999;\n    border-radius: 5px;\n}\n.progress {\n    text-align: center;\n}\n.progress .progress-circular {\n    margin: 1rem;\n}\n", ""]);
 
 // exports
 
@@ -100401,6 +100855,166 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-b3f3aea0", module.exports)
   }
 }
+
+/***/ }),
+/* 324 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(325);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("fc954414", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d7de3e9a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./UserSections.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d7de3e9a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./UserSections.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 325 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.progress {\n    text-align: center;\n}\n.progress .progress-circular {\n    margin: 1rem;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 326 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(327);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("48a1d90d", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-98ba3f30\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Schedule.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-98ba3f30\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Schedule.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 327 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.progress {\n    text-align: center;\n}\n.progress .progress-circular {\n    margin: 1rem;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 328 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(329);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("33424a92", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-123bd2d3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./UserNews.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-123bd2d3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./UserNews.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 329 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.progress {\n    text-align: center;\n}\n.progress .progress-circular {\n    margin: 1rem;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 330 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(331);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("5c711aee", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6290cad2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CreateMessage.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6290cad2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CreateMessage.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 331 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.progress {\n    text-align: center;\n}\n.progress .progress-circular {\n    margin: 1rem;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

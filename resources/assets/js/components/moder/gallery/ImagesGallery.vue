@@ -7,11 +7,17 @@
                 </v-flex>
                 <v-flex xs8>
                     <v-select
-                            :items="sectionsNames"
-                            v-model="select"
+                            :items="sections"
+                            v-model="section"
                             label="Секция"
                             single-line
+                            :hint="`${section.section_name}`"
+                            item-text="section_name"
+                            item-value="section_name"
+                            return-object
+                            persistent-hint
                             required
+
                             @change="getImages"
                     ></v-select>
                 </v-flex>
@@ -50,11 +56,9 @@
     export default {
         data() {
             return {
-                sectionsNames: [],
                 sections: [],
-                select: '',
-                images: [],
-                sectionId:null
+                section: {section_name: ''},
+                images: []
             };
         },
         created() {
@@ -70,13 +74,8 @@
             getPath(file) {
                 return "/images/" + file.name;
             },
-            getImages() {
-                this.sections.forEach(item => {
-                    if (item.section_name === this.select) {
-                       this.sectionId = item.id;
-                    }
-                });
-                axios.post(`/imagesGallery`, {section_id: this.sectionId}).then(response => {
+            getImages(event) {
+                axios.post(`/imagesGallery`, {section_id: event.id}).then(response => {
                     if (response.data.status) {
                         this.images = response.data.images;
                     }
@@ -85,7 +84,6 @@
             getSections() {
                 axios.post(`/userSections`, {id: this.$store.state.Auth.id}).then(response => {
                     this.sections = response.data.sections;
-                    this.sectionsNames = this.sections.map(item => item.section_name);
                 });
             },
             onDelete(file) {

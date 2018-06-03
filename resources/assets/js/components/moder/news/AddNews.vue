@@ -1,5 +1,15 @@
 <template>
     <v-container fluid>
+        <v-layout row justify-center>
+            <v-dialog v-model="dialog" persistent>
+                <template>
+                    <div class="progress">
+                        <v-progress-circular :size="70" indeterminate color="primary"></v-progress-circular>
+                    </div>
+                </template>
+            </v-dialog>
+        </v-layout>
+
         <v-layout row>
             <v-flex xs4>
                 <v-subheader>Секция</v-subheader>
@@ -105,6 +115,7 @@
     export default {
         data() {
             return {
+                dialog: false,
                 news: {
                     title: null,
                     description: null,
@@ -151,6 +162,7 @@
                 data.append('section_id', this.news.section_id);
 
                 axios.post(`/api/addNews`, data).then(response => {
+                    this.dialog = true;
                     if (response.data.status) {
                         this.$store.commit(
                             "showInfo",
@@ -159,6 +171,7 @@
                         this.onUserNews();
                     }
                 }).catch(error => {
+                    this.dialog = false;
                     this.errors = error.response.data.errors;
                 });
 
@@ -209,5 +222,13 @@
         padding: 15px;
         border: 1px solid #999;
         border-radius: 5px;
+    }
+
+    .progress {
+        text-align: center;
+    }
+
+    .progress .progress-circular {
+        margin: 1rem;
     }
 </style>

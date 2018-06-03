@@ -9,6 +9,7 @@
                 </template>
             </v-dialog>
         </v-layout>
+
         <v-layout row>
             <v-flex xs4>
                 <v-subheader>Категория</v-subheader>
@@ -107,7 +108,7 @@
                 <v-btn color="primary" dark @click="addSection">Сохранить
                     <v-icon dark right>check_circle</v-icon>
                 </v-btn>
-                <v-btn color="red" dark @click="onUserNews">Отмена
+                <v-btn color="red" dark @click="onUserSections">Отмена
                     <v-icon dark right>block</v-icon>
                 </v-btn>
             </v-flex>
@@ -121,7 +122,6 @@
         data() {
             return {
                 dialog: false,
-                message:null,
                 section: {
                     section_name: '',
                     info: '',
@@ -180,8 +180,8 @@
                 axios.post(`/addSections`, data).then(response => {
                     this.dialog=true;
                     if (response.data.status) {
-                        this.message = response.data.message;
-                        setTimeout(this.onUserNews, 2000);
+                        this.$store.commit("showInfo",response.data.message);
+                        this.onUserSections();
                     }
                 }).catch(error => {
                     this.dialog = false;
@@ -214,12 +214,7 @@
             calcSize(size) {
                 return Math.round(size / 1024);
             },
-            onUserNews() {
-                this.$store.commit(
-                    "showInfo",
-                    this.message
-                );
-                this.dialog = false;
+            onUserSections() {
                 this.$router.push("/user_sections");
             },
             checkError(field) {

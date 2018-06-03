@@ -1,5 +1,15 @@
 <template>
     <div class="wrapper">
+        <v-layout row justify-center>
+            <v-dialog v-model="dialog" persistent>
+                <template>
+                    <div class="progress">
+                        <v-progress-circular :size="70" indeterminate color="primary"></v-progress-circular>
+                    </div>
+                </template>
+            </v-dialog>
+        </v-layout>
+
         <v-card>
             <v-card-title>
                 <v-btn color="primary" @click="onAddSection">Добавить
@@ -25,7 +35,8 @@
                     <td>{{ props.item.section_name }}</td>
                     <td>{{ props.item.info }}</td>
                     <td>
-                        <v-btn icon class="mx-0" v-bind:to="{name:'EditSection',params:{item:props.item,categories:categories}}">
+                        <v-btn icon class="mx-0"
+                               v-bind:to="{name:'EditSection',params:{item:props.item,categories:categories}}">
                             <v-icon color="teal">edit</v-icon>
                         </v-btn>
                         <v-btn icon class="mx-0" @click="deleteSection(props.item)">
@@ -52,6 +63,7 @@
         data() {
             return {
                 search: '',
+                dialog: false,
                 headers: [
                     {text: 'Дата создания', value: 'created_at'},
                     {text: 'Название', value: 'section_name'},
@@ -59,7 +71,7 @@
                     {text: 'Управление', sortable: false,}
                 ],
                 sections: [],
-                categories:[]
+                categories: []
             }
         },
         created() {
@@ -76,21 +88,31 @@
                 const index = this.sections.indexOf(item);
                 let answer = confirm('Вы действительно хотите удалить эту запись?');
                 if (answer) {
-                    axios.delete(`/deleteSection/`+item.id).then(response => {
+                    axios.delete(`/deleteSection/` + item.id).then(response => {
+                        this.dialog = true;
                         if (response.data.status) {
                             this.sections.splice(index, 1);
-                            this.$store.commit(
-                                "showInfo",
-                                response.data.message
-                            );
+                            this.$store.commit("showInfo", response.data.message);
+                            this.dialog = false;
                         }
                     });
                 }
             },
             onAddSection() {
-                this.$router.push({name:'AddSection',params:{'categories':this.categories}});
+                this.$router.push({name: 'AddSection', params: {'categories': this.categories}});
             }
 
         }
     }
 </script>
+
+
+<style>
+    .progress {
+        text-align: center;
+    }
+
+    .progress .progress-circular {
+        margin: 1rem;
+    }
+</style>

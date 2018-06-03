@@ -1,5 +1,15 @@
 <template>
     <div class="wrapper">
+        <v-layout row justify-center>
+            <v-dialog v-model="dialog" persistent>
+                <template>
+                    <div class="progress">
+                        <v-progress-circular :size="70" indeterminate color="primary"></v-progress-circular>
+                    </div>
+                </template>
+            </v-dialog>
+        </v-layout>
+
         <v-card>
             <v-card-title>
                 <v-btn color="primary" @click="onAddNews">Добавить
@@ -28,7 +38,7 @@
                         <v-btn icon class="mx-0" v-bind:to="{name:'EditNews',params:{item:props.item}}">
                             <v-icon color="teal">edit</v-icon>
                         </v-btn>
-                        <v-btn icon class="mx-0" @click="deleteItem(props.item)">
+                        <v-btn icon class="mx-0" @click="deleteNews(props.item)">
                             <v-icon color="pink">delete</v-icon>
                         </v-btn>
                     </td>
@@ -51,6 +61,7 @@
     export default {
         data() {
             return {
+                dialog: false,
                 search: '',
                 headers: [
                     {text: 'Дата создания', value: 'created_at'},
@@ -80,25 +91,36 @@
                     this.news = news;
                 });
             },
-            deleteItem(item) {
+            deleteNews(item) {
                 const index = this.news.indexOf(item);
                 let answer = confirm('Вы действительно хотите удалить эту запись?');
                 if (answer) {
                     axios.delete(`/api/news/` + item.id).then(response => {
-                        if (response.data.status == 'success') {
+                        this.dialog = true;
+                        if (response.data.status) {
                             this.news.splice(index, 1);
-                            this.$store.commit(
-                                "showInfo",
-                                response.data.message
-                            );
+                            this.$store.commit("showInfo", response.data.message);
+                            this.dialog = false;
                         }
+                    }).catch(error => {
+                        this.dialog = false;
                     });
                 }
             },
             onAddNews() {
-                this.$router.push({name:'AddNews',params:{sections:this.sections}});
+                this.$router.push({name: 'AddNews', params: {sections: this.sections}});
             }
 
         }
     }
 </script>
+
+<style>
+    .progress {
+        text-align: center;
+    }
+
+    .progress .progress-circular {
+        margin: 1rem;
+    }
+</style>

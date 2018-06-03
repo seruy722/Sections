@@ -12,14 +12,7 @@ window.router = router;
 
 const app = new Vue({
     el: "#app",
-
-    created() {
-        this.$store.dispatch("loadImages");
-    },
-
     store,
-
     router,
-
     render: h => h(App)
 });

@@ -131,8 +131,7 @@ class NewsController extends Controller
         $this->validate($request, [
             'title' => 'required|min:10|max:255',
             'description' => 'required|min:10|max:1500',
-            'content' => 'max:3000',
-            'fupload' => 'mimes:jpg,jpeg,png|dimensions:max:5120'
+            'content' => 'max:3000'
         ]);
 
         $news = News::find($request->id);
@@ -144,6 +143,10 @@ class NewsController extends Controller
             'user_id' => $request->user_id
         ];
         if (!is_string($file)) {
+            $this->validate($request, [
+                'fupload' => 'mimes:jpg,jpeg,png|dimensions:max:5120'
+            ]);
+
             $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
             $file->move('images', $filename);
             $data['image_name'] = $filename;
@@ -152,15 +155,15 @@ class NewsController extends Controller
                     unlink(public_path() . '/images/' . $news->img_filename);
                 }
                 $news->update($data);
-                return response()->json(['status' => 'success', 'message' => 'Данные успешно обновлены.']);
+                return response()->json(['status' => true, 'message' => 'Данные успешно обновлены.']);
             }
         } else {
             if ($news) {
                 $news->update($data);
-                return response()->json(['status' => 'success', 'message' => 'Данные успешно обновлены.']);
+                return response()->json(['status' => true, 'message' => 'Данные успешно обновлены.']);
             }
         }
-        return response()->json(['status' => 'error', 'message' => 'Ошибка при обновлении.']);
+        return response()->json(['status' => false, 'message' => 'Ошибка при обновлении.']);
     }
 
     public function needDate($date)
@@ -182,9 +185,9 @@ class NewsController extends Controller
                 unlink(public_path() . '/images/' . $news->img_filename);
             }
             $news->delete();
-            return response()->json(['status' => 'success', 'message' => 'Запись успешно удалена']);
+            return response()->json(['status' => true, 'message' => 'Запись успешно удалена']);
         } else {
-            return response()->json(['status' => 'error', 'message' => 'Ошибка при удалении записи']);
+            return response()->json(['status' => false, 'message' => 'Ошибка при удалении записи']);
         }
     }
 }

@@ -1,5 +1,15 @@
 <template>
     <v-container fluid>
+        <v-layout row justify-center>
+            <v-dialog v-model="dialog" persistent>
+                <template>
+                    <div class="progress">
+                        <v-progress-circular :size="70" indeterminate color="primary"></v-progress-circular>
+                    </div>
+                </template>
+            </v-dialog>
+        </v-layout>
+
         <v-layout row>
             <v-flex xs4>
                 <v-subheader>Категория</v-subheader>
@@ -128,6 +138,7 @@
         data() {
             return {
                 image: true,
+                dialog: false,
                 section: {},
                 formData: {
                     displayFileName: null,
@@ -187,14 +198,16 @@
 
 
                 axios.post(`/updateSection`, data).then(response => {
+                    this.dialog=true;
                     if (response.data.status) {
                         this.$store.commit(
                             "showInfo",
                             response.data.message
                         );
-                        setTimeout(this.onUserSections, 2000);
+                        this.onUserSections();
                     }
                 }).catch(error => {
+                    this.dialog = false;
                     this.errors = error.response.data.errors;
                 });
 
@@ -257,5 +270,17 @@
         color: red;
         font-size: 12px;
         background-color: white !important;
+    }
+
+    .progress{
+        text-align: center;
+    }
+    .progress .progress-circular{
+        margin: 1rem;
+    }
+
+
+    .input-field-file {
+        display: none;
     }
 </style>
