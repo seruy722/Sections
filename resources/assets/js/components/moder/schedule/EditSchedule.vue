@@ -1,5 +1,15 @@
 <template>
     <v-container>
+        <v-layout row justify-center>
+            <v-dialog v-model="dialog" persistent>
+                <template>
+                    <div class="progress">
+                        <v-progress-circular :size="70" indeterminate color="primary"></v-progress-circular>
+                    </div>
+                </template>
+            </v-dialog>
+        </v-layout>
+
         <v-layout row wrap>
             <v-flex xs4>
                 <v-subheader>Секция</v-subheader>
@@ -119,7 +129,7 @@
         <v-spacer></v-spacer>
         <v-layout row class="top">
             <v-flex xs8>
-                <v-btn color="primary" dark @click="addSchedule">Сохранить
+                <v-btn color="primary" dark @click="editSchedule">Обновить
                     <v-icon dark right>check_circle</v-icon>
                 </v-btn>
                 <v-btn color="red" dark @click="onUserSchedules">Отмена
@@ -134,6 +144,7 @@
     export default {
         data() {
             return {
+                dialog: false,
                 time1: null,
                 time2: null,
                 piker1: false,
@@ -171,7 +182,7 @@
             });
         },
         methods: {
-            addSchedule() {
+            editSchedule() {
                 this.errors = {};
 
                 let data = new FormData();
@@ -183,6 +194,7 @@
                 data.append('event_name', this.event);
 
                 axios.post('/editSchedule', data).then(response => {
+                    this.dialog = true;
                     if (response.data.status) {
                         this.$store.commit(
                             "showInfo",
@@ -192,6 +204,7 @@
                         this.onUserSchedules();
                     }
                 }).catch(error => {
+                    this.dialog = false;
                     this.errors = error.response.data.errors;
                 });
             },
@@ -208,5 +221,13 @@
 <style>
     .top {
         margin-top: 30px;
+    }
+
+    .progress {
+        text-align: center;
+    }
+
+    .progress .progress-circular {
+        margin: 1rem;
     }
 </style>

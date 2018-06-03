@@ -125,7 +125,6 @@
                     name: null,
                     email: null,
                     password: null,
-                    address: null,
                     phone:null,
                     password_confirmation: null,
                     action: null
@@ -145,6 +144,7 @@
                     .then(response => {
                         if (response.data.success) {
                             this.form = response.data.user;
+                            this.form.password = null;
                         }
                     })
                     .catch(error => {

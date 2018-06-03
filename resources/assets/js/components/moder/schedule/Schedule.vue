@@ -1,5 +1,15 @@
 <template>
     <div class="wrapper">
+        <v-layout row justify-center>
+            <v-dialog v-model="dialog" persistent>
+                <template>
+                    <div class="progress">
+                        <v-progress-circular :size="70" indeterminate color="primary"></v-progress-circular>
+                    </div>
+                </template>
+            </v-dialog>
+        </v-layout>
+
         <v-card>
             <v-card-title>
                 <v-btn color="primary" @click="onAddSchedule">Добавить
@@ -14,6 +24,7 @@
                         hide-details
                 ></v-text-field>
             </v-card-title>
+
             <v-data-table
                     disable-initial-sort
                     :headers="headers"
@@ -37,11 +48,13 @@
                         </v-btn>
                     </td>
                 </template>
+
                 <template slot="no-data">
                     <v-alert :value="true" type="info">
                         Нет данных!
                     </v-alert>
                 </template>
+
                 <v-alert slot="no-results" :value="true" color="error" icon="warning">
                     Ваш поиск по "{{ search }}" не дал результатов!.
                 </v-alert>
@@ -55,6 +68,7 @@
     export default {
         data() {
             return {
+                dialog: false,
                 search: '',
                 headers: [
                     {text: 'Дата создания', value: 'created_at'},
@@ -93,12 +107,11 @@
                 let answer = confirm('Вы действительно хотите удалить эту запись?');
                 if (answer) {
                     axios.delete('/daleteSchedule/' + item.id).then(response => {
+                        this.dialog = true;
                         if (response.data.status) {
                             this.schedules.splice(index, 1);
-                            this.$store.commit(
-                                "showInfo",
-                                response.data.message
-                            );
+                            this.$store.commit("showInfo", response.data.message);
+                            this.dialog = false;
                         }
                     });
                 }
@@ -121,3 +134,14 @@
         }
     }
 </script>
+
+
+<style>
+    .progress {
+        text-align: center;
+    }
+
+    .progress .progress-circular {
+        margin: 1rem;
+    }
+</style>

@@ -4,10 +4,6 @@ export default {
         state.info.show = true;
     },
 
-    setImagesList(state, payload) {
-        state.imagesList = payload;
-    },
-
     Login(state) {
         state.Auth.id = localStorage.getItem("id");
         state.Auth.api_token = localStorage.getItem("api_token");

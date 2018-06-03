@@ -1,5 +1,15 @@
 <template>
     <v-container fluid>
+        <v-layout row justify-center>
+            <v-dialog v-model="dialog" persistent>
+                <template>
+                    <div class="progress">
+                        <v-progress-circular :size="70" indeterminate color="primary"></v-progress-circular>
+                    </div>
+                </template>
+            </v-dialog>
+        </v-layout>
+
         <v-layout row>
             <v-flex xs4>
                 <v-subheader>Заголовок</v-subheader>
@@ -93,6 +103,7 @@
     export default {
         data() {
             return {
+                dialog: false,
                 news: {},
                 formData: {
                     displayFileName: null,
@@ -100,7 +111,7 @@
                     file: null
                 },
                 image: true,
-                errors:{}
+                errors: {}
             }
         },
         created() {
@@ -128,14 +139,14 @@
                 data.append('user_id', this.news.user_id);
 
                 axios.post(`/api/updateNews`, data).then(response => {
-                    if (response.data.status === 'success') {
-                        setTimeout(this.onUserNews, 3000);
+                    this.dialog = true;
+                    if (response.data.status) {
+                        this.$store.commit("showInfo", response.data.message);
+                        this.onUserNews();
                     }
-                    this.$store.commit(
-                        "showInfo",
-                        response.data.message
-                    );
+
                 }).catch(error => {
+                    this.dialog = false;
                     this.errors = error.response.data.errors;
                 });
 
@@ -191,5 +202,13 @@
         padding: 15px;
         border: 1px solid #999;
         border-radius: 5px;
+    }
+
+    .progress {
+        text-align: center;
+    }
+
+    .progress .progress-circular {
+        margin: 1rem;
     }
 </style>
