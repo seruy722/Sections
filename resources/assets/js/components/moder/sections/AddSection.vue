@@ -21,6 +21,7 @@
                         label="Категория"
                         required
                         :error-messages="checkError('category_id')"
+                        @change="enotherCategory"
                 ></v-select>
             </v-flex>
         </v-layout>
@@ -147,6 +148,7 @@
         created() {
             this.categories = this.$route.params.categories;
             this.sectionsCategory = this.categories.map(item => item.name);
+            this.sectionsCategory.push('Другая');
         },
         computed: {
             readyToUpload() {
@@ -203,7 +205,11 @@
                     reader.readAsDataURL(file);
                 }
             },
-
+            enotherCategory(event) {
+                if(event === 'Другая'){
+                    this.$router.push({name:'CreateMessage',params:{subject:'Добавление новой категории',email:'Email администратора',category:'Ваша категория'}});
+                }
+            },
             onButtonClick() {
                 this.$refs.fupload.click();
             },

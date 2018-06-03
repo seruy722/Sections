@@ -91453,6 +91453,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             errors: {}
         };
     },
+    created: function created() {
+        this.mail.subject = this.$route.params.subject;
+        this.mail.email_to = this.$route.params.email;
+        this.mail.msg = this.$route.params.category;
+    },
 
     methods: {
         sendMessage: function sendMessage() {
@@ -93443,6 +93448,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -93479,6 +93485,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.sectionsCategory = this.categories.map(function (item) {
             return item.name;
         });
+        this.sectionsCategory.push('Другая');
     },
 
     computed: {
@@ -93531,6 +93538,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this2.formData.uploadFileData = e.target.result;
                 };
                 reader.readAsDataURL(file);
+            }
+        },
+        enotherCategory: function enotherCategory(event) {
+            if (event === 'Другая') {
+                this.$router.push({ name: 'CreateMessage', params: { subject: 'Добавление новой категории', email: 'Email администратора', category: 'Ваша категория' } });
             }
         },
         onButtonClick: function onButtonClick() {
@@ -93618,6 +93630,7 @@ var render = function() {
                   required: "",
                   "error-messages": _vm.checkError("category_id")
                 },
+                on: { change: _vm.enotherCategory },
                 model: {
                   value: _vm.select,
                   callback: function($$v) {

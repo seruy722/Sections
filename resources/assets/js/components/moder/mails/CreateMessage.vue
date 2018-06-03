@@ -88,6 +88,11 @@
                 errors: {}
             }
         },
+        created(){
+            this.mail.subject = this.$route.params.subject;
+            this.mail.email_to = this.$route.params.email;
+            this.mail.msg = this.$route.params.category;
+        },
         methods: {
             sendMessage() {
                 this.errors = {};
