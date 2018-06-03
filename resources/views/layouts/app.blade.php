@@ -30,14 +30,13 @@
 </head>
 
 <body data-spy="scroll" data-target="#ha-header">
-
 <!-- Fixed navbar -->
 <div class="navbar navbar-default navbar-fixed-top ha-header-large" id="ha-header">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span
                         class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
-            <a class="navbar-brand logo" href="{{url('/#home')}}"></a>
+            <a class="navbar-brand logo" href="{{url('/')}}"></a>
         </div>
         <div class="navbar-collapse collapse ">
             <ul class="nav navbar-nav navbar-right">
@@ -66,10 +65,18 @@
                 @endguest
             </ul>
             <ul class="nav navbar-nav navbar-right top-menu">
-                <li class="active"><a href="{{url('/#home')}}">Главная</a></li>
-                <li><a href="{{url('/#sections')}}">Кружки</a></li>
-                <li><a href="{{url('/#schedule')}}">Расписание</a></li>
-                <li><a href="{{url('/#news')}}">Новости</a></li>
+                <li class="a active"><a href="{{url('/#home')}}">Главная</a></li>
+                <li class=""><a href="{{url('/#sections')}}">Кружки</a></li>
+                <li class=""><a href="{{url('/#schedule')}}">Расписание</a></li>
+                <li class=""><a href="{{url('/#news')}}">Новости</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right top1-menu" style="display: none">
+                <li class="active"><a href="{{url()->current(). '/#about'}}">О нас</a></li>
+                <li ><a href="{{url()->current() . '/#schedule'}}">Расписание</a></li>
+                <li ><a href="{{url()->current() . '/#news'}}">Новости</a></li>
+                <li ><a href="{{url()->current() . '/#photos'}}">Галерея</a></li>
+                <li ><a href="{{url()->current() . '/#contact'}}">Контакты</a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
@@ -133,37 +140,32 @@
 
 <script src="/js/main.js"></script>
 <!-- Resource jQuery -->
-<script type="text/javascript">
-   if (document.location.hash) {
+<script defer type="text/javascript">
+    if (document.location.hash) {
+        $('a[href^="{{url('/#')}}"]').bind('click.smoothscroll', function (e) {
+            e.preventDefault();
 
-       $('a[href^="{{url('/#')}}"]').bind('click.smoothscroll', function (e) {
-           e.preventDefault();
+            var target = this.hash,
+                $target = $(target);
 
-           var target = this.hash,
-               $target = $(target);
+            $('html, body').stop().animate({
+                'scrollTop': $target.offset().top
+            }, 2000, 'swing', function () {
+                window.location.hash = target;
+            });
+        });
 
-           $('html, body').stop().animate({
-               'scrollTop': $target.offset().top
-           }, 2000, 'swing', function () {
-               window.location.hash = target;
-           });
-       });
-
-       $(window).scroll(function () {
-           var scrollDistance = $(window).scrollTop();
-           // Assign active class to nav links while scolling
-           $('.page-section').each(function (i) {
-               if ($(this).position().top <= scrollDistance) {
-                   $('.top-menu li.active').removeClass('active');
-                   $('.top-menu li').eq(i).addClass('active');
-               }
-           });
-       }).scroll();
-   }
-   if (document.location.href != "{{url('/')}}") {
-       $('.top-menu li.active').removeClass('active');
-       $('.navbar-default').removeClass('ha-header-large');
-  }
+        $(window).scroll(function () {
+            var scrollDistance = $(window).scrollTop();
+            // Assign active class to nav links while scolling
+            $('.page-section').each(function (i) {
+                if ($(this).position().top <= scrollDistance) {
+                    $('.top-menu li.active').removeClass('active');
+                    $('.top-menu li').eq(i).addClass('active');
+                }
+            });
+        }).scroll();
+    }
 
 </script>
 
@@ -175,9 +177,6 @@
 <script defer src="/js/jquery.flexslider.js"></script>
 
 <script type="text/javascript">
-    $(function(){
-        <!-- SyntaxHighlighter.all(); -->
-    });
     $(window).load(function(){
         $('.flexslider').flexslider({
             animation: "slide",
@@ -188,7 +187,44 @@
         });
     });
 </script>
+<!--dynamic navbar script-->
+<script type="text/javascript">
+    function dynNav () {
+        var path = window.location.pathname;
+        var c = path.lastIndexOf('/');
+        var p = path.slice(0, c);
+        if (p == "/sections/section") {
+            $('.a').removeClass('active');
+            $('a[href^="{{url()->current(). '/#'}}"]').bind('click.smoothscroll', function (e) {
+                e.preventDefault();
 
+                var target = this.hash,
+                    $target = $(target);
+
+                $('html, body').stop().animate({
+                    'scrollTop': $target.offset().top
+                }, 2000, 'swing', function () {
+                    window.location.hash = target;
+                });
+            });
+
+            $(window).scroll(function () {
+                var scrollDistance = $(window).scrollTop();
+                // Assign active class to nav links while scolling
+                $('.page-section').each(function (i) {
+                    if ($(this).position().top <= scrollDistance) {
+                        $('.top1-menu li.active').removeClass('active');
+                        $('.top1-menu li').eq(i).addClass('active');
+                    }
+                });
+            }).scroll();
+
+            $(".top-menu").css("display", "none");
+            $(".top1-menu").css("display", "block");
+        }
+    }
+    dynNav();
+</script>
 </body>
 
 </html>

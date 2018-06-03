@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- About -->
-    <div id="about" class="about ha-waypoint" data-animate-down="ha-header-small" data-animate-up="ha-header-large">
+    <div id="about" class="about ha-waypoint page-section" data-animate-down="ha-header-small" data-animate-up="ha-header-large">
         <div class="container">
             <div class="col-xs-12 col-md-12 col-sm-12">
                 <div class="container TitleSection">
@@ -21,7 +21,7 @@
     </div>
     <!-- About -->
     <!-- Schedule -->
-    <div id="schedule" class="schedule">
+    <div id="schedule" class="schedule page-section">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-12 col-sm-12">
@@ -153,16 +153,16 @@
     <!-- /Schedule -->
 
     <!-- News-->
-    @if(count($news) > 0)
-        <div id="news" class="news">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-md-12 col-sm-12">
-                        <div class=" container TitleSection">
-                            <header class="page-head">
-                                <h2>Новости</h2>
-                            </header>
-                        </div>
+    <div id="news" class="news page-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-sm-12">
+                    <div class=" container TitleSection">
+                        <header class="page-head">
+                            <h2>Новости</h2>
+                        </header>
+                    </div>
+                    @if(count($news) > 0)
                         <div class="row">
                             <div class="imgSwitch">
                                 <div class="row">
@@ -187,50 +187,50 @@
                                 <div class="paginate">{{$news->links()}}</div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>
-    @endif
-    <!-- News-->
+    </div>
+    <!--/News-->
     <!--Photos-->
-    @if(count($photos) > 0)
-        <div id="photos" class="photos">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class=" container TitleSection">
-                            <header class="page-head">
-                                <h2>Галерея</h2>
-                            </header>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 ">
-                                <section class="slider">
-                                    <div class="flexslider">
-                                        <ul class="slides">
-                                            @foreach($photos as $one)
-                                            <li data-thumb="/images/{{$one->name}}">
-                                                <img src="/images/{{$one->name}}" class="center-block"/>
-                                            </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </section>
-                            </div>
-                            <a href="{{route('gallery', $users->id)}}">
-                                <button type="button" class="btn btn-primary goto">ВСЕ ФОТОГРАФИИ</button>
-                            </a>
-                        </div>
+    <div id="photos" class="photos page-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class=" container TitleSection">
+                        <header class="page-head">
+                            <h2>Галерея</h2>
+                        </header>
                     </div>
+                    @if(count($photos) > 0)
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 ">
+                            <section class="slider">
+                                <div class="flexslider">
+                                    <ul class="slides">
+                                        @foreach($photos as $one)
+                                        <li data-thumb="/images/{{$one->name}}">
+                                            <img src="/images/{{$one->name}}" class="center-block"/>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </section>
+                        </div>
+                        <a href="{{route('gallery', $users->id)}}">
+                            <button type="button" class="btn btn-primary goto">ВСЕ ФОТОГРАФИИ</button>
+                        </a>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
-    @endif
+    </div>
     <!--/Photos-->
 
     <!--Contact -->
-    <div id="contact" class="contact">
+    <div id="contact" class="contact page-section">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-12 col-sm-12">

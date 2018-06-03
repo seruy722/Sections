@@ -12,8 +12,8 @@
         </button>
     </form>
     </div>
-            <div class="msg">{{Session::get('msg')}}</div>
-        </div>
+        <div class="msg">{{Session::get('msg')}}</div>
+    </div>
     </div>
     <!-- Sections -->
     <div id="sections" class="sections ha-waypoint page-section" data-animate-down="ha-header-small "
