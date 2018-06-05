@@ -87,6 +87,11 @@
                         <li><a href="{{url()->current() . '/#contact'}}">Контакты</a></li>
                     </ul>
                 @endif
+                @if(dirname($path) ==  "/sections/gallery" || dirname($path) == "/articles"))
+                    <ul class="nav navbar-nav navbar-right top1-menu" style="display: none">
+                        <li><a onclick="javascript:history.back()">Назад</a></li>
+                    </ul>
+                @endif
             @endif
         </div>
         <!--/.nav-collapse -->
@@ -200,12 +205,12 @@
     });
 </script>
 <!--dynamic navbar script-->
-<script type="text/javascript">
+<script defer type="text/javascript">
     function dynNav() {
         var path = window.location.pathname;
         var c = path.lastIndexOf('/');
         var p = path.slice(0, c);
-        if (p == "/sections/section") {
+        if (p == "/sections/section" || p ==  "/sections/gallery" || p == "/articles") {
             $('.a').removeClass('active');
             $('a[href^="{{url()->current(). '/#'}}"]').bind('click.smoothscroll', function (e) {
                 e.preventDefault();

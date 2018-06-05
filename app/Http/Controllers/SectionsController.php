@@ -242,7 +242,8 @@ class SectionsController extends Controller
     public function gallery($id)
     {
         $img = Sections::findOrFail($id);
-        return view('gallery', ['img' => $img]);
+        $name = Sections::where('id', $id)->value('section_name');
+        return view('gallery', ['img' => $img, 'name'=>$name]);
     }
 
 }

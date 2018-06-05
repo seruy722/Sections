@@ -32,121 +32,154 @@
                             <h2>Расписание</h2>
                         </header>
                     </div>
-                    <div class="cd-schedule loading">
-                        <div class="timeline">
-                            <ul>
-                                <li><span>08:00</span></li>
-                                <li><span>09:00</span></li>
-                                <li><span>10:00</span></li>
-                                <li><span>11:00</span></li>
-                                <li><span>12:00</span></li>
-                                <li><span>13:00</span></li>
-                                <li><span>14:00</span></li>
-                                <li><span>15:00</span></li>
-                                <li><span>16:00</span></li>
-                                <li><span>17:00</span></li>
-                                <li><span>18:00</span></li>
-                                <li><span>19:00</span></li>
-                                <li><span>20:00</span></li>
-                            </ul>
+                    <div class="container">
+                        <ul class="nav nav-justified nav-pills">
+                            <li class="active noround"><a data-toggle="pill" href="#menu">Понедельник</a></li>
+                            <li class="noround"><a data-toggle="pill" href="#menu1">Вторник</a></li>
+                            <li class="noround"><a data-toggle="pill" href="#menu2">Среда</a></li>
+                            <li class="noround"><a data-toggle="pill" href="#menu3">Четверг</a></li>
+                            <li class="noround"><a data-toggle="pill" href="#menu4">Пятница</a></li>
+                            <li class="noround"><a data-toggle="pill" href="#menu5">Суббота</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="menu" class="tab-pane fade in active">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <div class="container">
+                                        <thead>
+                                        <tr class="table-head">
+                                            <th class="col-md-1">Время начала занятия</th>
+                                            <th class="col-md-1">Время окончания занятия</th>
+                                            <th class="col-md-1">Название</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($monday as $b)
+                                            <tr>
+                                                <td>{{$b->event_start}}</td>
+                                                <td>{{$b->event_end}}</td>
+                                                <td>{{$b->event_name}}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </div>
+                                </table>
+                            </div>
+
+                            <div id="menu1" class="tab-pane fade">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <div class="container">
+                                        <thead>
+                                        <tr class="table-head">
+                                            <th class="col-md-1">Время начала занятия</th>
+                                            <th class="col-md-1">Время окончания занятия</th>
+                                            <th class="col-md-1">Название</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($tuesday as $b)
+                                            <tr>
+                                                <td>{{$b->event_start}}</td>
+                                                <td>{{$b->event_end}}</td>
+                                                <td>{{$b->event_name}}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </div>
+                                </table>
+                            </div>
+
+                            <div id="menu2" class="tab-pane fade">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <div class="container">
+                                        <thead>
+                                        <tr class="table-head">
+                                            <th class="col-md-1">Время начала занятия</th>
+                                            <th class="col-md-1">Время окончания занятия</th>
+                                            <th class="col-md-1">Название</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($wednesday as $b)
+                                            <tr>
+                                                <td>{{$b->event_start}}</td>
+                                                <td>{{$b->event_end}}</td>
+                                                <td>{{$b->event_name}}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </div>
+                                </table>
+                            </div>
+
+                            <div id="menu3" class="tab-pane fade">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <div class="container">
+                                        <thead>
+                                        <tr class="table-head">
+                                            <th class="col-md-1">Время начала занятия</th>
+                                            <th class="col-md-1">Время окончания занятия</th>
+                                            <th class="col-md-1">Название</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($thursday as $b)
+                                            <tr>
+                                                <td>{{$b->event_start}}</td>
+                                                <td>{{$b->event_end}}</td>
+                                                <td>{{$b->event_name}}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </div>
+                                </table>
+                            </div>
+
+                            <div id="menu4" class="tab-pane fade">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <div class="container">
+                                        <thead>
+                                        <tr class="table-head">
+                                            <th class="col-md-1">Время начала занятия</th>
+                                            <th class="col-md-1">Время окончания занятия</th>
+                                            <th class="col-md-1">Название</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($friday as $b)
+                                            <tr>
+                                                <td>{{$b->event_start}}</td>
+                                                <td>{{$b->event_end}}</td>
+                                                <td>{{$b->event_name}}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </div>
+                                </table>
+                            </div>
+
+                            <div id="menu5" class="tab-pane fade">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <div class="container">
+                                        <thead>
+                                        <tr class="table-head">
+                                            <th class="col-md-1">Время начала занятия</th>
+                                            <th class="col-md-1">Время окончания занятия</th>
+                                            <th class="col-md-1">Название</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($saturday as $b)
+                                            <tr>
+                                                <td>{{$b->event_start}}</td>
+                                                <td>{{$b->event_end}}</td>
+                                                <td>{{$b->event_name}}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </div>
+                                </table>
+                            </div>
                         </div>
-                        <!-- .timeline -->
-
-                        <div class="events">
-                            <ul>
-                                <li class="events-group">
-                                    <div class="top-info"><span>Понедельник</span></div>
-                                    <ul>
-                                        <?php $i = 0 ?>
-                                        @foreach ($monday as $day)
-                                            <?php $i++; ?>
-                                            <li class="single-event"
-                                                data-start={{$day->event_start}} data-end={{$day->event_end}} data-content="event-rowing-workout"
-                                                data-event="event-1">
-                                                <p><em class="event-name">Занятие <?php echo $i; ?></em></p>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-
-                                <li class="events-group">
-                                    <div class="top-info"><span>Вторник</span></div>
-                                    <ul>
-                                        <?php $i = 0 ?>
-                                        @foreach ($tuesday as $day)
-                                            <?php $i++; ?>
-                                            <li class="single-event"
-                                                data-start={{$day->event_start}} data-end={{$day->event_end}} data-content="event-rowing-workout"
-                                                data-event="event-2">
-                                                <p><em class="event-name">Занятие <?php echo $i; ?></em></p>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-
-                                <li class="events-group">
-                                    <div class="top-info"><span>Среда</span></div>
-
-                                    <ul>
-                                        <?php $i = 0 ?>
-                                        @foreach ($wednesday as $day)
-                                            <?php $i++; ?>
-                                            <li class="single-event"
-                                                data-start={{$day->event_start}} data-end={{$day->event_end}} data-content="event-rowing-workout"
-                                                data-event="event-3">
-                                                <p><em class="event-name">Занятие <?php echo $i; ?></em></p>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-
-                                <li class="events-group">
-                                    <div class="top-info"><span>Четверг</span></div>
-                                    <ul>
-                                        <?php $i = 0 ?>
-                                        @foreach ($thursday as $day)
-                                            <?php $i++; ?>
-                                            <li class="single-event"
-                                                data-start={{$day->event_start}} data-end={{$day->event_end}} data-content="event-rowing-workout"
-                                                data-event="event-4">
-                                                <p><em class="event-name">Занятие <?php echo $i; ?></em></p>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-
-                                <li class="events-group">
-                                    <div class="top-info"><span>Пятница</span></div>
-                                    <ul>
-                                        <?php $i = 0 ?>
-                                        @foreach ($friday as $day)
-                                            <?php $i++; ?>
-                                            <li class="single-event"
-                                                data-start={{$day->event_start}} data-end={{$day->event_end}} data-content="event-rowing-workout"
-                                                data-event="event-5">
-                                                <p><em class="event-name">Занятие <?php echo $i; ?></em></p>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-
-                                <li class="events-group">
-                                    <div class="top-info"><span>Суббота</span></div>
-                                    <ul>
-                                        <?php $i = 0 ?>
-                                        @foreach ($saturday as $day)
-                                            <?php $i++; ?>
-                                            <li class="single-event"
-                                                data-start={{$day->event_start}} data-end={{$day->event_end}} data-content="event-rowing-workout"
-                                                data-event="event-6">
-                                                <p><em class="event-name">Занятие <?php echo $i; ?></em></p>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- .cd-schedule -->
                     </div>
                 </div>
             </div>

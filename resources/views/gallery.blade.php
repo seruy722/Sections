@@ -8,6 +8,7 @@
                     <div class=" container TitleSection">
                         <header class="page-head">
                             <h2>Галерея</h2>
+                            <p>{{$name}}</p>
                         </header>
                     </div>
                     <div class="tz-gallery">
