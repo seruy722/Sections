@@ -46,7 +46,7 @@
                 @endif
             @endif
         </div>
-        <ul class="navbar-collapse collapse ">
+        <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @guest
