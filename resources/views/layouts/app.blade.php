@@ -244,8 +244,32 @@
             $(".top1-menu").css("display", "block");
         }
     }
-
     dynNav();
+</script>
+
+<!--change schedule buttons lables on resize script -->
+<script defer type="text/javascript">
+    $( window ).resize(function() {
+        if ($( window ).width() < 768)
+        {
+            $('[href = "#menu"]').html("Пн");
+            $('[href = "#menu1"]').html("Вт");
+            $('[href = "#menu2"]').html("Ср");
+            $('[href = "#menu3"]').html("Чт");
+            $('[href = "#menu4"]').html("Пт");
+            $('[href = "#menu5"]').html("Сб");
+        }
+        else
+        {
+            $('[href = "#menu"]').html("Понедельник");
+            $('[href = "#menu1"]').html("Вторник");
+            $('[href = "#menu2"]').html("Среда");
+            $('[href = "#menu3"]').html("Четверг");
+            $('[href = "#menu4"]').html("Пятница");
+            $('[href = "#menu5"]').html("Суббота");
+        }
+    });
+    $(window).resize();
 </script>
 </body>
 
