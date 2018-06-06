@@ -37,8 +37,16 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span
                         class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
             <a class="navbar-brand logo" href="{{url('/#home')}}"></a>
+            @if (isset(parse_url(url()->current())['path']))
+                <?php $path = parse_url(url()->current())['path'];?>
+                @if(dirname($path) ==  "/sections/gallery" || dirname($path) == "/articles")
+                    <ul class="nav navbar-nav top1-menu col-xs-6" style="display: none">
+                        <li><a href="#" onclick="javascript:history.back()">Вернуться назад</a></li>
+                    </ul>
+                @endif
+            @endif
         </div>
-        <div class="navbar-collapse collapse ">
+        <ul class="navbar-collapse collapse ">
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @guest
@@ -87,11 +95,7 @@
                         <li><a href="{{url()->current() . '/#contact'}}">Контакты</a></li>
                     </ul>
                 @endif
-                @if(dirname($path) ==  "/sections/gallery" || dirname($path) == "/articles"))
-                    <ul class="nav navbar-nav navbar-right top1-menu" style="display: none">
-                        <li><a onclick="javascript:history.back()">Назад</a></li>
-                    </ul>
-                @endif
+
             @endif
         </div>
         <!--/.nav-collapse -->
