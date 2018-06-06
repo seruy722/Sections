@@ -36,7 +36,7 @@
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span
                         class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
-            <a class="navbar-brand logo" href="{{url('/#home')}}"></a>
+            <a onclick="return location.href = '/#home'" class="navbar-brand logo" href="#"></a>
             @if (isset(parse_url(url()->current())['path']))
                 <?php $path = parse_url(url()->current())['path'];?>
                 @if(dirname($path) ==  "/sections/gallery" || dirname($path) == "/articles")
