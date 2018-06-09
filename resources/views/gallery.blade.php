@@ -7,8 +7,9 @@
                 <div class="col-xs-12 col-md-12 col-sm-12">
                     <div class=" container TitleSection">
                         <header class="page-head">
-                            <h2>Галерея</h2>
-                            <p>{{$name}}</p>
+                            <h2>Галерея
+                                <small>// {{$name}}</small>
+                            </h2>
                         </header>
                     </div>
                     <div class="tz-gallery">

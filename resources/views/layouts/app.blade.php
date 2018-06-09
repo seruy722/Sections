@@ -133,7 +133,6 @@
                         <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                         <li><a href="#"><i class="fa fa-vk"></i></a></li>
                         <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                        <li class="go_top"><a href="#top"><i class="fa fa-chevron-circle-up"></i></a></li>
                     </ul>
                 </div>
             </div>
