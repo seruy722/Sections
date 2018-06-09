@@ -95,7 +95,6 @@
                         <li><a href="{{url()->current() . '/#contact'}}">Контакты</a></li>
                     </ul>
                 @endif
-
             @endif
         </div>
         <!--/.nav-collapse -->

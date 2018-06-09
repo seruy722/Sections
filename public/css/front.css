@@ -4256,7 +4256,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .nav-justified {
-    width: 94%
+    width: 99%
 }
 
 .nav-justified > li {
@@ -4265,7 +4265,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .nav-justified > li > a {
     margin-bottom: 5px;
-    text-align: center
+    text-align: center;
+    padding: 10px 0;
 }
 
 .nav-justified > .dropdown .dropdown-menu {
@@ -4273,13 +4274,25 @@ textarea.input-group-sm > .input-group-btn > .btn {
     left: auto
 }
 
-@media(min-width: 412px) {
+@media(min-width: 319px) {
     .nav-justified > li {
         display: table-cell;
         width: 1%
     }
     .nav-justified > li > a {
-        margin-bottom: 0
+        margin-bottom: 0;
+    }
+}
+
+@media(min-width: 410px){
+    .nav-justified > li > a {
+        padding: 10px 15px;
+    }
+}
+
+@media(min-width: 321px){
+    .nav-justified {
+        width: 94%
     }
 }
 
