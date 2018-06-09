@@ -445,7 +445,7 @@ h2 .small,
 h2 small,
 h3 .small,
 h3 small {
-    font-size: 65%
+    font-size: 100%
 }
 
 h4,
@@ -4451,6 +4451,9 @@ textarea.input-group-sm > .input-group-btn > .btn {
         padding-right: 0;
         padding-left: 0
     }
+    .ha-header-small .logo {
+        margin: 0 !important;
+    }
 }
 
 .container > .navbar-collapse,
@@ -7373,7 +7376,7 @@ h1 small {
     background: url(../images/passion.png) no-repeat scroll 0 0 transparent;
     height: 45px;
     text-indent: -9999px;
-    width: 112px
+    width: 112px;
 }
 
 .navbar-default {
@@ -7518,7 +7521,8 @@ h1 small {
     background: url(../images/passion_small.png) no-repeat scroll 0 0 transparent;
     -webkit-transition: all .5s;
     -moz-transition: all .5s;
-    transition: all .5s
+    transition: all .5s;
+    margin: 8px 0 3px 10px;
 }
 
 .news,
