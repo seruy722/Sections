@@ -42,7 +42,7 @@ class SectionsTableSeeder extends Seeder
             ),
             array(
                 'user_id' => rand(1, 26),
-                'section_name' => '',
+                'section_name' => 'Ансамбль эстрадного танца «Ассорти»',
                 'address' => 'ул. Парковая, 12а, Краматорск, Донецкая область',
                 'category_id' => '1',
                 'img_logo' => 'placeholder.png',
@@ -50,7 +50,7 @@ class SectionsTableSeeder extends Seeder
             ),
             array(
                 'user_id' => rand(1, 26),
-                'section_name' => '',
+                'section_name' => 'Ансамбль спортивного бального танца «Серпантин»',
                 'address' => 'ул. Парковая, 12а, Краматорск, Донецкая область',
                 'category_id' => '1',
                 'img_logo' => 'placeholder.png',
