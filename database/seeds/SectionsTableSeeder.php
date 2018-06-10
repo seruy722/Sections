@@ -115,7 +115,7 @@ class SectionsTableSeeder extends Seeder
             ),
             array(
                 'user_id' => rand(1, 20),
-                'section_name' => 'Образцовый ансамбль эстрадной песни "Барви"',
+                'section_name' => "Образцовый ансамбль эстрадной песни 'Барви'",
                 'address' => 'ул. Орджоникидзе, 5, Краматорск, Донецкая область',
                 'category_id' => '4',
                 'img_logo' => 'placeholder.png',
