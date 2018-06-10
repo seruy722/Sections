@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Sections -->
-    <div id="sections" class="sections ha-waypoint page-section" data-animate-down="ha-header-small "
+    <div id="sections" class="sections ha-waypoint" data-animate-down="ha-header-small "
          data-animate-up="ha-header-large">
         <div class="container">
             <div class="row">

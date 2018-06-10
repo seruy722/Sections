@@ -2,7 +2,8 @@
 
 @section('content')
 
-    <div class="col-xs-12 col-sm-12 col-md-12" search>
+    <div class="col-xs-12 col-sm-12 col-md-12 ha-waypoint" data-animate-down="ha-header-small "
+         data-animate-up="ha-header-large">
         <div class="msg" style="padding-top: 2.5%; padding-bottom: 2.5%;">Результаты поиска по вашему запросу
             <b> {{ $query }} </b>:
         </div>

@@ -469,13 +469,13 @@ h1 {
     font-size: 80px
 }
 
-H1 {
+H1 a {
     text-shadow: -1px -1px #fff, -2px -2px #fff, -1px 1px #fff, -2px 2px #fff, 1px 1px #fff, 2px 2px #fff, 1px -1px #fff, 2px -2px #fff, -3px -3px 2px #bbb, -3px 3px 2px #bbb, 3px 3px 2px #bbb, 3px -3px 2px #bbb;
     color: #4682b4;
     transition: all 1s
 }
 
-H1:hover {
+H1 a:hover {
     color: #9acd32
 }
 
@@ -4656,6 +4656,9 @@ textarea.input-group-sm > .input-group-btn > .btn {
     .navbar-form .form-group {
         margin-bottom: 5px
     }
+    .tz-gallery .row > div {
+    left: 15% !important;
+}
 }
 
 @media(min-width:768px) {
@@ -7076,8 +7079,11 @@ th.hidden-lg {
     tr.hidden-lg.hidden-xs {
         display: none!important
     }
+    #search-box {
+    width: 100% !important;
+    margin-left: 0% !important;
 }
-
+}
 @media(min-width:768px) and (max-width:991px) {
     .hidden-lg.hidden-sm,
     td.hidden-lg.hidden-sm,
@@ -7085,6 +7091,9 @@ th.hidden-lg {
     tr.hidden-lg.hidden-sm {
         display: none!important
     }
+    .tz-gallery .row > div {
+    left: 3% !important;
+}
 }
 
 @media(min-width:992px) and (max-width:1199px) {
@@ -7349,6 +7358,18 @@ ul {
 
 h1 small {
     font-size: 90%
+}
+
+.back{
+    background: url(../images/back.png) no-repeat center top;
+    width: 100px;
+    height: 45px;
+}
+
+.ha-header-small .back{
+    background: url(../images/back_small.png) no-repeat center top;
+    width: 100px;
+    height: 35px;
 }
 
 .header_img {

@@ -41,7 +41,7 @@
                 <?php $path = parse_url(url()->current())['path'];?>
                 @if(dirname($path) ==  "/sections/gallery" || dirname($path) == "/articles")
                     <ul class="nav navbar-nav top1-menu col-xs-6" style="display: none">
-                        <li><a href="#" onclick="javascript:history.back()">Вернуться назад</a></li>
+                        <li><a class="back" href="#" onclick="javascript:history.back()"></a></li>
                     </ul>
                 @endif
             @endif
@@ -108,7 +108,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <div class="spacer"></div>
-                <h1>Секции, студии, кружки</h1>
+                <h1><a onclick="return location.href = '/#home'" href="#">Секции, студии, кружки</a></h1>
             </div>
         </div>
     </div>

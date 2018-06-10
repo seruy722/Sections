@@ -16,7 +16,8 @@
         </div>
     </div>
     <!-- News-->
-    <div id="news" class="news">
+    <div id="news" class="news ha-waypoint" data-animate-down="ha-header-small "
+         data-animate-up="ha-header-large">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-12 col-sm-12">
