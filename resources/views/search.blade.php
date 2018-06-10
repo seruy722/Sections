@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    @if(isset($detail))
+    @if(count($detail) > 0)
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-12 col-sm-12">
@@ -55,7 +55,7 @@
     @endif
 
 
-    @if(isset($details))
+    @if(count($details) > 0)
         <div id="news" class="news">
             <div class="imgSwitch">
                 <div class="row">
