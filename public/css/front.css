@@ -496,7 +496,9 @@ h4 {
 
 .h5,
 h5 {
-    font-size: 14px
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
 }
 
 .h6,
@@ -4284,13 +4286,13 @@ textarea.input-group-sm > .input-group-btn > .btn {
     }
 }
 
-@media(min-width: 410px){
+@media(min-width: 410px) {
     .nav-justified > li > a {
         padding: 10px 15px;
     }
 }
 
-@media(min-width: 321px){
+@media(min-width: 321px) {
     .nav-justified {
         width: 94%
     }
@@ -4657,8 +4659,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
         margin-bottom: 5px
     }
     .tz-gallery .row > div {
-    left: 15% !important;
-}
+        left: 15% !important;
+    }
 }
 
 @media(min-width:768px) {
@@ -7080,10 +7082,11 @@ th.hidden-lg {
         display: none!important
     }
     #search-box {
-    width: 100% !important;
-    margin-left: 0% !important;
+        width: 100% !important;
+        margin-left: 0% !important;
+    }
 }
-}
+
 @media(min-width:768px) and (max-width:991px) {
     .hidden-lg.hidden-sm,
     td.hidden-lg.hidden-sm,
@@ -7092,8 +7095,8 @@ th.hidden-lg {
         display: none!important
     }
     .tz-gallery .row > div {
-    left: 3% !important;
-}
+        left: 3% !important;
+    }
 }
 
 @media(min-width:992px) and (max-width:1199px) {
@@ -7360,13 +7363,13 @@ h1 small {
     font-size: 90%
 }
 
-.back{
+.back {
     background: url(../images/back.png) no-repeat center top;
     width: 100px;
     height: 45px;
 }
 
-.ha-header-small .back{
+.ha-header-small .back {
     background: url(../images/back_small.png) no-repeat center top;
     width: 100px;
     height: 35px;
@@ -9296,4 +9299,11 @@ label {
     body {
         padding: 0;
     }
+    .map_title {
+        width: 200px !important;
+    }
+}
+
+.map_title {
+    width: 360px;
 }

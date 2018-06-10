@@ -15,7 +15,7 @@
                                         <h4>{{optional($post->sections)->section_name}}</h4>
                                         <div class="thumb_img"><img class="img-responsive center-block" alt="Blue Gate" src="/images/{{$post->image_name}}"></div>
                                         <div class="itemInfo">
-                                            <p>{{$post->content}}</p>
+                                            <p><?php echo($post->content); ?></p>
                                         </div>
                                     </div>
                                 </div>

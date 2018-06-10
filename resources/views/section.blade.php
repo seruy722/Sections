@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-12 col-sm-12">
                         <div class="log"><img src="/images/{{$users->img_logo}}" alt="filter"></div>
-                        <p class="text-justify">{{$users->info}}.</p>
+                        <p style="text-align: justify;">{{$users->info}}.</p>
                     </div>
                 </div>
             </div>
@@ -346,7 +346,7 @@
         google.maps.event.addDomListener(window, "load", function () {
             var map = new google.maps.Map(document.getElementById("map"), {
                 center: new google.maps.LatLng(<?php echo $lat ?>, <?php echo $lng ?>),
-                zoom: 14,
+                zoom: 16,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
             var infoWindow = new google.maps.InfoWindow();
@@ -365,7 +365,7 @@
             var marker1 = createMarker({
                 position: new google.maps.LatLng(<?php echo $lat ?>, <?php echo $lng ?>),
                 map: map
-            }, "<h4><?php echo($users->section_name); ?></h4><p><?php echo(optional($users->user)->phone); ?></p>");
+            }, "<h4 class='map_title';><?php echo($users->section_name); ?></h4><p><?php echo(optional($users->user)->phone); ?></p>");
 
         });
     </script>
