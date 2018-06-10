@@ -58,7 +58,7 @@ class SectionsTableSeeder extends Seeder
             ),
             array(
                 'user_id' => rand(1, 26),
-                'section_name' => 'Хореографический ансамбль "Вітерець"',
+                'section_name' => 'Кружок «Греко-римской борьбы»',
                 'address' => 'ул. Парковая, 12а, Краматорск, Донецкая область',
                 'category_id' => '2',
                 'img_logo' => 'placeholder.png',
@@ -66,7 +66,7 @@ class SectionsTableSeeder extends Seeder
             ),
             array(
                 'user_id' => rand(1, 26),
-                'section_name' => 'Ансамбль спортивного бального танца «Серпантин»',
+                'section_name' => 'Кружок «Скалолазание»',
                 'address' => 'ул. Парковая, 12а, Краматорск, Донецкая область',
                 'category_id' => '2',
                 'img_logo' => 'placeholder.png',
