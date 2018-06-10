@@ -4,10 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Сайт про кружки, секции, студии и клубы города Краматорск">
+    <meta name="author" content="IT 2.0 Academy">
     <meta name="keywords"
-          content="business, corporate, corporate website, creative, html5, marketing, multipurpose, responsive, site templates">
+          content="кружки, секции, студии, клубы, Краматорск,
+          ансамбль, театр, школа, детский, искусства, творчества,
+          мастерства, техника, язык, группа, танца, образцовый, песни,
+          народный, эстрадного, спортивного, бального, народного,
+          изобразительного, танцевальные, спортивные, художественные,
+          рукоделие, музыкальные, театральные, образовательные">
     <link rel="shortcut icon" href="images/favicon.png">
     <title>Секции, Кружки, Студии</title>
     <link href="{{ asset('css/front.css') }}" rel="stylesheet">
