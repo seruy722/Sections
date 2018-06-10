@@ -45,7 +45,7 @@ class SectionsTableSeeder extends Seeder
             ),
             array(
                 'user_id' => rand(1, 20),
-                'section_name' => 'Секция современного танца',
+                'section_name' => 'Ансамбль эстрадного танца «Ассорти»',
                 'address' => 'ул. Марата, 8, Краматорск, Донецкая область',
                 'category_id' => '1',
                 'img_logo' => 'placeholder.png',
@@ -55,7 +55,7 @@ class SectionsTableSeeder extends Seeder
             ),
             array(
                 'user_id' => rand(1, 20),
-                'section_name' => 'Секция народного танца',
+                'section_name' => 'Ансамбль спортивного бального танца «Серпантин',
                 'address' => 'ул. Василя Стуса, 48, Краматорск, Донецкая область',
                 'category_id' => '1',
                 'img_logo' => 'placeholder.png',
@@ -65,7 +65,7 @@ class SectionsTableSeeder extends Seeder
             ),
             array(
                 'user_id' => rand(1, 20),
-                'section_name' => 'Секция футбола',
+                'section_name' => 'Кружок «Греко-римской борьбы»',
                 'address' => 'ул. Шкадинова, 32, Краматорск, Донецкая область',
                 'category_id' => '2',
                 'img_logo' => 'placeholder.png',
@@ -75,7 +75,7 @@ class SectionsTableSeeder extends Seeder
             ),
             array(
                 'user_id' => rand(1, 20),
-                'section_name' => 'Секция бокса',
+                'section_name' => 'Кружок «Скалолазание',
                 'address' => 'ул. Парковая, 12а, Краматорск, Донецкая область',
                 'category_id' => '2',
                 'img_logo' => 'placeholder.png',
