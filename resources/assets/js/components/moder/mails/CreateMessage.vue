@@ -128,7 +128,7 @@
                 this.emails = response.data.emails;
             });
             this.mail.subject = this.$route.params.subject;
-            this.mail.email_to = this.$route.params.email;
+            this.selectEmails.push(this.$route.params.email);
             this.mail.msg = this.$route.params.category;
         },
         methods: {

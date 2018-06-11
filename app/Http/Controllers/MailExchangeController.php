@@ -51,11 +51,6 @@ class MailExchangeController extends Controller
     public function store(Request $request)
     {
         $emails = $request->email_to;
-//        foreach ($emails as $key => $item) {
-//            $this->validate($request, [
-//                "0" => 'email'
-//            ]);
-//        }
 
         $this->validate($request, [
             'subject' => 'max:255',
@@ -94,24 +89,13 @@ class MailExchangeController extends Controller
         return response()->json(['emails' => $emails]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request)
     {
 
@@ -137,13 +121,7 @@ class MailExchangeController extends Controller
         return $arr;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+        public function destroy($id)
     {
         $mail = MailExchange::where('id', $id)->first();
         if ($mail) {

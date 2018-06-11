@@ -23,6 +23,7 @@ import EditSchedule from "./components/moder/schedule/EditSchedule";
 import Categories from "./components/admin/categories/Categories";
 import AddCategory from "./components/admin/categories/AddCategory";
 import EditCategory from "./components/admin/categories/EditCategory";
+import Social from "./components/Social";
 
 import VueRouter from "vue-router";
 
@@ -35,6 +36,7 @@ const routes = [
     {name: 'AdminNews',path: "/news", component: News},
 
     {path: "/user_news", component: UserNews},
+    {path: "/social", component: Social},
     {name: 'AddNews', path: "/add_news", component: AddNews},
     {name: 'EditNews', path: "/edit_news", component: EditNews},
     {name: 'ResetPassword', path: "/reset_password", component: ResetPassword},

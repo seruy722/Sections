@@ -22,12 +22,14 @@ Route::post('/imagesGallery', 'ImageGalleryController@getImages');
 Route::resource('/addSchedule', 'ScheduleController');
 Route::post('/schedules', 'ScheduleController@getSchedules');
 Route::post('/editSchedule', 'ScheduleController@update');
-Route::resource('/daleteSchedule', 'ScheduleController');
+Route::resource('/deleteSchedule', 'ScheduleController');
 Route::resource('/categories', 'CategoryController');
 Route::resource('/deleteCategories', 'CategoryController');
 Route::resource('/addCategory', 'CategoryController');
 Route::post('/editCategory', 'CategoryController@update');
 Route::post('/adminEmail', 'AuthController@getAdminEmail');
+Route::post('/addSocialsLinks', 'SocialController@store');
+Route::post('/getSocialsLinks', 'SocialController@getSocialsLinks');
 
 Route::view('/controls', 'controls');
 

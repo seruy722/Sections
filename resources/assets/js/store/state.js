@@ -17,6 +17,7 @@ export default {
         {path: "/users", title: "Пользователи", auth: true, role: 'admin'},
         {path: "/news", title: "Новости", auth: true, role: 'admin'},
         {path: "/sections_categories", title: "Категории", auth: true, role: 'admin'},
+        {path: "/social", title: "Соцсети", auth: true, role: 'admin'},
 
         {path: "/user_sections", title: "Секции", auth: true, role: 'moder'},
         {path: "/schedule", title: "Расписание", auth: true, role: 'moder'},
@@ -24,6 +25,7 @@ export default {
         {path: "/user_gallery", title: "Изображения", auth: true, role: 'moder'},
         {path: "/images_gallery", title: "Галерея", auth: true, role: 'moder'},
         {path: "/user_messages", title: "Сообщения", auth: true, role: 'moder'},
+        {path: "/social", title: "Соцсети", auth: true, role: 'moder'},
     ],
 
     authNav: [

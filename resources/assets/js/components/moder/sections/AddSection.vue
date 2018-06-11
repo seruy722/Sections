@@ -209,7 +209,6 @@
             },
             enotherCategory(event) {
                 if(event === 'Другая'){
-                    let adminEmail = null;
                     axios.post('/adminEmail', 1).then(response => {
                         this.$router.push({name:'CreateMessage',params:{subject:'Добавление новой категории',email:response.data.email,category:'ВАША КАТЕГОРИЯ'}});
                     });

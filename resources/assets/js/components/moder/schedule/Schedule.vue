@@ -111,7 +111,7 @@
                 const index = this.schedules.indexOf(item);
                 let answer = confirm('Вы действительно хотите удалить эту запись?');
                 if (answer) {
-                    axios.delete('/daleteSchedule/' + item.id).then(response => {
+                    axios.delete('/deleteSchedule/' + item.id).then(response => {
                         if (response.data.status) {
                             this.schedules.splice(index, 1);
                             this.$store.commit("showInfo", response.data.message);
