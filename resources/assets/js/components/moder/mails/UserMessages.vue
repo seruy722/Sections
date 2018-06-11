@@ -11,6 +11,10 @@
             </v-dialog>
         </v-layout>
 
+        <v-layout class="justify-center">
+            <v-subheader class="title">Сообщения</v-subheader>
+        </v-layout>
+
         <v-card>
             <v-card-title>
                 <v-btn color="primary" v-bind:to="{name:'CreateMessage'}">
@@ -33,8 +37,11 @@
                     :search="search"
             >
                 <template slot="items" slot-scope="props">
-                    <td v-bind:class="{'danger':props.item.read_it=='0'}">{{ props.item.created_at }}</td>
-                    <td>{{ props.item.subject }}</td>
+                    <td v-bind:class="{'danger':props.item.read_it=='0'}">
+                        <v-icon left v-if="props.item.read_it=='0'">fiber_new</v-icon>
+                        {{ props.item.created_at }}
+                    </td>
+                    <td>{{ props.item.subject || 'Без темы' }}</td>
                     <td>{{ props.item.name }}</td>
                     <td>
                         <v-btn icon class="mx-0" @click="readMessage(props.item)">
@@ -60,10 +67,11 @@
 
 
 <script>
+    import Auth from "../../../helpers/Auth";
     export default {
         data() {
             return {
-                dialog:false,
+                dialog: false,
                 search: '',
                 headers: [
                     {text: 'Дата', value: 'created_at'},
@@ -75,6 +83,7 @@
             }
         },
         created() {
+            Auth.check();
             this.initialize();
         },
         methods: {
@@ -136,6 +145,7 @@
 <style>
     .danger {
         color: red;
+        font-weight: bold;
     }
 
     .progress {

@@ -10,4 +10,3 @@ Route::post('/reset_password', 'AuthController@resetPassword');
 Route::post('/logout', 'AuthController@logout');
 Route::post('/edit_profile', 'AuthController@editProfile');
 Route::post('/update_profile', 'AuthController@updateProfile');
-Route::get('/allUsers', 'AuthController@allUsers');

@@ -16,6 +16,13 @@ class MailExchangeController extends Controller
     public function index()
     {
 
+
+    }
+
+    public function getUnreadMessage(Request $request)
+    {
+        $mails = MailExchange::where('read_it',false)->where('email_from', $request->email)->orWhere('email_to', $request->email)->get();
+        return response()->json(['mails' => $mails]);
     }
 
     public function mailsForUser(Request $request)
@@ -43,20 +50,34 @@ class MailExchangeController extends Controller
      */
     public function store(Request $request)
     {
+        $emails = $request->email_to;
+//        foreach ($emails as $key => $item) {
+//            $this->validate($request, [
+//                "0" => 'email'
+//            ]);
+//        }
+
         $this->validate($request, [
-            'email_to' => 'required|email',
-            'email_from' => 'required|email',
-            'subject'=>'max:255',
+            'subject' => 'max:255',
             'msg' => 'required|max:1000'
         ]);
-        $data = $this->cleanData($request->all());
-        MailExchange::create($data);
 
-        Mail::send('sendMails', $data, function ($message) use ($data) {
-            $message->from($data['email_from']);
-            $message->to($data['email_to']);
-            $message->subject($data['subject']);
-        });
+
+        $data = $request->all();
+
+        foreach ($emails as $item) {
+            $data['email_to'] = $item;
+            MailExchange::create($data);
+
+            $data['email'] = $data['email_from'];
+            $data['phone'] = '';
+            Mail::send('mail', $data, function ($message) use ($data) {
+                $message->from($data['email_from']);
+                $message->to($data['email_to']);
+                $message->subject($data['subject']);
+            });
+        }
+
         return response()->json(['status' => true, 'message' => 'Сообщение отправлено!']);
     }
 
@@ -68,7 +89,9 @@ class MailExchangeController extends Controller
      */
     public function show($id)
     {
-        //
+        $emails = MailExchange::where('user_id', $id)->pluck('email_to');
+
+        return response()->json(['emails' => $emails]);
     }
 
     /**
@@ -79,7 +102,7 @@ class MailExchangeController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**

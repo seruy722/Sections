@@ -1,5 +1,6 @@
 <template>
     <v-container fluid>
+        <v-layout><v-subheader class="title">Добавление новости</v-subheader></v-layout>
         <v-layout row justify-center>
             <v-dialog v-model="dialog" persistent>
                 <template>
@@ -112,6 +113,7 @@
 </template>
 
 <script>
+    import Auth from "../../../helpers/Auth";
     export default {
         data() {
             return {
@@ -135,6 +137,7 @@
             }
         },
         created() {
+            Auth.check();
             this.sections = this.$route.params.sections;
             this.sectionsName = this.sections.map(item => item.section_name);
         },

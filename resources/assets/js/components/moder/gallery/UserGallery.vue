@@ -1,5 +1,8 @@
 <template>
-    <v-container fluid>
+    <v-container fluid v-if="sections.length > 0">
+        <v-layout class="justify-center">
+            <v-subheader class="title">Загрузка изображений</v-subheader>
+        </v-layout>
         <v-layout row justify-center>
             <v-dialog v-model="dialog" persistent>
                 <template>
@@ -48,6 +51,9 @@
                 Загрузить изображения
             </v-btn>
         </div>
+    </v-container>
+    <v-container v-else>
+        <v-btn color="red" v-bind:to="{name:'UserSections'}">Добавить секцию</v-btn>
     </v-container>
 </template>
 
@@ -111,7 +117,7 @@
                         data = new FormData();
                         this.errors = {};
                         this.dialog = false;
-                    }else {
+                    } else {
                         this.dialog = false;
                         this.$store.commit("showError", response.data.message);
                     }

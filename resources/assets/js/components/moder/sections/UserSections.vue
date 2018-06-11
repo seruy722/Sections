@@ -1,5 +1,6 @@
 <template>
     <div class="wrapper">
+        <v-layout class="justify-center"><v-subheader class="title">Секции</v-subheader></v-layout>
         <v-layout row justify-center>
             <v-dialog v-model="dialog" persistent>
                 <template>
@@ -59,6 +60,7 @@
 
 
 <script>
+    import Auth from "../../../helpers/Auth";
     export default {
         data() {
             return {
@@ -76,6 +78,7 @@
         },
         created() {
             this.initialize();
+            Auth.check();
         },
         methods: {
             initialize() {

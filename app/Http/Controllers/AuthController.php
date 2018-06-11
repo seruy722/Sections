@@ -27,9 +27,7 @@ class AuthController extends Controller
         $user = new User($request->all());
         $user->password = Hash::make($request->password);
         $user->save();
-        return response()->json([
-            'success' => true
-        ]);
+        return response()->json(['success' => true]);
     }
 
     public function login(Request $request)
@@ -48,11 +46,7 @@ class AuthController extends Controller
                 'user' => $user
             ]);
         }
-        return response()->json([
-            'errors' => [
-                'email' => 'Email не зарегестрирован!'
-            ]
-        ], 422);
+        return response()->json(['errors' => ['email' => 'Email не зарегестрирован!']], 422);
     }
 
     public function logout(Request $request)
@@ -60,19 +54,14 @@ class AuthController extends Controller
         $user = $request->user();
         $user->api_token = null;
         $user->save();
-        return response()->json([
-            'success' => true
-        ]);
+        return response()->json(['success' => true]);
     }
 
     public function editProfile(Request $request)
     {
         $user = $request->user();
         if ($user) {
-            return response()->json([
-                'success' => true,
-                'user' => $user
-            ]);
+            return response()->json(['success' => true, 'user' => $user]);
         }
         return response()->json(['success' => false]);
     }
@@ -88,47 +77,35 @@ class AuthController extends Controller
                 $file->move('users', $filename);
                 $user->photo = '/users/' . $filename;
                 $user->save();
-                return response()->json([
-                    'success' => true,
-                    'user' => $user
-                ]);
+
+                return response()->json(['success' => true, 'user' => $user]);
                 break;
             case 'profile':
                 $this->validate($request, [
                     'name' => 'required|max:255',
                     'address' => 'max:255',
-                    'phone'=>'regex:/^\+380\d{3}\d{2}\d{2}\d{2}$/'
+                    'phone' => 'regex:/^\+380\d{3}\d{2}\d{2}\d{2}$/'
                 ]);
                 if ($user) {
                     $user->name = $request->name;
                     $user->phone = $request->phone;
                     $user->save();
 
-                    return response()->json([
-                        'success' => true,
-                        'user' => $user
-                    ]);
+                    return response()->json(['success' => true, 'user' => $user]);
                 }
                 break;
             case 'password':
                 $this->validate($request, [
                     'old_password' => 'required|between:6,25',
-                    'password' => 'required|between:6,25|confirmed'
+                    'password' => 'required|between:6,100|confirmed'
                 ]);
 
                 if ($user && Hash::check($request->old_password, $user->password)) {
                     $user->password = bcrypt($request->password);
                     $user->save();
-                    return response()->json([
-                        'success' => true,
-                        'user' => $user
-                    ]);
+                    return response()->json(['success' => true, 'user' => $user]);
                 }
-                return response()->json([
-                    'errors' => [
-                        'old_password' => 'Old password is not correct.'
-                    ]
-                ]);
+                return response()->json(['errors' => ['old_password' => 'Старый пароль не правильный']]);
                 break;
         }
     }
@@ -147,15 +124,16 @@ class AuthController extends Controller
             $password = 'Ваш новый пароль: ' . $randPassword;
 
             Mail::to($request->email)->send(new ResetPasswordClass($title, $subject, $url, $password));
-            return response()->json([
-                'status' => true,
-                'message' => 'Пароль отправлен на почту!'
-            ]);
+            return response()->json(['status' => true, 'message' => 'Пароль отправлен на почту!']);
         } else {
-            return response()->json([
-                'status' => false,
-                'message' => 'Email не зарегестрирован!'
-            ]);
+            return response()->json(['status' => false, 'message' => 'Email не зарегестрирован!']);
         }
+    }
+
+    public function getAdminEmail(Request $request)
+    {
+        $user = User::where('role', 'admin')->first()->toArray();
+
+        return response()->json(['email' => $user['email']]);
     }
 }

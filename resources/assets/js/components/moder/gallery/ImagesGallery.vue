@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-container>
+        <v-container v-if="sections.length>0">
             <v-layout row justify-center>
                 <v-dialog v-model="dialog" persistent>
                     <template>
@@ -10,6 +10,8 @@
                     </template>
                 </v-dialog>
             </v-layout>
+
+            <v-layout class="justify-center"><v-subheader class="title">Просмотр и удаление изображений</v-subheader></v-layout>
 
             <v-layout row wrap>
                 <v-flex xs4>
@@ -55,6 +57,9 @@
                     </v-card>
                 </v-flex>
             </v-layout>
+        </v-container>
+        <v-container v-else>
+            <v-btn color="red" v-bind:to="{name:'UserSections'}">Добавить секцию</v-btn>
         </v-container>
     </div>
 

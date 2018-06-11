@@ -98,6 +98,8 @@
 </template>
 
 <script>
+    import Auth from "../../helpers/Auth";
+
     export default {
         data() {
             return {
@@ -115,6 +117,7 @@
             }
         },
         created() {
+            Auth.check();
             this.initialize();
         },
         methods: {
@@ -130,10 +133,7 @@
                     axios.delete(`/api/news/` + item.id).then(response => {
                         if (response.data.status == 'success') {
                             this.news.splice(index, 1);
-                            this.$store.commit(
-                                "showInfo",
-                                response.data.message
-                            );
+                            this.$store.commit("showInfo", response.data.message);
                         }
                     });
                 }

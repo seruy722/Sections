@@ -93,6 +93,7 @@
 </template>
 
 <script>
+    import Auth from "../../helpers/Auth";
     export default {
         data() {
             return {
@@ -139,6 +140,7 @@
             }
         },
         created() {
+            Auth.check();
             this.initialize();
         },
         methods: {

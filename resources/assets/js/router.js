@@ -1,5 +1,4 @@
 import AdminConsole from "./components/admin/AdminConsole";
-import Settings from "./components/admin/Settings";
 import Register from "./components/admin/Register";
 import Login from "./components/admin/Login";
 import Profile from "./components/admin/Profile";
@@ -29,12 +28,11 @@ import VueRouter from "vue-router";
 
 const routes = [
     {path: "/controls", component: AdminConsole},
-    {path: "/settings", component: Settings},
     {path: "/register", component: Register},
     {path: "/login", component: Login},
     {path: "/profile", component: Profile},
     {path: "/users", component: Users},
-    {path: "/news", component: News},
+    {name: 'AdminNews',path: "/news", component: News},
 
     {path: "/user_news", component: UserNews},
     {name: 'AddNews', path: "/add_news", component: AddNews},

@@ -1,5 +1,8 @@
 <template>
     <div class="wrapper">
+        <v-layout class="justify-center">
+            <v-subheader class="title">Новости</v-subheader>
+        </v-layout>
         <v-layout row justify-center>
             <v-dialog v-model="dialog" persistent>
                 <template>
@@ -12,9 +15,10 @@
 
         <v-card>
             <v-card-title>
-                <v-btn color="primary" @click="onAddNews">Добавить
+                <v-btn color="primary" v-if="sections.length>0" @click="onAddNews">Добавить
                     <v-icon>add</v-icon>
                 </v-btn>
+                <v-btn v-else color="red" v-bind:to="{name:'UserSections'}">Добавить секцию</v-btn>
                 <v-spacer></v-spacer>
                 <v-text-field
                         v-model="search"
@@ -58,6 +62,7 @@
 
 
 <script>
+    import Auth from "../../../helpers/Auth";
     export default {
         data() {
             return {
@@ -74,6 +79,7 @@
             }
         },
         created() {
+            Auth.check();
             this.initialize();
         },
         methods: {

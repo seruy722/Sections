@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\ImageGallery;
-use App\Mail\MailClass;
+use App\MailExchange;
 use App\News;
 use App\Schedules;
 use App\Sections;
@@ -14,11 +14,6 @@ use Illuminate\Support\Facades\Mail;
 
 class SectionsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index($id)
     {
         // $sections = Users::join('sections', 'sections.user_id', '=', 'users.id')->get();
@@ -46,11 +41,6 @@ class SectionsController extends Controller
             'friday' => $friday, 'saturday' => $saturday, 'photos' => $photos]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function sections($id)
     {
         $sections = Category::findOrFail($id);
@@ -59,23 +49,28 @@ class SectionsController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function mail(Request $request)
     {
-        $name = $request->name;
-        $email = $request->email;
-        $phone = $request->phone;
-        $subject = $request->subject;
-        $msg = $request->msg;
-        $imail = $request->imail;
-        Mail::to($imail)->send(new MailClass($name, $email, $phone, $subject, $msg));
-    }
+        $data = [
+            'name' => $request->name,
+            'email_to' => $request->imail,
+            'email_from' => $request->email,
+            'subject' => $request->subject,
+            'msg' => $request->msg,
+            'phone' => $request->phone,
+            'email' => $request->email
 
+        ];
+
+        Mail::send('mail', $data, function ($message) use ($data) {
+            $message->from($data['email_from']);
+            $message->to($data['email_to']);
+            $message->subject($data['subject']);
+        });
+
+        $data['msg'] = "$request->msg. Телефон: $request->phone";
+        MailExchange::create($data);
+    }
 
     public function getUserSections(Request $request)
     {
@@ -243,7 +238,7 @@ class SectionsController extends Controller
     {
         $img = Sections::findOrFail($id);
         $name = Sections::where('id', $id)->value('section_name');
-        return view('gallery', ['img' => $img, 'name'=>$name]);
+        return view('gallery', ['img' => $img, 'name' => $name]);
     }
 
 }

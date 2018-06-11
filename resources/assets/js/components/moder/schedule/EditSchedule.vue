@@ -1,5 +1,6 @@
 <template>
     <v-container>
+        <v-layout><v-subheader class="title">Редактирование расписания</v-subheader></v-layout>
         <v-layout row justify-center>
             <v-dialog v-model="dialog" persistent>
                 <template>
@@ -141,6 +142,7 @@
 </template>
 
 <script>
+    import Auth from "../../../helpers/Auth";
     export default {
         data() {
             return {
@@ -167,6 +169,7 @@
             }
         },
         created() {
+            Auth.check();
             this.sections = this.$route.params.sections;
             this.schedule = this.$route.params.item;
             this.section.id = this.schedule.section_id;

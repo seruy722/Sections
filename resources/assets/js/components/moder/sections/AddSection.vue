@@ -1,5 +1,6 @@
 <template>
     <v-container fluid>
+        <v-layout><v-subheader class="title">Добавление секции</v-subheader></v-layout>
         <v-layout row justify-center>
             <v-dialog v-model="dialog" persistent>
                 <template>
@@ -115,7 +116,7 @@
 </template>
 
 <script>
-
+    import Auth from "../../../helpers/Auth";
     export default {
         data() {
             return {
@@ -146,6 +147,7 @@
             }
         },
         created() {
+            Auth.check();
             this.categories = this.$route.params.categories;
             this.sectionsCategory = this.categories.map(item => item.name);
             this.sectionsCategory.push('Другая');
@@ -207,7 +209,10 @@
             },
             enotherCategory(event) {
                 if(event === 'Другая'){
-                    this.$router.push({name:'CreateMessage',params:{subject:'Добавление новой категории',email:'Email администратора',category:'Ваша категория'}});
+                    let adminEmail = null;
+                    axios.post('/adminEmail', 1).then(response => {
+                        this.$router.push({name:'CreateMessage',params:{subject:'Добавление новой категории',email:response.data.email,category:'ВАША КАТЕГОРИЯ'}});
+                    });
                 }
             },
             onButtonClick() {

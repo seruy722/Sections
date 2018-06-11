@@ -12,8 +12,10 @@ Route::post('api/userNews', 'Api\NewsController@userNews');
 Route::resource('api/users', 'Api\UserController');
 Route::resource('/createMail', 'MailExchangeController');
 Route::resource('/deleteMail', 'MailExchangeController');
+Route::resource('/getEmails', 'MailExchangeController');
 Route::post('/updateMail', 'MailExchangeController@updateMail');
 Route::post('/mailsForUser', 'MailExchangeController@mailsForUser');
+Route::post('/unreadMessage', 'MailExchangeController@getUnreadMessage');
 Route::resource('/addImage', 'ImageGalleryController');
 Route::resource('/deleteImage', 'ImageGalleryController');
 Route::post('/imagesGallery', 'ImageGalleryController@getImages');
@@ -25,6 +27,7 @@ Route::resource('/categories', 'CategoryController');
 Route::resource('/deleteCategories', 'CategoryController');
 Route::resource('/addCategory', 'CategoryController');
 Route::post('/editCategory', 'CategoryController@update');
+Route::post('/adminEmail', 'AuthController@getAdminEmail');
 
 Route::view('/controls', 'controls');
 

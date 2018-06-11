@@ -21,7 +21,7 @@
             <v-flex xs8>
                 <v-text-field
                         name="input-2-3"
-                        label="Описание"
+                        label="Тема"
                         single-line
                         v-model="mail.subject"
                 ></v-text-field>
@@ -35,9 +35,9 @@
             <v-flex xs8>
                 <v-text-field
                         name="input-4"
-                        label="Контент"
+                        label="Сообщение"
                         textarea
-                        v-model="mail.message"
+                        v-model="mail.msg"
                 ></v-text-field>
             </v-flex>
         </v-layout>
@@ -47,7 +47,8 @@
             </v-flex>
             <v-flex xs8>
                 <v-btn color="red" dark @click="onUserMessages">
-                    <v-icon dark left>block</v-icon>Отмена
+                    <v-icon dark left>block</v-icon>
+                    Отмена
                 </v-btn>
                 <v-btn color="primary" dark @click="onReplyMessages">Ответить
                     <v-icon dark right>check_circle</v-icon>
@@ -58,24 +59,26 @@
 </template>
 
 <script>
+    import Auth from "../../../helpers/Auth";
     export default {
         data() {
             return {
                 mail: {},
-                errors:{}
+                errors: {}
             }
         },
         created() {
+            Auth.check();
             this.mail = this.$route.params.item;
         },
         methods: {
             checkError(field) {
                 return this.errors.hasOwnProperty(field) ? this.errors[field] : [];
             },
-            onReplyMessages(){
-                this.$router.push({name:'ReplyMessage',params:{item:this.mail}});
+            onReplyMessages() {
+                this.$router.push({name: 'ReplyMessage', params: {item: this.mail}});
             },
-            onUserMessages(){
+            onUserMessages() {
                 this.$router.push('/user_messages');
             }
         }

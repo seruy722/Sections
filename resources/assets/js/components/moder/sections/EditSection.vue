@@ -1,5 +1,6 @@
 <template>
     <v-container fluid>
+        <v-layout><v-subheader class="title">Редактирование секции</v-subheader></v-layout>
         <v-layout row justify-center>
             <v-dialog v-model="dialog" persistent>
                 <template>
@@ -134,6 +135,7 @@
 </template>
 
 <script>
+    import Auth from "../../../helpers/Auth";
     export default {
         data() {
             return {
@@ -159,6 +161,7 @@
             }
         },
         created() {
+            Auth.check();
             this.section = this.$route.params.item;
             this.categories = this.$route.params.categories;
             this.sectionsCategory = this.categories.map(item => item.name);
@@ -279,5 +282,12 @@
 
     .input-field-file {
         display: none;
+    }
+
+    .preview-image {
+        width: 250px;
+        padding: 15px;
+        border: 1px solid #999;
+        border-radius: 5px;
     }
 </style>

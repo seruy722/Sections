@@ -22,7 +22,7 @@
                     v-if="item.auth === auth.login"
             >{{ item.title }}
             </v-btn>
-            <v-btn flat @click="mainPage">На главную</v-btn>
+            <v-btn flat @click="mainPage">На Сайт</v-btn>
             <v-avatar size="55" v-if="auth.login">
                 <img :src="profileImage">
             </v-avatar>
@@ -81,13 +81,18 @@
         },
 
         computed: {
-            ...mapState(["info", "nav", "authNav", "profileNav",'error']),
+            ...mapState(["info", "nav", "authNav", "profileNav", 'error']),
             auth() {
                 return this.$store.state.Auth;
             },
 
             profileImage() {
-                return this.$store.state.Auth.photo;
+                if (this.$store.state.Auth.photo != 'null') {
+                    return this.$store.state.Auth.photo;
+                } else {
+                    return '/users/nofoto.png';
+                }
+
             },
             role() {
                 return this.$store.state.Auth.role;

@@ -24,10 +24,10 @@ class ImageGalleryController extends Controller
         $allowedImges = 100;
         $countImages = ImageGallery::where('section_id', $request->section_id)->count();
 
-        if ($countImages <= $allowedImges) {
+        if ($countImages != $allowedImges) {
             $count = $allowedImges - $countImages;
         } else {
-            return response()->json(['status' => false, 'message' => 'Нельзя загрузить больше 100 изображений.']);
+            return response()->json(['status' => false, 'message' => "Нельзя загрузить больше $allowedImges изображений."]);
         }
 
         $data = $request->all();
@@ -42,11 +42,11 @@ class ImageGalleryController extends Controller
             ]);
         }
 
-        $countIterations = 0;
+        $countIterations = 1;
         foreach ($data as $key => $elem) {
             if ($key != 'section_id') {
+                if($countIterations > $count) break;
                 $countIterations++;
-                if($countIterations <= $count) break;
                 $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $elem->getClientOriginalExtension();
                 $elem->move('images', $filename);
                 $newFile = [
@@ -56,7 +56,7 @@ class ImageGalleryController extends Controller
                 ImageGallery::create($newFile);
             }
         }
-
+        $countImages = ImageGallery::where('section_id', $request->section_id)->count();
         return response()->json(['status' => true, 'message' => "Загружено: $countImages/$allowedImges изображений."]);
     }
 

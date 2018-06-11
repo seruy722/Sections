@@ -115,7 +115,11 @@
     export default {
         computed: {
             profileImage() {
-                return this.$store.state.Auth.photo;
+                if (this.$store.state.Auth.photo != 'null') {
+                    return this.$store.state.Auth.photo;
+                } else {
+                    return '/users/nofoto.png';
+                }
             }
         },
 
@@ -135,6 +139,7 @@
         },
 
         created() {
+            Auth.check();
             this.edit_profile();
         },
 
@@ -163,11 +168,7 @@
                     .then(response => {
                         if (response.data.success) {
                             Auth.login(response.data.user);
-
-                            this.$store.commit(
-                                "showInfo",
-                                "Ваш профиль обновлен!"
-                            );
+                            this.$store.commit("showInfo", "Ваш профиль обновлен!");
                         }
                     })
                     .catch(error => {
@@ -197,10 +198,7 @@
                         if (response.data.success) {
                             Auth.login(response.data.user);
 
-                            this.$store.commit(
-                                "showInfo",
-                                "Ваше фото обновлено."
-                            );
+                            this.$store.commit("showInfo", "Ваше фото обновлено.");
                         }
                     });
                 }

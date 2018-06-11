@@ -185,7 +185,7 @@
                 <tr>
                     <td class="content footer" align="center">
                         <p>Контактные данные:</p>
-                        <p><a href="mailto:$email">{{$email}}</a> | <a href="$phone">{{$phone}}</a></p>
+                        <p><span>{{$email}}</span> | <span>{{$phone}}</span></p>
                     </td>
                 </tr>
             </table>

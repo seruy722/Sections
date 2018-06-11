@@ -9,19 +9,49 @@
                 </template>
             </v-dialog>
         </v-layout>
-
-        <v-layout row>
+        <v-layout>
+            <v-subheader class="title">Новое сообщение</v-subheader>
+        </v-layout>
+        <v-layout row wrap>
             <v-flex xs4>
                 <v-subheader>Кому</v-subheader>
             </v-flex>
             <v-flex xs8>
-                <v-text-field
-                        name="input-1-3"
-                        label="Email"
-                        single-line
-                        v-model="mail.email_to"
+                <v-select
+                        :items="emails"
+                        v-model="selectEmails"
+                        label="Кому"
+                        chips
+                        tags
+                        solo
+                        clearable
+                        prepend-icon="filter_list"
+                        append-icon=""
+                        max-height="auto"
+                        autocomplete
+                        required
                         :error-messages="checkError('email_to')"
-                ></v-text-field>
+                >
+                    <template slot="selection" slot-scope="data">
+                        <v-chip
+                                :selected="data.selected"
+                                close
+                                @input="data.parent.selectItem(data.item)"
+                        >
+                            {{ data.item}}
+                        </v-chip>
+                    </template>
+                    <template slot="item" slot-scope="data">
+                        <template v-if="typeof data.item !== 'object'">
+                            <v-list-tile-content v-text="data.item"></v-list-tile-content>
+                        </template>
+                        <template v-else>
+                            <v-list-tile-content>
+                                <v-list-tile-title v-html="data.item.email"></v-list-tile-title>
+                            </v-list-tile-content>
+                        </template>
+                    </template>
+                </v-select>
             </v-flex>
         </v-layout>
 
@@ -32,7 +62,7 @@
             <v-flex xs8>
                 <v-text-field
                         name="input-2-3"
-                        label="Заголовок"
+                        label="Тема"
                         single-line
                         v-model="mail.subject"
                         :error-messages="checkError('subject')"
@@ -73,6 +103,8 @@
 </template>
 
 <script>
+    import Auth from "../../../helpers/Auth";
+
     export default {
         data() {
             return {
@@ -85,10 +117,16 @@
                     name: null,
                     user_id: null
                 },
-                errors: {}
+                errors: {},
+                emails: [],
+                selectEmails: []
             }
         },
-        created(){
+        created() {
+            Auth.check();
+            axios.get('/getEmails/' + this.$store.state.Auth.id).then(response => {
+                this.emails = response.data.emails;
+            });
             this.mail.subject = this.$route.params.subject;
             this.mail.email_to = this.$route.params.email;
             this.mail.msg = this.$route.params.category;
@@ -97,6 +135,7 @@
             sendMessage() {
                 this.errors = {};
                 this.dialog = true;
+                this.mail.email_to = this.selectEmails;
                 this.mail.email_from = this.$store.state.Auth.email;
                 this.mail.name = this.$store.state.Auth.name;
                 this.mail.user_id = this.$store.state.Auth.id;
