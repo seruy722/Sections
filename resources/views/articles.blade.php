@@ -34,7 +34,7 @@
                                                 </div>
                                                 <div class="itemInfo">
                                                     <h4>{{$list->title}}</h4>
-                                                    <h6>{{$list->sections->section_name}}</h6>
+                                                    <h6>{{optional($list->sections)->section_name}}</h6>
                                                     <p>{{$list->description}}</p>
                                                 </div>
                                             </a>
