@@ -4,11 +4,6 @@ use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         $faker = Faker\Factory::create();
@@ -19,7 +14,7 @@ class UsersTableSeeder extends Seeder
                 'phone' => $faker->e164PhoneNumber,
                 'password' => $faker->password,
                 'photo' => $faker->shuffle('$Ukraine$, $Kramatorsk$'),
-                'api_token'=>$faker->shuffle('hello, world'),
+                'api_token' => $faker->shuffle('hello, world'),
             ]);
         }
     }

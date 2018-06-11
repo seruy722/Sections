@@ -8,20 +8,10 @@ use Illuminate\Support\Facades\Mail;
 
 class MailExchangeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-
-
-    }
 
     public function getUnreadMessage(Request $request)
     {
-        $mails = MailExchange::where('read_it',false)->where('email_from', $request->email)->orWhere('email_to', $request->email)->get();
+        $mails = MailExchange::where('read_it', false)->where('email_from', $request->email)->orWhere('email_to', $request->email)->get();
         return response()->json(['mails' => $mails]);
     }
 
@@ -32,22 +22,6 @@ class MailExchangeController extends Controller
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $emails = $request->email_to;
@@ -76,12 +50,7 @@ class MailExchangeController extends Controller
         return response()->json(['status' => true, 'message' => 'Сообщение отправлено!']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         $emails = MailExchange::where('user_id', $id)->pluck('email_to');
@@ -89,17 +58,6 @@ class MailExchangeController extends Controller
         return response()->json(['emails' => $emails]);
     }
 
-
-    public function edit($id)
-    {
-
-    }
-
-
-    public function update(Request $request)
-    {
-
-    }
 
     public function updateMail(Request $request)
     {
@@ -121,7 +79,7 @@ class MailExchangeController extends Controller
         return $arr;
     }
 
-        public function destroy($id)
+    public function destroy($id)
     {
         $mail = MailExchange::where('id', $id)->first();
         if ($mail) {

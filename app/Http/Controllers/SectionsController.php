@@ -16,7 +16,6 @@ class SectionsController extends Controller
 {
     public function index($id)
     {
-        // $sections = Users::join('sections', 'sections.user_id', '=', 'users.id')->get();
         $users = Sections::findOrFail($id);
 
         $origin = urlencode($users->address);
@@ -44,7 +43,7 @@ class SectionsController extends Controller
     public function sections($id)
     {
         $sections = Category::findOrFail($id);
-        // $sections = $category->sections();
+
         return view('sections', ['sections' => $sections]);
 
     }
@@ -123,35 +122,6 @@ class SectionsController extends Controller
         return $arr;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
         $this->validate($request, [
@@ -189,12 +159,7 @@ class SectionsController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $section = Sections::findOrFail($id);

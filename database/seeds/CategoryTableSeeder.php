@@ -11,13 +11,6 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        //$faker = Faker\Factory::create();
-        /*for ($i = 1; $i <= 9; $i++) {
-            DB::table('category')->insert([
-                'name' => $faker->title,
-                'image' => str_random(10) . '.jpg',
-            ]);
-        }*/
         DB::table('category')->delete();
         $category = array(
             array(

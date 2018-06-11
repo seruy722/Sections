@@ -5,7 +5,6 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ResetPasswordClass extends Mailable
 {
@@ -18,7 +17,7 @@ class ResetPasswordClass extends Mailable
     public $password;
 
 
-    public function __construct($title,$subject,$url,$password)
+    public function __construct($title, $subject, $url, $password)
     {
         $this->title = $title;
         $this->subject = $subject;
@@ -26,11 +25,6 @@ class ResetPasswordClass extends Mailable
         $this->password = $password;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
 

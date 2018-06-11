@@ -9,12 +9,13 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $fillable = ['name', 'email', 'password', 'role','api_token', 'photo'];
+    protected $fillable = ['name', 'email', 'password', 'role', 'api_token', 'photo'];
 
     public function sections()
     {
-        return $this->hasMany(Sections::class,'user_id');
+        return $this->hasMany(Sections::class, 'user_id');
     }
+
     public function news()
     {
         return $this->hasManyThrough(News::class, Sections::class, 'user_id', 'section_id');

@@ -5,7 +5,6 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class MailClass extends Mailable
 {
@@ -17,11 +16,6 @@ class MailClass extends Mailable
     public $subject;
     public $message;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
     public function __construct($name, $email, $phone, $subject, $msg)
     {
         $this->name = $name;
@@ -31,11 +25,7 @@ class MailClass extends Mailable
         $this->msg = $msg;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
+
     public function build()
     {
         return $this->view('mail')

@@ -39,8 +39,7 @@ Route::get('/404',function(){
 Route::get('/500',function(){
     abort(500);
 });
-//Route::resource('api/schedules', 'Api\SchedulesController')
-//    ->only(['index', 'show']);
+
 Route::get('/', 'FrontController@index');
 Route::get('/articles/{id}', 'FrontController@show')->name('articles');
 Route::get('/articles', 'FrontController@all')->name('news');
