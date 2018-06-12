@@ -1,9 +1,6 @@
 <?php
 
-Route::post('/upload_file', 'FilesController@upload');
-Route::post('/save_headers', 'FilesController@saveHeaders');
-Route::post('/list', 'FilesController@list');
-Route::post('/delete/{file}', 'FilesController@delete');
+
 Route::post('/register', 'AuthController@register');
 Route::post('/login', 'AuthController@login');
 Route::post('/reset_password', 'AuthController@resetPassword');

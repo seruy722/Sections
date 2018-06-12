@@ -39,7 +39,7 @@
                     <td>{{ props.item.title }}</td>
                     <td>{{ props.item.name }}</td>
                     <td>
-                        <v-btn icon class="mx-0" v-bind:to="{name:'EditNews',params:{item:props.item}}">
+                        <v-btn icon class="mx-0" v-bind:to="{name:'EditNews',params:{item:props.item,sections:sections}}">
                             <v-icon color="teal">edit</v-icon>
                         </v-btn>
                         <v-btn icon class="mx-0" @click="deleteNews(props.item)">

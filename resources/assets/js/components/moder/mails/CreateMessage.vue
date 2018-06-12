@@ -18,13 +18,12 @@
             </v-flex>
             <v-flex xs8>
                 <v-select
-                        :error-messages="checkError('email_to.0')"
+                        :error-messages="checkError('email_to')"
                         :items="emails"
                         v-model="selectEmails"
                         label="Кому"
                         chips
                         tags
-                        solo
                         clearable
                         prepend-icon="filter_list"
                         append-icon=""
@@ -154,6 +153,11 @@
 
             },
             checkError(field) {
+                for (let key in this.errors) {
+                    if (key.indexOf('email') >= 0) {
+                        this.errors.email_to = this.errors[key];
+                    }
+                }
                 return this.errors.hasOwnProperty(field) ? this.errors[field] : [];
             },
             onUserMessages() {

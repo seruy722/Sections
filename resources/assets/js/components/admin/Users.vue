@@ -94,6 +94,7 @@
 
 <script>
     import Auth from "../../helpers/Auth";
+
     export default {
         data() {
             return {
@@ -145,7 +146,7 @@
         },
         methods: {
             initialize() {
-                axios.get(`/api/users`).then(response => {
+                axios.get('/api/users').then(response => {
                     this.users = response.data.data;
                 });
             },
@@ -160,7 +161,7 @@
                 const index = this.users.indexOf(item);
                 let answer = confirm('Вы действительно хотите удалить этого пользователя?');
                 if (answer) {
-                    axios.delete(`/api/users/` + item.id).then(response => {
+                    axios.delete('/api/users/' + item.id).then(response => {
                         if (response.data.status) {
                             this.users.splice(index, 1);
                             this.$store.commit("showInfo", response.data.message);
@@ -192,7 +193,7 @@
                     let item = this.editedItem;
                     item.created_at = this.formatDate(new Date());
 
-                    axios.post(`/api/users`, this.editedItem).then(response => {
+                    axios.post('/api/users', this.editedItem).then(response => {
                         if (response.data.status) {
                             this.users.push(item);
                             this.$store.commit("showInfo", response.data.message);

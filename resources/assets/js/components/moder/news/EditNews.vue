@@ -1,6 +1,8 @@
 <template>
     <v-container fluid>
-        <v-layout><v-subheader class="title">Редактирование новости</v-subheader></v-layout>
+        <v-layout>
+            <v-subheader class="title">Редактирование новости</v-subheader>
+        </v-layout>
         <v-layout row justify-center>
             <v-dialog v-model="dialog" persistent>
                 <template>
@@ -9,6 +11,26 @@
                     </div>
                 </template>
             </v-dialog>
+        </v-layout>
+
+        <v-layout row>
+            <v-flex xs4>
+                <v-subheader>Секция</v-subheader>
+            </v-flex>
+            <v-flex xs8>
+                <v-select
+                        :items="sections"
+                        v-model="section"
+                        label="Секция"
+                        single-line
+                        :hint="`${section.section_name}`"
+                        item-text="section_name"
+                        item-value="section_name"
+                        return-object
+                        persistent-hint
+                        required
+                ></v-select>
+            </v-flex>
         </v-layout>
 
         <v-layout row>
@@ -102,6 +124,7 @@
 
 <script>
     import Auth from "../../../helpers/Auth";
+
     export default {
         data() {
             return {
@@ -113,12 +136,21 @@
                     file: null
                 },
                 image: true,
-                errors: {}
+                errors: {},
+                sections: [],
+                section: {id: '', section_name: ''},
             }
         },
         created() {
             Auth.check();
             this.news = this.$route.params.item;
+            this.sections = this.$route.params.sections;
+            this.sections.forEach(item=>{
+                if(item.id===this.news.section_id){
+                    this.section.id = item.id;
+                    this.section.section_name = item.section_name;
+                }
+            });
         },
         computed: {
             readyToUpload() {
@@ -140,6 +172,7 @@
                 data.append('title', this.news.title);
                 data.append('description', this.news.description);
                 data.append('content', this.news.content);
+                data.append('section_id', this.section.id);
 
                 axios.post(`/api/updateNews`, data).then(response => {
                     if (response.data.status) {

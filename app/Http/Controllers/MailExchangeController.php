@@ -29,7 +29,8 @@ class MailExchangeController extends Controller
         $this->validate($request, [
             'subject' => 'max:255',
             'msg' => 'required|max:1000',
-            'email_to.*' => 'email'
+            'email_to.*' => 'email',
+            'email_to' => 'required'
         ]);
 
 

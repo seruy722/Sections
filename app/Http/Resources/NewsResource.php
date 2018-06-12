@@ -11,13 +11,12 @@ class NewsResource extends JsonResource
         $need_date = date('d-m-Y', strtotime($this->created_at));
         return [
             'id' => $this->id,
-            'user_name' => optional($this->user)->name,
             'title' => $this->title,
             'description' => $this->description,
             'content' => $this->content,
-            'img_filename' => $this->img_filename,
-            'user_id' => $this->user_id,
-            'active' => $this->active,
+            'image_name' => $this->image_name,
+            'section_id' => $this->section_id,
+            'section_name'=>$this->sections->section_name,
             'created_at' => $need_date
         ];
     }

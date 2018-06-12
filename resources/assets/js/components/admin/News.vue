@@ -71,7 +71,7 @@
                 <template slot="items" slot-scope="props">
                     <td>{{ props.item.created_at }}</td>
                     <td>{{ props.item.title }}</td>
-                    <td>{{ props.item.user_name }}</td>
+                    <td>{{ props.item.section_name }}</td>
                     <td>
                         <v-btn icon class="mx-0" @click="viewItem(props.item)">
                             <v-icon color="teal">pageview</v-icon>
@@ -107,11 +107,10 @@
                 headers: [
                     {text: 'Дата создания', value: 'created_at'},
                     {text: 'Заголовок', value: 'title'},
-                    {text: 'Пользователь', value: 'user_name'},
+                    {text: 'Секция', value: 'section_name'},
                     {text: 'Управление', sortable: false,}
                 ],
                 news: [],
-                url: "http://sections.loc/",
                 dialog: false,
                 itemForView: {}
             }
@@ -122,7 +121,7 @@
         },
         methods: {
             initialize() {
-                axios.get(`/api/news`).then(response => {
+                axios.get('/api/news').then(response => {
                     this.news = response.data.data;
                 });
             },
@@ -157,7 +156,7 @@
                 this.dialog = true;
             },
             getPath() {
-                return "/images/" + this.itemForView.img_filename;
+                return "/images/" + this.itemForView.image_name;
             }
         }
     }

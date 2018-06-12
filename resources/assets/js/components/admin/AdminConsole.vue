@@ -5,7 +5,7 @@
             <v-expansion-panel-content
                     hide-actions
             >
-                <v-layout slot="header" align -center row spacer>
+                <v-layout slot="header" align-center row spacer>
                     <v-flex xs4 sm2 md1>
                         <v-avatar
                                 slot="activator"
@@ -20,8 +20,6 @@
                         <span class="grey--text">&nbsp;({{ countNews || 0 }})</span>
                     </v-flex>
                 </v-layout>
-
-
             </v-expansion-panel-content>
 
             <v-expansion-panel-content

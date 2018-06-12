@@ -100,7 +100,8 @@ class NewsController extends Controller
         $data = [
             'title' => $data['title'],
             'description' => $data['description'],
-            'content' => $data['content']
+            'content' => $data['content'],
+            'section_id' => $data['section_id']
         ];
         if (!is_string($file)) {
             $this->validate($request, [

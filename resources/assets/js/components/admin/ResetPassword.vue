@@ -1,6 +1,16 @@
 <template>
     <div>
         <v-container>
+            <v-layout row justify-center>
+                <v-dialog v-model="dialog" persistent>
+                    <template>
+                        <div class="progress">
+                            <v-progress-circular :size="70" indeterminate color="primary"></v-progress-circular>
+                        </div>
+                    </template>
+                </v-dialog>
+            </v-layout>
+
             <v-layout>
                 <v-flex sm6 offset-sm3>
                     <v-card>
@@ -34,6 +44,7 @@
 <script>
     export default {
         data: () => ({
+            dialog: false,
             valid: false,
             email: '',
             emailRules: [
@@ -46,6 +57,7 @@
         }),
         methods: {
             checkEmail() {
+                this.dialog = true;
                 if (this.valid) {
                     axios.post("/api/reset_password", {
                         'email': this.email,
@@ -53,11 +65,13 @@
                     })
                         .then(response => {
                             if (response.data.status) {
+                                this.dialog = false;
                                 this.success = response.data.message;
                                 this.form = false;
                                 this.error = null;
                                 setTimeout(this.onLogin, 3000);
                             } else {
+                                this.dialog = false;
                                 this.error = response.data.message;
                             }
 
@@ -73,3 +87,13 @@
         }
     }
 </script>
+
+<style>
+    .progress {
+        text-align: center;
+    }
+
+    .progress .progress-circular {
+        margin: 1rem;
+    }
+</style>

@@ -31,6 +31,8 @@ Route::post('/adminEmail', 'AuthController@getAdminEmail');
 Route::post('/addSocialsLinks', 'SocialController@store');
 Route::post('/getSocialsLinks', 'SocialController@getSocialsLinks');
 
+
+
 Route::view('/controls', 'controls');
 
 Route::get('/404', function () {

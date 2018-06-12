@@ -17,7 +17,6 @@ export default {
         {path: "/users", title: "Пользователи", auth: true, role: 'admin'},
         {path: "/news", title: "Новости", auth: true, role: 'admin'},
         {path: "/sections_categories", title: "Категории", auth: true, role: 'admin'},
-        {path: "/social", title: "Соцсети", auth: true, role: 'admin'},
 
         {path: "/user_sections", title: "Секции", auth: true, role: 'moder'},
         {path: "/schedule", title: "Расписание", auth: true, role: 'moder'},
