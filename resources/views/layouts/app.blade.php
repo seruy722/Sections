@@ -128,7 +128,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-9 col-sm-12">
-                    <p>Copyright &copy; 2018 Coyier. All rights reserved.</p>
+                    <p>По вопросам сайта пишите на admin_feedback@example.com</p>
                 </div>
             </div>
         </div>
