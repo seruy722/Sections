@@ -90972,7 +90972,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var index = this.news.indexOf(item);
             item.active = true;
             axios.patch('/api/news/' + item.id, item).then(function (response) {
-                if (response.data.status === 'success') {
+                if (response.data.status) {
                     _this3.news.splice(index, 1);
                     _this3.$store.commit("showInfo", response.data.message);
                 }
@@ -91075,7 +91075,7 @@ var render = function() {
                       _c(
                         "v-card-media",
                         {
-                          staticClass: "white--text",
+                          staticClass: "black--text",
                           attrs: { src: _vm.getPath() }
                         },
                         [

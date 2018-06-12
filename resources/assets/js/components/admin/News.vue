@@ -15,7 +15,7 @@
                 <v-flex xs12 sm6 offset-sm3>
                     <v-card>
                         <v-card-media
-                                class="white--text"
+                                class="black--text"
                                 :src="getPath()"
                         >
                             <v-container fill-height fluid>
@@ -140,13 +140,10 @@
             activeItem(item) {
                 const index = this.news.indexOf(item);
                 item.active = true;
-                axios.patch(`/api/news/` + item.id, item).then(response => {
-                    if (response.data.status === 'success') {
+                axios.patch('/api/news/' + item.id, item).then(response => {
+                    if (response.data.status) {
                         this.news.splice(index, 1);
-                        this.$store.commit(
-                            "showInfo",
-                            response.data.message
-                        );
+                        this.$store.commit("showInfo", response.data.message);
                     }
                 });
                 this.dialog = false;

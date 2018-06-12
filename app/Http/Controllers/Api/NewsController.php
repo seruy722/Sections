@@ -76,13 +76,12 @@ class NewsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data['created_at'] = $this->needDate($request->created_at);
-        $user = News::find($id);
-        if ($user) {
-            $user->update($data);
-            return response()->json(['status' => 'success', 'message' => 'Запись успешно активирована.']);
+        $news = News::find($id);
+        if ($news) {
+            $news->update($request->all());
+            return response()->json(['status' => true, 'message' => 'Запись успешно активирована.']);
         } else {
-            return response()->json(['status' => 'error', 'message' => 'Ошибка при активации записи.']);
+            return response()->json(['status' => false, 'message' => 'Ошибка при активации записи.']);
         }
     }
 
