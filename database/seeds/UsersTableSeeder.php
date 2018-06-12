@@ -6,16 +6,22 @@ class UsersTableSeeder extends Seeder
 {
     public function run()
     {
-        $faker = Faker\Factory::create();
-        for ($i = 1; $i <= 26; $i++) {
-            DB::table('users')->insert([
-                'name' => $faker->company,
-                'email' => $faker->email,
-                'phone' => $faker->e164PhoneNumber,
-                'password' => $faker->password,
-                'photo' => $faker->shuffle('$Ukraine$, $Kramatorsk$'),
-                'api_token' => $faker->shuffle('hello, world'),
-            ]);
-        }
+        DB::table('users')->insert([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'phone' => '',
+            'password' => '$2y$10$HDgfuNP5nOJRkPTr3GDPG.kygvycJEAkhhuE5i45/xltawqTrjROC',
+            'photo' => '/users/admin.jpg',
+            'role' => 'admin'
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'user',
+            'email' => 'user@gmail.com',
+            'phone' => '',
+            'password' => '$2y$10$vRInDVSRpP5bmZhwQqFfUe9vrg2zdcaNwF9CjT.Bd0AQdni3koTSO',
+            'photo' => '/users/user.jpg'
+        ]);
+
     }
 }

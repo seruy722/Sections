@@ -16,7 +16,6 @@ class FrontController extends Controller
     {
         $monday = Schedules::join('sections', 'sections.id', '=', 'schedules.section_id')
             ->where('day_of_week', 'Monday')->orderBy('event_start', 'asc')->get()
-            //  $monday = Schedules::where('days_of_week', 'Monday')->orderBy('data_start', 'asc')->get()
             ->groupby('section_name');
 
         $tuesday = Schedules::join('sections', 'sections.id', '=', 'schedules.section_id')
@@ -38,7 +37,7 @@ class FrontController extends Controller
             ->where('day_of_week', 'Saturday')->orderBy('event_start', 'asc')->get()
             ->groupby('section_name');
 
-        $news = News::orderBy('id', 'desc')->limit(10)->get();
+        $news = News::where('active',true)->orderBy('id', 'desc')->limit(10)->get();
 
         $category = Category::all();
 
@@ -50,14 +49,14 @@ class FrontController extends Controller
 
     public function show($id)
     {
-        $post = News::where('id', $id)->firstOrFail();
+        $post = News::where('active',true)->where('id', $id)->firstOrFail();
         return view('article', compact('post'));
     }
 
 
     public function all()
     {
-        $all = News::orderBy('id', 'desc')->paginate(10);
+        $all = News::where('active',true)->orderBy('id', 'desc')->paginate(10);
         return view('articles', ['all' => $all]);
     }
 

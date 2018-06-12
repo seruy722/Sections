@@ -101077,11 +101077,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.errors = {};
             this.dialog = true;
-            this.sections.forEach(function (item) {
-                if (item.section_name === _this2.select) {
-                    _this2.social.section_id = item.id;
-                }
-            });
+
+            if (this.role()) {
+                this.sections.forEach(function (item) {
+                    if (item.section_name === _this2.select) {
+                        _this2.social.section_id = item.id;
+                    }
+                });
+            }
 
             axios.post('/addSocialsLinks', this.social).then(function (response) {
                 if (response.data.status) {
@@ -101096,14 +101099,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getSocials: function getSocials(event) {
             var _this3 = this;
 
-            this.sections.forEach(function (item) {
-                if (item.section_name === event) {
-                    _this3.social.section_id = item.id;
-                }
-            });
+            if (this.role()) {
+                this.sections.forEach(function (item) {
+                    if (item.section_name === event) {
+                        _this3.social.section_id = item.id;
+                    }
+                });
+            }
 
             axios.post('/getSocialsLinks', { 'id': this.social.section_id }).then(function (response) {
-                _this3.social = response.data.socials[0];
+                var socials = response.data.socials[0];
+                if (socials) {
+                    _this3.social = socials;
+                } else {
+                    _this3.social = {
+                        fb: null,
+                        inst: null,
+                        tw: null,
+                        vk: null,
+                        section_id: null || 0
+                    };
+                }
             });
         },
         checkError: function checkError(field) {
@@ -101357,20 +101373,22 @@ var render = function() {
             "v-flex",
             { attrs: { xs8: "" } },
             [
-              _c(
-                "v-btn",
-                {
-                  attrs: { color: "primary", dark: "" },
-                  on: { click: _vm.addSocialLinks }
-                },
-                [
-                  _vm._v("Сохранить\n                "),
-                  _c("v-icon", { attrs: { dark: "", right: "" } }, [
-                    _vm._v("check_circle")
-                  ])
-                ],
-                1
-              )
+              _vm.sections.length > 0
+                ? _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "primary", dark: "" },
+                      on: { click: _vm.addSocialLinks }
+                    },
+                    [
+                      _vm._v("Сохранить\n                "),
+                      _c("v-icon", { attrs: { dark: "", right: "" } }, [
+                        _vm._v("check_circle")
+                      ])
+                    ],
+                    1
+                  )
+                : _vm._e()
             ],
             1
           )

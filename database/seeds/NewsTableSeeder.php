@@ -56,7 +56,7 @@ class NewsTableSeeder extends Seeder
                 облагородить<br>',
                     'image_name' => 'img.jpg',
                     'section_id' => $val,
-                    'active' => false
+                    'active' => true
                 ],
                 [
                     'title' => 'Быстрее, выше, сильнее: как правильно выбрать секцию для ребенка',
@@ -114,7 +114,7 @@ class NewsTableSeeder extends Seeder
                  даже рекомендуют как возможность излечить ДЦП.<br>',
                     'image_name' => 'keggg.png',
                     'section_id' => $val,
-                    'active' => false
+                    'active' => true
                 ],
             ]);
         }

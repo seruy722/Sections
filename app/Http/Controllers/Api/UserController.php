@@ -8,6 +8,7 @@ use App\News;
 use App\Schedules;
 use App\Sections;
 use App\User;
+use App\ImageGallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 

@@ -33,10 +33,10 @@ Route::post('/getSocialsLinks', 'SocialController@getSocialsLinks');
 
 Route::view('/controls', 'controls');
 
-Route::get('/404',function(){
+Route::get('/404', function () {
     abort(404);
 });
-Route::get('/500',function(){
+Route::get('/500', function () {
     abort(500);
 });
 

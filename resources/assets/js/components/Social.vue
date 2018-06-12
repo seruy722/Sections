@@ -87,7 +87,7 @@
 
             </v-flex>
             <v-flex xs8>
-                <v-btn color="primary" dark @click="addSocialLinks">Сохранить
+                <v-btn v-if="sections.length>0" color="primary" dark @click="addSocialLinks">Сохранить
                     <v-icon dark right>check_circle</v-icon>
                 </v-btn>
             </v-flex>
@@ -122,7 +122,7 @@
                 this.sections = response.data.sections;
                 this.sectionNames = this.sections.map(item => item.section_name);
             });
-            if(!this.role()){
+            if (!this.role()) {
                 this.getSocials();
             }
         },
@@ -130,12 +130,16 @@
             addSocialLinks() {
                 this.errors = {};
                 this.dialog = true;
-                this.sections.forEach(item => {
-                    if (item.section_name === this.select) {
-                        this.social.section_id = item.id
 
-                    }
-                });
+                if (this.role()) {
+                    this.sections.forEach(item => {
+                        if (item.section_name === this.select) {
+                            this.social.section_id = item.id
+
+                        }
+                    });
+                }
+
 
                 axios.post('/addSocialsLinks', this.social).then(response => {
                     if (response.data.status) {
@@ -149,15 +153,28 @@
 
             },
             getSocials(event) {
-                this.sections.forEach(item => {
-                    if (item.section_name === event) {
-                        this.social.section_id = item.id
+                if (this.role()) {
+                    this.sections.forEach(item => {
+                        if (item.section_name === event) {
+                            this.social.section_id = item.id
 
-                    }
-                });
+                        }
+                    });
+                }
 
                 axios.post('/getSocialsLinks', {'id': this.social.section_id}).then(response => {
-                    this.social = response.data.socials[0];
+                    let socials = response.data.socials[0];
+                    if (socials) {
+                        this.social = socials;
+                    } else {
+                        this.social = {
+                            fb: null,
+                            inst: null,
+                            tw: null,
+                            vk: null,
+                            section_id: null || 0
+                        };
+                    }
                 });
             },
             checkError(field) {
