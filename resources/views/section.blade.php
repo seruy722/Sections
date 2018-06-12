@@ -335,16 +335,16 @@
                                     <strong>Социальные сети:</strong>
                                     <ul class="soc_net">
                                         @if (!empty($users->social->vk))
-                                        <li><a href="{{$users->social->vk}}" class="soc soc_vk"></a></li>
+                                        <li><a href="{{$users->social->vk}}" target="_blank" class="soc soc_vk"></a></li>
                                         @endif
                                         @if (!empty($users->social->fb))
-                                        <li><a href="{{$users->social->fb}}" class="soc soc_fb"></a></li>
+                                        <li><a href="{{$users->social->fb}}" target="_blank" class="soc soc_fb"></a></li>
                                         @endif
                                         @if (!empty($users->social->tw))
-                                        <li><a href="{{$users->social->tw}}" class="soc soc_tw"></a></li>
+                                        <li><a href="{{$users->social->tw}}" target="_blank" class="soc soc_tw"></a></li>
                                         @endif
                                         @if (!empty($users->social->inst))
-                                        <li><a href="{{$users->social->inst}}" class="soc soc_inst"></a></li>
+                                        <li><a href="{{$users->social->inst}}" target="_blank" class="soc soc_inst"></a></li>
                                         @endif
                                     </ul>
                                 </address>
