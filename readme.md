@@ -1,7 +1,10 @@
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg">
 <img src="https://blog.tuleap.org/sites/default/files/logo-vue-js.png"></p>
 
-<h3>Установка</h3>
+<h1></h1>
+
+<h2>Установка</h2>
+<hr>
 
 <ul>
     <li>Клонировать репозиторий</li>

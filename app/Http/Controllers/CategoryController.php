@@ -59,10 +59,10 @@ class CategoryController extends Controller
         if ($category->count() > 0) {
             $data = $this->cleanData($request->all());
             $file = $request->image;
-            if (file_exists(public_path() . '/images/' . $category->image)) {
-                unlink(public_path() . '/images/' . $category->image);
-            }
             if (is_object($request->image)) {
+                if (file_exists(public_path() . '/images/' . $category->image)) {
+                    unlink(public_path() . '/images/' . $category->image);
+                }
                 $this->validate($request, [
                     'image' => 'mimes:jpg,jpeg,png|dimensions:max:5120'
                 ]);

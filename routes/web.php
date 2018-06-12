@@ -35,7 +35,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('/addSections', 'SectionsController');
     Route::resource('/deleteSection', 'SectionsController');
 
-    return redirect('/');
 });
 
 
