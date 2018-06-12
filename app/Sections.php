@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Users;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Sections extends Model
@@ -27,5 +27,9 @@ class Sections extends Model
     public function image()
     {
         return $this->hasMany(ImageGallery::class, 'section_id');
+    }
+    public function social()
+    {
+        return $this->hasOne(Social::class, 'section_id');
     }
 }

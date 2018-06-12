@@ -8095,6 +8095,57 @@ footer a {
     border: none
 }
 
+.soc_net > li{
+    float: left;
+    height: 30px;
+    margin-right: 5px;
+    text-align: center;
+    width: 30px;
+}
+
+.soc {
+    background-image: url(/images/sprite_soc.png);
+    background-repeat: no-repeat;
+    display: block;
+    height: 100%;
+}
+
+.soc:hover {
+    transition: unset;
+}
+
+.soc_fb:hover {
+    background-position: -5px -5px;
+}
+
+.soc_fb {
+    background-position: -45px -5px;
+}
+
+.soc_inst:hover {;
+    background-position: -5px -45px;
+}
+
+.soc_inst {
+    background-position: -45px -45px;
+}
+
+.soc_tw:hover {
+    background-position: -85px -5px;
+}
+
+.soc_tw {
+    background-position: -85px -45px;
+}
+
+.soc_vk:hover {
+    background-position: -5px -85px;
+}
+
+.soc_vk {
+    background-position: -45px -85px;
+}
+
 .nav-pills > .noround a {
     border-radius: 0px;
     background-color: #eee;
@@ -9317,4 +9368,8 @@ label {
     width: 100%;
     text-align: center;
     margin-bottom: -30px;
+}
+
+.soc_net {
+
 }

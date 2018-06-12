@@ -24,7 +24,6 @@ class SectionsController extends Controller
         $lat = ($d->results[0]->geometry->location->lat);
         $lng = ($d->results[0]->geometry->location->lng);
 
-
         $news = $users->news()->where('active', 1)->paginate(10);
 
         $monday = $users->schedules()->where('day_of_week', 'Monday')->orderBy('event_start', 'asc')->get();
@@ -43,9 +42,7 @@ class SectionsController extends Controller
     public function sections($id)
     {
         $sections = Category::findOrFail($id);
-
         return view('sections', ['sections' => $sections]);
-
     }
 
     public function mail(Request $request)
@@ -58,7 +55,6 @@ class SectionsController extends Controller
             'msg' => $request->msg,
             'phone' => $request->phone,
             'email' => $request->email
-
         ];
 
         Mail::send('mail', $data, function ($message) use ($data) {
@@ -79,7 +75,6 @@ class SectionsController extends Controller
         }
         $categories = Category::all();
         return response()->json(['status' => true, 'sections' => $sections, 'categories' => $categories]);
-
     }
 
     public function needDate($date)
@@ -160,7 +155,6 @@ class SectionsController extends Controller
 
         $section->update($data);
         return response()->json(['status' => true, 'message' => 'Запись успешно обновлена.']);
-
     }
 
 
@@ -213,5 +207,4 @@ class SectionsController extends Controller
         $name = Sections::where('id', $id)->value('section_name');
         return view('gallery', ['img' => $img, 'name' => $name]);
     }
-
 }

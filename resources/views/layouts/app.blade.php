@@ -130,14 +130,6 @@
                 <div class="col-xs-12 col-md-9 col-sm-12">
                     <p>Copyright &copy; 2018 Coyier. All rights reserved.</p>
                 </div>
-                <div class="col-xs-12 col-md-3 col-sm-12">
-                    <ul class=" footer_social clearfix">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#"><i class="fa fa-vk"></i></a></li>
-                        <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>

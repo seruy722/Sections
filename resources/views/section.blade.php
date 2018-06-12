@@ -327,9 +327,28 @@
                                     <strong>Телефон:</strong>{{optional($users->user)->phone}}<br>
                                 </address>
                                 <address>
-                                    <strong>Email:</strong> <a
-                                            href="mailto:<?php echo(optional($users->user)->email);?>">{{optional($users->user)->email}}</a><br>
+                                    <strong>Email:</strong>
+                                    <a href="mailto:<?php echo(optional($users->user)->email);?>">{{optional($users->user)->email}}</a><br>
                                 </address>
+                                @if (isset($users->social))
+                                <address>
+                                    <strong>Социальные сети:</strong>
+                                    <ul class="soc_net">
+                                        @if (!empty($users->social->vk))
+                                        <li><a href="{{$users->social->vk}}" class="soc soc_vk"></a></li>
+                                        @endif
+                                        @if (!empty($users->social->fb))
+                                        <li><a href="{{$users->social->fb}}" class="soc soc_fb"></a></li>
+                                        @endif
+                                        @if (!empty($users->social->tw))
+                                        <li><a href="{{$users->social->tw}}" class="soc soc_tw"></a></li>
+                                        @endif
+                                        @if (!empty($users->social->inst))
+                                        <li><a href="{{$users->social->inst}}" class="soc soc_inst"></a></li>
+                                        @endif
+                                    </ul>
+                                </address>
+                                @endif
                             </div>
                             <div class="google">
                                 <div id="map"></div>
