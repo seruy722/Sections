@@ -92688,7 +92688,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             data.append('title', this.news.title);
             data.append('description', this.news.description);
             data.append('content', this.news.content);
-            data.append('user_id', this.news.user_id);
 
             axios.post("/api/updateNews", data).then(function (response) {
                 if (response.data.status) {
@@ -93519,9 +93518,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         axios.get('/getEmails/' + this.$store.state.Auth.id).then(function (response) {
             _this.emails = response.data.emails;
         });
-        this.mail.subject = this.$route.params.subject;
-        this.selectEmails.push(this.$route.params.email);
-        this.mail.msg = this.$route.params.category;
+        if (Object.keys(this.$route.params).length !== 0) {
+            this.mail.subject = this.$route.params.subject;
+            this.selectEmails.push(this.$route.params.email);
+            this.mail.msg = this.$route.params.category;
+        }
     },
 
     methods: {
@@ -93629,6 +93630,7 @@ var render = function() {
             [
               _c("v-select", {
                 attrs: {
+                  "error-messages": _vm.checkError("email_to.0"),
                   items: _vm.emails,
                   label: "Кому",
                   chips: "",
@@ -93639,8 +93641,7 @@ var render = function() {
                   "append-icon": "",
                   "max-height": "auto",
                   autocomplete: "",
-                  required: "",
-                  "error-messages": _vm.checkError("email_to")
+                  required: ""
                 },
                 scopedSlots: _vm._u([
                   {
@@ -99218,6 +99219,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -101035,6 +101039,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -101144,65 +101151,110 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "v-container",
-    { attrs: { fluid: "" } },
-    [
-      _c(
-        "v-layout",
-        [
-          _c("v-subheader", { staticClass: "title" }, [
-            _vm._v("Добавление ссылок на соцсети")
-          ])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-layout",
-        { attrs: { row: "", "justify-center": "" } },
+  return _vm.sections.length > 0 || !_vm.role()
+    ? _c(
+        "v-container",
+        { attrs: { fluid: "" } },
         [
           _c(
-            "v-dialog",
-            {
-              attrs: { persistent: "" },
-              model: {
-                value: _vm.dialog,
-                callback: function($$v) {
-                  _vm.dialog = $$v
-                },
-                expression: "dialog"
-              }
-            },
-            [
-              [
-                _c(
-                  "div",
-                  { staticClass: "progress" },
-                  [
-                    _c("v-progress-circular", {
-                      attrs: { size: 70, indeterminate: "", color: "primary" }
-                    })
-                  ],
-                  1
-                )
-              ]
-            ],
-            2
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _vm.role()
-        ? _c(
             "v-layout",
-            { attrs: { row: "", wrap: "" } },
+            [
+              _c("v-subheader", { staticClass: "title" }, [
+                _vm._v("Добавление ссылок на соцсети")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-layout",
+            { attrs: { row: "", "justify-center": "" } },
+            [
+              _c(
+                "v-dialog",
+                {
+                  attrs: { persistent: "" },
+                  model: {
+                    value: _vm.dialog,
+                    callback: function($$v) {
+                      _vm.dialog = $$v
+                    },
+                    expression: "dialog"
+                  }
+                },
+                [
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "progress" },
+                      [
+                        _c("v-progress-circular", {
+                          attrs: {
+                            size: 70,
+                            indeterminate: "",
+                            color: "primary"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]
+                ],
+                2
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _vm.role()
+            ? _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c(
+                    "v-flex",
+                    { attrs: { xs4: "" } },
+                    [_c("v-subheader", [_vm._v("Секция")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs8: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          "error-messages": _vm.checkError("section_id"),
+                          items: _vm.sectionNames,
+                          label: "Секция",
+                          "single-line": "",
+                          required: ""
+                        },
+                        on: { change: _vm.getSocials },
+                        model: {
+                          value: _vm.select,
+                          callback: function($$v) {
+                            _vm.select = $$v
+                          },
+                          expression: "select"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "v-layout",
+            { attrs: { row: "" } },
             [
               _c(
                 "v-flex",
                 { attrs: { xs4: "" } },
-                [_c("v-subheader", [_vm._v("Секция")])],
+                [_c("v-subheader", [_vm._v("Facebook")])],
                 1
               ),
               _vm._v(" "),
@@ -101210,21 +101262,14 @@ var render = function() {
                 "v-flex",
                 { attrs: { xs8: "" } },
                 [
-                  _c("v-select", {
-                    attrs: {
-                      "error-messages": _vm.checkError("section_id"),
-                      items: _vm.sectionNames,
-                      label: "Секция",
-                      "single-line": "",
-                      required: ""
-                    },
-                    on: { change: _vm.getSocials },
+                  _c("v-text-field", {
+                    attrs: { label: "Facebook" },
                     model: {
-                      value: _vm.select,
+                      value: _vm.social.fb,
                       callback: function($$v) {
-                        _vm.select = $$v
+                        _vm.$set(_vm.social, "fb", $$v)
                       },
-                      expression: "select"
+                      expression: "social.fb"
                     }
                   })
                 ],
@@ -101232,149 +101277,115 @@ var render = function() {
               )
             ],
             1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "v-layout",
-        { attrs: { row: "" } },
-        [
+          ),
+          _vm._v(" "),
           _c(
-            "v-flex",
-            { attrs: { xs4: "" } },
-            [_c("v-subheader", [_vm._v("Facebook")])],
+            "v-layout",
+            { attrs: { row: "" } },
+            [
+              _c(
+                "v-flex",
+                { attrs: { xs4: "" } },
+                [_c("v-subheader", [_vm._v("Twitter")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { attrs: { xs8: "" } },
+                [
+                  _c("v-text-field", {
+                    attrs: { name: "input-3", label: "Twitter" },
+                    model: {
+                      value: _vm.social.tw,
+                      callback: function($$v) {
+                        _vm.$set(_vm.social, "tw", $$v)
+                      },
+                      expression: "social.tw"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
             1
           ),
           _vm._v(" "),
           _c(
-            "v-flex",
-            { attrs: { xs8: "" } },
+            "v-layout",
+            { attrs: { row: "" } },
             [
-              _c("v-text-field", {
-                attrs: { label: "Facebook" },
-                model: {
-                  value: _vm.social.fb,
-                  callback: function($$v) {
-                    _vm.$set(_vm.social, "fb", $$v)
-                  },
-                  expression: "social.fb"
-                }
-              })
+              _c(
+                "v-flex",
+                { attrs: { xs4: "" } },
+                [_c("v-subheader", [_vm._v("Instagram")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { attrs: { xs8: "" } },
+                [
+                  _c("v-text-field", {
+                    attrs: { name: "input-3", label: "Instagram" },
+                    model: {
+                      value: _vm.social.inst,
+                      callback: function($$v) {
+                        _vm.$set(_vm.social, "inst", $$v)
+                      },
+                      expression: "social.inst"
+                    }
+                  })
+                ],
+                1
+              )
             ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-layout",
-        { attrs: { row: "" } },
-        [
-          _c(
-            "v-flex",
-            { attrs: { xs4: "" } },
-            [_c("v-subheader", [_vm._v("Twitter")])],
             1
           ),
           _vm._v(" "),
           _c(
-            "v-flex",
-            { attrs: { xs8: "" } },
+            "v-layout",
+            { attrs: { row: "" } },
             [
-              _c("v-text-field", {
-                attrs: { name: "input-3", label: "Twitter" },
-                model: {
-                  value: _vm.social.tw,
-                  callback: function($$v) {
-                    _vm.$set(_vm.social, "tw", $$v)
-                  },
-                  expression: "social.tw"
-                }
-              })
+              _c(
+                "v-flex",
+                { attrs: { xs4: "" } },
+                [_c("v-subheader", [_vm._v("Vkontakte")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { attrs: { xs8: "" } },
+                [
+                  _c("v-text-field", {
+                    attrs: { name: "input-3", label: "Vkontakte" },
+                    model: {
+                      value: _vm.social.vk,
+                      callback: function($$v) {
+                        _vm.$set(_vm.social, "vk", $$v)
+                      },
+                      expression: "social.vk"
+                    }
+                  })
+                ],
+                1
+              )
             ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-layout",
-        { attrs: { row: "" } },
-        [
-          _c(
-            "v-flex",
-            { attrs: { xs4: "" } },
-            [_c("v-subheader", [_vm._v("Instagram")])],
             1
           ),
           _vm._v(" "),
           _c(
-            "v-flex",
-            { attrs: { xs8: "" } },
+            "v-layout",
+            { attrs: { row: "" } },
             [
-              _c("v-text-field", {
-                attrs: { name: "input-3", label: "Instagram" },
-                model: {
-                  value: _vm.social.inst,
-                  callback: function($$v) {
-                    _vm.$set(_vm.social, "inst", $$v)
-                  },
-                  expression: "social.inst"
-                }
-              })
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-layout",
-        { attrs: { row: "" } },
-        [
-          _c(
-            "v-flex",
-            { attrs: { xs4: "" } },
-            [_c("v-subheader", [_vm._v("Vkontakte")])],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs8: "" } },
-            [
-              _c("v-text-field", {
-                attrs: { name: "input-3", label: "Vkontakte" },
-                model: {
-                  value: _vm.social.vk,
-                  callback: function($$v) {
-                    _vm.$set(_vm.social, "vk", $$v)
-                  },
-                  expression: "social.vk"
-                }
-              })
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-layout",
-        { attrs: { row: "" } },
-        [
-          _c("v-flex", { attrs: { xs4: "" } }),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs8: "" } },
-            [
-              _vm.sections.length > 0
-                ? _c(
+              _c("v-flex", { attrs: { xs4: "" } }),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { attrs: { xs8: "" } },
+                [
+                  _c(
                     "v-btn",
                     {
                       attrs: { color: "primary", dark: "" },
@@ -101388,16 +101399,26 @@ var render = function() {
                     ],
                     1
                   )
-                : _vm._e()
+                ],
+                1
+              )
             ],
             1
           )
         ],
         1
       )
-    ],
-    1
-  )
+    : _c(
+        "v-container",
+        [
+          _c(
+            "v-btn",
+            { attrs: { color: "red", to: { name: "UserSections" } } },
+            [_vm._v("Добавить секцию")]
+          )
+        ],
+        1
+      )
 }
 var staticRenderFns = []
 render._withStripped = true

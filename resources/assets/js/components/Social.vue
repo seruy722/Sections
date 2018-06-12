@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid>
+    <v-container fluid v-if="sections.length>0 || !role()">
         <v-layout>
             <v-subheader class="title">Добавление ссылок на соцсети</v-subheader>
         </v-layout>
@@ -87,11 +87,14 @@
 
             </v-flex>
             <v-flex xs8>
-                <v-btn v-if="sections.length>0" color="primary" dark @click="addSocialLinks">Сохранить
+                <v-btn color="primary" dark @click="addSocialLinks">Сохранить
                     <v-icon dark right>check_circle</v-icon>
                 </v-btn>
             </v-flex>
         </v-layout>
+    </v-container>
+    <v-container v-else>
+        <v-btn color="red" v-bind:to="{name:'UserSections'}">Добавить секцию</v-btn>
     </v-container>
 </template>
 

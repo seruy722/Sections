@@ -1,6 +1,8 @@
 <template>
     <v-container>
-        <v-layout><v-subheader class="title">Редактирование расписания</v-subheader></v-layout>
+        <v-layout>
+            <v-subheader class="title">Редактирование расписания</v-subheader>
+        </v-layout>
         <v-layout row justify-center>
             <v-dialog v-model="dialog" persistent>
                 <template>
@@ -143,6 +145,7 @@
 
 <script>
     import Auth from "../../../helpers/Auth";
+
     export default {
         data() {
             return {

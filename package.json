@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "moment": "^2.22.1",
+        "npm": "^6.1.0",
         "vue-axios": "^2.1.1",
         "vue-router": "^3.0.1",
         "vue2-google-maps": "^0.9.7",

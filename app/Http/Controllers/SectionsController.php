@@ -141,7 +141,11 @@ class SectionsController extends Controller
             $this->validate($request, [
                 'fupload' => 'mimes:jpg,jpeg,png|dimensions:max:5120',
             ]);
-            unlink(public_path() . '/images/' . $section->img_logo);
+
+            if (file_exists(public_path() . '/images/' . $section->img_logo)) {
+                unlink(public_path() . '/images/' . $section->img_logo);
+            }
+
             $file = $request->fupload;
             $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $file->getClientOriginalExtension();
             $file->move('images', $filename);
@@ -168,7 +172,9 @@ class SectionsController extends Controller
         if ($images->count() > 0) {
             $arr = $images->toArray();
             foreach ($arr as $item) {
-                unlink(public_path() . '/images/' . $item['name']);
+                if (file_exists(public_path() . '/images/' . $item['name'])) {
+                    unlink(public_path() . '/images/' . $item['name']);
+                }
                 ImageGallery::destroy($item['id']);
             }
         }
@@ -177,7 +183,9 @@ class SectionsController extends Controller
         if ($news->count() > 0) {
             $arr = $news->toArray();
             foreach ($arr as $item) {
-                unlink(public_path() . '/images/' . $item['image_name']);
+                if (file_exists(public_path() . '/images/' . $item['image_name'])) {
+                    unlink(public_path() . '/images/' . $item['image_name']);
+                }
                 News::destroy($item['id']);
             }
         }
@@ -191,7 +199,7 @@ class SectionsController extends Controller
         }
 
 
-        if ($section->img_logo) {
+        if (file_exists(public_path() . '/images/' . $section->img_logo)) {
             unlink(public_path() . '/images/' . $section->img_logo);
         }
 

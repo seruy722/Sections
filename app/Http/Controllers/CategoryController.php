@@ -59,6 +59,9 @@ class CategoryController extends Controller
         if ($category->count() > 0) {
             $data = $this->cleanData($request->all());
             $file = $request->image;
+            if (file_exists(public_path() . '/images/' . $category->image)) {
+                unlink(public_path() . '/images/' . $category->image);
+            }
             if (is_object($request->image)) {
                 $this->validate($request, [
                     'image' => 'mimes:jpg,jpeg,png|dimensions:max:5120'
@@ -68,6 +71,7 @@ class CategoryController extends Controller
                 $data['image'] = $filename;
             }
             $category->update($data);
+
             return response()->json(['status' => true, 'message' => 'Категория успешно обновлена.']);
         } else {
             return response()->json(['status' => false, 'message' => 'Ошибка при обновлении категории.']);
@@ -80,7 +84,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         if ($category->count() > 0) {
-            if ($category->image) {
+            if (file_exists(public_path() . '/images/' . $category->image)) {
                 unlink(public_path() . '/images/' . $category->image);
             }
             $category->delete();

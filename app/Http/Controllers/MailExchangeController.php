@@ -28,11 +28,12 @@ class MailExchangeController extends Controller
 
         $this->validate($request, [
             'subject' => 'max:255',
-            'msg' => 'required|max:1000'
+            'msg' => 'required|max:1000',
+            'email_to.*' => 'email'
         ]);
 
 
-        $data = $request->all();
+        $data = $this->cleanData($request->except('email_to'));
 
         foreach ($emails as $item) {
             $data['email_to'] = $item;
@@ -40,6 +41,7 @@ class MailExchangeController extends Controller
 
             $data['email'] = $data['email_from'];
             $data['phone'] = '';
+
             Mail::send('mail', $data, function ($message) use ($data) {
                 $message->from($data['email_from']);
                 $message->to($data['email_to']);

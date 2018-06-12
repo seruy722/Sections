@@ -12,3 +12,5 @@
     <li>Запустить миграции (php artisan migrate)</li>
     <li>Установить демо-данные (php artisan db:seed)</li>
 </ul>
+
+<span># В демо-данных по умолчанию создаются 2 пользователя admin c доступом (admin@gmail.com:admin123) и user с доступом (user@gmail.com:user123)</span>

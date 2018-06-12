@@ -19,10 +19,14 @@ class NewsController extends Controller
 
     public function userNews(Request $request)
     {
-        $news = User::find($request->id)->news;
+        $news = User::find($request->id)->news->toArray();
         $sections = User::find($request->id)->sections->toArray();
         foreach ($sections as $key => $elem) {
             $sections[$key]['created_at'] = $this->needDates($elem['created_at']);
+        }
+
+        foreach ($news as $key => $elem) {
+            $news[$key]['created_at'] = $this->needDates($elem['created_at']);
         }
 
         return response()->json(['status' => true, 'news' => $news, 'sections' => $sections]);
@@ -44,11 +48,12 @@ class NewsController extends Controller
         ]);
 
         $file = $request->fupload;
+        $data = $this->cleanData($request->all());
         $data = [
-            'title' => $request->title,
-            'description' => $request->description,
-            'content' => $request->content,
-            'section_id' => $request->section_id
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'content' => $data['content'],
+            'section_id' => $data['section_id']
         ];
 
         if (!is_string($file)) {
@@ -71,7 +76,6 @@ class NewsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = $request->all();
         $data['created_at'] = $this->needDate($request->created_at);
         $user = News::find($id);
         if ($user) {
@@ -92,11 +96,11 @@ class NewsController extends Controller
 
         $news = News::find($request->id);
         $file = $request->fupload;
+        $data = $this->cleanData($request->all());
         $data = [
-            'title' => $request->title,
-            'description' => $request->description,
-            'content' => $request->content,
-            'user_id' => $request->user_id
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'content' => $data['content']
         ];
         if (!is_string($file)) {
             $this->validate($request, [
@@ -107,8 +111,8 @@ class NewsController extends Controller
             $file->move('images', $filename);
             $data['image_name'] = $filename;
             if ($news) {
-                if (is_string($news->img_filename)) {
-                    unlink(public_path() . '/images/' . $news->img_filename);
+                if (file_exists(public_path() . '/images/' . $news->image_name)) {
+                    unlink(public_path() . '/images/' . $news->image_name);
                 }
                 $news->update($data);
                 return response()->json(['status' => true, 'message' => 'Данные успешно обновлены.']);
@@ -122,6 +126,14 @@ class NewsController extends Controller
         return response()->json(['status' => false, 'message' => 'Ошибка при обновлении.']);
     }
 
+    function cleanData($value)
+    {
+        $arr = array_map("trim", $value);
+        $arr = array_map("strip_tags", $arr);
+        $arr = array_map("stripcslashes", $arr);
+        return $arr;
+    }
+
     public function needDate($date)
     {
         return $newDate = date('Y-m-d H:i:s', strtotime($date));
@@ -131,12 +143,14 @@ class NewsController extends Controller
     {
         $news = News::find($id);
         if ($news) {
-            if ($news->img_filename) {
-                unlink(public_path() . '/images/' . $news->img_filename);
+            if (file_exists(public_path() . '/images/' . $news->image_name)) {
+                unlink(public_path() . '/images/' . $news->image_name);
             }
             $news->delete();
+
             return response()->json(['status' => true, 'message' => 'Запись успешно удалена']);
         } else {
+
             return response()->json(['status' => false, 'message' => 'Ошибка при удалении записи']);
         }
     }

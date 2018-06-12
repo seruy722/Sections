@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\ImageGallery;
 use App\News;
 use App\Schedules;
 use App\Sections;
 use App\User;
-use App\ImageGallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -89,7 +89,7 @@ class UserController extends Controller
                 if ($images->count() > 0) {
                     $arr = $images->toArray();
                     foreach ($arr as $item) {
-                        if ($item['name']) {
+                        if (file_exists(public_path() . '/images/' . $item['name'])) {
                             unlink(public_path() . '/images/' . $item['name']);
                         }
                         ImageGallery::destroy($item['id']);
@@ -100,7 +100,7 @@ class UserController extends Controller
                 if ($news->count() > 0) {
                     $arr = $news->toArray();
                     foreach ($arr as $item) {
-                        if ($item['image_name']) {
+                        if (file_exists(public_path() . '/images/' . $item['image_name'])) {
                             unlink(public_path() . '/images/' . $item['image_name']);
                         }
                         News::destroy($item['id']);
@@ -116,7 +116,7 @@ class UserController extends Controller
                 }
 
 
-                if ($elem['img_logo']) {
+                if (file_exists(public_path() . '/images/' . $elem['img_logo'])) {
                     unlink(public_path() . '/images/' . $elem['img_logo']);
                 }
 

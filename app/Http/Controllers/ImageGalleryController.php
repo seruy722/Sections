@@ -45,7 +45,7 @@ class ImageGalleryController extends Controller
         $countIterations = 1;
         foreach ($data as $key => $elem) {
             if ($key != 'section_id') {
-                if($countIterations > $count) break;
+                if ($countIterations > $count) break;
                 $countIterations++;
                 $filename = 'IMG-' . md5(microtime() . rand()) . '.' . $elem->getClientOriginalExtension();
                 $elem->move('images', $filename);
@@ -64,8 +64,11 @@ class ImageGalleryController extends Controller
     {
         $image = ImageGallery::findOrFail($id);
         if ($image) {
-            unlink(public_path() . '/images/' . $image->name);
+            if (file_exists(public_path() . '/images/' . $image->name)) {
+                unlink(public_path() . '/images/' . $image->name);
+            }
             $image->delete();
+
             return response()->json(['status' => true, 'message' => 'Изображение успешно удалено.']);
         }
         return response()->json(['status' => false, 'message' => 'Ошибка при удвлении изображения.']);

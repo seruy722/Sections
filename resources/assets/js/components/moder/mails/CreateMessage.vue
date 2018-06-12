@@ -18,6 +18,7 @@
             </v-flex>
             <v-flex xs8>
                 <v-select
+                        :error-messages="checkError('email_to.0')"
                         :items="emails"
                         v-model="selectEmails"
                         label="Кому"
@@ -30,7 +31,6 @@
                         max-height="auto"
                         autocomplete
                         required
-                        :error-messages="checkError('email_to')"
                 >
                     <template slot="selection" slot-scope="data">
                         <v-chip
@@ -127,9 +127,11 @@
             axios.get('/getEmails/' + this.$store.state.Auth.id).then(response => {
                 this.emails = response.data.emails;
             });
-            this.mail.subject = this.$route.params.subject;
-            this.selectEmails.push(this.$route.params.email);
-            this.mail.msg = this.$route.params.category;
+            if (Object.keys(this.$route.params).length !== 0) {
+                this.mail.subject = this.$route.params.subject;
+                this.selectEmails.push(this.$route.params.email);
+                this.mail.msg = this.$route.params.category;
+            }
         },
         methods: {
             sendMessage() {
