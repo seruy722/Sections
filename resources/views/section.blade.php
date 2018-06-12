@@ -307,7 +307,7 @@
                                                class="form-control" placeholder="Тема сообщения:"/>
                                     </div>
                                     <div class="form-group">
-                                          <textarea class="form-control required" name="msg" rows="6" id="message"
+                                          <textarea class="form-control required" name="msg" rows="9" id="message"
                                                     name="message" placeholder="Текст сообщения:*"
                                                     required></textarea>
                                     </div>

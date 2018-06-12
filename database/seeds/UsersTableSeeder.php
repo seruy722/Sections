@@ -10,7 +10,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'feedback_email'=>'admin_feedback@example.com',
-            'phone' => '',
+            'phone' => '+380507777777',
             'password' => '$2y$10$HDgfuNP5nOJRkPTr3GDPG.kygvycJEAkhhuE5i45/xltawqTrjROC',
             'photo' => '/users/admin.jpg',
             'role' => 'admin'
@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'user',
             'email' => 'user@gmail.com',
-            'phone' => '',
+            'phone' => '+380509999999',
             'password' => '$2y$10$vRInDVSRpP5bmZhwQqFfUe9vrg2zdcaNwF9CjT.Bd0AQdni3koTSO',
             'photo' => '/users/user.jpg'
         ]);
