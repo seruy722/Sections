@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <header class="title_sections">
+        <h2>{{$users->section_name}}</h2>
+    </header>
     <!-- About -->
     <div id="about" class="about ha-waypoint page-section1" data-animate-down="ha-header-small"
          data-animate-up="ha-header-large">
@@ -284,28 +287,28 @@
                                     {{ csrf_field() }}
                                     <div class="form-group">
                                         <input type="text" size="50" name="name" id="name" value=""
-                                               class="form-control required" placeholder="Введите Ваше имя*"
+                                               class="form-control required" placeholder="Ваше имя:*"
                                                required/>
                                     </div>
                                     <div class="form-group">
                                         <input type="email" size="50" name="email" id="email" value=""
-                                               class="form-control required email" placeholder="Введите Ваш E-mail*"
+                                               class="form-control required email" placeholder="Ваш E-mail:*"
                                                required/>
                                     </div>
                                     <div class="form-group">
                                         <input type="tel" pattern="[0-9]{10}" size="50" name="phone" id="phone"
                                                value=""
                                                class="form-control required phone"
-                                               placeholder="Введите номер телефона в формате +38 ХХX XXX XX XX*"
+                                               placeholder="Ваш телефон (+38 ХХX XXX XX XX):*"
                                                required/>
                                     </div>
                                     <div class="form-group">
                                         <input type="text" size="50" name="subject" id="subject" value=""
-                                               class="form-control" placeholder="Введите тему сообщения"/>
+                                               class="form-control" placeholder="Тема сообщения:"/>
                                     </div>
                                     <div class="form-group">
                                           <textarea class="form-control required" name="msg" rows="6" id="message"
-                                                    name="message" placeholder="Введите текст сообщения*"
+                                                    name="message" placeholder="Текст сообщения:*"
                                                     required></textarea>
                                     </div>
                                     <input type="hidden" value="{{optional($users->user)->email}}" name="imail"/>
@@ -364,8 +367,8 @@
 
             var marker1 = createMarker({
                 position: new google.maps.LatLng(<?php echo $lat ?>, <?php echo $lng ?>),
-                map: map
-            }, "<h4 class='map_title';><?php echo($users->section_name); ?></h4><p><?php echo(optional($users->user)->phone); ?></p>");
+                map: map,
+            }, "<h4 class='map_title'><?php echo($users->section_name); ?></h4><p><?php echo(optional($users->user)->phone); ?></p>");
 
         });
     </script>

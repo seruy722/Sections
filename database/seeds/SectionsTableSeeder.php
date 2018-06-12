@@ -44,7 +44,7 @@ class SectionsTableSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'section_name' => 'Ансамбль спортивного бального танца «Серпантин',
+                'section_name' => "Ансамбль спортивного бального танца 'Серпантин'",
                 'address' => 'ул. Василя Стуса, 48, Краматорск, Донецкая область',
                 'category_id' => '1',
                 'img_logo' => 'placeholder.png',
@@ -164,7 +164,7 @@ class SectionsTableSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'section_name' => 'Кружок «Английский язык»',
+                'section_name' => 'Кружок «Франзузский язык»',
                 'address' => 'ул. Новый Свет, 36, Краматорск, Донецкая область',
                 'category_id' => '7',
                 'img_logo' => 'placeholder.png',
@@ -174,7 +174,7 @@ class SectionsTableSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'section_name' => 'Кружок «Современное вязание спицами», секция химии МАН',
+                'section_name' => 'Кружок «Современное вязание спицами»',
                 'address' => 'ул. Марата, 10, Краматорск, Донецкая область',
                 'category_id' => '8',
                 'img_logo' => 'placeholder.png',
@@ -184,7 +184,7 @@ class SectionsTableSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'section_name' => 'Кружок «Техника рукоделия», «Бисероплетение»',
+                'section_name' => 'Кружок «Техника рукоделия»',
                 'address' => 'ул. Юбилейная, 16, Краматорск, Донецкая область',
                 'category_id' => '8',
                 'img_logo' => 'placeholder.png',

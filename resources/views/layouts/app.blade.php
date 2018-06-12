@@ -15,8 +15,6 @@
           рукоделие, музыкальные, театральные, образовательные">
     <link rel="shortcut icon" href="images/favicon.png">
     <title>Секции, Кружки, Студии</title>
-    <link href="{{ asset('css/front.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -26,12 +24,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
             integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
             crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://rawgit.com/LeshikJanz/libraries/master/Bootstrap/baguetteBox.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/css/flexslider.css" type="text/css" media="screen"/>
 </head>
 
 <body data-spy="scroll" data-target="#ha-header">
@@ -145,6 +138,11 @@
     </div>
 </footer>
 <!-- /Footer -->
+<link href="{{ asset('css/front.css') }}" rel="stylesheet">
+<link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
+<link rel="stylesheet" href="https://rawgit.com/LeshikJanz/libraries/master/Bootstrap/baguetteBox.min.css">
+<link rel="stylesheet" href="/css/flexslider.css" type="text/css" media="screen"/>
 <!-- JavaScript -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/nicescroll.min.js"></script>

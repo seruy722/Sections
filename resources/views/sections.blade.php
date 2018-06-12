@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <header class="title_sections">
+        <h2>{{$sections->name}}</h2>
+    </header>
     <!-- Sections -->
     <div id="sections" class="sections ha-waypoint" data-animate-down="ha-header-small "
          data-animate-up="ha-header-large">
