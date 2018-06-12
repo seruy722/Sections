@@ -89719,6 +89719,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -89738,6 +89746,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             form: {
                 name: null,
                 email: null,
+                feedback_email: null,
                 password: null,
                 phone: null,
                 password_confirmation: null,
@@ -89775,6 +89784,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.errors = {};
             this.form.action = action;
 
+            if (this.role()) {
+                delete this.form.feedback_email;
+            }
             axios.post("/api/update_profile", this.form).then(function (response) {
                 if (response.data.success) {
                     __WEBPACK_IMPORTED_MODULE_0__helpers_Auth__["a" /* default */].login(response.data.user);
@@ -89809,6 +89821,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         _this3.$store.commit("showInfo", "Ваше фото обновлено.");
                     }
                 });
+            }
+        },
+        role: function role() {
+            var role = this.$store.state.Auth.role;
+            if (role === 'admin') {
+                return false;
+            } else {
+                return true;
             }
         }
     }
@@ -89944,13 +89964,42 @@ var render = function() {
                                     1
                                   ),
                                   _vm._v(" "),
+                                  !_vm.role()
+                                    ? _c(
+                                        "v-layout",
+                                        { attrs: { row: "" } },
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              label: "Email для обратной связи",
+                                              "error-messages": _vm.checkError(
+                                                "feedback_email"
+                                              )
+                                            },
+                                            model: {
+                                              value: _vm.form.feedback_email,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "feedback_email",
+                                                  $$v
+                                                )
+                                              },
+                                              expression: "form.feedback_email"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
                                   _c(
                                     "v-layout",
                                     { attrs: { row: "" } },
                                     [
                                       _c("v-text-field", {
                                         attrs: {
-                                          label: "Телефон",
+                                          label: "Телефон (+380977451425)",
                                           "error-messages": _vm.checkError(
                                             "phone"
                                           )
@@ -94188,6 +94237,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -94260,6 +94313,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (yy < 10) yy = '0' + yy;
 
             return dd + '-' + mm + '-' + yy;
+        },
+        feedBack: function feedBack() {
+            var _this4 = this;
+
+            if (this.role()) {
+                axios.post('/adminEmail', 1).then(function (response) {
+                    _this4.$router.push({ name: 'CreateMessage', params: { email: response.data.email } });
+                });
+            }
+        },
+        role: function role() {
+            var role = this.$store.state.Auth.role;
+            if (role === 'admin') {
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 });
@@ -94336,6 +94406,22 @@ var render = function() {
                 ],
                 1
               ),
+              _vm._v(" "),
+              _vm.role()
+                ? _c(
+                    "v-btn",
+                    { attrs: { color: "info" }, on: { click: _vm.feedBack } },
+                    [
+                      _c("v-icon", { attrs: { color: "yellow", left: "" } }, [
+                        _vm._v("feedback")
+                      ]),
+                      _vm._v(
+                        "\n                Написать администратору\n            "
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _c("v-spacer"),
               _vm._v(" "),

@@ -21,6 +21,10 @@
                     <v-icon dark left>mail_outline</v-icon>
                     Написать
                 </v-btn>
+                <v-btn color="info" @click="feedBack" v-if="role()">
+                    <v-icon color="yellow" left>feedback</v-icon>
+                    Написать администратору
+                </v-btn>
                 <v-spacer></v-spacer>
                 <v-text-field
                         v-model="search"
@@ -136,6 +140,21 @@
                 if (yy < 10) yy = '0' + yy;
 
                 return dd + '-' + mm + '-' + yy;
+            },
+            feedBack(){
+                if(this.role()){
+                    axios.post('/adminEmail', 1).then(response => {
+                        this.$router.push({name:'CreateMessage',params:{email:response.data.email,}});
+                    });
+                }
+            },
+            role() {
+                let role = this.$store.state.Auth.role;
+                if (role === 'admin') {
+                    return false;
+                } else {
+                    return true;
+                }
             }
 
         }

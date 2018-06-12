@@ -83,12 +83,13 @@ class AuthController extends Controller
             case 'profile':
                 $this->validate($request, [
                     'name' => 'required|max:255',
-                    'address' => 'max:255',
-                    'phone' => 'regex:/^\+380\d{3}\d{2}\d{2}\d{2}$/'
+                    'phone' => 'regex:/^\+380\d{3}\d{2}\d{2}\d{2}$/',
+                    'feedback_email'=>'email'
                 ]);
                 if ($user) {
                     $user->name = $request->name;
                     $user->phone = $request->phone;
+                    $user->feedback_email = $request->feedback_email;
                     $user->save();
 
                     return response()->json(['success' => true, 'user' => $user]);
@@ -132,8 +133,8 @@ class AuthController extends Controller
 
     public function getAdminEmail(Request $request)
     {
-        $user = User::where('role', 'admin')->first()->toArray();
+        $user = User::where('role', 'admin')->value('feedback_email');
 
-        return response()->json(['email' => $user['email']]);
+        return response()->json(['email' => $user]);
     }
 }

@@ -9,6 +9,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
+            'feedback_email'=>'admin_feedback@example.com',
             'phone' => '',
             'password' => '$2y$10$HDgfuNP5nOJRkPTr3GDPG.kygvycJEAkhhuE5i45/xltawqTrjROC',
             'photo' => '/users/admin.jpg',

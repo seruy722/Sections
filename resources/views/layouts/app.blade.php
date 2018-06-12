@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Сайт про кружки, секции, студии и клубы города Краматорск">
     <meta name="author" content="IT 2.0 Academy">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="keywords"
           content="кружки, секции, студии, клубы, Краматорск,
           ансамбль, театр, школа, детский, искусства, творчества,
@@ -52,28 +53,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
-                @guest
-                    <li><a class="nav-link" href="{{ url('/controls') }}">{{ __('Профиль') }}</a></li>
-                @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                {{ __('Выход') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                @endguest
+                <li><a class="nav-link" href="{{ url('/controls') }}">{{ __('Профиль') }}</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right top-menu">
@@ -128,7 +108,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-9 col-sm-12">
-                    <p>По вопросам сайта пишите на admin_feedback@example.com</p>
+                    <p>Copyright &copy; 2018 Coier. All rights reserved.</p>
                 </div>
             </div>
         </div>

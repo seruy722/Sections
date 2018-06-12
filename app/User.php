@@ -9,7 +9,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $fillable = ['name', 'email', 'password', 'role', 'api_token', 'photo'];
+    protected $fillable = ['name', 'email', 'password', 'role', 'api_token', 'photo','feedback_email'];
 
     public function sections()
     {

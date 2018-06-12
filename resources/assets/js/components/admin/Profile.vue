@@ -41,9 +41,17 @@
                                         ></v-text-field>
                                     </v-layout>
 
+                                    <v-layout row v-if="!role()">
+                                        <v-text-field
+                                                label="Email для обратной связи"
+                                                v-model="form.feedback_email"
+                                                :error-messages="checkError('feedback_email')"
+                                        ></v-text-field>
+                                    </v-layout>
+
                                     <v-layout row>
                                         <v-text-field
-                                                label="Телефон"
+                                                label="Телефон (+380977451425)"
                                                 v-model="form.phone"
                                                 :error-messages="checkError('phone')"
                                         ></v-text-field>
@@ -128,6 +136,7 @@
                 form: {
                     name: null,
                     email: null,
+                    feedback_email: null,
                     password: null,
                     phone: null,
                     password_confirmation: null,
@@ -164,6 +173,9 @@
                 this.errors = {};
                 this.form.action = action;
 
+                if (this.role()) {
+                    delete this.form.feedback_email;
+                }
                 axios.post("/api/update_profile", this.form)
                     .then(response => {
                         if (response.data.success) {
@@ -201,6 +213,14 @@
                             this.$store.commit("showInfo", "Ваше фото обновлено.");
                         }
                     });
+                }
+            },
+            role() {
+                let role = this.$store.state.Auth.role;
+                if (role === 'admin') {
+                    return false;
+                } else {
+                    return true;
                 }
             }
         }

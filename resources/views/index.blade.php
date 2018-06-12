@@ -23,7 +23,7 @@
                 <div class="col-xs-12 col-md-12 col-sm-12">
                     <div class=" container TitleSection">
                         <header class="page-head">
-                            <h2>Кружки</h2>
+                            <h2>Категории</h2>
                         </header>
                     </div>
                     <div class="row">
