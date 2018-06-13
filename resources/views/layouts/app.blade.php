@@ -28,7 +28,8 @@
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://rawgit.com/LeshikJanz/libraries/master/Bootstrap/baguetteBox.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-
+<link href="{{ asset('css/front.css') }}" rel="stylesheet">
+<link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/css/flexslider.css" type="text/css" media="screen"/>
 </head>
@@ -110,13 +111,18 @@
                 <div class="col-xs-12 col-md-9 col-sm-12">
                     <p>Copyright &copy; 2018. Все права защищены.</p>
                 </div>
+                <div class="col-xs-12 col-md-3 col-sm-12">
+                    <ul>
+                        <li> <?php  ?>
+                            <a href="mailto:<?php foreach ($admin as $a) {echo ($a->feedback_email);}?>">Связаться с администратором</a>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </footer>
 <!-- /Footer -->
-<link href="{{ asset('css/front.css') }}" rel="stylesheet">
-<link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+
 <!-- JavaScript -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/nicescroll.min.js"></script>
@@ -135,7 +141,7 @@
 <script src="/js/main.js"></script>
 <!-- Resource jQuery -->
 <script defer type="text/javascript">
-    if (document.location.hash) {
+  //  if (document.location.hash) {
         $('a[href^="{{url('/#')}}"]').bind('click.smoothscroll', function (e) {
             e.preventDefault();
 
@@ -159,10 +165,8 @@
                 }
             });
         }).scroll();
-    }
-    if (document.location.href != "{{url('/')}}") {
-        $('.top-menu li.active').removeClass('active');
-    }
+ //   }
+
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
@@ -245,6 +249,15 @@
     });
     $(window).resize();
 </script>
+<script>
+   // if (window.location.pathname == '/') {window.location = "http://sections.ml#home";};
+    </script>
+    <script>
+       if (!document.location.hash) {
+       $('.top-menu li.active').removeClass('active');
+       $('.navbar-default').removeClass('ha-header-large');
+   }
+    </script>
 </body>
 
 </html>

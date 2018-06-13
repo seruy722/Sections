@@ -104,7 +104,7 @@
             display: block !important;
             clear: both !important;
             margin: 0 auto !important;
-            max-width: 580px !important;
+            max-width: 900px !important;
         }
 
         .container table {
@@ -114,7 +114,7 @@
 
         .container .masthead {
             padding: 80px 0;
-            background: url(http://sections.loc/images/header.jpg) no-repeat;
+            background: url(http://sections.ml/images/header.jpg) no-repeat;
             background-size: cover;
             color: white;
         }

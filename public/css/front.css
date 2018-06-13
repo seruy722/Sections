@@ -9353,6 +9353,9 @@ label {
     .map_title {
         width: 200px !important;
     }
+    .title_sections h2 {
+      font-size: 26px!important;  
+    }
 }
 
 .map_title {

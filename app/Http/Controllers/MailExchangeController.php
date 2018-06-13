@@ -44,7 +44,7 @@ class MailExchangeController extends Controller
             $data['phone'] = '';
 
             Mail::send('mail', $data, function ($message) use ($data) {
-                $message->from($data['email_from']);
+                $message->from('adm@sections.bizml.ru');
                 $message->to($data['email_to']);
                 $message->subject($data['subject']);
             });

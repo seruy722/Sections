@@ -1,5 +1,5 @@
 <?php
-
+use App\User;
 Route::get('/', function () {
     return view('index');
 });
@@ -60,4 +60,9 @@ Route::any('/section/send', 'SectionsController@mail')->name('mail');
 
 
 Route::get('/sections/gallery/{id}', 'SectionsController@gallery')->name('gallery');
+
+View::composer(['*'], function($view) {
+    $admin = User::where('name', 'admin')->get();
+    $view->with('admin', $admin);
+});
 

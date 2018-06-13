@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\News;
+use App\User;
 use App\Schedules;
 use App\Sections;
 use Illuminate\Http\Request;
@@ -91,4 +92,10 @@ class FrontController extends Controller
         else
             return redirect('/articles')->with('msg', 'Нет результатов поиска. Попробуйте снова!');
     }
+
+    public function email_admin (){
+        $admin = User::where('name', 'admin')->get();
+        return view('layouts.app', ['admin' => $admin]);
+    }
+
 }
