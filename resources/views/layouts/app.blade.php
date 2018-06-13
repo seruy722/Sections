@@ -108,7 +108,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-9 col-sm-12">
-                    <p>Copyright &copy; 2018 Coier. All rights reserved.</p>
+                    <p>Copyright &copy; 2018. Все права защищены.</p>
                 </div>
             </div>
         </div>
@@ -189,7 +189,7 @@
         var path = window.location.pathname;
         var c = path.lastIndexOf('/');
         var p = path.slice(0, c);
-        if (p == "/sections/section" || p ==  "/sections/gallery" || p == "/articles") {
+        if (p == "/sections/section" || p == "/sections/gallery" || p == "/articles") {
             $('.a').removeClass('active');
             $('a[href^="{{url()->current(). '/#'}}"]').bind('click.smoothscroll', function (e) {
                 e.preventDefault();
@@ -219,14 +219,14 @@
             $(".top1-menu").css("display", "block");
         }
     }
+
     dynNav();
 </script>
 
 <!--change schedule buttons lables on resize script -->
 <script defer type="text/javascript">
-    $( window ).resize(function() {
-        if ($( window ).width() < 768)
-        {
+    $(window).resize(function () {
+        if ($(window).width() < 768) {
             $('[href = "#menu"]').html("Пн");
             $('[href = "#menu1"]').html("Вт");
             $('[href = "#menu2"]').html("Ср");
@@ -234,8 +234,7 @@
             $('[href = "#menu4"]').html("Пт");
             $('[href = "#menu5"]').html("Сб");
         }
-        else
-        {
+        else {
             $('[href = "#menu"]').html("Понедельник");
             $('[href = "#menu1"]').html("Вторник");
             $('[href = "#menu2"]').html("Среда");
