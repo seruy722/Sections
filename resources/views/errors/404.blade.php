@@ -42,6 +42,10 @@
             transition: all 1s
         }
 
+        .link a {
+            font-size: 50px;
+        }
+
         .title:hover {
             color: #9acd32
         }
@@ -51,11 +55,12 @@
 
 <body>
 
-    <div class="container">
-        <div class="content">
-            <div class="title">404 Error</div>
-        </div>
+<div class="container">
+    <div class="content">
+        <div class="link"><a href="{{url('/').'#home'}}">Перейти на главную</a></div>
+        <div class="title">404 Error</div>
     </div>
+</div>
 
 </body>
 

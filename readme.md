@@ -1,7 +1,7 @@
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg">
 <img src="https://blog.tuleap.org/sites/default/files/logo-vue-js.png"></p>
 
-<h1></h1>
+<h1>Проект секции, кружки, студии</h1>
 
 <h2>Установка</h2>
 <hr>
