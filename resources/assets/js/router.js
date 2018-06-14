@@ -57,7 +57,10 @@ const routes = [
     {name: 'EditCategory', path: "/edit_category", component: EditCategory},
 ];
 
-export default new VueRouter({
+const router =  new VueRouter({
     routes,
     mode: "history"
 });
+
+
+export default router;

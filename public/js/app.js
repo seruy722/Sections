@@ -63662,6 +63662,28 @@ var app = new __WEBPACK_IMPORTED_MODULE_2_vue___default.a({
     }
 });
 
+// If user want to reload page with vue component (in controls panel) - it was redirected on start page
+var isAsked = false;
+
+window.onbeforeunload = function (event) {
+    var e = event || window.event;
+    window.focus();
+    if (!isAsked) {
+        isAsked = true;
+        var showstr = "CUSTOM_MESSAGE";
+        if (e) {
+            e.returnValue = showstr;
+        }
+        return showstr;
+    }
+};
+
+window.onfocus = function () {
+    if (isAsked) {
+        window.location.href = window.location.origin + "/controls";
+    }
+};
+
 /***/ }),
 /* 155 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -88591,10 +88613,12 @@ if (false) {
 
 var routes = [{ path: "/controls", component: __WEBPACK_IMPORTED_MODULE_0__components_admin_AdminConsole___default.a }, { path: "/register", component: __WEBPACK_IMPORTED_MODULE_1__components_admin_Register___default.a }, { path: "/login", component: __WEBPACK_IMPORTED_MODULE_2__components_admin_Login___default.a }, { path: "/profile", component: __WEBPACK_IMPORTED_MODULE_3__components_admin_Profile___default.a }, { path: "/users", component: __WEBPACK_IMPORTED_MODULE_4__components_admin_Users___default.a }, { name: 'AdminNews', path: "/news", component: __WEBPACK_IMPORTED_MODULE_5__components_admin_News___default.a }, { path: "/user_news", component: __WEBPACK_IMPORTED_MODULE_6__components_moder_news_UserNews___default.a }, { path: "/social", component: __WEBPACK_IMPORTED_MODULE_25__components_Social___default.a }, { name: 'AddNews', path: "/add_news", component: __WEBPACK_IMPORTED_MODULE_7__components_moder_news_AddNews___default.a }, { name: 'EditNews', path: "/edit_news", component: __WEBPACK_IMPORTED_MODULE_8__components_moder_news_EditNews___default.a }, { name: 'ResetPassword', path: "/reset_password", component: __WEBPACK_IMPORTED_MODULE_9__components_admin_ResetPassword___default.a }, { name: 'UserMessages', path: "/user_messages", component: __WEBPACK_IMPORTED_MODULE_11__components_moder_mails_UserMessages___default.a }, { name: 'CreateMessage', path: "/create_message", component: __WEBPACK_IMPORTED_MODULE_10__components_moder_mails_CreateMessage___default.a }, { name: 'ViewMessage', path: "/view_message", component: __WEBPACK_IMPORTED_MODULE_12__components_moder_mails_ViewMessage___default.a }, { name: 'ReplyMessage', path: "/reply_message", component: __WEBPACK_IMPORTED_MODULE_13__components_moder_mails_ReplyMessage___default.a }, { name: 'UserSections', path: "/user_sections", component: __WEBPACK_IMPORTED_MODULE_14__components_moder_sections_UserSections___default.a }, { name: 'AddSection', path: "/add_section", component: __WEBPACK_IMPORTED_MODULE_15__components_moder_sections_AddSection___default.a }, { name: 'EditSection', path: "/edit_section", component: __WEBPACK_IMPORTED_MODULE_16__components_moder_sections_EditSection___default.a }, { name: 'UserGallery', path: "/user_gallery", component: __WEBPACK_IMPORTED_MODULE_17__components_moder_gallery_UserGallery___default.a }, { name: 'ImagesGallery', path: "/images_gallery", component: __WEBPACK_IMPORTED_MODULE_18__components_moder_gallery_ImagesGallery___default.a }, { name: 'Schedule', path: "/schedule", component: __WEBPACK_IMPORTED_MODULE_19__components_moder_schedule_Schedule___default.a }, { name: 'AddSchedule', path: "/add_schedule", component: __WEBPACK_IMPORTED_MODULE_20__components_moder_schedule_AddSchedule___default.a }, { name: 'EditSchedule', path: "/edit_schedule", component: __WEBPACK_IMPORTED_MODULE_21__components_moder_schedule_EditSchedule___default.a }, { name: 'Categories', path: "/sections_categories", component: __WEBPACK_IMPORTED_MODULE_22__components_admin_categories_Categories___default.a }, { name: 'AddCategory', path: "/add_category", component: __WEBPACK_IMPORTED_MODULE_23__components_admin_categories_AddCategory___default.a }, { name: 'EditCategory', path: "/edit_category", component: __WEBPACK_IMPORTED_MODULE_24__components_admin_categories_EditCategory___default.a }];
 
-/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_26_vue_router__["a" /* default */]({
+var router = new __WEBPACK_IMPORTED_MODULE_26_vue_router__["a" /* default */]({
     routes: routes,
     mode: "history"
-}));
+});
+
+/* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
 /* 217 */
@@ -90359,6 +90383,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -90498,6 +90523,10 @@ var render = function() {
     "div",
     { staticClass: "wrapper" },
     [
+      _c("v-subheader", { staticClass: "title justify-center" }, [
+        _vm._v("Пользователи")
+      ]),
+      _vm._v(" "),
       _c(
         "v-dialog",
         {
@@ -90975,6 +91004,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -91050,6 +91080,10 @@ var render = function() {
     "div",
     { staticClass: "wrapper" },
     [
+      _c("v-subheader", { staticClass: "title justify-center" }, [
+        _vm._v("Новости")
+      ]),
+      _vm._v(" "),
       _c(
         "v-dialog",
         {

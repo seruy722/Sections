@@ -8,6 +8,7 @@ import 'vuetify/dist/vuetify.min.css';
 
 Vue.use(Vuetify);
 
+
 window.router = router;
 
 const app = new Vue({
@@ -16,3 +17,27 @@ const app = new Vue({
     router,
     render: h => h(App)
 });
+
+// If user want to reload page with vue component (in controls panel) - it was redirected on start page
+let isAsked = false;
+
+window.onbeforeunload =
+    function (event) {
+        let e = event || window.event;
+        window.focus();
+        if (!isAsked) {
+            isAsked = true;
+            let showstr = "CUSTOM_MESSAGE";
+            if (e) {
+                e.returnValue = showstr;
+            }
+            return showstr;
+        }
+    };
+
+window.onfocus =
+    function () {
+        if (isAsked) {
+            window.location.href = `${window.location.origin}/controls`;
+        }
+    };

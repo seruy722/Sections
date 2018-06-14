@@ -1,5 +1,6 @@
 <template>
     <div class="wrapper">
+        <v-subheader class="title justify-center">Пользователи</v-subheader>
         <v-dialog v-model="dialog" width="100%">
             <v-btn slot="activator" color="primary" dark class="mb-2">Новый</v-btn>
             <v-card>

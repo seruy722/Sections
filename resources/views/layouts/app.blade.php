@@ -114,7 +114,7 @@
                 <div class="col-xs-12 col-md-5 col-sm-12">
                     <ul>
                         <li>
-                            <p>Связаться с администратором: {{$admin}}</p>
+                            <p>Связаться с администратором: {{$adminFeedbackEmail}}</p>
                         </li>
                     </ul>
                 </div>

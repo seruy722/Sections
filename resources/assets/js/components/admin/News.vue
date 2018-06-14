@@ -1,5 +1,6 @@
 <template>
     <div class="wrapper">
+        <v-subheader class="title justify-center">Новости</v-subheader>
         <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
             <v-card>
                 <v-toolbar color="primary" dark>

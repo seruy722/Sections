@@ -65,6 +65,6 @@ Route::get('/sections/gallery/{id}', 'SectionsController@gallery')->name('galler
 
 View::composer(['*'], function ($view) {
     $adminFeedbackEmail = User::where('role', 'admin')->value('feedback_email');
-    $view->with('admin', $adminFeedbackEmail);
+    $view->with('adminFeedbackEmail', $adminFeedbackEmail);
 });
 
