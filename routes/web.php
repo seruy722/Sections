@@ -1,10 +1,13 @@
 <?php
+
 use App\User;
+
 Route::get('/', function () {
     return view('index');
 });
 
 Route::group(['middleware' => 'auth:api'], function () {
+
     Route::resource('api/news', 'Api\NewsController');
     Route::resource('api/addNews', 'Api\NewsController');
     Route::post('api/updateNews', 'Api\NewsController@userUpdateNews');
@@ -58,11 +61,10 @@ Route::get('/sections/{id}', 'SectionsController@sections')->name('sections');
 Route::any('/section/send', 'SectionsController@mail')->name('mail');
 
 
-
 Route::get('/sections/gallery/{id}', 'SectionsController@gallery')->name('gallery');
 
-View::composer(['*'], function($view) {
-    $admin = User::where('name', 'admin')->get();
-    $view->with('admin', $admin);
+View::composer(['*'], function ($view) {
+    $adminFeedbackEmail = User::where('role', 'admin')->value('feedback_email');
+    $view->with('admin', $adminFeedbackEmail);
 });
 

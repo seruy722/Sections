@@ -28,8 +28,8 @@
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://rawgit.com/LeshikJanz/libraries/master/Bootstrap/baguetteBox.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<link href="{{ asset('css/front.css') }}" rel="stylesheet">
-<link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/front.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/css/flexslider.css" type="text/css" media="screen"/>
 </head>
@@ -108,13 +108,14 @@
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-md-9 col-sm-12">
+                <div class="col-xs-12 col-md-7 col-sm-12">
                     <p>Copyright &copy; 2018. Все права защищены.</p>
                 </div>
-                <div class="col-xs-12 col-md-3 col-sm-12">
+                <div class="col-xs-12 col-md-5 col-sm-12">
                     <ul>
-                        <li> <?php  ?>
-                            <a href="mailto:<?php foreach ($admin as $a) {echo ($a->feedback_email);}?>">Связаться с администратором</a>
+                        <li>
+                            <p>Связаться с администратором: {{$admin}}</p>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -141,31 +142,31 @@
 <script src="/js/main.js"></script>
 <!-- Resource jQuery -->
 <script defer type="text/javascript">
-  //  if (document.location.hash) {
-        $('a[href^="{{url('/#')}}"]').bind('click.smoothscroll', function (e) {
-            e.preventDefault();
+    //  if (document.location.hash) {
+    $('a[href^="{{url('/#')}}"]').bind('click.smoothscroll', function (e) {
+        e.preventDefault();
 
-            var target = this.hash,
-                $target = $(target);
+        var target = this.hash,
+            $target = $(target);
 
-            $('html, body').stop().animate({
-                'scrollTop': $target.offset().top
-            }, 2000, 'swing', function () {
-                window.location.hash = target;
-            });
+        $('html, body').stop().animate({
+            'scrollTop': $target.offset().top
+        }, 2000, 'swing', function () {
+            window.location.hash = target;
         });
+    });
 
-        $(window).scroll(function () {
-            var scrollDistance = $(window).scrollTop();
-            // Assign active class to nav links while scolling
-            $('.page-section').each(function (i) {
-                if ($(this).position().top <= scrollDistance + 2) {
-                    $('.top-menu li.active').removeClass('active');
-                    $('.top-menu li').eq(i).addClass('active');
-                }
-            });
-        }).scroll();
- //   }
+    $(window).scroll(function () {
+        var scrollDistance = $(window).scrollTop();
+        // Assign active class to nav links while scolling
+        $('.page-section').each(function (i) {
+            if ($(this).position().top <= scrollDistance + 2) {
+                $('.top-menu li.active').removeClass('active');
+                $('.top-menu li').eq(i).addClass('active');
+            }
+        });
+    }).scroll();
+    //   }
 
 </script>
 
@@ -250,14 +251,14 @@
     $(window).resize();
 </script>
 <script>
-   // if (window.location.pathname == '/') {window.location = "http://sections.ml#home";};
-    </script>
-    <script>
-       if (!document.location.hash) {
-       $('.top-menu li.active').removeClass('active');
-       $('.navbar-default').removeClass('ha-header-large');
-   }
-    </script>
+    // if (window.location.pathname == '/') {window.location = "http://sections.ml#home";};
+</script>
+<script>
+    if (!document.location.hash) {
+        $('.top-menu li.active').removeClass('active');
+        $('.navbar-default').removeClass('ha-header-large');
+    }
+</script>
 </body>
 
 </html>
