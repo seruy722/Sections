@@ -4,7 +4,8 @@
 <head>
     <title>404</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         html,
         body {
@@ -34,6 +35,10 @@
             display: inline-block;
         }
 
+        .btn {
+            font-size: 50px;
+        }
+
         .title {
             font-size: 150px;
             margin-bottom: 40px;
@@ -42,14 +47,20 @@
             transition: all 1s
         }
 
-        .link a {
-            font-size: 50px;
-        }
-
         .title:hover {
             color: #9acd32
         }
     </style>
+    <script defer>
+        (function () {
+            let url = window.location.pathname;
+            let arrLinks = ['/user_messages', '/all_users', '/news', '/sections_categories', '/user_sections', '/schedule', '/user_news', '/user_gallery', '/images_gallery', '/social','/profile','/login','/register'];
+
+            if (arrLinks.indexOf(url) > -1) {
+                window.location.href = `${window.location.origin}/controls`;
+            }
+        }());
+    </script>
 
 </head>
 
@@ -57,11 +68,10 @@
 
 <div class="container">
     <div class="content">
-        <div class="link"><a href="{{url('/').'#home'}}">Перейти на главную</a></div>
+        <a href="{{url('/').'#home'}}" class="btn btn-primary">Перейти на главную</a>
         <div class="title">404 Error</div>
     </div>
 </div>
-
 </body>
 
 </html>

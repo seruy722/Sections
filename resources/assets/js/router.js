@@ -32,7 +32,7 @@ const routes = [
     {path: "/register", component: Register},
     {path: "/login", component: Login},
     {path: "/profile", component: Profile},
-    {path: "/users", component: Users},
+    {path: "/all_users", component: Users},
     {name: 'AdminNews',path: "/news", component: News},
 
     {path: "/user_news", component: UserNews},

@@ -14,7 +14,7 @@ export default {
     nav: [
         {path: "/controls", title: "Консоль", auth: true, role: 'admin'},
         {path: "/user_messages", title: "Сообщения", auth: true, role: 'admin'},
-        {path: "/users", title: "Пользователи", auth: true, role: 'admin'},
+        {path: "/all_users", title: "Пользователи", auth: true, role: 'admin'},
         {path: "/news", title: "Новости", auth: true, role: 'admin'},
         {path: "/sections_categories", title: "Категории", auth: true, role: 'admin'},
 
