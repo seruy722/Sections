@@ -4268,7 +4268,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav-justified > li > a {
     margin-bottom: 5px;
     text-align: center;
-    padding: 10px 0;
+    padding: 10px 11.2px;
 }
 
 .nav-justified > .dropdown .dropdown-menu {
@@ -8154,7 +8154,6 @@ footer a {
 
 .nav.nav-pills > li + li {
     margin-left: 2px;
-    /*orig: 2px*/
 }
 
 table {
@@ -9371,8 +9370,4 @@ label {
     width: 100%;
     text-align: center;
     margin-bottom: -30px;
-}
-
-.soc_net {
-
 }
