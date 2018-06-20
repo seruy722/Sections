@@ -15,3 +15,5 @@
 </ul>
 
 <span># В демо-данных по умолчанию создаются 2 пользователя admin c доступом (admin@gmail.com:admin123) и user с доступом (user@gmail.com:user123)</span>
+
+<span># Ссылка на сайт: <a href="http://sections.ml" target="_blank">ссылка</span>
